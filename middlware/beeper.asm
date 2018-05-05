@@ -6,7 +6,9 @@ MODULE beeper
   ENDM
 
 set_border:
+  LD A,(HL)
+  INC HL
   OUT (#FE), A
-  RET
+  JP zxengine.process
 
 ENDMODULE

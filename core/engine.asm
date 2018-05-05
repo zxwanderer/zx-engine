@@ -1,22 +1,35 @@
 MODULE zxengine
 
+  MACRO stop
+    defw zxengine.stop_me
+  ENDM
+
+  MACRO goto addr
+    defw zxengine.goto_me
+    defw addr
+  ENDM
+
 start:
   LD HL, START_SCRIPT
 process:
   LD A, (HL)
   AND A; _endByte -> 0
   RET Z
-  LD DE, (HL)
+  LD E,A
   INC HL
-  PUSH HL ; запоминаем
-  PUSH DE ; в DE - адрес процедуры
-  RET
-  /* JP (HL) */
-  /* JR process */
-process_ret
-  POP HL
-  JR process
+  LD D,(HL)
+  INC HL
+  LD (process_goto+1), DE
+process_goto:
+  JP #0000 // в DE - указатель на данные
 
-  /* include "middlware/beeper.asm" */
+goto_me:
+  LD DE, (HL)
+  EX HL, DE
+  JP process
+
+stop_me:
+  DI
+  HALT
 
 ENDMODULE
