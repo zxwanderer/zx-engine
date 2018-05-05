@@ -6,3 +6,10 @@ PEN_GREEN equ 4
 PEN_CYAN equ 5
 PEN_YELLOW equ 6
 PEN_WHITE equ 7
+
+_endByte equ 0
+
+MACRO mLDA
+  LD A, (HL)
+  INC HL
+ENDM
