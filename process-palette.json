@@ -1,0 +1,95 @@
+{
+  "patterns": {
+    "P1": {
+      "expression": "(path):(line)"
+    },
+    "P2": {
+      "expression": "(path)\\s+(line)",
+      "path": "(?:\\/[\\w\\.\\-]+)+"
+    }
+  },
+  "commands": [
+    {
+      "namespace": "process-palette",
+      "action": "run-sjasm",
+      "command": "echo {projectPath}\n./bin/sjasmplus --dos866 --dirbol main.asm\nopen -a 'UnrealSpeccyPortable' myzx.sna",
+      "arguments": [],
+      "cwd": "{projectPath}",
+      "inputDialogs": [],
+      "env": {},
+      "keystroke": "cmd-shift-r",
+      "stream": true,
+      "outputTarget": "panel",
+      "outputBufferSize": 80000,
+      "maxCompleted": 0,
+      "autoShowOutput": true,
+      "autoHideOutput": false,
+      "scrollLockEnabled": true,
+      "singular": true,
+      "promptToSave": false,
+      "saveOption": "none",
+      "patterns": [
+        "default"
+      ],
+      "successOutput": "{stdout}",
+      "errorOutput": "{stdout}\n{stderr}",
+      "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "startMessage": "",
+      "successMessage": "Executed : {fullCommand}",
+      "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "menus": [],
+      "notifyOnStart": true,
+      "notifyOnSuccess": true,
+      "notifyOnError": true,
+      "input": null,
+      "startScript": null,
+      "successScript": null,
+      "errorScript": null,
+      "scriptOnStart": false,
+      "scriptOnSuccess": false,
+      "scriptOnError": false
+    },
+    {
+      "namespace": "process-palette",
+      "action": "build-sjasm",
+      "command": "echo {projectPath}\n./bin/sjasmplus --dos866 --dirbol main.asm",
+      "arguments": [],
+      "cwd": "{projectPath}",
+      "inputDialogs": [],
+      "env": {},
+      "keystroke": null,
+      "stream": true,
+      "outputTarget": "panel",
+      "outputBufferSize": 80000,
+      "maxCompleted": 1,
+      "autoShowOutput": true,
+      "autoHideOutput": false,
+      "scrollLockEnabled": false,
+      "singular": false,
+      "promptToSave": false,
+      "saveOption": "none",
+      "patterns": [
+        "default"
+      ],
+      "successOutput": "{stdout}",
+      "errorOutput": "{stdout}\n{stderr}",
+      "fatalOutput": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "startMessage": "",
+      "successMessage": "Executed : {fullCommand}",
+      "errorMessage": "Executed : {fullCommand}\nReturned with code {exitStatus}\n{stderr}",
+      "fatalMessage": "Failed to execute : {fullCommand}\n{stdout}\n{stderr}",
+      "menus": [],
+      "startScript": null,
+      "successScript": null,
+      "errorScript": null,
+      "scriptOnStart": false,
+      "scriptOnSuccess": false,
+      "scriptOnError": false,
+      "notifyOnStart": false,
+      "notifyOnSuccess": true,
+      "notifyOnError": true,
+      "input": null
+    }
+  ]
+}
