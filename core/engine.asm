@@ -9,7 +9,13 @@ MODULE zxengine
     defw addr
   ENDM
 
+  MACRO wait num
+    defw zxengine.wait_me
+    defb num
+  ENDM
+
 start:
+  EI
   LD HL, START_SCRIPT
 process:
   LD A, (HL)
@@ -31,5 +37,13 @@ goto_me:
 stop_me:
   DI
   HALT
+
+wait_me:
+  LD B, (HL)
+  INC HL
+wait_me_loop:
+  HALT
+  DJNZ wait_me_loop
+  JP process
 
 ENDMODULE
