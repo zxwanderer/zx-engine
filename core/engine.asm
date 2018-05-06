@@ -42,7 +42,8 @@ wait_me:
   LD B, (HL)
   INC HL
 wait_me_loop:
-  HALT
+  /* HALT */
+  NOP
   DJNZ wait_me_loop
   JP process
 
