@@ -15,8 +15,9 @@ loop:
   NOP */
   jp zxengine.start
 
-
   include "core/engine.asm"
+  include "core/routines/math.asm"
+  include "core/routines/text68.asm"
   include "core/defines.asm"
   include "middlware/beeper.asm"
 
