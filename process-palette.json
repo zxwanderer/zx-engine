@@ -12,7 +12,7 @@
     {
       "namespace": "process-palette",
       "action": "run-sjasm",
-      "command": "echo {projectPath}\n./bin/sjasmplus --dos866 --dirbol main.asm\nopen -a 'UnrealSpeccyPortable' myzx.sna",
+      "command": "echo {projectPath}\n./bin/sjasmplus --dos866 --dirbol main.asm\nopen -a 'Unreal Speccy Portable' myzx.sna",
       "arguments": [],
       "cwd": "{projectPath}",
       "inputDialogs": [],
