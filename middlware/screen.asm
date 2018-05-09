@@ -4,11 +4,11 @@ MODULE screen
     defw screen.set_colors
     defb inc_
   ENDM
-
+/*
   MACRO setStatic
     defw screen.statica
   ENDM
-
+*/
 set_colors:
   mLDA
   PUSH HL
@@ -30,6 +30,7 @@ set_colors_loop:
   POP HL
   JP zxengine.process
 
+/*
 statica:
   PUSH HL
   XOR A
@@ -47,7 +48,7 @@ statica:
   LDIR
   POP HL
   JP zxengine.process
-
+*/
 ENDMODULE
 
 /*

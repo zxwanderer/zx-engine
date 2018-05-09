@@ -1,5 +1,7 @@
 MODULE text
 
+include "../core/routines/text68.asm"
+
   MACRO printAt posx,posy,ptext
     defw text.print_at
     defb posx, posy
