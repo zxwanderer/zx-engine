@@ -14,7 +14,7 @@
   /* wait 7 */
   /*  */
   /* wait 125 */
-  setScreen PEN_GREEN
+  setScreen PAPER_BLACK or PEN_GREEN
   printAt 0,0,HELLO_TXT
   setBorder PEN_BLACK
 LOOP_SCRIPT:
