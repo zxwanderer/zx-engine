@@ -14,10 +14,11 @@
   /* wait 7 */
   /*  */
   /* wait 125 */
+  setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_GREEN
   printAt 0,0,HELLO_TXT
-  setBorder PEN_BLACK
 LOOP_SCRIPT:
   setBorder PEN_BLACK
+  setBorder PEN_RED
   goto LOOP_SCRIPT
   defb _endByte
