@@ -15,12 +15,19 @@ loop:
   NOP */
   jp zxengine.start
 
+  include "core/defines.asm"
   include "core/engine.asm"
   include "core/routines/math.asm"
-  include "core/defines.asm"
+  include "core/routines/sprite16.asm"
   include "middlware/beeper.asm"
   include "middlware/text.asm"
   include "middlware/screen.asm"
+
+test_proc:
+  LD HL, TILE_SET
+  LD DE, #4000
+  JP sprite16.show_sprite
+  RET
 
 START_SCRIPT:
   include "data/script.asm"
