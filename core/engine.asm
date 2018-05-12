@@ -14,6 +14,11 @@ MODULE zxengine
     defb num
   ENDM
 
+  MACRO CallCode ptr
+    defw zxengine.call_code_me
+    defw ptr
+  ENDM
+
 start:
   EI
   LD HL, START_SCRIPT
@@ -28,6 +33,16 @@ process:
   LD (process_goto+1), DE
 process_goto:
   JP #0000 // в DE - указатель на данные
+
+call_code_me:
+  mLDE
+  PUSH HL
+  EX HL,DE
+  CALL callHL
+  POP HL
+  JP process
+
+callHL  JP (hl)
 
 goto_me:
   LD DE, (HL)
