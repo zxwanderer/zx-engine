@@ -19,6 +19,10 @@ PAPER_WHITE   equ %111000
 
 _endByte equ 0
 
+scrHeight equ 12
+scrWidth equ 16
+mapSize equ 32
+
 SCREEN_ADDR equ #4000
 ATTR_ADDR EQU SCREEN_ADDR+#1800
 

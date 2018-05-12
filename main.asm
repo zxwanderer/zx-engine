@@ -3,6 +3,8 @@ DEVICE zxspectrum128
 ORG     #8000
 code_start:
   call interrupt.int_init
+  LD HL, TILE_SET
+  LD (Tiles16.sprArray), HL
 /* start:
   LD B, #80
 loop:
@@ -18,15 +20,16 @@ loop:
   include "core/defines.asm"
   include "core/engine.asm"
   include "core/routines/math.asm"
-  include "core/routines/sprite16.asm"
+  include "core/routines/tiles16.asm"
   include "middlware/beeper.asm"
   include "middlware/text.asm"
   include "middlware/screen.asm"
 
 test_proc:
-  LD HL, TILE_SET
-  LD DE, #4000
-  JP sprite16.show_sprite
+  LD HL, MAP_SET
+  /* LD DE, #4000 */
+  JP Tiles16.show_tile_map
+  /* JP sprite16.show_sprite */
   RET
 
 START_SCRIPT:
@@ -53,6 +56,8 @@ _data_end:
   include "core/interrupt.asm"
 
 display /D, _data_end-code_start, " size, ", /D, 0x10000-_data_end, " free"
+/* display /D, tilescreen.TileWidth_scr
+display /D, tilescreen.TileHeight_scr */
 display "font addr: ", p68_font
 display "code start: ", code_start
 display "data end: ", _data_end
