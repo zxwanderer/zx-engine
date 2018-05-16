@@ -19,9 +19,10 @@
   printAt 0,0,HELLO_TXT
 LOOP_SCRIPT:
   setBorder PEN_BLACK
-  /* setBorder PEN_BLUE */
+  setBorder PEN_BLUE
+  ; CallCode test_proc
   setBorder PEN_RED
-  CallCode test_proc
+  setBorder PEN_GREEN
   goto LOOP_SCRIPT
   defb _endByte
 
