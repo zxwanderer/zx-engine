@@ -1,0 +1,25 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "sjasmplus",
+            "command": "./bin/sjasmplus --dos866 --dirbol main.asm",
+            "problemMatcher": "$errmatcher-sjasmplus"
+        },
+        {
+            "type": "shell",
+            "label": "unreal",
+            "command": "open -a 'Unreal Speccy Portable' myzx.sna",
+            "dependsOn": [
+                "sjasmplus"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
