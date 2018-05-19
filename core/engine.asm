@@ -49,9 +49,9 @@ goto_me:
   EX HL, DE
   JP process
 
-stop_me:
-  DI
+halt_me:
   HALT
+  RET
 
 wait_me:
   LD B, (HL)

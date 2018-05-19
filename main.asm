@@ -20,6 +20,7 @@ loop:
   include "core/engine.asm"
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
+  include "core/routines/input.asm"
   include "middlware/beeper.asm"
   include "middlware/text.asm"
   include "middlware/screen.asm"
