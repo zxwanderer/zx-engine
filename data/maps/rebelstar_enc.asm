@@ -113,13 +113,14 @@ no_script:
   defb _endByte
 
 no_way_script:
-  rSetVar system_data.ret_var, 0
+  ; rSetVar system_data.ret_var, 0
   defb _endByte
 
 wall_script:
-  rPlayVibr 1
+  ; rPlayVibr 1
   ;rBorder PEN_BLACK
-  GOTO no_way_script
+  defb _endByte
+  ; GOTO no_way_script
 
 door_open_script:
   defb _endByte
@@ -132,27 +133,31 @@ door_open_script:
   GOTO no_w */
 
 door_script:
+  defb _endByte
   ;rPlayLaser 1
-  SET_ACTION_CELL Door_half_open
-  rExec Entities.lookChar
-  WAIT 5
-  SET_ACTION_CELL Door_open
+  ; SET_ACTION_CELL Door_half_open
+  ; rExec Entities.lookChar
+  ; WAIT 5
+  ; SET_ACTION_CELL Door_open
   ;rExec Entities.lookChar
-  GOTO no_way_script
+  ; GOTO no_way_script
 
 computer_on_script:
-  rPlayLaser 1
-  SET_ACTION_CELL Computer_off
-  GOTO no_way_script
+  defb _endByte
+  ; rPlayLaser 1
+  ; SET_ACTION_CELL Computer_off
+  ; GOTO no_way_script
 
 computer_off_script:
-  rPlayLaser 1
-  SET_ACTION_CELL Computer_on
-  GOTO no_way_script
+  defb _endByte
+  ; rPlayLaser 1
+  ; SET_ACTION_CELL Computer_on
+  ; GOTO no_way_script
 
 computer_break_script:
-  rPlayLaser 1
-  GOTO no_way_script
+  defb _endByte
+  ; rPlayLaser 1
+  ; GOTO no_way_script
 
 ;CellType2: Entities.CellType 0,0,tHeroName1
 ;CellType3: Entities.CellType 0,0,tHeroName1
@@ -179,8 +184,8 @@ name_p dw #0000 */
 PersonagesNum equ 1
 ; описываем героя:
 CHARS_SET:
-;Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1
-;13-31
-Hero2: Entities.Hero 1,14, 9, 0, 0, tHeroName2, 0, 0, 0, 0, 0
+Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1
+Hero2: Entities.Hero 1,14, 9, 0, 0, tHeroName2
+; , 0, 0, 0, 0, 0
 ;Hero3: Entities.Hero 22,22, 12, 0, 0, tHeroName2
 ;defb _endByte

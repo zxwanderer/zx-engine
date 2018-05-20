@@ -39,7 +39,7 @@ GAME_LOOP:
   defb _endByte
 
 binary_proc:
-  LD D, 20
-  LD E, 20
+  LD D, #20
+  LD E, 1
   CALL map.center_map
   JP Tiles16.show_tile_map
