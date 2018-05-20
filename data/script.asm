@@ -23,7 +23,8 @@ LOOP_SCRIPT:
   ; setBorder PEN_BLUE
   ; setBorder PEN_RED
   ; setBorder PEN_GREEN
-  CallCode test_proc
+  ; CallCode test_proc
+  CallCode binary_proc
   ; setBorder PEN_BLACK
   ; CallCode input.noKey
   CallCode input.waitKey
@@ -36,3 +37,9 @@ LOOP_SCRIPT:
 GAME_LOOP:
   setBorder PEN_GREEN
   defb _endByte
+
+binary_proc:
+  LD D, 20
+  LD E, 20
+  CALL map.center_map
+  JP Tiles16.show_tile_map
