@@ -25,27 +25,40 @@ LOOP_SCRIPT:
   ; setBorder PEN_RED
   ; setBorder PEN_GREEN
   ; CallCode test_proc
-  CallCode binary_proc
+  ; CallCode binary_proc
   ; setBorder PEN_BLACK
-  CallCode input.noKey
-  CallCode input.waitKey
-  CallCode input.noKey
+  ; CallCode input.noKey
+  ; CallCode input.waitKey
+  ; CallCode input.noKey
+  CallScript GAME_LOOP
   ; CallCode zxengine.halt_me
   setBorder PEN_GREEN
   goto LOOP_SCRIPT
   defb _endByte
 
 GAME_LOOP:
-  setBorder PEN_GREEN
+  setBorder PEN_RED
+  SkanKeyTable key_table_hero
   defb _endByte
 
 binary_init:
   CALL Entities.initHeroes
-  RET
-
-binary_proc:
-  ; LD HL, CHARS_SET
-  ; LD ( Entities.activePersonage_ptr), HL
-  CALL Entities.loopNextChar
   CALL Entities.lookChar
   RET
+
+; binary_proc:
+  ; LD HL, CHARS_SET
+  ; LD ( Entities.activePersonage_ptr), HL
+  ; CALL Entities.loopNextChar
+  ; CALL Entities.lookChar
+  ; RET
+
+key_table_hero:
+  KEY_N, next_char
+  defb _endByte
+
+next_char:
+    CallCode Entities.loopNextChar
+    CallCode Entities.lookChar
+    defb _endByte
+
