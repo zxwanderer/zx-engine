@@ -45,7 +45,7 @@ initHeroes:
   LD HL, CHARS_SET
 PersonagesNum_ptr:
   LD B, PersonagesNum
-init_loop; пробегаемся по всем персонажам и размещаем их на карте
+init_loop: ; пробегаемся по всем персонажам и размещаем их на карте
   LD DE, Hero
   PUSH BC
   PUSH DE

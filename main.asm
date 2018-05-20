@@ -17,6 +17,7 @@ loop:
   NOP */
   jp zxengine.start
   include "core/defines.asm"
+  include "core/scankeys.asm"
   include "core/engine.asm"
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
