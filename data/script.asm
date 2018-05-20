@@ -17,6 +17,7 @@
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_GREEN
   printAt 0,0,HELLO_TXT
+  CallCode binary_init
 LOOP_SCRIPT:
   setBorder PEN_BLACK
   ; CallCode zxengine.halt_me
@@ -26,9 +27,9 @@ LOOP_SCRIPT:
   ; CallCode test_proc
   CallCode binary_proc
   ; setBorder PEN_BLACK
-  ; CallCode input.noKey
+  CallCode input.noKey
   CallCode input.waitKey
-  ; CallCode input.noKey
+  CallCode input.noKey
   ; CallCode zxengine.halt_me
   setBorder PEN_GREEN
   goto LOOP_SCRIPT
@@ -38,8 +39,13 @@ GAME_LOOP:
   setBorder PEN_GREEN
   defb _endByte
 
+binary_init:
+  CALL Entities.initHeroes
+  RET
+
 binary_proc:
-  LD D, #20
-  LD E, 1
-  CALL map.center_map
-  JP Tiles16.show_tile_map
+  ; LD HL, CHARS_SET
+  ; LD ( Entities.activePersonage_ptr), HL
+  CALL Entities.loopNextChar
+  CALL Entities.lookChar
+  RET

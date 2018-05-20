@@ -181,7 +181,7 @@ ground db 00; на чем стоит
 flags db 00; признаки-флаги
 name_p dw #0000 */
 
-PersonagesNum equ 1
+PersonagesNum equ 2
 ; описываем героя:
 CHARS_SET:
 Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1
