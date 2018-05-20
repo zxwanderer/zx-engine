@@ -55,10 +55,27 @@ binary_init:
 
 key_table_hero:
   KEY_N, next_char
+  KEY_W, char_up
+  KEY_S, char_down
+  KEY_A, char_left
+  KEY_D, char_right
   defb _endByte
 
 next_char:
     CallCode Entities.loopNextChar
+look_char:
     CallCode Entities.lookChar
     defb _endByte
 
+char_up:
+  CallCode Entities.charMoveUp
+  goto look_char
+char_down:
+  CallCode Entities.charMoveDown
+  goto look_char
+char_left:
+  CallCode Entities.charMoveLeft
+  goto look_char
+char_right:
+  CallCode Entities.charMoveRight
+  goto look_char
