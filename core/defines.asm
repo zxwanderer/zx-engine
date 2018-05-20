@@ -17,6 +17,16 @@ PAPER_YELLOW  equ %110000
 PAPER_WHITE   equ %111000
 
 
+;указатели направления
+dir_up   EQU 0
+dir_up_right EQU 1
+dir_right  EQU 2
+dir_down_right EQU 3
+dir_down EQU 4
+dir_down_left EQU 5
+dir_left  EQU 6
+dir_up_left EQU 7
+
 _endByte equ 0
 
 scrHeight equ 12
