@@ -26,6 +26,11 @@ mapSize equ 32
 SCREEN_ADDR equ #4000
 ATTR_ADDR EQU SCREEN_ADDR+#1800
 
+STRUCT Point
+y db 0
+x db 0
+ENDS
+
 MACRO mLDA
   LD A, (HL)
   INC HL
