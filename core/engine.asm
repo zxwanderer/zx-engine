@@ -19,6 +19,17 @@ MODULE zxengine
     defw ptr
   ENDM
 
+  MACRO CallScript ptr
+    defw zxengine.call_script_me
+    defw ptr
+  ENDM
+
+  MACRO SkanKeyTable ptr
+    defw zxengine.scan_keys_me
+    defw ptr
+  ENDM
+
+
 start:
   EI
   LD HL, START_SCRIPT
@@ -61,5 +72,41 @@ wait_me_loop:
   NOP
   DJNZ wait_me_loop
   JP process
+
+scan_keys_me: ; ================ scan keys
+	mLDE
+	PUSH HL
+	EX DE, HL
+	call scanKeys; возвратились из scankeys, в DE - указатель на процедуру
+	JR NZ, call_script_call; если флаг не 0 то клавиша есть
+	POP HL
+	JP process
+
+	; честно стырено из движка Wanderers
+scanKeys:
+	ld a,(HL) ;//  загружаем первый байт
+	and a  ;проверяем на 0
+	ret z ; возвращаем если 0
+	inc hl ; увеличиваем HL
+	in a,(0xfe) ; читаем значение
+	and (hl) ; сравниваем со вторым байтом
+	inc hl   ; увеличиваем указатель
+	ld e,(hl)
+	inc hl
+	ld d,(hl) ; запоминаем в DE указатель на процедуру
+	inc hl    ; увеличиваем HL
+	jr nz,scanKeys
+	or 2
+	ret
+
+call_script_me:
+  mLDE
+	PUSH HL
+call_script_call:
+	EX DE, HL
+	call process
+call_script_ret:
+	POP HL
+	JP process
 
 ENDMODULE
