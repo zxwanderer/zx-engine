@@ -25,6 +25,7 @@ loop:
   include "middlware/text.asm"
   include "middlware/screen.asm"
   include "middlware/map.asm"
+  include "middlware/entities.asm"
 
 ; test_proc:
 ;   LD HL, MAP_SET
@@ -45,7 +46,7 @@ MAP_SET:
 	include "data/maps/laboratory.asm"
 MAP_SET_END
 ENCOUNTER_SET:
-	/* include "data/maps/rebelstar_enc.asm" */
+	include "data/maps/rebelstar_enc.asm"
 ENCOUNTER_SET_END
 ORG (high $+1)*256
 p68_font:
