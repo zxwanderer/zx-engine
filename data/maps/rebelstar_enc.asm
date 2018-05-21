@@ -5,6 +5,8 @@ Door_closed equ #02
 Door_half_open equ #12
 Door_open equ #22
 
+Floor equ #03
+
 Computer_on equ #04
 Computer_off equ #14
 Computer_break equ #24
@@ -174,6 +176,7 @@ computer_off_script:
   goto no_way_script
 
 computer_break_script:
+  SetActionCell Floor
   goto no_way_script
   ;defb _endByte
   ; rPlayLaser 1
