@@ -1,5 +1,10 @@
     MODULE Entities
 
+  MACRO SetActionCell value
+    defw Entities.set_action_cell_me
+    defb value
+  ENDM
+
 activePersonage_ptr:
   dw #0000 ; указатель на текущего персонажа
 RevertPersonageNum:
@@ -8,25 +13,6 @@ MapCell_xy:
   Point 0,0 ; координаты на карте на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
-
-; различные переменные для скриптов
-varsTab:
-  DUP 256
-  defb 00
-  EDUP
-
-  	; первые резервные переменные
-act_var equ 0; // переменная 0 - действие
-ret_var equ 1; // переменная 2 что возвратили из скрипта
-
-  MACRO setVar var, val
-    LD ( Entities.varsTab + var ), val
-  ENDM
-
-	MACRO getVar perem, var
-    LD perem, ( Entities.varsTab + var )
-  ENDM
-
 
 ; действия
 act_end   EQU 0x00
@@ -219,9 +205,9 @@ check_right:
 ; -- перед этим проверили на выходы за границы
 check_action: ; в DE у нас координаты ячейки на которую воздействует персонаж
   LD A,B
-  setVar act_var, A; запоминаем в системной переменной действие
+  setVar zxengine.act_var, A; запоминаем в системной переменной действие
   LD A, 1
-  setVar ret_var, A; запоминаем в системной переменной действие
+  setVar zxengine.ret_var, A; запоминаем в системной переменной действие
   LD ( MapCell_xy ), DE
   call map.calc_pos ; получаем указатель на ячейку карты в HL
   LD ( MapCell_ptr), HL
@@ -230,7 +216,7 @@ check_action: ; в DE у нас координаты ячейки на кото�
   LD IY, HL
   LD HL, (IY+CellType.script_ptr)
   CALL zxengine.process
-  getVar A, ret_var
+  getVar A, zxengine.ret_var
   OR A
   JR Z, charCheck_no
 charCheck_yes:
@@ -241,5 +227,17 @@ charCheck_no:
   SCF
   RET
 
+set_action_cell_me:
+  mLDA
+  PUSH HL
+  CALL set_action_cell
+  POP HL
+  JP zxengine.process
+
+; -- устанавливаем новое значение ячейки на карте по адресу MapCell_ptr
+set_action_cell:
+  LD HL, (MapCell_ptr)
+  LD (HL), A
+  RET
 
     ENDMODULE
