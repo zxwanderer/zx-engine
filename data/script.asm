@@ -65,6 +65,7 @@ next_char:
     CallCode Entities.loopNextChar
 look_char:
     CallCode Entities.lookChar
+    CallCode input.noKey
     defb _endByte
 
 char_up:
