@@ -18,26 +18,15 @@
   setScreen PAPER_BLACK or PEN_GREEN
   printAt 0,0,HELLO_TXT
   CallCode binary_init
+  setBorder PEN_BLACK
 LOOP_SCRIPT:
   setBorder PEN_BLACK
-  ; CallCode zxengine.halt_me
-  ; setBorder PEN_BLUE
-  ; setBorder PEN_RED
-  ; setBorder PEN_GREEN
-  ; CallCode test_proc
-  ; CallCode binary_proc
-  ; setBorder PEN_BLACK
-  ; CallCode input.noKey
-  ; CallCode input.waitKey
-  ; CallCode input.noKey
   CallScript GAME_LOOP
-  ; CallCode zxengine.halt_me
-  setBorder PEN_GREEN
   goto LOOP_SCRIPT
   defb _endByte
 
 GAME_LOOP:
-  setBorder PEN_RED
+  ; setBorder PEN_RED
   SkanKeyTable key_table_hero
   defb _endByte
 
@@ -65,7 +54,7 @@ next_char:
     CallCode Entities.loopNextChar
 look_char:
     CallCode Entities.lookChar
-    CallCode input.noKey
+    CallCode input.noKey ; ждем пока отпустит клавишу
     defb _endByte
 
 char_up:
