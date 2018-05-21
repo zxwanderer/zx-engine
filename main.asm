@@ -41,7 +41,7 @@ LANG_SET:
   include "data/lang/lang_ru.asm"
 LANG_SET_END
 TILE_SET:
-  include "data/graph/new_tiles.asm"
+  include "data/graph/tiles_many.asm"
 TILE_SET_END
 MAP_SET:
 	include "data/maps/laboratory.asm"
