@@ -3,8 +3,8 @@ DEVICE zxspectrum128
 ORG     #8000
 code_start:
   call interrupt.int_init
-  LD HL, TILE_SET
-  LD (Tiles16.sprArray), HL
+  ; LD HL, TILE_SET
+  ; LD (Tiles16.sprArray), HL
 /* start:
   LD B, #80
 loop:
@@ -23,17 +23,11 @@ loop:
   include "core/routines/tiles16.asm"
   include "core/routines/input.asm"
   include "middlware/beeper.asm"
+  include "middlware/screenfx.asm"
   include "middlware/text.asm"
   include "middlware/screen.asm"
   include "middlware/map.asm"
   include "middlware/entities.asm"
-
-; test_proc:
-;   LD HL, MAP_SET
-;   /* LD DE, #4000 */
-;   JP Tiles16.show_tile_map
-;   /* JP sprite16.show_sprite */
-;   RET
 
 START_SCRIPT:
   include "data/script.asm"
