@@ -14,6 +14,10 @@ MODULE zxengine
     defb num
   ENDM
 
+  MACRO wait_halt
+    defw zxengine.halt_me
+  ENDM
+
   MACRO CallCode ptr
     defw zxengine.call_code_me
     defw ptr
