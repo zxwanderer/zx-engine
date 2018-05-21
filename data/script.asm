@@ -28,7 +28,7 @@ LOOP_SCRIPT:
 GAME_LOOP:
   ; setBorder PEN_RED
   SkanKeyTable key_table_hero
-  ShowSprite 1,5,1
+  ; ShowSprite 1,5,1
   defb _endByte
 
 binary_init:
