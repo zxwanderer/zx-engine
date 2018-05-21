@@ -9,6 +9,11 @@ Computer_on equ #04
 Computer_off equ #14
 Computer_break equ #24
 
+Ring_expl_1 equ #f0
+Ring_expl_2 equ #f1
+Ring_expl_3 equ #f2
+Ring_expl_4 equ #f3
+
 CELL_TYPES:
 
 ; -- 0 --

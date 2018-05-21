@@ -6,27 +6,27 @@
 ; A - номер спрайта
 ; на выходе HL - указатель на данные спрайта
 ; затрагивается регистр BC!!!
-  MACRO spr_index_to_addr
-   LD L, A
-   LD H, 0; загружаем номер спрайта в HL
-   ADD HL,HL; x2
-   ADD HL,HL; x4
-   PUSH HL; // запоминаем x4
-   ADD HL,HL; x8
-   ADD HL,HL; x16
-   ADD HL,HL; x32
-   POP BC; // снимаем со стека x4 - еще 4 байта цветности
-   ADD HL, BC
-   LD BC, (sprArray); указатель на начало спрайтов
-   ADD HL, BC
-  ENDM
+spr_index_to_addr:
+  LD L, A
+  LD H, 0; загружаем номер спрайта в HL
+  ADD HL,HL; x2
+  ADD HL,HL; x4
+  PUSH HL; // запоминаем x4
+  ADD HL,HL; x8
+  ADD HL,HL; x16
+  ADD HL,HL; x32
+  POP BC; // снимаем со стека x4 - еще 4 байта цветности
+  ADD HL, BC
+  LD BC, TILE_SET; указатель на начало спрайтов
+  ADD HL, BC
+  RET
 
 ;показываем 1 тайл на карте
 ;HL - указатель на спрайт
 ;DE - экранный адрес
 show_tile_on_map:
    PUSH DE
- // thanks to Alone Coder!
+ ; // thanks to Alone Coder!
    LD BC,#0808
    ;LD C,0 ; 0E 00
 _my_spr_loop_1:
@@ -98,7 +98,6 @@ next_tile_pos_down_exit:
 ; программа показывает на экране карту тайлов
 ; в HL - адрес первого тайла на карте
 show_tile_map:
-  DI ; лишний раз не теребим стек
   LD DE, SCREEN_ADDR ; current pos draw variable
   LD B, scrHeight
 show_tile_map_loop2: ; цикл по столбцам
@@ -114,7 +113,7 @@ show_tile_map_loop1: ; цикл по строкам
   PUSH DE
 
   LD A,(HL)
-  spr_index_to_addr
+  call spr_index_to_addr
   call show_tile_on_map
   POP DE; ---- снимаем все со стека
   next_tile_pos_right
@@ -131,9 +130,8 @@ show_tile_map_loop1: ; цикл по строкам
   ADD HL, BC; прибавляем к указателю на начало тайлов ширину - сдвигаем указатель вниз на 1 тайл
   POP BC
   DJNZ show_tile_map_loop2
-  EI
   RET
 
-sprArray dw 00 ;EQU p_sprArray+1
+; sprArray dw 00 ;EQU p_sprArray+1
 
   ENDMODULE
