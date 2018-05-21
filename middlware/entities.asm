@@ -9,6 +9,25 @@ MapCell_xy:
 MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 
+; различные переменные для скриптов
+varsTab:
+  DUP 256
+  defb 00
+  EDUP
+
+  	; первые резервные переменные
+act_var equ 0; // переменная 0 - действие
+ret_var equ 1; // переменная 2 что возвратили из скрипта
+
+  MACRO setVar var, val
+    LD ( Entities.varsTab + var ), val
+  ENDM
+
+	MACRO getVar perem, var
+    LD perem, ( Entities.varsTab + var )
+  ENDM
+
+
 ; действия
 act_end   EQU 0x00
 act_stand EQU 0x01
@@ -39,6 +58,15 @@ name_p dw #0000
 ; torse db 00
 ; boot db 00
 ENDS
+
+; на входе в A - индекс типа ячейки
+; на выходе - указатель на массив с ячейкой
+calcCellType:
+  LD DE, CellType
+  CALL math.mul_ADE
+  LD DE, CELL_TYPES
+  ADD HL, DE
+  RET
 
 ; ------- инициализация на карте всех персонажей из CHAR_SET
 initHeroes:
@@ -146,8 +174,65 @@ charMoveRight:
   RET C; нельзя двигаться никак
   JR char_to_map_moved;
 
+; может ли текущий персонаж совершить действие
+; если установлен флаг переноса SCF то не может
+; На входе: 
+;   в B - действие
+;   в A - направление
 charCheckAction:
-
+  LD IX, (activePersonage_ptr)
+  LD DE, (IX+Hero.pos);  D - x, E - y
+  CP dir_up
+  JR Z, check_up
+  CP dir_down
+  JR Z, check_down
+  CP dir_left
+  JR Z, check_left
+  CP dir_right
+  JR Z, check_right
+  JR charCheck_no; фигня какая-то
+check_up:
+  LD A,E
+  DEC A
+  JP M, charCheck_no
+  LD E,A
+  JR check_action
+check_down:
+  LD A,E
+  INC A
+  CP mapSize
+  JP NC, charCheck_no
+  LD E,A
+  JR check_action
+check_left:
+  LD A,D
+  DEC A
+  JP M, charCheck_no
+  LD D,A
+  JR check_action
+check_right:
+  LD A,D
+  INC A
+  CP mapSize
+  JR NC, charCheck_no
+  LD D,A
+; -- перед этим проверили на выходы за границы
+check_action: ; в DE у нас координаты ячейки на которую воздействует персонаж
+  LD A,B
+  setVar act_var, A; запоминаем в системной переменной действие
+  LD A, 1
+  setVar ret_var, A; запоминаем в системной переменной действие
+  LD ( MapCell_xy ), DE
+  call map.calc_pos ; получаем указатель на ячейку карты в HL
+  LD ( MapCell_ptr), HL
+  LD A, (HL);  и берем оттуда индекс !
+  CALL calcCellType
+  LD IY, HL
+  LD HL, (IY+CellType.script_ptr)
+  CALL zxengine.process
+  getVar A, ret_var
+  OR A
+  JR Z, charCheck_no
 charCheck_yes:
   SCF ; устанавливаем бит переноса и инвертируем его ))
   CCF
