@@ -1,4 +1,6 @@
 
+
+; обозначаем номера сущностей для лучшей адресации например SetActionCell Door_open
 Door_closed equ #02
 Door_half_open equ #12
 Door_open equ #22
@@ -109,53 +111,45 @@ Cell_Type_4F:        Entities.CellType Empty_cell_name,   no_script ; F
   defb 00
   EDUP */
 
-no_script:
-  defb _endByte
-
-no_way_script:
-  ; rSetVar system_data.ret_var, 0
+no_way_script: ; неуспех 
+  SetVar zxengine.ret_var, 0
+no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
 
 wall_script:
   ; rPlayVibr 1
   ;rBorder PEN_BLACK
-  defb _endByte
-  ; GOTO no_way_script
+  goto no_way_script
 
 door_open_script:
   defb _endByte
-  /* SET_ACTION_CELL Door_half_open
-  rExec Entities.lookChar
-  WAIT 5
-  SET_ACTION_CELL Door_closed
-  rExec Entities.lookChar
-  WAIT 5
-  GOTO no_w */
+  ; SetActionCell Door_half_open
+  ; SetActionCell Door_closed
+  ; goto no_way_script
 
+; ----- проверяем дверь
 door_script:
-  defb _endByte
   ;rPlayLaser 1
-  ; SET_ACTION_CELL Door_half_open
-  ; rExec Entities.lookChar
-  ; WAIT 5
-  ; SET_ACTION_CELL Door_open
-  ;rExec Entities.lookChar
-  ; GOTO no_way_script
+  SetActionCell Door_half_open
+  CallCode Entities.lookChar
+  wait 5
+  SetActionCell Door_open
+  ; CallCode Entities.lookChar
+  goto no_way_script
 
 computer_on_script:
-  defb _endByte
   ; rPlayLaser 1
-  ; SET_ACTION_CELL Computer_off
-  ; GOTO no_way_script
+  SetActionCell Computer_off
+  goto no_way_script
 
 computer_off_script:
-  defb _endByte
   ; rPlayLaser 1
-  ; SET_ACTION_CELL Computer_on
-  ; GOTO no_way_script
+  SetActionCell Computer_on
+  goto no_way_script
 
 computer_break_script:
-  defb _endByte
+  goto no_way_script
+  ;defb _endByte
   ; rPlayLaser 1
   ; GOTO no_way_script
 
@@ -174,7 +168,6 @@ Cell4: Entities.Cell 0,0 */
   ;dw cGround, cWater, cGreenBush
 
 ; позиция Y,X !!!
-
 /* pos Point 0,0 ; позиция на карте
 sprite db 00; спрайт
 ground db 00; на чем стоит
@@ -185,7 +178,7 @@ PersonagesNum equ 2
 ; описываем героя:
 CHARS_SET:
 Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1
-Hero2: Entities.Hero 1,14, 9, 0, 0, tHeroName2
+Hero2: Entities.Hero 10,14, 9, 0, 0, tHeroName2
 ; , 0, 0, 0, 0, 0
 ;Hero3: Entities.Hero 22,22, 12, 0, 0, tHeroName2
 ;defb _endByte

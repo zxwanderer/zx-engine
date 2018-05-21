@@ -29,6 +29,34 @@ MODULE zxengine
     defw ptr
   ENDM
 
+  MACRO SetVar var, value
+    defw zxengine.set_var_me
+    defb var
+    defb value
+  ENDM
+
+; для использования внутри ассемблера
+
+; первые резервные переменные
+act_var equ 0; // переменная 0 - действие
+ret_var equ 1; // переменная 2 что возвратили из скрипта
+
+  MACRO setVar var, val
+    LD ( zxengine.varsTab + var ), val
+  ENDM
+
+	MACRO getVar perem, var
+    LD perem, ( zxengine.varsTab + var )
+  ENDM
+
+
+  ; rSetVar var,value
+
+; различные переменные для скриптов
+varsTab:
+  DUP 256
+  defb 00
+  EDUP
 
 start:
   EI
@@ -104,9 +132,28 @@ call_script_me:
 	PUSH HL
 call_script_call:
 	EX DE, HL
-	call process
+	CALL process
 call_script_ret:
 	POP HL
 	JP process
+
+set_var_me:
+	mLDA
+	CALL getVar
+	LD A,(HL)
+	INC HL
+	LD (DE),A
+	JP process
+
+; --- получить значение переменной
+; на входе A - номер переменной
+; на выходе 
+;   в DE - указатель на переменную
+;   в A - значение переменной
+getVar:
+	ld de,varsTab
+	mADDA D,E
+	ld A,(DE)
+	ret
 
 ENDMODULE

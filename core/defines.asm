@@ -59,3 +59,11 @@ MACRO mLBC ;LD BC, (HL)
   LD B, (HL)
   INC HL
 ENDM
+
+MACRO mADDA hr,lr ; прибавляем A к регистровой паре hrlr
+	add a,lr;  a = a + lr
+	ld lr,a ; lr = a + lr
+	adc a,hr ; a = a + lr + hr + (carry )
+	sub lr; a = a + hr
+	ld hr,a
+ENDM
