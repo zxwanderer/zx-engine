@@ -9,10 +9,10 @@ Computer_on equ #04
 Computer_off equ #14
 Computer_break equ #24
 
-Ring_expl_1 equ #f0
-Ring_expl_2 equ #f1
-Ring_expl_3 equ #f2
-Ring_expl_4 equ #f3
+Ring_expl_1 equ #b0
+Ring_expl_2 equ #b1
+Ring_expl_3 equ #b2
+Ring_expl_4 equ #b3
 
 CELL_TYPES:
 
@@ -121,9 +121,26 @@ no_way_script: ; неуспех
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
 
+action_ring_explode:
+  FxActionCell Ring_expl_1
+  wait_halt 3
+  FxActionCell Ring_expl_2
+  wait_halt 3
+  FxActionCell Ring_expl_3
+  wait_halt 3
+  FxActionCell Ring_expl_4
+  wait_halt 3
+  FxActionCell Ring_expl_3
+  wait_halt 3
+  FxActionCell Ring_expl_2
+  wait_halt 3
+  FxActionCell Ring_expl_1
+  wait_halt 3
+  defb _endByte
+
 wall_script:
   ; rPlayVibr 1
-  ;rBorder PEN_BLACK
+  CallScript action_ring_explode
   goto no_way_script
 
 door_open_script:

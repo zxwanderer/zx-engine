@@ -14,8 +14,9 @@ MODULE zxengine
     defb num
   ENDM
 
-  MACRO wait_halt
+  MACRO wait_halt num
     defw zxengine.halt_me
+    defb num
   ENDM
 
   MACRO CallCode ptr
@@ -93,8 +94,11 @@ goto_me:
   JP process
 
 halt_me:
+  mLDB
+wait_halt_loop:
   HALT
-  RET
+  DJNZ wait_halt_loop
+  JP process
 
 wait_me:
   LD B, (HL)

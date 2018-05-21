@@ -46,6 +46,11 @@ MACRO mLDA
   INC HL
 ENDM
 
+MACRO mLDB
+  LD B, (HL)
+  INC HL
+ENDM
+
 MACRO mLDE ;LD DE, (HL)
   LD E, (HL)
   INC HL
