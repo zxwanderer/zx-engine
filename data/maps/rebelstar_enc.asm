@@ -144,7 +144,7 @@ computer_on_script:
 
 computer_off_script:
   ; rPlayLaser 1
-  SetActionCell Computer_on
+  SetActionCell Computer_break
   goto no_way_script
 
 computer_break_script:
