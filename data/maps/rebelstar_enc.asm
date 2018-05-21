@@ -1,6 +1,6 @@
 
 
-; обозначаем номера сущностей для лучшей адресации например SetActionCell Door_open
+; обозначаем номера сущностей для лучшей адресации например открытие двери - SetActionCell Door_open
 Door_closed equ #02
 Door_half_open equ #12
 Door_open equ #22
@@ -175,10 +175,10 @@ flags db 00; признаки-флаги
 name_p dw #0000 */
 
 PersonagesNum equ 2
-; описываем героя:
+; описываем героев:
 CHARS_SET:
 Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1
-Hero2: Entities.Hero 10,14, 9, 0, 0, tHeroName2
+Hero2: Entities.Hero 10,23, 9, 0, 0, tHeroName2
 ; , 0, 0, 0, 0, 0
 ;Hero3: Entities.Hero 22,22, 12, 0, 0, tHeroName2
 ;defb _endByte
