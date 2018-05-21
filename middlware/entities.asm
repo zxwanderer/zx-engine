@@ -1,8 +1,14 @@
     MODULE Entities
 
-  MACRO SetActionCell value
+  MACRO SetActionCell value_p
     defw Entities.set_action_cell_me
-    defb value
+    defb value_p
+  ENDM
+
+  MACRO CharDo action_p, dir_p
+    defw Entities.char_action_me
+    defb action_p
+    defb dir_p
   ENDM
 
 activePersonage_ptr:
@@ -15,11 +21,12 @@ MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 
 ; действия
-act_end   EQU 0x00
-act_stand EQU 0x01
-act_look  EQU 0x02
-act_take  EQU 0x03
-act_use   EQU 0x04
+actions.act_end   EQU 0x00
+do_stand EQU 0x01
+do_look  EQU 0x02
+do_take  EQU 0x03
+do_use   EQU 0x04
+do_smach EQU 0x05
 
 ; тип ячейки на карте или предмета
 STRUCT CellType
@@ -112,59 +119,72 @@ lookChar:
   JP Tiles16.show_tile_map
   RET
 
-; ------- двигаем персонажа вверх
-charMoveUp:
-  LD B, act_stand; встаем на ячейку
-  LD A, dir_up
+; ----- персонаж на что-то воздействует
+char_action_me:
+  mLDA
+  LD B,A
+  mLDA
+  PUSH HL
   CALL charCheckAction
-  RET C; нельзя двигаться никак
+  JR C, char_action_me_end; проверили - переносить не нужно - возврат 
+  CALL char_to_map_moved
+char_action_me_end:
+  POP HL
+  JP zxengine.process
 
 ; ------- двигаем персонажа на позицию MapCell_xy ( MapCell_ptr )
 char_to_map_moved:
-  ;CALL pesr_floor_to_ground; вместо этого - процедура ниже
-  LD IX, (activePersonage_ptr);
-  LD DE, (IX+Hero.pos) ;
-  CALL map.calc_pos    ; определяем координаты позиции персонажа в HL
-  LD A,(IX+Hero.ground);
-  LD (HL),A            ; и ставим на карту спрайт пола
+  LD IX, (activePersonage_ptr)  ;
+  LD DE, (IX+Hero.pos)          ;
+  CALL map.calc_pos             ; определяем координаты позиции персонажа в HL
+  LD A,(IX+Hero.ground)         ;
+  LD (HL),A                     ; и ставим на карту спрайт пола
   LD DE, ( MapCell_xy )
   LD (IX+Hero.pos), DE
-  ;call ground_to_pers_floor; вместо этого - процедура ниже
   LD HL,( MapCell_ptr )
   LD A,(HL)
-  LD (IX+Hero.ground),A; ячейку карты ставим на пол персонажа
+  LD (IX+Hero.ground),A         ; ячейку карты ставим на пол персонажа
   LD A,(IX+Hero.sprite)
-  LD (HL),A ; ставим спрайт персонажа на карту
+  LD (HL),A                     ; ставим спрайт персонажа на карту
   RET
 
-  ; двигаем персонажа вниз
-charMoveDown:
-  LD B, act_stand; встаем на ячейку
-  LD A, dir_down
-  CALL charCheckAction
-  RET C; нельзя двигаться никак
-  JR char_to_map_moved;
 
-;двигаем персонажа влево
-charMoveLeft:
-  LD B, act_stand; встаем на ячейку
-  LD A, dir_left
-  CALL charCheckAction
-  RET C; нельзя двигаться никак
-  JR char_to_map_moved;
+  MACRO m_check_left:
+    LD A,D
+    DEC A
+    JP M, charCheck_no
+    LD D,A
+  ENDM
 
-charMoveRight:
-  LD B, act_stand; встаем на ячейку
-  LD A, dir_right
-  CALL charCheckAction
-  RET C; нельзя двигаться никак
-  JR char_to_map_moved;
+  MACRO m_check_right:
+    LD A,D
+    INC A
+    CP mapSize
+    JR NC, charCheck_no
+    LD D,A
+  ENDM
 
-; может ли текущий персонаж совершить действие
-; если установлен флаг переноса SCF то не может
+  MACRO m_check_up:
+    LD A,E
+    DEC A
+    JP M, charCheck_no
+    LD E,A
+  ENDM
+
+  MACRO m_check_down:
+    LD A,E
+    INC A
+    CP mapSize
+    JP NC, charCheck_no
+    LD E,A
+  ENDM
+
+; Проверяем как персонаж выполняет скриптовое действие
 ; На входе: 
 ;   в B - действие
 ;   в A - направление
+; На выходе: если установлен флаг SCF то переносить персонажа
+; на активируемую ячейку не нужно =)
 charCheckAction:
   LD IX, (activePersonage_ptr)
   LD DE, (IX+Hero.pos);  D - x, E - y
@@ -176,32 +196,53 @@ charCheckAction:
   JR Z, check_left
   CP dir_right
   JR Z, check_right
-  JR charCheck_no; фигня какая-то
+
+  CP dir_down_left
+  JR Z, check_down_left
+  CP dir_down_right
+  JR Z, check_down_right
+  CP dir_up_left
+  JR Z, check_up_left
+  CP dir_up_right
+  JR Z, check_up_right
+
+  JP charCheck_no; фигня какая-то
+
+check_down_left:
+  m_check_down
+  m_check_left
+  JR check_action
+
+check_down_right:
+  m_check_down
+  m_check_right
+  JR check_action
+
+check_up_left:
+  m_check_up
+  m_check_left
+  JR check_action
+
+check_up_right:
+  m_check_up
+  m_check_right
+  JR check_action
+
 check_up:
-  LD A,E
-  DEC A
-  JP M, charCheck_no
-  LD E,A
+  m_check_up
   JR check_action
+
 check_down:
-  LD A,E
-  INC A
-  CP mapSize
-  JP NC, charCheck_no
-  LD E,A
+  m_check_down
   JR check_action
+
 check_left:
-  LD A,D
-  DEC A
-  JP M, charCheck_no
-  LD D,A
+  m_check_left
   JR check_action
+
 check_right:
-  LD A,D
-  INC A
-  CP mapSize
-  JR NC, charCheck_no
-  LD D,A
+  m_check_right
+
 ; -- перед этим проверили на выходы за границы
 check_action: ; в DE у нас координаты ячейки на которую воздействует персонаж
   LD A,B

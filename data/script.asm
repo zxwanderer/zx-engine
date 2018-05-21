@@ -44,10 +44,17 @@ binary_init:
 
 key_table_hero:
   KEY_N, next_char
+
   KEY_W, char_up
-  KEY_S, char_down
+  KEY_X, char_down
   KEY_A, char_left
   KEY_D, char_right
+
+  KEY_Q, char_up_left
+  KEY_E, char_up_right
+  KEY_Z, char_down_left
+  KEY_C, char_down_right
+
   defb _endByte
 
 next_char:
@@ -58,14 +65,27 @@ look_char:
     defb _endByte
 
 char_up:
-  CallCode Entities.charMoveUp
+  CharDo Entities.do_stand, dir_up
   goto look_char
 char_down:
-  CallCode Entities.charMoveDown
+  CharDo Entities.do_stand, dir_down
   goto look_char
 char_left:
-  CallCode Entities.charMoveLeft
+  CharDo Entities.do_stand, dir_left
   goto look_char
 char_right:
-  CallCode Entities.charMoveRight
+  CharDo Entities.do_stand, dir_right
+  goto look_char
+
+char_up_left:
+  CharDo Entities.do_stand, dir_up_left
+  goto look_char
+char_up_right:
+  CharDo Entities.do_stand, dir_up_right
+  goto look_char
+char_down_left:
+  CharDo Entities.do_stand, dir_down_left
+  goto look_char
+char_down_right:
+  CharDo Entities.do_stand, dir_down_right
   goto look_char
