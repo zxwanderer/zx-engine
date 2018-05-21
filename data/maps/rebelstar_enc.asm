@@ -23,7 +23,7 @@ Cell_Type_Wall:     Entities.CellType Wall_cell_name,     wall_script ; 1
 Cell_Type_Door:     Entities.CellType Door_cell_name,     door_script ; 2
 Cell_Type_Floor:    Entities.CellType Floor_cell_name,    no_script ; 3
 Cell_Type_Computer: Entities.CellType Computer_cell_name, computer_on_script ; 4
-Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   no_way_script ; 5
+Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   ballon_script ; 5
 Cell_Type_GridWall: Entities.CellType Ballon_cell_name,   no_script ; 6
 Cell_Type_Canister: Entities.CellType Ballon_cell_name,   no_script ; 7
 Cell_Type_Palm:     Entities.CellType Ballon_cell_name,   no_script ; 8
@@ -148,6 +148,10 @@ door_open_script:
   ; SetActionCell Door_half_open
   ; SetActionCell Door_closed
   ; goto no_way_script
+
+ballon_script:
+  CallScript action_ring_explode
+  goto no_way_script
 
 ; ----- проверяем дверь
 door_script:
