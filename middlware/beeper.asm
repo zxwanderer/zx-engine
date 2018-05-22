@@ -10,6 +10,11 @@ MODULE beeper
     ; defb num
   ENDM
 
+  MACRO shiruFX num
+    defw beeper.shiru_me
+    defb num
+  ENDM
+
   MACRO vibrFX
     defw beeper.vibr_me
     ; defb num
@@ -43,6 +48,13 @@ explos_me:
   CALL explos
   POP HL
   JP zxengine.process
+
+shiru_me:
+  mLDA
+  PUSH HL
+  CALL FX_SET
+  POP HL
+  JP zxengine.process  
 
 vibr:  LD    H,100
        LD    E,10
