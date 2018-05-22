@@ -16,6 +16,8 @@ Ring_expl_2 equ #b1
 Ring_expl_3 equ #b2
 Ring_expl_4 equ #b3
 
+Shard_spr: equ #b0
+
 CELL_TYPES:
 
 ; -- 0 --
@@ -118,6 +120,19 @@ Cell_Type_4F:        Entities.CellType Empty_cell_name,   no_script ; F
   defb 00
   EDUP */
 
+ITEM_TYPES:
+
+Shard_Item_Type:     items.ItemType Shard_item_name, Shard_spr
+
+  DUP items.ItemType*100
+    defb 00
+   EDUP 
+
+ITEM_ARRAY:
+  DUP items.Item*100
+    defb 00
+   EDUP 
+
 no_way_script: ; неуспех 
   SetVar zxengine.ret_var, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
@@ -160,14 +175,13 @@ ballon_script:
 ; ----- проверяем дверь
 door_script:
   ;rPlayLaser 1
-
   ; laserFX
   shiruFX 43
   SetActionCell Door_half_open
   CallCode Entities.lookChar
   wait 5
   SetActionCell Door_open
-  ; CallCode Entities.lookChar
+  AddItemMap 13,22, 0
   goto no_way_script
 
 computer_on_script:
@@ -217,7 +231,7 @@ PersonagesNum equ 2
 ; описываем героев:
 CHARS_SET:
 Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1
-Hero2: Entities.Hero 10,23, 9, 0, 0, tHeroName2
+Hero2: Entities.Hero 13,22, 9, 0, 0, tHeroName2
 ; , 0, 0, 0, 0, 0
 ;Hero3: Entities.Hero 22,22, 12, 0, 0, tHeroName2
 ;defb _endByte

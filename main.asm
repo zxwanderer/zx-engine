@@ -28,6 +28,7 @@ loop:
   include "middlware/screen.asm"
   include "middlware/map.asm"
   include "middlware/entities.asm"
+  include "middlware/items.asm"
 
 START_SCRIPT:
   include "data/script.asm"

@@ -45,6 +45,8 @@ MODULE zxengine
 ; первые резервные переменные
 act_var equ 0; // переменная 0 - действие
 ret_var equ 1; // переменная 2 что возвратили из скрипта
+map_cell_x equ 2; //
+map_cell_y equ 3; // 
 
   MACRO setVar var, val
     LD ( zxengine.varsTab + var ), val
@@ -54,12 +56,13 @@ ret_var equ 1; // переменная 2 что возвратили из скр
     LD perem, ( zxengine.varsTab + var )
   ENDM
 
-
-  ; rSetVar var,value
-
 ; различные переменные для скриптов
 varsTab:
-  DUP 256
+vars_act defb 0
+vars_ret defb 0
+vars_act_cell_x defb 0
+vars_act_cell_y defb 0
+  DUP 256-4
   defb 00
   EDUP
 

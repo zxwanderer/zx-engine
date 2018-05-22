@@ -14,5 +14,7 @@ Door_cell_name: db "Дверь",0
 Wall_cell_name: db "Стена",0
 Ballon_cell_name: db "Баллон",0
 
+Shard_item_name: db "Осколок",0
+
 tHeroName1 defb "Иван Ребрин",0
 tHeroName2 defb "Виталий Капустин",0
