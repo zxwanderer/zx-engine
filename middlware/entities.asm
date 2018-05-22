@@ -120,6 +120,33 @@ lookChar:
   JP Tiles16.show_tile_map
   RET
 
+; в DE позиция на карте
+; на выходе если есть на этой позиции чар NZ
+; и IX - указатель на него
+find_char_on_map:
+    LD IX, CHARS_SET; указатель на массив чаров
+    LD B, PersonagesNum; число чаров
+; проверяем совпадают ли координаты
+check_char:
+    LD A, (IX+Hero.pos.y)
+    CP E
+    JR NZ, next_char
+    LD A, (IX+Hero.pos.x)
+    CP D
+    JR NZ, next_char
+    ; LD A, (IX+Hero.itemID)
+    ; CP #FF; пустая запись
+    ; JR Z, next_item
+; нашли!
+    JP Entities.check_yes
+next_char:
+    PUSH BC
+    LD BC, Hero
+    ADD IX, BC
+    POP BC
+    DJNZ check_char
+    JP Entities.check_no
+
 ; ----- персонаж на что-то воздействует
 char_action_me:
   mLDA

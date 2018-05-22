@@ -38,13 +38,22 @@ binary_show_gui:
   LD DE, (IX+Entities.Hero.pos)
   CALL items.find_item_on_map
   JR C, binary_show_gui_ret; не стоит
-  LD DE, (IX+Entities.Hero.pos) ; загружаем в DE снова позицию героя
-  CALL 
-
+  ; LD DE, (IX+Entities.Hero.pos) ; загружаем в DE снова позицию героя
+  ; CALL 
   LD DE, #1D01
-
+  LD A, #BE
   CALL screenfx.show_sprite
 binary_show_gui_ret:
+  RET
+
+binary_get_item_from_map:
+  LD IX, (Entities.activePersonage_ptr)
+  LD DE, (IX+Entities.Hero.pos)
+  CALL items.find_item_on_map
+  JR C, binary_get_item_from_map_ret; предмета нет
+  CALL items.pick_up_item
+  RET
+binary_get_item_from_map_ret:
   RET
 
 binary_init:
@@ -71,6 +80,8 @@ key_table_hero:
   KEY_E, char_up_right
   KEY_Z, char_down_left
   KEY_C, char_down_right
+
+  KEY_ENTER, char_loot
 
   defb _endByte
 
@@ -106,4 +117,8 @@ char_down_left:
   goto look_char
 char_down_right:
   CharDo Entities.do_stand, dir_down_right
+  goto look_char
+
+char_loot:
+  CallCode binary_get_item_from_map
   goto look_char

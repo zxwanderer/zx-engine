@@ -72,7 +72,15 @@ add_item_to_map:
     LD (IX+Item.itemID), A; сохранили тип предмета
     POP DE
     LD (IX+Item.pos.x), D
-    LD (IX+Item.pos.y), E ; сохранили позицию предмета 
+    LD (IX+Item.pos.y), E ; сохранили позицию предмета
+    ; проверяем стоит ли на этой ячейке какой-либо герой:
+    PUSH IX
+    CALL Entities.find_char_on_map
+    POP IX
+    JR C, add_item_to_map_spr
+    ; JP items.add_item_to_map_error
+    JP Entities.check_no
+add_item_to_map_spr:
     ; теперь надо закинуть спрайт предмета на карту и взять ground с нее
     CALL map.calc_pos ; в HL указатель на ячейку
     LD A, (HL) ; забрали "землю"
@@ -85,10 +93,36 @@ add_item_to_map:
     LD A, (IX+ItemType.spr_num)
     POP HL
     LD (HL),A
-    RET
+    JP Entities.check_yes
 add_item_to_map_error:
     POP AF
     POP DE
+    JP Entities.check_no
+
+; самодостаточная функция, герой подбирает первый попавшийся предмет с карты
+pick_up_item:
+    LD IX, (Entities.activePersonage_ptr)
+    LD DE, (IX+Entities.Hero.pos)
+    CALL find_item_on_map
+    JR C, pick_up_item_ret
+
+    LD ( IX+Item.itemID ), #ff; удалили из списка :D
+    LD A, (IX+Item.ground) ; земля предмета
+    
+    LD IY, (Entities.activePersonage_ptr)
+    LD (IY+Entities.Hero.ground), A; записываем землю предмета в землю героя, поэтому как только он сойдет с клетки,
+                          ; на старом месте появится не спрайт предмета а его земля
+pick_up_item_ret:
+    RET
+
+; в IX указатель на предмет в массиве предметов
+remove_item_to_map:
+    LD ( IX+Item.itemID ), #ff; удалили :D
+    LD D, (IX+Item.pos.x)
+    LD E, (IX+Item.pos.y)
+    CALL map.calc_pos
+    LD A, (IX+Item.ground)
+    LD (HL),A
     RET
 
 ; в DE позиция на карте
@@ -105,6 +139,9 @@ check_item:
     LD A, (IX+Item.pos.x)
     CP D
     JR NZ, next_item
+    LD A, (IX+Item.itemID)
+    CP #FF; пустая запись
+    JR Z, next_item
 ; нашли!
     JP Entities.check_yes
 next_item:
