@@ -153,7 +153,7 @@ char_to_map_moved:
   MACRO m_check_left:
     LD A,D
     DEC A
-    JP M, charCheck_no
+    JP M, check_no
     LD D,A
   ENDM
 
@@ -161,14 +161,14 @@ char_to_map_moved:
     LD A,D
     INC A
     CP mapSize
-    JR NC, charCheck_no
+    JR NC, check_no
     LD D,A
   ENDM
 
   MACRO m_check_up:
     LD A,E
     DEC A
-    JP M, charCheck_no
+    JP M, check_no
     LD E,A
   ENDM
 
@@ -176,7 +176,7 @@ char_to_map_moved:
     LD A,E
     INC A
     CP mapSize
-    JP NC, charCheck_no
+    JP NC, check_no
     LD E,A
   ENDM
 
@@ -207,7 +207,7 @@ charCheckAction:
   CP dir_up_right
   JR Z, check_up_right
 
-  JP charCheck_no; фигня какая-то
+  JP check_no; фигня какая-то
 
 check_down_left:
   m_check_down
@@ -260,12 +260,12 @@ check_action: ; в DE у нас координаты ячейки на кото�
   CALL zxengine.process
   getVar A, zxengine.ret_var
   OR A
-  JR Z, charCheck_no
-charCheck_yes:
+  JR Z, check_no
+check_yes:
   SCF ; устанавливаем бит переноса и инвертируем его ))
   CCF
   RET
-charCheck_no:
+check_no:
   SCF
   RET
 

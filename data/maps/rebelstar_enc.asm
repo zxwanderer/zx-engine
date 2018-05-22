@@ -1,6 +1,6 @@
 
 
-; обозначаем номера сущностей для лучшей адресации например открытие двери - SetActionCell Door_open
+; обозначаем номера типов ячеек карты для лучшей адресации например открытие двери - SetActionCell Door_open
 Door_closed equ #02
 Door_half_open equ #12
 Door_open equ #22
@@ -17,7 +17,8 @@ Ring_expl_3 equ #b2
 Ring_expl_4 equ #b3
 
 Shard_Item: equ 0
-Shard_spr: equ #b0
+
+Shard_spr: equ #34
 
 CELL_TYPES:
 
@@ -85,7 +86,7 @@ Cell_Type_30:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_31:        Entities.CellType Empty_cell_name,   no_script ; 1
 Cell_Type_32:        Entities.CellType Empty_cell_name,   no_script ; 2
 Cell_Type_33:        Entities.CellType Empty_cell_name,   no_script ; 3
-Cell_Type_34:        Entities.CellType Empty_cell_name,   no_script ; 4
+Cell_Type_Shard:     Entities.CellType Shard_item_name,   no_script ; 4
 Cell_Type_35:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_36:        Entities.CellType Empty_cell_name,   no_script ; 6
 Cell_Type_37:        Entities.CellType Empty_cell_name,   no_script ; 7
@@ -134,6 +135,8 @@ ITEM_ARRAY:
     defb 00
    EDUP 
 
+ItemArraySize equ 100; максимальное число предметов 
+
 no_way_script: ; неуспех 
   SetVar zxengine.ret_var, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
@@ -159,7 +162,7 @@ action_ring_explode:
 wall_script:
   ; rPlayVibr 1
   ; laserFX
-  AddItemMap 13,22, Shard_Item
+  ; AddItemMap 13,22, Shard_Item
   shiruFX 2
   CallScript action_ring_explode
   goto no_way_script
@@ -197,6 +200,7 @@ computer_off_script:
   ; laserFX
   shiruFX 56
   SetActionCell Computer_break
+  CallCode binary_add_shard
   goto no_way_script
 
 computer_break_script:
@@ -227,6 +231,15 @@ sprite db 00; спрайт
 ground db 00; на чем стоит
 flags db 00; признаки-флаги
 name_p dw #0000 */
+
+binary_add_shard:
+; читаем что у нас подзорвалось
+  LD DE, (Entities.MapCell_xy)
+; Y+1 ( размещаем shard внизу взорвавшегося предмета )
+  INC E
+  LD A, Shard_Item
+  CALL items.add_item_to_map
+  RET
 
 PersonagesNum equ 2
 ; описываем героев:

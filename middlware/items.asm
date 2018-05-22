@@ -1,11 +1,11 @@
 MODULE items
-
+/*
   MACRO AddItemMap pos_x,pos_y,itemID
     defw items.add_item_map_me
     defb pos_x, pos_y
     defb itemID
   ENDM
-
+*/
 STRUCT ItemType
 ; name_ptr dw 00; указатель на имя типа ( имя не нужно - есть имя спрайта )
 spr_num db 00; номер спрайта предмета
@@ -35,6 +35,7 @@ calcItemType:
   ADD HL, DE
   RET
 
+/*
 add_item_map_me:
     mLDE; в DE позиция
     mLDA; в A номер предмета
@@ -42,6 +43,7 @@ add_item_map_me:
     CALL add_item_to_map
     POP HL
     JP zxengine.process
+*/
 
 ; ищем пустой элемент в массиве предметов
     MACRO search_empty_item
@@ -50,17 +52,6 @@ search_empty_item_loop:
     LD A, (HL)
     LD IX, HL
     ENDM
-
-; в DE позиция на карте
-; в A - номер предмета  
-; add_item_to_array:
-;     ; call search
-;     LD HL, ITEM_ARRAY ; указатель на начало массива предметов
-;     LD IX, HL
-;     LD (IX+Item.itemID), A
-;     LD (IX+Item.pos.x), D
-;     LD (IX+Item.pos.y), E
-;     RET
 
 ; в DE позиция на карте
 ; в A - номер предмета
@@ -87,5 +78,28 @@ add_item_to_map:
     LD (HL),A
     RET
 
+; в DE позиция на карте
+; на выходе если есть на этой позиции предметы возвращаем NZ
+; и IX - указатель на него
+find_item_to_map:
+    LD IX, ITEM_ARRAY; указатель на массив предметов
+    LD B, ItemArraySize; число предметов
+; проверяем совпадают ли координаты хотя бы c одним предметом
+check_item:
+    LD A, (IX+Item.pos.y)
+    CP E
+    JR NZ, next_item
+    LD A, (IX+Item.pos.x)
+    CP D
+    JR NZ, next_item
+; нашли!
+    JP Entities.check_yes
+next_item:
+    PUSH BC
+    LD BC, Item
+    ADD IX, BC
+    POP BC
+    DJNZ check_item
+    JP Entities.check_no
 
 ENDMODULE
