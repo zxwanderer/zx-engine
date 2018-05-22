@@ -28,6 +28,7 @@ LOOP_SCRIPT:
 GAME_LOOP:
   ; setBorder PEN_RED
   SkanKeyTable key_table_hero
+  AddItemMap 13,22, Shard_Item
   ; ShowSprite 1,5,1
   defb _endByte
 
@@ -62,7 +63,7 @@ next_char:
     CallCode Entities.loopNextChar
 look_char:
     CallCode Entities.lookChar
-    CallCode input.noKey ; ждем пока отпустит клавишу
+    ; CallCode input.noKey ; ждем пока отпустит клавишу
     defb _endByte
 
 char_up:
