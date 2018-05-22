@@ -183,7 +183,6 @@ door_script:
   CallCode Entities.lookChar
   wait 5
   SetActionCell Door_open
-  AddItemMap 13,22, Shard_Item
   goto no_way_script
 
 computer_on_script:
