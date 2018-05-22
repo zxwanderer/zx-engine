@@ -46,19 +46,28 @@ add_item_map_me:
 */
 
 ; ищем пустой элемент в массиве предметов
-    MACRO search_empty_item
-    LD HL, ITEM_ARRAY ; указатель на начало массива предметов
+; на выходе - если признак переноса есть то предмет можно положить
+; иначе в IX указатель на предмет
+search_empty_item:
+    LD IX, ITEM_ARRAY ; указатель на начало массива предметов
+    LD DE, Item; размерность
+    LD B, ItemArraySize; максимальное число предметов
 search_empty_item_loop:
-    LD A, (HL)
-    LD IX, HL
-    ENDM
+    LD A, (IX+Item.itemID)
+    CP #FF
+    JP Z, Entities.check_yes
+    ADD IX, DE
+    DJNZ search_empty_item_loop
+    JP Entities.check_no
 
 ; в DE позиция на карте
 ; в A - номер предмета
+; TODO: проверить находится ли герой на ячейке, меняем землю у него на спрайт (?)
 add_item_to_map:
     PUSH DE
     PUSH AF
-    search_empty_item; на выходе в IX указатель на пустой предмет
+    CALL search_empty_item; на выходе признак переноса и IX указатель на пустой предмет или сброшеный признак переноса
+    JR C, add_item_to_map_error
     POP AF
     LD (IX+Item.itemID), A; сохранили тип предмета
     POP DE
@@ -77,11 +86,15 @@ add_item_to_map:
     POP HL
     LD (HL),A
     RET
+add_item_to_map_error:
+    POP AF
+    POP DE
+    RET
 
 ; в DE позиция на карте
 ; на выходе если есть на этой позиции предметы возвращаем NZ
 ; и IX - указатель на него
-find_item_to_map:
+find_item_on_map:
     LD IX, ITEM_ARRAY; указатель на массив предметов
     LD B, ItemArraySize; число предметов
 ; проверяем совпадают ли координаты хотя бы c одним предметом
