@@ -143,7 +143,7 @@ action_ring_explode:
 wall_script:
   ; rPlayVibr 1
   ; laserFX
-  shiruFX 1
+  shiruFX 2
   CallScript action_ring_explode
   goto no_way_script
 
@@ -161,7 +161,8 @@ ballon_script:
 door_script:
   ;rPlayLaser 1
 
-  laserFX
+  ; laserFX
+  shiruFX 43
   SetActionCell Door_half_open
   CallCode Entities.lookChar
   wait 5
@@ -178,12 +179,13 @@ computer_on_script:
 
 computer_off_script:
   ; rPlayLaser 1
-  laserFX
+  ; laserFX
+  shiruFX 56
   SetActionCell Computer_break
   goto no_way_script
 
 computer_break_script:
-  laserFX
+  shiruFX 56
   SetActionCell Floor
   goto no_way_script
   ;defb _endByte

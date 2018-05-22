@@ -22,11 +22,12 @@ play:
 	push de
 	pop ix			;put it into ix
 
-	ld a,(23624)	;get border color from BASIC vars to keep it unchanged
-	rra
-	rra
-	rra
-	and 7
+	; ld a,(23624)	;get border color from BASIC vars to keep it unchanged
+	; rra
+	; rra
+	; rra
+	; and 7
+	ld a, 11111000b
 	ld (sfxRoutineToneBorder  +1),a
 	ld (sfxRoutineNoiseBorder +1),a
 	ld (sfxRoutineSampleBorder+1),a
@@ -71,7 +72,7 @@ sfxRS2:
 	sbc a,a
 	and 16
 sfxRoutineSampleBorder:
-	or 0
+	and 0
 	out (254),a
 	dec e
 	jr nz,sfxRS1
@@ -109,7 +110,7 @@ sfxRoutineToneDuty:
 	sbc a,a
 	and 16
 sfxRoutineToneBorder:
-	or 0
+	and 0
 	out (254),a
 
 	dec bc
@@ -154,7 +155,7 @@ sfxRN1:
 	ld a,(hl)
 	and 16
 sfxRoutineNoiseBorder:
-	or 0
+	and 0
 	out (254),a
 	dec d
 	jr nz,sfxRN2
