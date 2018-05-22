@@ -16,6 +16,7 @@ Ring_expl_2 equ #b1
 Ring_expl_3 equ #b2
 Ring_expl_4 equ #b3
 
+Shard_Item: equ 0
 Shard_spr: equ #b0
 
 CELL_TYPES:
@@ -122,7 +123,7 @@ Cell_Type_4F:        Entities.CellType Empty_cell_name,   no_script ; F
 
 ITEM_TYPES:
 
-Shard_Item_Type:     items.ItemType Shard_item_name, Shard_spr
+Shard_Item_Type:     items.ItemType Shard_spr, 0, 10
 
   DUP items.ItemType*100
     defb 00
@@ -158,6 +159,7 @@ action_ring_explode:
 wall_script:
   ; rPlayVibr 1
   ; laserFX
+  AddItemMap 13,22, Shard_Item
   shiruFX 2
   CallScript action_ring_explode
   goto no_way_script
@@ -181,7 +183,7 @@ door_script:
   CallCode Entities.lookChar
   wait 5
   SetActionCell Door_open
-  AddItemMap 13,22, 0
+  AddItemMap 13,22, Shard_Item
   goto no_way_script
 
 computer_on_script:

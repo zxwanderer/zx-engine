@@ -80,8 +80,8 @@ add_item_to_map:
     PUSH HL
     CALL calcItemType
     PUSH HL
-    POP IY
-    LD A, (IY+ItemType.spr_num)
+    POP IX
+    LD A, (IX+ItemType.spr_num)
     POP HL
     LD (HL),A
     RET
