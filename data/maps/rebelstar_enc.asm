@@ -132,7 +132,7 @@ Shard_Item_Type:     items.ItemType Shard_spr, 0, 10
 
 ITEM_ARRAY:
   DUP items.Item*100
-    defb 00
+    defb #ff; item.itemID = #ff - признак того что предмета нет 
    EDUP 
 
 ItemArraySize equ 100; максимальное число предметов 

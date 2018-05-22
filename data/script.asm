@@ -33,6 +33,18 @@ GAME_LOOP:
   defb _endByte
 
 binary_show_gui:
+; проверяем стоит ли герой на каком-нибудь предмете
+  LD IX, (Entities.activePersonage_ptr)
+  LD DE, (IX+Entities.Hero.pos)
+  CALL items.find_item_on_map
+  JR C, binary_show_gui_ret; не стоит
+  LD DE, (IX+Entities.Hero.pos) ; загружаем в DE снова позицию героя
+  CALL 
+
+  LD DE, #1D01
+
+  CALL screenfx.show_sprite
+binary_show_gui_ret:
   RET
 
 binary_init:
