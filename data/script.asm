@@ -28,9 +28,12 @@ LOOP_SCRIPT:
 GAME_LOOP:
   ; setBorder PEN_RED
   SkanKeyTable key_table_hero
-  AddItemMap 13,22, Shard_Item
+  ; AddItemMap 13,22, Shard_Item
   ; ShowSprite 1,5,1
   defb _endByte
+
+binary_show_gui:
+  RET
 
 binary_init:
   CALL Entities.initHeroes
@@ -63,7 +66,8 @@ next_char:
     CallCode Entities.loopNextChar
 look_char:
     CallCode Entities.lookChar
-    ; CallCode input.noKey ; ждем пока отпустит клавишу
+    CallCode binary_show_gui
+    CallCode input.noKey ; ждем пока отпустит клавишу
     defb _endByte
 
 char_up:
