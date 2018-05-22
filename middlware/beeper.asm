@@ -100,7 +100,7 @@ LASER1 PUSH  BC
        LD    L,H
 LASER2
 			 XOR   16
-			AND 11111000b
+			 AND 11111000b
        OUT   (254),A
        LD    B,H
        DJNZ  $
