@@ -78,6 +78,7 @@ add_item_to_map:
     LD A, (HL) ; забрали "землю"
     LD (IX+Item.ground), A
     PUSH HL
+    LD A, (IX+Item.itemID); взяли тип предмета
     CALL calcItemType
     PUSH HL
     POP IX
