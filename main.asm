@@ -43,6 +43,9 @@ MAP_SET_END
 ENCOUNTER_SET:
 	include "data/maps/rebelstar_enc.asm"
 ENCOUNTER_SET_END
+
+_logic_data_end:
+
 ORG (high $+1)*256
 p68_font:
   ; incbin "data/fonts/tripfont_revert.fnt"
@@ -51,10 +54,17 @@ p68_font:
 _data_end:
 
   include "core/interrupt.asm"
+FX_SET:
+  include "data/demoFX.asm"
+FX_SET_END
+
+_all_end:
 
 display /D, _data_end-code_start, " size, ", /D, 0xE000-_data_end, " free"
 display "font addr: ", p68_font
 display "code start: ", code_start
+display "logic data end: ", _logic_data_end
 display "data end: ", _data_end
+display "all end: ", _all_end
 
 SAVESNA "myzx.sna",code_start

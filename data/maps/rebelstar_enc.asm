@@ -143,7 +143,7 @@ action_ring_explode:
 wall_script:
   ; rPlayVibr 1
   ; laserFX
-  vibrFX
+  shiruFX 1
   CallScript action_ring_explode
   goto no_way_script
 
@@ -171,7 +171,8 @@ door_script:
 
 computer_on_script:
   ; rPlayLaser 1
-  explosFX
+  ; explosFX
+  shiruFX 55
   SetActionCell Computer_off
   goto no_way_script
 
