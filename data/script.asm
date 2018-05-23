@@ -33,32 +33,52 @@ GAME_LOOP:
   defb _endByte
 
 binary_show_gui:
+
 ; проверяем стоит ли герой на каком-нибудь предмете
+show_ground_item:
   LD IX, (Entities.activePersonage_ptr)
   LD DE, (IX+Entities.Hero.pos)
-  CALL items.find_item_on_map
-  JR C, binary_show_gui_ret; не стоит
-  ; в IX указатель на найденный предмет
+  CALL items.find_item_on_map ; в IX указатель на найденный предмет
+  JR C, show_hand_item; не стоит
   LD A, (IX+items.Item.itemID)
   CALL items.calcItemType
   LD A,(HL)
-  ; LD DE, (IX+Entities.Hero.pos) ; загружаем в DE снова позицию героя
-  ; CALL 
   LD DE, #1D01
-  ; LD A, #BE
   CALL screenfx.show_sprite
+
+show_hand_item:
+  LD IX, (Entities.activePersonage_ptr)
+  LD A, (IX+Entities.Hero.hand_right_p)
+  AND A
+  JR Z, binary_show_gui_ret
+  LD HL, (IX+Entities.Hero.hand_right_p)
+  LD A, (HL)
+  CALL items.calcItemType
+  LD A,(HL)
+  LD DE, #0101
+  CALL screenfx.show_sprite
+
 binary_show_gui_ret:
   RET
 
+binary_get_or_drop_item:
+; сначала смотрим есть ли предмет на земле
 binary_get_item_from_map:
-  LD IX, (Entities.activePersonage_ptr)
-  LD DE, (IX+Entities.Hero.pos)
+  LD IY, (Entities.activePersonage_ptr)
+  LD DE, (IY+Entities.Hero.pos)
   CALL items.find_item_on_map
-  JR C, binary_get_item_from_map_ret; предмета нет
-  CALL items.pick_up_item
-  RET
-binary_get_item_from_map_ret:
-  RET
+  JR C, binary_drop_item_to_map; предмета на земле нет - переходим на проверку бросания
+  JP items.pick_up_item
+
+binary_drop_item_to_map:
+  ; смотрим есть ли предмет в руках?
+  LD A, (IY+Entities.Hero.hand_right_p)
+  AND A
+  RET Z; бросить ничего не можем - возврат
+  LD HL, (IY+Entities.Hero.hand_right_p)
+  PUSH HL
+  POP IX
+  JP items.drop_down_item
 
 binary_init:
   CALL Entities.initHeroes
@@ -124,5 +144,5 @@ char_down_right:
   goto look_char
 
 char_loot:
-  CallCode binary_get_item_from_map
+  CallCode binary_get_or_drop_item
   goto look_char

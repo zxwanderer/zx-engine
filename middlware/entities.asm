@@ -44,13 +44,14 @@ sprite db 00; текущий спрайт
 ground db 00; на чем стоит
 flags db 00; признаки-флаги
 name_p dw #0000
-; --- инвентарь
-; head db 00
-; mask db 00
-; left_hand db 00
-; righ_hand db 00
-; torse db 00
-; boot db 00
+; указатели на предметы в правой и левой руке, первый байт 00 - в руке пусто
+hand_right_p dw 00
+; hand_left_p dw 00
+; --- одежда
+; head dw 00
+; mask dw 00
+; torse dw 00
+; boot dw 00
 ENDS
 
 ; на входе в A - индекс типа ячейки

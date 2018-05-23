@@ -73,8 +73,6 @@ add_item_to_map_spr:; героя нет, размещаем просто на к
     PUSH HL
     LD A, (IY+Item.itemID); взяли тип предмета
     CALL calcItemType
-    ; PUSH HL
-    ; POP IX
     LD A, (HL) ; (IX+ItemType.spr_num)
     POP HL
     LD (HL),A
@@ -95,21 +93,40 @@ add_item_to_map_error:
     POP DE
     JP Entities.check_no
 
-; самодостаточная функция, герой подбирает первый попавшийся предмет с карты
+; герой подбирает предмет с карты
+; на входе в IY указатель на персонажа, Entities.CurPersonageNum - текущий номер персонажа ( помечаются им предметы )
+; на входе в IX указатель на предмет
 pick_up_item:
-    LD IX, (Entities.activePersonage_ptr)
-    LD DE, (IX+Entities.Hero.pos)
-    CALL find_item_on_map
-    JR C, pick_up_item_ret
 
     LD A, (Entities.CurPersonageNum)
     LD (IX+Item.owner), A; пометили предмет как принадлежащий текущему герою
 
     LD A, (IX+Item.ground) ; земля предмета
-    LD IY, (Entities.activePersonage_ptr)
     LD (IY+Entities.Hero.ground), A; записываем землю предмета в землю героя, поэтому как только он сойдет с клетки,
                           ; на старом месте появится не спрайт предмета а его земля
-pick_up_item_ret:
+    PUSH IX
+    POP HL
+    LD (IY+Entities.Hero.hand_right_p), HL
+    RET
+
+; герой бросает предмет из рук на карту
+; на входе в IY указатель на персонажа, Entities.CurPersonageNum - текущий номер персонажа ( помечаются им предметы )
+; на входе в IX указатель на предмет
+drop_down_item:
+
+    LD (IY+Entities.Hero.hand_right_p), 0; освободили руку героя
+    LD (IX+Item.owner), #ff; пометили предмет как свободный
+    LD DE, (IY+Entities.Hero.pos)
+    LD (IX+Item.pos), DE ; помещаем предмет на позицию героя
+
+    LD A, (IY+Entities.Hero.ground); читаем землю героя
+    LD (IX+Item.ground), A ; пишем в землю предмета
+
+    LD A, (IX+Item.itemID) ; берем id предмета
+    CALL calcItemType
+    LD A, (HL) ; в HL указатель на тип предмета, первый байт - номер спрайта
+    LD (IY+Entities.Hero.ground), A
+
     RET
 
 ; в IX указатель на предмет в массиве предметов
