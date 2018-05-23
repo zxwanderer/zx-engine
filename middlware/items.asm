@@ -73,20 +73,17 @@ add_item_to_map:
     POP DE
     LD (IX+Item.pos.x), D
     LD (IX+Item.pos.y), E ; сохранили позицию предмета
-    ; проверяем стоит ли на этой ячейке какой-либо герой:
     PUSH IX
-    CALL Entities.find_char_on_map
-    POP IX
-    JR C, add_item_to_map_spr
-    ; JP items.add_item_to_map_error
-    JP Entities.check_no
-add_item_to_map_spr:
-    ; теперь надо закинуть спрайт предмета на карту и взять ground с нее
+    POP IY; сохраняем в IY указатель на предмет
+    CALL Entities.find_char_on_map ; проверяем стоит ли на этой ячейке какой-либо герой
+    JR NC, add_item_to_hero_ground_spr ; герой есть, переходим 
+add_item_to_map_spr:; героя нет, размещаем просто на карте
+    ; надо закинуть спрайт предмета на карту и взять ground с нее
     CALL map.calc_pos ; в HL указатель на ячейку
     LD A, (HL) ; забрали "землю"
-    LD (IX+Item.ground), A
+    LD (IY+Item.ground), A
     PUSH HL
-    LD A, (IX+Item.itemID); взяли тип предмета
+    LD A, (IY+Item.itemID); взяли тип предмета
     CALL calcItemType
     PUSH HL
     POP IX
@@ -94,6 +91,12 @@ add_item_to_map_spr:
     POP HL
     LD (HL),A
     JP Entities.check_yes
+add_item_to_hero_ground_spr:
+; мы добавляем предмет на пол, а на полу стоит герой, ставим ему на пол спрайт
+    ; LD A, 
+    ; JP Entities.check_no
+    di
+    halt
 add_item_to_map_error:
     POP AF
     POP DE
