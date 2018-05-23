@@ -13,8 +13,8 @@
 
 activePersonage_ptr:
   dw #0000 ; указатель на текущего персонажа
-RevertPersonageNum:
-  db #00 ; инверсный номер персонажа ( от PersonagesNum до 0!!!)
+CurPersonageNum:
+  db #00 ; текущий номер персонажа ( от 0 до PersonagesNum )
 MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 
@@ -94,17 +94,18 @@ loopNextChar:
 firstChar:
   LD DE, CHARS_SET
   ld (activePersonage_ptr), DE
-  LD A, PersonagesNum
-  LD (RevertPersonageNum), A
+  XOR A
+  LD (CurPersonageNum), A
   RET
 
 ; ------- переход на следующего героя
 ; на выходе если у нас признак Z в 1 значит достилги конца массива
 nextChar:
-  LD A, (RevertPersonageNum)
-  DEC A
+  LD A, (CurPersonageNum)
+  INC A
+  CP PersonagesNum
   RET Z; если у нас обнулился счетчик - возвращаемся
-  LD (RevertPersonageNum), A
+  LD (CurPersonageNum), A
   LD DE, (activePersonage_ptr)
   LD HL, Hero
   ADD HL, DE
