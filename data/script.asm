@@ -38,10 +38,14 @@ binary_show_gui:
   LD DE, (IX+Entities.Hero.pos)
   CALL items.find_item_on_map
   JR C, binary_show_gui_ret; не стоит
+  ; в IX указатель на найденный предмет
+  LD A, (IX+items.Item.itemID)
+  CALL items.calcItemType
+  LD A,(HL)
   ; LD DE, (IX+Entities.Hero.pos) ; загружаем в DE снова позицию героя
   ; CALL 
   LD DE, #1D01
-  LD A, #BE
+  ; LD A, #BE
   CALL screenfx.show_sprite
 binary_show_gui_ret:
   RET
