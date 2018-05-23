@@ -7,9 +7,12 @@ MODULE items
   ENDM
 */
 STRUCT ItemType
-; name_ptr dw 00; указатель на имя типа ( имя не нужно - есть имя спрайта )
-spr_num db 00; номер спрайта предмета
+spr_num db 00; номер спрайта предмета, должен идти первым 
+; чтобы после вызова функции calcItemType 
+; можно было получать номер спрайта как LD A, (HL)
+; а не через PUSH HL/POP IX/LD A,(IX+ItemType.spr_num)
 ;--- прочие части
+; name_ptr dw 00; не нужно, у нас показывается по name_ptr в спрайте
 round db 00; скажем, заряд
 weight db 00; скажем, вес
     db 00
@@ -85,18 +88,23 @@ add_item_to_map_spr:; героя нет, размещаем просто на к
     PUSH HL
     LD A, (IY+Item.itemID); взяли тип предмета
     CALL calcItemType
-    PUSH HL
-    POP IX
-    LD A, (IX+ItemType.spr_num)
+    ; PUSH HL
+    ; POP IX
+    LD A, (HL) ; (IX+ItemType.spr_num)
     POP HL
     LD (HL),A
     JP Entities.check_yes
 add_item_to_hero_ground_spr:
 ; мы добавляем предмет на пол, а на полу стоит герой, ставим ему на пол спрайт
-    ; LD A, 
-    ; JP Entities.check_no
-    di
-    halt
+; у нас в IY указатель на предмет
+; в IX указатель на героя
+    LD A, (IY+Item.itemID); взяли тип предмета
+    CALL calcItemType; в HL указатель на предмет
+    LD A, (HL); забрали номер спрайта
+    LD B, (IX+Entities.Hero.ground)
+    LD (IX+Entities.Hero.ground), A; поместили спрайт на землю у героя
+    LD (IY+Item.ground),B
+    JP Entities.check_yes
 add_item_to_map_error:
     POP AF
     POP DE
