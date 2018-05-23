@@ -199,12 +199,14 @@ computer_off_script:
   ; rPlayLaser 1
   ; laserFX
   shiruFX 56
+  CallScript action_ring_explode
   SetActionCell Computer_break
   CallCode binary_add_shard
   goto no_way_script
 
 computer_break_script:
   shiruFX 56
+  CallScript action_ring_explode
   SetActionCell Floor
   goto no_way_script
   ;defb _endByte
@@ -244,8 +246,8 @@ binary_add_shard:
 PersonagesNum equ 2
 ; описываем героев:
 CHARS_SET:
-Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1
-Hero2: Entities.Hero 13,22, 9, 0, 0, tHeroName2
+Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
+Hero2: Entities.Hero 13,22, 9, 0, 0, tHeroName2, 00
 ; , 0, 0, 0, 0, 0
 ;Hero3: Entities.Hero 22,22, 12, 0, 0, tHeroName2
 ;defb _endByte
