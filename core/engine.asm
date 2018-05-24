@@ -29,9 +29,17 @@ MODULE zxengine
     defw ptr
   ENDM
 
+; сканировать таблицу в зависимости от нажатой клавиши
   MACRO SkanKeyTable ptr
     defw zxengine.scan_keys_me
     defw ptr
+  ENDM
+
+; сканировать таблицу в зависимости от номера переменной ( не значения!!! )
+  MACRO SkanVarTable var_num, ptr
+    defw zxengine.scan_var_me
+    defw ptr
+    defw var_num
   ENDM
 
   MACRO SetVar var, value
@@ -40,13 +48,21 @@ MODULE zxengine
     defb value
   ENDM
 
+	MACRO IfVar var_num, value_, code_ptr; переход 
+	  defw zxengine.if_var_me
+	  defb var_num
+	  defb value_
+	  defw code_ptr
+	ENDM
+
 ; для использования внутри ассемблера
 
 ; первые резервные переменные
-act_var equ 0; // переменная 0 - действие
-ret_var equ 1; // переменная 2 что возвратили из скрипта
-map_cell_x equ 2; //
-map_cell_y equ 3; // 
+var_act equ 0; // переменная 0 - действие
+var_ret equ 1; // переменная 1 - что возвратили из скрипта
+var_item_id equ 2; // переменная 3 - чем воздействуем
+; map_cell_x equ 2; //
+; map_cell_y equ 3; // 
 
   MACRO setVar var, val
     LD ( zxengine.varsTab + var ), val
@@ -58,12 +74,8 @@ map_cell_y equ 3; //
 
 ; различные переменные для скриптов
 varsTab:
-vars_act defb 0
-vars_ret defb 0
-vars_act_cell_x defb 0
-vars_act_cell_y defb 0
-  DUP 256-4
-  defb 00
+  DUP 256
+    defb 00
   EDUP
 
 start:
@@ -112,6 +124,22 @@ wait_me_loop:
   DJNZ wait_me_loop
   JP process
 
+scan_var_me:
+	mLDE; table_ptr
+  mLDA; A - var num
+  PUSH HL; script_pointer
+
+  PUSH DE
+  
+  call getVar ; A - значение var
+  LD B,A
+  
+  POP HL
+  call scan_sctipt_table
+  JR NZ, call_script_call; если флаг не 0 то переменная найдена
+  POP HL
+  JP process
+
 scan_keys_me: ; ================ scan keys
 	mLDE
 	PUSH HL
@@ -120,6 +148,26 @@ scan_keys_me: ; ================ scan keys
 	JR NZ, call_script_call; если флаг не 0 то клавиша есть
 	POP HL
 	JP process
+
+; вход:
+;   в B - значение переменной
+;   в HL указатель на таблицу вида [ptr],[value]
+; выход:
+; z=1 если найдено, в DE указатель на скрипт
+scan_sctipt_table:
+  LD A,(HL) ;//  загружаем первый байт
+  AND A
+  RET Z ; возвращаем если конец таблицы
+  LD E,A
+  INC HL
+  LD D,(HL)
+  INC HL
+  LD A,(HL) ;//  загружаем value
+  INC HL
+  CP B
+  JR NZ,scan_sctipt_table
+	OR 2
+	RET
 
 	; честно стырено из движка Wanderers
 scanKeys:
@@ -148,6 +196,18 @@ call_script_ret:
 	POP HL
 	JP process
 
+; rIfVar var_num,value,code_ptr
+if_var_me:
+	mLDA
+	CALL getVar
+	CP (HL)
+	INC HL
+	JP Z, goto_me; переход по GOTO
+if_var_me_no_goto:
+	INC HL
+	INC HL
+	JP process  
+
 set_var_me:
 	mLDA
 	CALL getVar
@@ -166,5 +226,6 @@ getVar:
 	mADDA D,E
 	ld A,(DE)
 	ret
+
 
 ENDMODULE

@@ -136,12 +136,12 @@ Shard_Item_Type:     items.ItemType Shard_spr, 0, 10
 ITEM_ARRAY:
   DUP items.Item*100
     defb #ff; item.itemID = #ff - признак того что предмета нет 
-   EDUP 
+   EDUP
 
 ItemArraySize equ 100; максимальное число предметов 
 
 no_way_script: ; неуспех 
-  SetVar zxengine.ret_var, 0
+  SetVar zxengine.var_ret, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
 
@@ -155,11 +155,11 @@ action_ring_explode:
   FxActionCell Ring_expl_4
   wait_halt 3
   FxActionCell Ring_expl_3
-  wait_halt 3
+  wait_halt 1
   FxActionCell Ring_expl_2
-  wait_halt 3
+  wait_halt 1
   FxActionCell Ring_expl_1
-  wait_halt 3
+  wait_halt 1
   defb _endByte
 
 wall_script:
@@ -182,6 +182,10 @@ ballon_script:
 
 ; ----- проверяем дверь
 door_script:
+  CallCode binary_hand_to_var
+  IfVar zxengine.var_item_id, 0, door_script_1
+  goto no_way_script
+door_script_1:
   ;rPlayLaser 1
   ; laserFX
   shiruFX 43
