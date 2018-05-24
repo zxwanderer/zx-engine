@@ -19,6 +19,9 @@ Ring_expl_4 equ #b3
 Shard_Item: equ 0
 
 Shard_spr: equ #34
+Hero_hand_item_spr: equ #0B
+Hero_hand_empty: equ #09
+Hero_dead: equ #0A
 
 CELL_TYPES:
 

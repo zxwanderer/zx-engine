@@ -68,6 +68,8 @@ binary_get_item_from_map:
   LD DE, (IY+Entities.Hero.pos)
   CALL items.find_item_on_map
   JR C, binary_drop_item_to_map; предмета на земле нет - переходим на проверку бросания
+  ; LD A, Hero_hand_item_spr
+  LD (IY+Entities.Hero.sprite), Hero_hand_item_spr
   JP items.pick_up_item
 
 binary_drop_item_to_map:
@@ -78,6 +80,7 @@ binary_drop_item_to_map:
   LD HL, (IY+Entities.Hero.hand_right_p)
   PUSH HL
   POP IX
+  LD (IY+Entities.Hero.sprite), Hero_hand_empty
   JP items.drop_down_item
 
 binary_init:
