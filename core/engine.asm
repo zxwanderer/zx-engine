@@ -227,5 +227,7 @@ getVar:
 	ld A,(DE)
 	ret
 
+; ищем
+find_action_ect:
 
 ENDMODULE
