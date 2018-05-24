@@ -122,7 +122,7 @@ upd_hero_map: ; обновляем спрайт героя на карте
 ; на входе в IY + Entities.Hero.sprite - спрайт героя без предмета
 drop_down_item:
 
-    LD (IY+Entities.Hero.hand_right_p), 0; освободили руку героя
+    LD (IY+Entities.Hero.hand_right_p+1), 0; освободили руку героя
     LD (IX+Item.owner), #ff; пометили предмет как свободный
     LD DE, (IY+Entities.Hero.pos)
     LD (IX+Item.pos), DE ; помещаем предмет на позицию героя
@@ -136,6 +136,19 @@ drop_down_item:
     LD (IY+Entities.Hero.ground), A
 
     JR upd_hero_map
+
+; получить указатель на предмет в руках героя
+; если NC то предмет есть, в A - номер спрайта, в HL указатель на тип предмета
+get_hero_hand_item:
+    LD IX, (Entities.activePersonage_ptr)
+    LD A, (IX+Entities.Hero.hand_right_p_1)
+    AND A
+    JP Z, Entities.check_yes
+    LD HL, (IX+Entities.Hero.hand_right_p)
+    LD A, (HL)
+    CALL items.calcItemType
+    LD A,(HL)
+    JP Entities.check_no
 
 ; в IX указатель на предмет в массиве предметов
 remove_item_to_map:

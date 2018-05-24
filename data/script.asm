@@ -32,6 +32,13 @@ GAME_LOOP:
   ; ShowSprite 1,5,1
   defb _endByte
 
+; читаем id предмета в руках
+binary_hand_to_var:
+  CALL items.get_hero_hand_item
+  setVar zxengine.var_item_id, A; если A = 0 то предмета нет )
+  RET
+
+; показать GUI поверх карты =)
 binary_show_gui:
 
 ; проверяем стоит ли герой на каком-нибудь предмете
@@ -47,14 +54,8 @@ show_ground_item:
   CALL screenfx.show_sprite
 
 show_hand_item:
-  LD IX, (Entities.activePersonage_ptr)
-  LD A, (IX+Entities.Hero.hand_right_p)
-  AND A
-  JR Z, binary_show_gui_ret
-  LD HL, (IX+Entities.Hero.hand_right_p)
-  LD A, (HL)
-  CALL items.calcItemType
-  LD A,(HL)
+  CALL items.get_hero_hand_item
+  JR NC, binary_show_gui_ret
   LD DE, #0101
   CALL screenfx.show_sprite
 
@@ -74,7 +75,7 @@ binary_get_item_from_map:
 
 binary_drop_item_to_map:
   ; смотрим есть ли предмет в руках?
-  LD A, (IY+Entities.Hero.hand_right_p)
+  LD A, (IY+Entities.Hero.hand_right_p_1)
   AND A
   RET Z; бросить ничего не можем - возврат
   LD HL, (IY+Entities.Hero.hand_right_p)
