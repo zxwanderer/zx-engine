@@ -96,6 +96,7 @@ add_item_to_map_error:
 ; герой подбирает предмет с карты
 ; на входе в IY указатель на персонажа, Entities.CurPersonageNum - текущий номер персонажа ( помечаются им предметы )
 ; на входе в IX указатель на предмет
+; на входе в IY + Entities.Hero.sprite - спрайт героя с предметом в руках
 pick_up_item:
 
     LD A, (Entities.CurPersonageNum)
@@ -107,11 +108,18 @@ pick_up_item:
     PUSH IX
     POP HL
     LD (IY+Entities.Hero.hand_right_p), HL
+
+upd_hero_map: ; обновляем спрайт героя на карте
+    LD DE, (IY+Entities.Hero.pos)
+    CALL map.calc_pos
+    LD A, (IY+Entities.Hero.sprite)
+    LD (HL), A
     RET
 
 ; герой бросает предмет из рук на карту
 ; на входе в IY указатель на персонажа, Entities.CurPersonageNum - текущий номер персонажа ( помечаются им предметы )
 ; на входе в IX указатель на предмет
+; на входе в IY + Entities.Hero.sprite - спрайт героя без предмета
 drop_down_item:
 
     LD (IY+Entities.Hero.hand_right_p), 0; освободили руку героя
@@ -127,7 +135,7 @@ drop_down_item:
     LD A, (HL) ; в HL указатель на тип предмета, первый байт - номер спрайта
     LD (IY+Entities.Hero.ground), A
 
-    RET
+    JR upd_hero_map
 
 ; в IX указатель на предмет в массиве предметов
 remove_item_to_map:
