@@ -23,6 +23,8 @@ Hero_hand_item_spr: equ #0B
 Hero_hand_empty: equ #09
 Hero_dead: equ #0A
 
+; ENTITY_TABLE: [action][item1][item2][script_ptr]
+; #ff - для любых предметов
 CELL_TYPES:
 
 ; -- 0 --
