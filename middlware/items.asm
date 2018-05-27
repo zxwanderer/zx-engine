@@ -32,6 +32,28 @@ calcItemType:
   ADD HL, DE
   RET
 
+; размещаем на карте предметы ( точнее их спрайты )
+initItems:
+    LD IX, ITEM_ARRAY
+    LD B, PersonagesNum
+init_items_loop:
+    PUSH BC
+    LD DE, (IX+Item.pos)
+    call map.calc_pos
+    LD A, (HL); ground
+    LD (IX+Item.ground), A; на земле
+    LD A, (IX+Item.itemID)
+    PUSH HL
+    CALL calcItemType; в HL указатель на тип предмета
+    LD A, (HL); в (HL) spr_num
+    POP HL; в HL указатель на место карты
+    LD (HL),A
+    LD DE, Item
+    ADD IX, DE
+    POP BC
+    DJNZ init_items_loop
+    RET  
+
 ; ищем пустой элемент в массиве предметов
 ; на выходе - если признак переноса есть то предмет можно положить
 ; иначе в IX указатель на предмет
