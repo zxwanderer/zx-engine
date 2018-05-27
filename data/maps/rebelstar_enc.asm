@@ -136,6 +136,9 @@ Shard_Item_Type: items.ItemType Shard_spr, 0, 10
    EDUP 
 
 ITEM_ARRAY:
+
+Shard_1: items.Item Shard_Item, 5,5, Floor, #ff, 00
+
   DUP items.Item*100
     defb #ff; item.itemID = #ff - признак того что предмета нет 
    EDUP
