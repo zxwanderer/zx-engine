@@ -31,14 +31,15 @@ centr_Y:
   SUB scrHeightHalf
   JR NC, centr_Y_max
   LD E, #00; обнуляем X
-  JP calc_pos
+  JP center_map_end
 centr_Y_max:
   CP scrWindowMaxY
   JR C,set_y
   LD E, scrWindowMaxY-1
-  JP calc_pos
+  JP center_map_end
 set_y:
   LD E, A
+center_map_end:  
   LD (mapPos),DE
 
 look_at_map:

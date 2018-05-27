@@ -6,13 +6,18 @@
         {
             "type": "shell",
             "label": "sjasmplus",
-            "command": "./bin/sjasmplus --dos866 --dirbol main.asm",
+            "command": "./bin/sjasmplus --dos866  --dirbol main.asm",
             "problemMatcher": "$errmatcher-sjasmplus"
+            // --nofakes 
         },
         {
             "type": "shell",
             "label": "unreal",
             "command": "open -a 'Unreal Speccy Portable' myzx.sna",
+            // "command": "open -a 'Fuse' -s myzx.sna",
+            // "command": "open -a 'xpeccy' myzx.sna",
+            "args": [
+            ],
             "dependsOn": [
                 "sjasmplus"
             ],

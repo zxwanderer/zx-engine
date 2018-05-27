@@ -68,4 +68,11 @@ display "logic data end: ", _logic_data_end
 display "data end: ", _data_end
 display "all end: ", _all_end
 
+display "check_action: ", Entities.check_action
+display "fx_action_cell_me: ", screenfx.fx_action_cell_me
+display "lookChar: ", Entities.lookChar
+display "center_map: ", map.center_map
+
+
+LABELSLIST "mylabels.txt"
 SAVESNA "myzx.sna",code_start
