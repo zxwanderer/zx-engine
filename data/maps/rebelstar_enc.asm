@@ -35,7 +35,7 @@ Cell_Type_Door:     Entities.CellType Door_cell_name,     door_script ; 2
 Cell_Type_Floor:    Entities.CellType Floor_cell_name,    no_script ; 3
 Cell_Type_Computer: Entities.CellType Computer_cell_name, computer_on_script ; 4
 Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   ballon_script ; 5
-Cell_Type_GridWall: Entities.CellType Ballon_cell_name,   no_script ; 6
+Cell_Type_GridWall: Entities.CellType Wall_cell_name,   wall_script ; 6
 Cell_Type_Canister: Entities.CellType Ballon_cell_name,   no_script ; 7
 Cell_Type_Palm:     Entities.CellType Ballon_cell_name,   no_script ; 8
 Cell_Type_Human:    Entities.CellType Ballon_cell_name,   no_script ; 9
@@ -147,6 +147,9 @@ no_way_script: ; неуспех
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
 
+; сигнал о получении приходит только после 
+; НАЗАД и открыть аккаунт по-новой
+
 action_ring_explode:
   FxActionCell Ring_expl_1
   wait_halt 3
@@ -165,6 +168,7 @@ action_ring_explode:
   defb _endByte
 
 wall_script:
+  ; goto computer_off_script
   ; rPlayVibr 1
   ; laserFX
   ; AddItemMap 13,22, Shard_Item
@@ -198,6 +202,7 @@ door_script_1:
   goto no_way_script
 
 computer_on_script:
+  ; goto computer_off_script
   ; rPlayLaser 1
   ; explosFX
   shiruFX 55
@@ -248,6 +253,8 @@ binary_add_shard:
   LD DE, (Entities.MapCell_xy)
 ; Y+1 ( размещаем shard внизу взорвавшегося предмета )
   INC E
+  ; INC E
+  ; INC E
   LD A, Shard_Item
   CALL items.add_item_to_map
   RET
