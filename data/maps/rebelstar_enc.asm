@@ -123,13 +123,13 @@ Cell_Type_4D:        Entities.CellType Empty_cell_name,   no_script ; D
 Cell_Type_4E:        Entities.CellType Empty_cell_name,   no_script ; E
 Cell_Type_4F:        Entities.CellType Empty_cell_name,   no_script ; F
 
-  /* DUP Entities.CellType*256
-  defb 00
-  EDUP */
+  DUP Entities.CellType*256
+    Entities.CellType Empty_cell_name,   no_way_script
+  EDUP
 
 ITEM_TYPES:
 
-Shard_Item_Type:     items.ItemType Shard_spr, 0, 10
+Shard_Item_Type: items.ItemType Shard_spr, 0, 10
 
   DUP items.ItemType*100
     defb 00
@@ -192,30 +192,24 @@ door_script:
   IfVar zxengine.var_item_id, 0, door_script_1
   goto no_way_script
 door_script_1:
-  ;rPlayLaser 1
-  ; laserFX
   shiruFX 43
-  SetActionCell Door_half_open
-  CallCode Entities.lookChar
-  wait 5
+  FxActionCell Door_half_open
+  wait_halt 3
   SetActionCell Door_open
   goto no_way_script
 
 computer_on_script:
-  ; goto computer_off_script
-  ; rPlayLaser 1
-  ; explosFX
   shiruFX 55
   SetActionCell Computer_off
   goto no_way_script
 
 computer_off_script:
-  ; rPlayLaser 1
-  ; laserFX
-  shiruFX 56
-  CallScript action_ring_explode
-  SetActionCell Computer_break
-  CallCode binary_add_shard
+  ; shiruFX 56
+  ; CallScript action_ring_explode
+  ; SetActionCell Computer_break
+  ; CallCode binary_add_shard
+  shiruFX 55
+  SetActionCell Computer_on
   goto no_way_script
 
 computer_break_script:
@@ -223,19 +217,6 @@ computer_break_script:
   CallScript action_ring_explode
   SetActionCell Floor
   goto no_way_script
-  ;defb _endByte
-  ; rPlayLaser 1
-  ; GOTO no_way_script
-
-;CellType2: Entities.CellType 0,0,tHeroName1
-;CellType3: Entities.CellType 0,0,tHeroName1
-;CellType4: Entities.CellType 0,0,tHeroName1
-
-;CELL_TABLE:
-;Cell_Empty: Entities.Cell Cell_Type_Empty, 0,0
-/* Cell2: Entities.Cell 0,0
-Cell3: Entities.Cell 0,0
-Cell4: Entities.Cell 0,0 */
 
 ; массив соответствия кода спрайта на карте типу энкаунтера
 ;cells_types_spr:
