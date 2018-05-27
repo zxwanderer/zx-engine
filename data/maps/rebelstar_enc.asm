@@ -17,8 +17,11 @@ Ring_expl_3 equ #b2
 Ring_expl_4 equ #b3
 
 Shard_Item: equ 0
+Chair_Item: equ 1
 
 Shard_spr: equ #34
+Chair_spr: equ #33
+
 Hero_hand_item_spr: equ #0B
 Hero_hand_empty: equ #09
 Hero_dead: equ #0A
@@ -130,6 +133,7 @@ Cell_Type_4F:        Entities.CellType Empty_cell_name,   no_script ; F
 ITEM_TYPES:
 
 Shard_Item_Type: items.ItemType Shard_spr, 0, 10
+Chair_Item_Type: items.ItemType Chair_spr, 0, 10
 
   DUP items.ItemType*100
     defb 00
@@ -137,7 +141,12 @@ Shard_Item_Type: items.ItemType Shard_spr, 0, 10
 
 ITEM_ARRAY:
 
-Shard_1: items.Item Shard_Item, 5,5, Floor, #ff, 00
+; Shard_1: items.Item Shard_Item, 5,5, Floor, #ff, 00
+Chair_1: items.Item Chair_Item, 5,7, Floor, #ff, 00
+Chair_2: items.Item Chair_Item, 5,11, Floor, #ff, 00
+Chair_3: items.Item Chair_Item, 5,15, Floor, #ff, 00
+Chair_4: items.Item Chair_Item, 5,19, Floor, #ff, 00
+Chair_5: items.Item Chair_Item, 5,23, Floor, #ff, 00
 
   DUP items.Item*100
     defb #ff; item.itemID = #ff - признак того что предмета нет 
@@ -202,17 +211,24 @@ door_script_1:
   goto no_way_script
 
 computer_on_script:
+  CallCode binary_hand_to_var
+  IfVar zxengine.var_item_id, Chair_spr, computer_glass_destroy:
   shiruFX 55
   SetActionCell Computer_off
   goto no_way_script
 
 computer_off_script:
-  ; shiruFX 56
-  ; CallScript action_ring_explode
-  ; SetActionCell Computer_break
-  ; CallCode binary_add_shard
+  CallCode binary_hand_to_var
+  IfVar zxengine.var_item_id, Chair_spr, computer_glass_destroy:
   shiruFX 55
   SetActionCell Computer_on
+  goto no_way_script
+
+computer_glass_destroy:
+  shiruFX 56
+  CallScript action_ring_explode
+  SetActionCell Computer_break
+  CallCode binary_add_shard
   goto no_way_script
 
 computer_break_script:

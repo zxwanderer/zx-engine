@@ -85,7 +85,7 @@ binary_drop_item_to_map:
   JP items.drop_down_item
 
 binary_init:
-  CALL items.initItems
+  ; CALL items.initItems
   CALL Entities.initHeroes
   CALL Entities.lookChar
   ; LD A, Shard_Item

@@ -32,11 +32,17 @@ calcItemType:
   ADD HL, DE
   RET
 
+/*
+вариант - не надо ничего размещать на карте через процедуру,
+на карте их спрайты уже есть, а в массиве предметов хранитмся и в том числе что было под ними на "земле"
+
 ; размещаем на карте предметы ( точнее их спрайты )
 initItems:
     LD IX, ITEM_ARRAY
-    LD B, PersonagesNum
 init_items_loop:
+    LD A, (IX+Item.itemID)
+    CP #FF; выход по признаку #ff - пустой предмет
+    RET Z
     PUSH BC
     LD DE, (IX+Item.pos)
     call map.calc_pos
@@ -51,8 +57,8 @@ init_items_loop:
     LD DE, Item
     ADD IX, DE
     POP BC
-    DJNZ init_items_loop
-    RET  
+    JR init_items_loop
+*/    
 
 ; ищем пустой элемент в массиве предметов
 ; на выходе - если признак переноса есть то предмет можно положить
