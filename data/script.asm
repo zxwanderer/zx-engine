@@ -25,6 +25,24 @@ LOOP_SCRIPT:
   goto LOOP_SCRIPT
   defb _endByte
 
+binary_init:
+  ; di
+  ; halt
+  ; CALL items.initItems
+  CALL Entities.initHeroes
+  CALL Entities.lookChar
+  ; LD A, Shard_Item
+  ; LD DE, #0505
+  ; CALL items.add_item_to_map
+  LD D, 0
+  LD E, 24
+  ; LD B, 10
+  ; LD C, 3
+  CALL screenfx.clear_window
+  di
+  halt
+  RET
+
 GAME_LOOP:
   ; setBorder PEN_RED
   SkanKeyTable key_table_hero
@@ -83,15 +101,6 @@ binary_drop_item_to_map:
   POP IX
   LD (IY+Entities.Hero.sprite), Hero_hand_empty
   JP items.drop_down_item
-
-binary_init:
-  ; CALL items.initItems
-  CALL Entities.initHeroes
-  CALL Entities.lookChar
-  ; LD A, Shard_Item
-  ; LD DE, #0505
-  ; CALL items.add_item_to_map
-  RET
 
 ; binary_proc:
   ; LD HL, CHARS_SET
