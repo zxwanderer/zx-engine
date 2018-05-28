@@ -104,5 +104,4 @@ clean_row_loop22:
 
     RET
 
-
 ENDMODULE
