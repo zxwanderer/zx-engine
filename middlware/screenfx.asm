@@ -44,9 +44,48 @@ show_sprite_me:
 ; в DE - экранная позиция
 ; в A - номер спрайта
 show_sprite:
-  CALL Tiles16.spr_index_to_addr; в HL у нас указатель на спрайт
-  CALL math.pos_scr
-  JP Tiles16.show_tile_on_map
-  RET
+    CALL Tiles16.spr_index_to_addr; в HL у нас указатель на спрайт
+    CALL math.pos_scr
+    JP Tiles16.show_tile_on_map
+    RET
+
+; процедура очистки строчек экрана
+; на входе:
+; в D - начальная строка
+; в E - число строчек
+;
+clear_window:
+    LD A, E
+    LD (clear_window_row_num+1), A
+    LD E, D
+    LD D, 0
+    CALL math.pos_scr; в DE - экранный адрес 
+
+clear_window_row_num:
+    LD B, #00
+next_row_loop:
+    PUSH BC
+    PUSH DE
+
+; цикл по заполнению одной строки
+    XOR A
+    LD B, 32; экранчик шириной 32 знакоместа
+clean_row_loop:
+    PUSH DE
+    DUP 8
+    LD (DE),A
+    INC D
+    EDUP
+    POP DE
+    INC DE
+    DJNZ clean_row_loop ;  цикл по одной строке 
+
+    POP DE; сняли со стека экранный адрес    
+    CALL math.down_pos; перешли на следующую строчку
+    
+    POP BC
+    DJNZ next_row_loop
+    RET
+
 
 ENDMODULE

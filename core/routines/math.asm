@@ -120,6 +120,19 @@ down_line:
     LD D,A
     RET
 
+; перемещаемся вниз на одно знакоместо
+; Вход: DE- экранный адрес
+; Выход: DE - экранный адрес
+down_pos:
+	LD A,E
+	ADD A,#20 
+	LD E,A 
+	RET NC 
+	LD A,D 
+	ADD A,8 
+	LD D,A 
+	RET 
+
 /* ;взято из процедуры Wanderers
 ; in: A = bit num
 ; out: HL = bit adr, C = bit mask, A = bit state (0,1), Z/NZ = bit state

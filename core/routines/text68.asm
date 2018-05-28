@@ -6,6 +6,8 @@
     CALL Text68.print_68at
   ENDM */
 
+; НЕ УЧИТЫВАЕТ DOWN_HL !!!!!!
+; ВСЕ В ПРЕДЕЛАХ ОДНОЙ ТРЕТИ ЭКРАНА!!!! :E
 ; DE - screen pointer
 ; HL - text pointer
 print_68at:
