@@ -17,6 +17,7 @@
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_GREEN
   printAt 0,0,HELLO_TXT
+  CallCode input.waitKey
   CallCode binary_init
   setBorder PEN_BLACK
 LOOP_SCRIPT:

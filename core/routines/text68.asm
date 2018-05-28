@@ -24,13 +24,27 @@ LOOP:
   JR Z, EXIT
   PUSH HL
   CALL PRINT_68
+
 ; ----- CALC_CE ----
   LD A,C
   SUB 6
-  JR NC, $+5
+  JR NC, calc_ce_end
   INC E
   AND 7
+calc_ce_end: 
   LD C,A
+
+  LD A, E
+  AND 31
+  CP 31
+  JR NZ, no_next_pos
+  LD A, E
+  AND 11100000b
+  LD E, A
+  call math.down_pos
+  LD C,7
+no_next_pos:
+
 ;------
   POP HL
   INC HL
