@@ -2,7 +2,7 @@ DEVICE zxspectrum128
 
 ORG     #8000
 code_start:
-  call interrupt.int_init
+  ; call interrupt.int_init
   ; LD HL, TILE_SET
   ; LD (Tiles16.sprArray), HL
 /* start:
@@ -22,6 +22,7 @@ loop:
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
   include "core/routines/input.asm"
+  ; include "core/routines/text68.asm"
   include "middlware/beeper.asm"
   include "middlware/screenfx.asm"
   include "middlware/text.asm"
@@ -68,11 +69,10 @@ display "logic data end: ", _logic_data_end
 display "data end: ", _data_end
 display "all end: ", _all_end
 
-display "check_action: ", Entities.check_action
-display "fx_action_cell_me: ", screenfx.fx_action_cell_me
-display "lookChar: ", Entities.lookChar
-display "center_map: ", map.center_map
-
+; display "check_action: ", Entities.check_action
+; display "fx_action_cell_me: ", screenfx.fx_action_cell_me
+; display "lookChar: ", Entities.lookChar
+; display "calc_ce: ", Text68.calc_ce
 
 LABELSLIST "mylabels.txt"
 SAVESNA "myzx.sna",code_start
