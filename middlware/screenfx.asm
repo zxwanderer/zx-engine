@@ -53,13 +53,13 @@ show_sprite:
 ; на входе:
 ; в D - начальная строка
 ; в E - число строчек
-;
 clear_window:
     LD A, E
     LD (clear_window_row_num+1), A
     LD E, D
     LD D, 0
     CALL math.pos_scr; в DE - экранный адрес 
+    PUSH DE; он еще нам пригодится
 
 clear_window_row_num:
     LD B, #00
@@ -82,9 +82,26 @@ clean_row_loop:
 
     POP DE; сняли со стека экранный адрес    
     CALL math.down_pos; перешли на следующую строчку
-    
     POP BC
     DJNZ next_row_loop
+
+    ;очистили все данные, теперь цвет
+    POP DE
+    CALL math.addr_to_attr
+    LD A, (clear_window_row_num+1)
+    LD B,A
+clean_row_loop2:
+    PUSH BC
+    LD B, 32; экранчик
+    LD A, %00000100
+clean_row_loop22:
+    LD (DE), A
+    INC DE
+    DJNZ clean_row_loop22
+
+    POP BC
+    DJNZ clean_row_loop2
+
     RET
 
 
