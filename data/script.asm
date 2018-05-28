@@ -39,8 +39,8 @@ binary_init:
   ; LD B, 10
   ; LD C, 3
   CALL screenfx.clear_window
-  di
-  halt
+  ; di
+  ; halt
   RET
 
 GAME_LOOP:
