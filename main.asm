@@ -3,7 +3,11 @@ DEVICE zxspectrum48
   include "core/defines.asm"
 
 ORG     #8000
+; ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
+
 code_start:
+  DI
+  LD SP, my_stack_end
   interrupt.init #E0
   jp zxengine.start
   include "core/scankeys.asm"
@@ -18,6 +22,10 @@ code_start:
   include "middlware/map.asm"
   include "middlware/entities.asm"
   include "middlware/items.asm"
+
+my_stack:
+  DEFS 100, 00
+my_stack_end:
 
 code_end:
 
