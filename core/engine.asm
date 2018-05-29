@@ -231,21 +231,16 @@ frames_cnt: dw 0000;
 frames_measured: dw 0000;
 
 start_measure:
-  ; DI
   LD HL, (interrupt.frame_counter)
-  ; EI
   LD (frames_cnt), HL
   RET
 
 stop_measure:
-  ; DI
   LD HL, (interrupt.frame_counter)
-  ; EI
   LD DE, (frames_cnt)
-  ; XOR A
+  XOR A
   SBC HL, DE
   LD (frames_measured), HL
-  
   RET
 
 ENDMODULE

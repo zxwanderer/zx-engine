@@ -155,11 +155,11 @@ show_frames:
     LD D, 0
     LD E, 1
     CALL screenfx.clear_window
-
+    
     LD DE, str_frames
-    LD HL, (interrupt.frame_counter)
+    ; LD HL, (interrupt.frame_counter)
     ; LD HL, (zxengine.frames_cnt)
-    ; LD HL, (zxengine.frames_measured)
+    LD HL, (zxengine.frames_measured)
     CALL PDEC_W
     LD HL, str_frames
     LD DE, #0000

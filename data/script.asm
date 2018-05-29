@@ -19,13 +19,13 @@
   printAt 0,0,HELLO_TXT
   CallCode input.waitKey
   CallCode binary_init
-  setBorder PEN_BLACK
-LOOP_SCRIPT:
   ; setBorder PEN_BLACK
   CallCode zxengine.start_measure
+LOOP_SCRIPT:
+  ; wait_halt 1
+  ; setBorder PEN_RED
   CallScript GAME_LOOP
-  CallCode zxengine.stop_measure
-  ; CallCode screenfx.show_frames
+  ; setBorder PEN_BLACK
   goto LOOP_SCRIPT
   defb _endByte
 
@@ -42,11 +42,10 @@ binary_init:
   RET
 
 GAME_LOOP:
-  ; setBorder PEN_RED
   SkanKeyTable key_table_hero
+  ; CallScript look_char
   ; CallCode zxengine.stop_measure
-  ; AddItemMap 13,22, Shard_Item
-  ; ShowSprite 1,5,1
+  ; CallCode zxengine.start_measure
   defb _endByte
 
 ; читаем id предмета в руках
@@ -57,7 +56,6 @@ binary_hand_to_var:
 
 ; показать GUI поверх карты =)
 binary_show_gui:
-
   ; CALL zxengine.start_measure
 
 ; проверяем стоит ли герой на каком-нибудь предмете
@@ -83,10 +81,10 @@ show_hand_item:
 binary_show_gui_ret:
 
   ; CALL zxengine.stop_measure
-
   ; LD D, 0
   ; LD E, 1
   ; CALL screenfx.clear_window
+  ; HALT
   ; CALL screenfx.show_frames
   RET
 
@@ -143,7 +141,8 @@ next_char:
 look_char:
     CallCode Entities.lookChar
     CallCode binary_show_gui
-    CallCode input.noKey ; ждем пока отпустит клавишу
+    ; CallCode input.noKey ; ждем пока отпустит клавишу
+    wait_halt 5
     defb _endByte
 
 char_up:

@@ -26,29 +26,12 @@ interrupt_routine:
   
   ; LD A,R
   ; OUT(#FE),A
-  ; PUSH HL
 
-  ; LD A,4
-  ; OUT (#fe),A
-  
   LD HL, (frame_counter)
   INC HL
   LD (frame_counter), HL
 
-  ; LD A,0
-  ; OUT (#fe),A
-  ; LD HL, frame_counter
-  ; INC (HL)
-  ; POP HL
-  ; JR NC, no_carry
-  ; LD (HL), 0
-  ; INC HL
-  ; INC (HL)
-; no_carry:
-  ; LD D, 0
-  ; LD E, 2
-  ; CALL screenfx.clear_window
-  CALL screenfx.show_frames
+  ; CALL screenfx.show_frames
 return_routine:
   pop iy
   pop ix             ; restore registers.
