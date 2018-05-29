@@ -1,3 +1,6 @@
+; файл определений, 
+; никаких данных только дефайны и макросы!
+
 PEN_BLACK     equ %000
 PEN_BLUE      equ %001
 PEN_RED       equ %010
@@ -15,7 +18,6 @@ PAPER_GREEN   equ %100000
 PAPER_CYAN    equ %101000
 PAPER_YELLOW  equ %110000
 PAPER_WHITE   equ %111000
-
 
 ;указатели направления
 dir_up   EQU 0
@@ -71,4 +73,12 @@ MACRO mADDA hr,lr ; прибавляем A к регистровой паре hr
 	adc a,hr ; a = a + lr + hr + (carry )
 	sub lr; a = a + hr
 	ld hr,a
+ENDM
+
+MACRO interrupt.init vec_
+  DI
+  LD   A,vec_
+  LD   I,A
+  IM   2
+  EI
 ENDM

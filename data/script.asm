@@ -16,32 +16,26 @@
   /* wait 125 */
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_GREEN
-  ; printAt 0,0,HELLO_TXT
-  ; CallCode input.waitKey
+  printAt 0,0,HELLO_TXT
+  CallCode input.waitKey
   CallCode binary_init
   setBorder PEN_BLACK
 LOOP_SCRIPT:
-  setBorder PEN_BLACK
+  ; setBorder PEN_BLACK
   CallScript GAME_LOOP
   goto LOOP_SCRIPT
   defb _endByte
 
 binary_init:
-  ; di
-  ; halt
   ; CALL items.initItems
   CALL Entities.initHeroes
   CALL Entities.lookChar
   ; LD A, Shard_Item
   ; LD DE, #0505
   ; CALL items.add_item_to_map
-  ; LD D, 0
-  ; LD E, 24
-  ; LD B, 10
-  ; LD C, 3
-  ; CALL screenfx.clear_window
-  ; di
-  ; halt
+  LD D, 0
+  LD E, 24
+  CALL screenfx.clear_window
   RET
 
 GAME_LOOP:

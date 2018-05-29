@@ -1,30 +1,11 @@
-DEVICE zxspectrum128
+DEVICE zxspectrum48
 
-ORG     #8000
-code_start:
-  ; LD SP, my_stack
-  ; EI
-  ; call interrupt.int_init
-  ; interrupt.init
-  DI
-  LD   A,#E0
-  LD   I,A
-  ; IM   2
-  EI
-  ; LD HL, TILE_SET
-  ; LD (Tiles16.sprArray), HL
-/* start:
-  LD B, #80
-loop:
-  LD A,B
-  OUT(#FE),A
-  DJNZ loop
-  NOP
-  NOP
-  NOP
-  NOP */
-  jp zxengine.start
   include "core/defines.asm"
+
+ORG     #6000
+code_start:
+  interrupt.init #E0
+  jp zxengine.start
   include "core/scankeys.asm"
   include "core/engine.asm"
   include "core/routines/math.asm"
@@ -81,9 +62,9 @@ display "font addr: ", p68_font
 display "data end: ", _data_end
 display "----- all end: ", _all_end
 
-display "check_action: ", Entities.check_action
-display "fx_action_cell_me: ", screenfx.fx_action_cell_me
-display "lookChar: ", Entities.lookChar
+; display "check_action: ", Entities.check_action
+; display "fx_action_cell_me: ", screenfx.fx_action_cell_me
+; display "lookChar: ", Entities.lookChar
 ; display "calc_ce: ", Text68.calc_ce
 
 LABELSLIST "mylabels.txt"

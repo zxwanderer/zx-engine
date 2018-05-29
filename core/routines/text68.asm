@@ -34,7 +34,7 @@ LOOP:
 calc_ce_end: 
   LD C,A
 
-/*
+
   LD A, E
   AND 31
   CP 31
@@ -45,7 +45,7 @@ calc_ce_end:
   call math.down_pos
   LD C,7
 no_next_pos:
-*/
+
 
 ;------
   POP HL

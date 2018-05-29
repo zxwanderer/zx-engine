@@ -15,6 +15,10 @@ MODULE beeper
     defb num
   ENDM
 
+  MACRO noise
+    defw beeper.noise_me
+  ENDM
+
   MACRO vibrFX
     defw beeper.vibr_me
     ; defb num
@@ -47,6 +51,11 @@ explos_me:
   PUSH HL
   CALL explos
   POP HL
+  JP zxengine.process
+
+noise_me
+  LD A,r
+  OUT (#FE), A
   JP zxengine.process
 
 shiru_me:
