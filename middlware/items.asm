@@ -126,7 +126,6 @@ add_item_to_map_error:
 ; на входе в IX указатель на предмет
 ; на входе в IY + Entities.Hero.sprite - спрайт героя с предметом в руках
 pick_up_item:
-
     LD A, (Entities.CurPersonageNum)
     LD (IX+Item.owner), A; пометили предмет как принадлежащий текущему герою
 
@@ -135,7 +134,9 @@ pick_up_item:
                           ; на старом месте появится не спрайт предмета а его земля
     PUSH IX
     POP HL
-    LD (IY+Entities.Hero.hand_right_p), HL
+    ; LD (IY+Entities.Hero.hand_right_p), HL
+    LD (IY+Entities.Hero.hand_right_p), L
+    LD (IY+Entities.Hero.hand_right_p+1), H
 
 upd_hero_map: ; обновляем спрайт героя на карте
     ; LD DE, (IY+Entities.Hero.pos)
@@ -154,8 +155,13 @@ drop_down_item:
 
     LD (IY+Entities.Hero.hand_right_p+1), 0; освободили руку героя
     LD (IX+Item.owner), #ff; пометили предмет как свободный
-    LD DE, (IY+Entities.Hero.pos)
-    LD (IX+Item.pos), DE ; помещаем предмет на позицию героя
+    ; LD DE, (IY+Entities.Hero.pos)
+    LD D, (IY+Entities.Hero.pos.x)
+    LD E, (IY+Entities.Hero.pos.y)
+    
+    ; LD (IX+Item.pos), DE ; помещаем предмет на позицию героя
+    LD (IX+Item.pos.x), D ; помещаем предмет на позицию героя
+    LD (IX+Item.pos.y), E ; помещаем предмет на позицию героя
 
     LD A, (IY+Entities.Hero.ground); читаем землю героя
     LD (IX+Item.ground), A ; пишем в землю предмета
@@ -174,14 +180,16 @@ get_hero_hand_item:
     LD A, (IX+Entities.Hero.hand_right_p_1)
     AND A
     JP Z, Entities.check_yes
-    LD HL, (IX+Entities.Hero.hand_right_p)
+    ; LD HL, (IX+Entities.Hero.hand_right_p)
+    LD L, (IX+Entities.Hero.hand_right_p)
+    LD H, (IX+Entities.Hero.hand_right_p+1)
     LD A, (HL)
     CALL items.calcItemType
     LD A,(HL)
     JP Entities.check_no
 
 ; в IX указатель на предмет в массиве предметов
-remove_item_to_map:
+remove_item_from_map:
     LD ( IX+Item.itemID ), #ff; удалили :D
     LD D, (IX+Item.pos.x)
     LD E, (IX+Item.pos.y)
