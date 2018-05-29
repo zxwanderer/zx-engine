@@ -141,14 +141,13 @@ Chair_Item_Type: items.ItemType Chair_spr, 0, 10
 
 ITEM_ARRAY:
 
-; Shard_1: items.Item Shard_Item, 5,5, Floor, #ff, 00
 Chair_1: items.Item Chair_Item, 5,7, Floor, #ff, 00
 Chair_2: items.Item Chair_Item, 5,11, Floor, #ff, 00
 Chair_3: items.Item Chair_Item, 5,15, Floor, #ff, 00
 Chair_4: items.Item Chair_Item, 5,19, Floor, #ff, 00
 Chair_5: items.Item Chair_Item, 5,23, Floor, #ff, 00
 
-  DUP items.Item*100
+  DUP items.Item*100-5
     defb #ff; item.itemID = #ff - признак того что предмета нет 
    EDUP
 

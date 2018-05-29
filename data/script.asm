@@ -33,9 +33,9 @@ binary_init:
   ; LD A, Shard_Item
   ; LD DE, #0505
   ; CALL items.add_item_to_map
-  LD D, 0
-  LD E, 24
-  CALL screenfx.clear_window
+  ; LD D, 0
+  ; LD E, 24
+  ; CALL screenfx.clear_window
   RET
 
 GAME_LOOP:
@@ -73,6 +73,11 @@ show_hand_item:
   CALL screenfx.show_sprite
 
 binary_show_gui_ret:
+
+  LD D, 0
+  LD E, 1
+  CALL screenfx.clear_window
+  CALL screenfx.show_frames
   RET
 
 binary_get_or_drop_item:

@@ -2,7 +2,7 @@ DEVICE zxspectrum48
 
   include "core/defines.asm"
 
-ORG     #6000
+ORG     #8000
 code_start:
   interrupt.init #E0
   jp zxengine.start
@@ -18,6 +18,8 @@ code_start:
   include "middlware/map.asm"
   include "middlware/entities.asm"
   include "middlware/items.asm"
+
+code_end:
 
 START_SCRIPT:
   include "data/script.asm"
@@ -42,11 +44,12 @@ _logic_data_end:
 
 ORG (high $+1)*256
 p68_font:
-  ; incbin "data/fonts/tripfont_revert.fnt"
-  incbin "data/fonts/Font57_revert.fnt"
-    /* incbin "data/fonts/casa2_revert.fnt" */
+  incbin "data/fonts/tripfont_revert.fnt"
+  ; incbin "data/fonts/Font57_revert.fnt"
+    ; incbin "data/fonts/casa2_revert.fnt"
+_after_font:
 
-_data_end:
+_data_end
 
   include "core/interrupt.asm"
 
@@ -54,9 +57,10 @@ _all_end:
 
 display /D, _data_end-code_start, " size, ", /D, 0xE000-_data_end, " free"
 display "----- code start: ", code_start
-display "logic data end: ", _logic_data_end
+display "code end: ", code_end, ", engine size :", /D, code_end-code_start
+display "data end: ", _logic_data_end, ", data size: ", /D, _logic_data_end-code_end
 display "font addr: ", p68_font
-display "data end: ", _data_end
+display "after font:", _after_font
 display "----- all end: ", _all_end
 
 ; display "check_action: ", Entities.check_action
