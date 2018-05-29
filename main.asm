@@ -48,9 +48,6 @@ p68_font:
 
 _data_end:
 
-; my_stack:
-  ; DEFS 257,00
-
   include "core/interrupt.asm"
 
 _all_end:
