@@ -8,7 +8,7 @@
 play:
 	ld hl,sfxData	;address of sound effects data
 
-	di ; без этого хрипы в динамике 
+	di ; без этого хрипы в динамике
 	push ix
 	push iy
 
