@@ -104,7 +104,8 @@ call_code_me:
 callHL  JP (hl)
 
 goto_me:
-  LD DE, (HL)
+  ; LD DE, (HL)
+  mLDA
   EX HL, DE
   JP process
 
@@ -227,7 +228,20 @@ getVar:
 	ld A,(DE)
 	ret
 
-; ищем
-find_action_ect:
+frames_cnt: dw 0000;
+
+start_measure:
+  DI
+  LD HL, (interrupt.frame_counter)
+  LD (frames_cnt), HL
+  EI  
+  RET
+
+stop_measure:
+  DI
+  LD HL, (interrupt.frame_counter)
+  LD DE, (frames_cnt)
+  EI  
+  RET
 
 ENDMODULE

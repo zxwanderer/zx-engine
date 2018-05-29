@@ -49,6 +49,7 @@ show_sprite:
     JP Tiles16.show_tile_on_map
     RET
 
+; ( нужна для стирания информации для подготовки текста )
 ; процедура очистки строчек экрана
 ; на входе:
 ; в D - начальная строка
@@ -103,5 +104,12 @@ clean_row_loop22:
     DJNZ clean_row_loop2
 
     RET
+
+show_frames:
+    LD HL, str_frames
+    LD DE, #0000
+    CALL text.print_at
+    RET    
+str_frames: defb "0000",0
 
 ENDMODULE

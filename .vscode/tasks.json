@@ -6,7 +6,7 @@
         {
             "type": "shell",
             "label": "sjasmplus",
-            "command": "./bin/sjasmplus --dos866  --dirbol main.asm",
+            "command": "./bin/sjasmplus --dos866  --nofakes --dirbol main.asm",
             "problemMatcher": "$errmatcher-sjasmplus"
             // --nofakes 
         },
