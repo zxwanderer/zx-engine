@@ -16,8 +16,8 @@
   /* wait 125 */
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_GREEN
-  printAt 0,0,HELLO_TXT
-  CallCode input.waitKey
+  ; printAt 0,0,HELLO_TXT
+  ; CallCode input.waitKey
   CallCode binary_init
   setBorder PEN_BLACK
 LOOP_SCRIPT:
@@ -35,11 +35,11 @@ binary_init:
   ; LD A, Shard_Item
   ; LD DE, #0505
   ; CALL items.add_item_to_map
-  LD D, 0
-  LD E, 24
+  ; LD D, 0
+  ; LD E, 24
   ; LD B, 10
   ; LD C, 3
-  CALL screenfx.clear_window
+  ; CALL screenfx.clear_window
   ; di
   ; halt
   RET

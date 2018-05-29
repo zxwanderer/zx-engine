@@ -28,12 +28,13 @@ LOOP:
 ; ----- CALC_CE ----
   LD A,C
   SUB 6
-  JR NC, calc_ce_end
+  JR NC, $+5;calc_ce_end
   INC E
   AND 7
 calc_ce_end: 
   LD C,A
 
+/*
   LD A, E
   AND 31
   CP 31
@@ -44,6 +45,7 @@ calc_ce_end:
   call math.down_pos
   LD C,7
 no_next_pos:
+*/
 
 ;------
   POP HL
