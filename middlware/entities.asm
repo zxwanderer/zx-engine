@@ -74,7 +74,10 @@ init_loop: ; пробегаемся по всем персонажам и раз
   PUSH BC
   PUSH DE
   PUSH HL
-  LD IX,HL
+
+  PUSH HL
+  POP IX
+  ; LD IX,HL
 
   LD DE, (IX+Hero.pos)
   call map.calc_pos
@@ -289,7 +292,9 @@ check_action: ; в DE у нас координаты ячейки на кото�
   LD ( MapCell_ptr), HL
   LD A, (HL);  и берем оттуда индекс !
   CALL calcCellType
-  LD IY, HL
+  ; LD IY, HL
+  PUSH HL
+  POP IY
   LD HL, (IY+CellType.script_ptr)
   CALL zxengine.process
   getVar A, zxengine.var_ret

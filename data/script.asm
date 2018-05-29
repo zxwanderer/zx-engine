@@ -22,7 +22,10 @@
   setBorder PEN_BLACK
 LOOP_SCRIPT:
   ; setBorder PEN_BLACK
+  CallCode zxengine.start_measure
   CallScript GAME_LOOP
+  CallCode zxengine.stop_measure
+  ; CallCode screenfx.show_frames
   goto LOOP_SCRIPT
   defb _endByte
 
@@ -41,6 +44,7 @@ binary_init:
 GAME_LOOP:
   ; setBorder PEN_RED
   SkanKeyTable key_table_hero
+  ; CallCode zxengine.stop_measure
   ; AddItemMap 13,22, Shard_Item
   ; ShowSprite 1,5,1
   defb _endByte
@@ -54,10 +58,14 @@ binary_hand_to_var:
 ; показать GUI поверх карты =)
 binary_show_gui:
 
+  ; CALL zxengine.start_measure
+
 ; проверяем стоит ли герой на каком-нибудь предмете
 show_ground_item:
   LD IX, (Entities.activePersonage_ptr)
-  LD DE, (IX+Entities.Hero.pos)
+  ; LD DE, (IX+Entities.Hero.pos)
+  LD D, (IX+Entities.Hero.pos.x)
+  LD E, (IX+Entities.Hero.pos.y)
   CALL items.find_item_on_map ; в IX указатель на найденный предмет
   JR C, show_hand_item; не стоит
   LD A, (IX+items.Item.itemID)
@@ -74,10 +82,12 @@ show_hand_item:
 
 binary_show_gui_ret:
 
-  LD D, 0
-  LD E, 1
-  CALL screenfx.clear_window
-  CALL screenfx.show_frames
+  ; CALL zxengine.stop_measure
+
+  ; LD D, 0
+  ; LD E, 1
+  ; CALL screenfx.clear_window
+  ; CALL screenfx.show_frames
   RET
 
 binary_get_or_drop_item:
@@ -96,7 +106,9 @@ binary_drop_item_to_map:
   LD A, (IY+Entities.Hero.hand_right_p_1)
   AND A
   RET Z; бросить ничего не можем - возврат
-  LD HL, (IY+Entities.Hero.hand_right_p)
+  ; LD HL, (IY+Entities.Hero.hand_right_p)
+  LD L, (IY+Entities.Hero.hand_right_p)
+  LD H, (IY+Entities.Hero.hand_right_p_1)
   PUSH HL
   POP IX
   LD (IY+Entities.Hero.sprite), Hero_hand_empty

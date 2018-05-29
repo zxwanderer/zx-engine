@@ -105,7 +105,7 @@ callHL  JP (hl)
 
 goto_me:
   ; LD DE, (HL)
-  mLDA
+  mLDE
   EX HL, DE
   JP process
 
@@ -120,7 +120,6 @@ wait_me:
   LD B, (HL)
   INC HL
 wait_me_loop:
-  /* HALT */
   NOP
   DJNZ wait_me_loop
   JP process
@@ -229,19 +228,24 @@ getVar:
 	ret
 
 frames_cnt: dw 0000;
+frames_measured: dw 0000;
 
 start_measure:
-  DI
+  ; DI
   LD HL, (interrupt.frame_counter)
+  ; EI
   LD (frames_cnt), HL
-  EI  
   RET
 
 stop_measure:
-  DI
+  ; DI
   LD HL, (interrupt.frame_counter)
+  ; EI
   LD DE, (frames_cnt)
-  EI  
+  ; XOR A
+  SBC HL, DE
+  LD (frames_measured), HL
+  
   RET
 
 ENDMODULE

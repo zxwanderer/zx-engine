@@ -138,7 +138,9 @@ pick_up_item:
     LD (IY+Entities.Hero.hand_right_p), HL
 
 upd_hero_map: ; обновляем спрайт героя на карте
-    LD DE, (IY+Entities.Hero.pos)
+    ; LD DE, (IY+Entities.Hero.pos)
+    LD D, (IY+Entities.Hero.pos.x)
+    LD E, (IY+Entities.Hero.pos.y)
     CALL map.calc_pos
     LD A, (IY+Entities.Hero.sprite)
     LD (HL), A
