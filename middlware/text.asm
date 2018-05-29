@@ -1,5 +1,3 @@
-include "../core/routines/text68.asm"
-
 MODULE text
 
   MACRO printAt posx,posy,ptext
@@ -7,6 +5,8 @@ MODULE text
     defb posx, posy
     defw ptext
   ENDM
+
+include "../core/routines/text68.asm"
 
 print_at:
   mLDE
