@@ -28,10 +28,11 @@ dir_down EQU 4
 dir_down_left EQU 5
 dir_left  EQU 6
 dir_up_left EQU 7
+dir_center EQU 8; никуда не двигаем =)
 
 _endByte equ 0
 
-scrHeight equ 12
+scrHeight equ 12-1
 scrWidth equ 16
 mapSize equ 32
 

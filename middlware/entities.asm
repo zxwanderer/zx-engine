@@ -6,7 +6,7 @@
   ENDM
 
   MACRO CharDo action_p, dir_p
-    defw Entities.char_action_me
+    defw Entities.char_do_me
     defb dir_p
     defb action_p
   ENDM
@@ -22,12 +22,13 @@ MapCell_xy:
   Point 0,0 ; координаты на карте на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 
 ; действия
-actions.act_end   EQU 0x00
-do_stand EQU 0x01
-do_look  EQU 0x02
-do_take  EQU 0x03
-do_use   EQU 0x04
-do_smach EQU 0x05
+actions.act_end   EQU #00
+do_stand EQU #01
+do_look  EQU #02
+do_take  EQU #03
+do_drop  EQU #03
+do_use   EQU #04
+do_smach EQU #05
 
 ; тип ячейки на карте или предмета
 STRUCT CellType
@@ -79,7 +80,9 @@ init_loop: ; пробегаемся по всем персонажам и раз
   POP IX
   ; LD IX,HL
 
-  LD DE, (IX+Hero.pos)
+  ; LD DE, (IX+Hero.pos)
+  LD D, (IX+Hero.pos.x)
+  LD E, (IX+Hero.pos.y)
   call map.calc_pos
   LD A,(HL)
   LD (IX+Hero.ground),A; ячейку карты ставим на пол персонажа
@@ -121,7 +124,9 @@ nextChar:
 ; ------- показать карту с текущим персонажем на экране
 lookChar:
   LD IX, (activePersonage_ptr)
-  LD DE, (IX+Hero.pos)
+  ; LD DE, (IX+Hero.pos)
+  LD D, (IX+Hero.pos.x)
+  LD E, (IX+Hero.pos.y)
   CALL map.center_map
   JP Tiles16.show_tile_map
   RET
@@ -153,28 +158,45 @@ next_char:
     DJNZ check_char
     JP Entities.check_no
 
-; ----- персонаж на что-то воздействует
-char_action_me:
-  ; mLDB
-  ; mLDС
+char_do_me:
   mLBC
   PUSH HL
-  CALL charCheckAction
-  JR C, char_action_me_end; проверили - переносить не нужно - возврат 
-  CALL char_to_map_moved
-char_action_me_end:
+
+  CALL char_do
+
   POP HL
-  JP zxengine.process
+  RET
+
+; ----- персонаж на что-то воздействует
+; на входе 
+; в B - действие
+; в C - направление 
+
+char_do:   
+  LD A, B
+  CP Entities.do_stand
+  JR Z, char_do_stand; персонаж стоит
+
+  RET
+
+char_do_stand: ; персонаж перемещается
+  CALL charCheckAction
+  RET C; проверили - переносить не нужно - возврат 
+  CALL char_to_map_moved
+  RET
 
 ; ------- двигаем персонажа на позицию MapCell_xy ( MapCell_ptr )
 char_to_map_moved:
   LD IX, (activePersonage_ptr)  ;
-  LD DE, (IX+Hero.pos)          ;
+  LD D, (IX+Hero.pos.x)        ;
+  LD E, (IX+Hero.pos.y)
   CALL map.calc_pos             ; определяем координаты позиции персонажа в HL
   LD A,(IX+Hero.ground)         ;
   LD (HL),A                     ; и ставим на карту спрайт пола
   LD DE, ( MapCell_xy )
-  LD (IX+Hero.pos), DE
+  ; LD (IX+Hero.pos), DE
+  LD (IX+Hero.pos.x), D
+  LD (IX+Hero.pos.y), E
   LD HL,( MapCell_ptr )
   LD A,(HL)
   LD (IX+Hero.ground),A         ; ячейку карты ставим на пол персонажа
@@ -221,10 +243,9 @@ char_to_map_moved:
 ; на активируемую ячейку не нужно =)
 charCheckAction:
   LD IX, (activePersonage_ptr)
-  ; LD HL, (IX+Hero.hand_right_p); читаем что у персонажа в руках
-  ; LD A, (HL)
-  ; setVar zxengine.var_item_id, A; помещаем предмет в руках в системную переменную
-  LD DE, (IX+Hero.pos);  D - x, E - y
+  ; LD DE, (IX+Hero.pos);  D - x, E - y
+  LD D, (IX+Hero.pos.x);  D - x, E - y
+  LD E, (IX+Hero.pos.y);  D - x, E - y
   LD A,C; направление 
   CP dir_up
   JR Z, check_up
@@ -282,7 +303,16 @@ check_right:
   m_check_right
 
 ; -- перед этим проверили на выходы за границы
-check_action: ; в DE у нас координаты ячейки на которую воздействует персонаж
+check_action: ; в DE у нас координаты ячейки на которую воздействует персонаж, в B - действие
+  ; PUSH bc
+  ; PUSH DE 
+
+  ; LD A, 6
+  ; CALL FX_SET
+
+  ; POP DE
+  ; POP bc
+
   LD A,B
   setVar zxengine.var_act, A; запоминаем в системной переменной действие
   LD A, 1
@@ -291,11 +321,14 @@ check_action: ; в DE у нас координаты ячейки на кото�
   call map.calc_pos ; получаем указатель на ячейку карты в HL
   LD ( MapCell_ptr), HL
   LD A, (HL);  и берем оттуда индекс !
+check_action_index:
   CALL calcCellType
   ; LD IY, HL
   PUSH HL
   POP IY
-  LD HL, (IY+CellType.script_ptr)
+  ; LD HL, (IY+CellType.script_ptr)
+  LD L, (IY+CellType.script_ptr)
+  LD H, (IY+CellType.script_ptr+1)
   CALL zxengine.process
   getVar A, zxengine.var_ret
   OR A
@@ -315,7 +348,7 @@ set_action_cell_me:
   POP HL
   JP zxengine.process
 
-; -- устанавливаем новое значение ячейки на карте по адресу MapCell_ptr
+; -- устанавливаем новое значение ячейки на карте по адресу MapCell_ptr <- A
 set_action_cell:
   LD HL, (MapCell_ptr)
   LD (HL), A

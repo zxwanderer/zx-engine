@@ -43,6 +43,8 @@ binary_init:
 
 GAME_LOOP:
   SkanKeyTable key_table_hero
+  wait_halt 1
+  ; CallCode screenfx.show_frames
   ; CallScript look_char
   ; CallCode zxengine.stop_measure
   ; CallCode zxengine.start_measure
@@ -88,17 +90,51 @@ binary_show_gui_ret:
   ; CALL screenfx.show_frames
   RET
 
-binary_get_or_drop_item:
-; сначала смотрим есть ли предмет на земле
-binary_get_item_from_map:
-  LD IY, (Entities.activePersonage_ptr)
-  LD DE, (IY+Entities.Hero.pos)
-  CALL items.find_item_on_map
-  JR C, binary_drop_item_to_map; предмета на земле нет - переходим на проверку бросания
-  ; LD A, Hero_hand_item_spr
-  LD (IY+Entities.Hero.sprite), Hero_hand_item_spr
-  JP items.pick_up_item
+; для корректного вызова скрипта обработки предмета 
+; нужно знать откуда брать его id - 
+;       предмет может быть в руках персонажа
+;       предмет может лежать на карте 
+;       или это может быть просто ячейка карты
+; поэтому все это придется закодировать в CharDo
+; а все богатство возможных последствий придется закодировать в 
+; скриптах
 
+binary_get_or_drop_item:
+    RET
+;   LD IY, (Entities.activePersonage_ptr)
+  
+;   LD A, (IY+Entities.Hero.hand_right_p_1) ; сначала смотрим пустые ли руки %) (!!!)
+;   OR A
+;   JR NZ, binary_drop_item_to_map; что-то в руках есть - кидаем это!
+
+; binary_get_item_from_map:
+
+  ; LD A, 6
+  ; CALL FX_SET
+  ; RET
+
+; binary_drop_item_to_map:
+
+;   LD A, 5
+;   CALL FX_SET
+
+;   RET
+
+  /*  
+  LD IY, (Entities.activePersonage_ptr)
+  
+  LD A, (IY+Entities.Hero.hand_right_p_1) ; сначала смотрим пустые ли руки %) (!!!)
+  OR A
+  JR NZ, binary_drop_item_to_map; что-то в руках есть - кидаем это!
+
+  LD A, 6
+  CALL FX_SET
+
+; binary_get_item_from_map:
+  LD DE, (IY+Entities.Hero.pos)
+  LD B, Entities.do_take
+  JP Entities.check_action
+  
 binary_drop_item_to_map:
   ; смотрим есть ли предмет в руках?
   LD A, (IY+Entities.Hero.hand_right_p_1)
@@ -111,6 +147,7 @@ binary_drop_item_to_map:
   POP IX
   LD (IY+Entities.Hero.sprite), Hero_hand_empty
   JP items.drop_down_item
+*/
 
 ; binary_proc:
   ; LD HL, CHARS_SET

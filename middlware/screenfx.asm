@@ -12,6 +12,11 @@ MODULE screenfx
         db spr_num
     ENDM
 
+    MACRO ShowText msg_p
+        dw screenfx.show_info_message_me
+        dw msg_p
+    ENDM
+
 ; ----- показать спрайт на месте действия ( например удар об стенку)
 fx_action_cell_me:
     PUSH HL
@@ -152,19 +157,41 @@ DECTB_W  ;Таблица степеней десятки;
 
 show_frames:
 
-    LD D, 0
+    LD D, 23
     LD E, 1
     CALL screenfx.clear_window
-    
+
     LD DE, str_frames
-    ; LD HL, (interrupt.frame_counter)
+    LD HL, (interrupt.frame_counter)
     ; LD HL, (zxengine.frames_cnt)
-    LD HL, (zxengine.frames_measured)
+    ; LD HL, (zxengine.frames_measured)
     CALL PDEC_W
     LD HL, str_frames
-    LD DE, #0000
+    LD DE, #0017
     CALL text.print_at
 
+    RET
+
+
+show_info_message_me:
+    mLDE
+    PUSH HL
+
+    PUSH DE
+    POP HL
+    CALL show_info_message
+
+    POP HL
+    JP zxengine.process
+
+; в HL указатель на сообщение 
+show_info_message:
+    LD D, 23
+    LD E, 1
+    CALL screenfx.clear_window
+
+    LD DE, #0017
+    CALL text.print_at
     RET
     
 str_frames: defb "00000",0

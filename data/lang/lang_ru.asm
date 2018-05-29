@@ -28,5 +28,7 @@ Ballon_cell_name: db "Баллон",0
 
 Shard_item_name: db "Осколок",0
 
-tHeroName1 defb "Иван Ребрин",0
-tHeroName2 defb "Виталий Капустин",0
+tHeroName1 defb "UNKNOWN1",0
+tHeroName2 defb "UNKNOWN2",0
+
+Take_chair_mess defb "Я подобрал стул",0
