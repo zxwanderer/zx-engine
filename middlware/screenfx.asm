@@ -187,10 +187,11 @@ show_info_message_me:
     POP HL
     JP zxengine.process
 
-; в HL указатель на сообщение 
+; в HL указатель на сообщение;
+; хорошо бы проверять сверху или снизу выводить сообщение 
 show_info_message:
-    LD D, 23
-    LD E, 1
+    LD D, 22
+    LD E, 2
     CALL screenfx.clear_window
 
     LD DE, #0017
