@@ -33,12 +33,12 @@ CELL_TYPES:
 ; -- 0 --
 
 Cell_Type_Empty:    Entities.CellType Empty_cell_name,    no_script ; 0
-Cell_Type_Wall:     Entities.CellType Wall_cell_name,     no_way_script ; 1
-Cell_Type_Door:     Entities.CellType Door_cell_name,     no_script ; 2
+Cell_Type_Wall:     Entities.CellType Wall_cell_name,     wall_script ; 1
+Cell_Type_Door:     Entities.CellType Door_cell_name,     door_script ; 2
 Cell_Type_Floor:    Entities.CellType Floor_cell_name,    no_script ; 3
-Cell_Type_Computer: Entities.CellType Computer_cell_name, no_script ; 4
+Cell_Type_Computer: Entities.CellType Computer_cell_name, computer_on_script ; 4
 Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   no_script ; 5
-Cell_Type_GridWall: Entities.CellType Wall_cell_name,     no_script ; 6
+Cell_Type_GridWall: Entities.CellType Wall_cell_name,     wall_script ; 6
 Cell_Type_Canister: Entities.CellType Ballon_cell_name,   no_script ; 7
 Cell_Type_Palm:     Entities.CellType Ballon_cell_name,   no_script ; 8
 Cell_Type_Human:    Entities.CellType Ballon_cell_name,   no_script ; 9
@@ -56,7 +56,7 @@ Cell_Type_10:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_11:        Entities.CellType Empty_cell_name,   no_script ; 1
 Cell_Type_12:        Entities.CellType Door_cell_name,    no_script ; 2
 Cell_Type_13:        Entities.CellType Empty_cell_name,   no_script ; 3
-Cell_Type_Off_Computer: Entities.CellType Computer_cell_name, no_script; 4
+Cell_Type_Off_Computer: Entities.CellType Computer_cell_name, computer_off_script; 4
 Cell_Type_15:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_16:        Entities.CellType Empty_cell_name,   no_script ; 6
 Cell_Type_17:        Entities.CellType Empty_cell_name,   no_script ; 7
@@ -75,7 +75,7 @@ Cell_Type_20:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_21:        Entities.CellType Empty_cell_name,   no_script ; 1
 Cell_Type_Door_Open: Entities.CellType Door_cell_name,    no_script ; 2
 Cell_Type_23:        Entities.CellType Empty_cell_name,   no_script ; 3
-Cell_Type_Computer_Break: Entities.CellType Computer_cell_name, no_script; 4
+Cell_Type_Computer_Break: Entities.CellType Computer_cell_name, computer_break_script; 4
 Cell_Type_25:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_26:        Entities.CellType Empty_cell_name,   no_script ; 6
 Cell_Type_27:        Entities.CellType Empty_cell_name,   no_script ; 7
@@ -206,19 +206,12 @@ action_ring_explode:
   defb _endByte
 
 wall_script:
-  ; goto computer_off_script
-  ; rPlayVibr 1
-  ; laserFX
-  ; AddItemMap 13,22, Shard_Item
   shiruFX 2
-  CallScript action_ring_explode
+  ; CallScript action_ring_explode
   goto no_way_script
 
 door_open_script:
   defb _endByte
-  ; SetActionCell Door_half_open
-  ; SetActionCell Door_closed
-  ; goto no_way_script
 
 ballon_script:
   CallScript action_ring_explode
@@ -244,6 +237,8 @@ computer_on_script:
   goto no_way_script
 
 computer_off_script:
+  goto computer_glass_destroy
+
   CallCode binary_hand_to_var
   IfVar zxengine.var_item_id, Chair_spr, computer_glass_destroy:
   shiruFX 55
@@ -255,6 +250,8 @@ computer_glass_destroy:
   CallScript action_ring_explode
   SetActionCell Computer_break
   CallCode binary_add_shard
+  CallCode Entities.lookChar; вывод текста ниже затормозит обновление экрана поэтому вызываем его вручную
+  ShowText Computer_break_mess
   goto no_way_script
 
 computer_break_script:
@@ -262,17 +259,6 @@ computer_break_script:
   CallScript action_ring_explode
   SetActionCell Floor
   goto no_way_script
-
-; массив соответствия кода спрайта на карте типу энкаунтера
-;cells_types_spr:
-  ;dw cGround, cWater, cGreenBush
-
-; позиция Y,X !!!
-/* pos Point 0,0 ; позиция на карте
-sprite db 00; спрайт
-ground db 00; на чем стоит
-flags db 00; признаки-флаги
-name_p dw #0000 */
 
 binary_add_shard:
 ; читаем что у нас подзорвалось

@@ -38,7 +38,7 @@ TILE_SET:
   include "data/graph/tiles_many.asm"
 TILE_SET_END
 MAP_SET:
-	include "data/maps/laboratory_old.asm"
+	include "data/maps/laboratory.asm"
 MAP_SET_END
 ENCOUNTER_SET:
 	include "data/maps/rebelstar_enc.asm"

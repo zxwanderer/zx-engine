@@ -32,7 +32,7 @@ dir_center EQU 8; никуда не двигаем =)
 
 _endByte equ 0
 
-scrHeight equ 12-1
+scrHeight equ 12
 scrWidth equ 16
 mapSize equ 32
 
