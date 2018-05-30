@@ -56,6 +56,20 @@ hand_right_p_1 db 00
 ; boot dw 00
 ENDS
 
+char_do_me:
+  mLBC
+  PUSH HL
+  CALL char_do
+  POP HL
+  JP zxengine.process
+
+set_action_cell_me:
+  mLDA
+  PUSH HL
+  CALL set_action_cell
+  POP HL
+  JP zxengine.process 
+
 ; на входе в A - индекс типа ячейки
 ; на выходе - указатель на массив с ячейкой
 calcCellType:
@@ -123,12 +137,13 @@ nextChar:
 
 ; ------- показать карту с текущим персонажем на экране
 lookChar:
+
   LD IX, (activePersonage_ptr)
-  ; LD DE, (IX+Hero.pos)
   LD D, (IX+Hero.pos.x)
   LD E, (IX+Hero.pos.y)
   CALL map.center_map
   JP Tiles16.show_tile_map
+
   RET
 
 ; в DE позиция на карте
@@ -158,43 +173,36 @@ next_char:
     DJNZ check_char
     JP Entities.check_no
 
-char_do_me:
-  mLBC
-  PUSH HL
-
-  CALL char_do
-
-  POP HL
-  RET
-
-; ----- персонаж на что-то воздействует
+; ----- текущий персонаж на что-то воздействует ----
 ; на входе 
+; activePersonage_ptr указатель на персонажа
 ; в B - действие
-; в C - направление 
-
-char_do:   
+; в C - направление
+; --------------------------------------------------
+char_do:
   LD A, B
+  setVar zxengine.var_act
+
+  LD A,C
+  CALL calc_action_pos
+  RET NC;  возвратили false - неправильное направление или действие
+
+  getVar zxengine.var_act
+
   CP Entities.do_stand
   JR Z, char_do_stand; персонаж стоит
 
   RET
 
-char_do_stand: ; персонаж перемещается
-  CALL charCheckAction
-  RET C; проверили - переносить не нужно - возврат 
-  CALL char_to_map_moved
-  RET
+char_do_stand: ; персонаж перемещается на MapCell_xy ( MapCell_ptr тоже установлен )
 
-; ------- двигаем персонажа на позицию MapCell_xy ( MapCell_ptr )
-char_to_map_moved:
-  LD IX, (activePersonage_ptr)  ;
-  LD D, (IX+Hero.pos.x)        ;
+  LD IX, (activePersonage_ptr)
+  LD D, (IX+Hero.pos.x)
   LD E, (IX+Hero.pos.y)
   CALL map.calc_pos             ; определяем координаты позиции персонажа в HL
   LD A,(IX+Hero.ground)         ;
   LD (HL),A                     ; и ставим на карту спрайт пола
   LD DE, ( MapCell_xy )
-  ; LD (IX+Hero.pos), DE
   LD (IX+Hero.pos.x), D
   LD (IX+Hero.pos.y), E
   LD HL,( MapCell_ptr )
@@ -202,13 +210,28 @@ char_to_map_moved:
   LD (IX+Hero.ground),A         ; ячейку карты ставим на пол персонажа
   LD A,(IX+Hero.sprite)
   LD (HL),A                     ; ставим спрайт персонажа на карту
+
+  ; LD A, 10
+  ; CALL FX_SET
+
+  ; JP lookChar
+
   RET
+
+  ; LD DE, (IX+Hero.pos)
+  ; CALL charCheckAction
+  ; RET C; проверили - переносить не нужно - возврат 
+  ; CALL char_to_map_moved
+
+  RET
+
+check_entity_action 
 
 
   MACRO m_check_left:
     LD A,D
     DEC A
-    JP M, check_no
+    JP M, check_act_no
     LD D,A
   ENDM
 
@@ -216,14 +239,14 @@ char_to_map_moved:
     LD A,D
     INC A
     CP mapSize
-    JR NC, check_no
+    JR NC, check_act_no
     LD D,A
   ENDM
 
   MACRO m_check_up:
     LD A,E
     DEC A
-    JP M, check_no
+    JP M, check_act_no
     LD E,A
   ENDM
 
@@ -231,22 +254,22 @@ char_to_map_moved:
     LD A,E
     INC A
     CP mapSize
-    JP NC, check_no
+    JP NC, check_act_no
     LD E,A
   ENDM
 
-; Проверяем как персонаж выполняет скриптовое действие
-; На входе: 
-;   в B - действие
-;   в C - направление
-; На выходе: если установлен флаг SCF то переносить персонажа
-; на активируемую ячейку не нужно =)
-charCheckAction:
+; вычисляем ячейку на которую действует персонаж по позиции персонажа и направлению
+; на входе 
+;       activePersonage_ptr указатель на персонажа
+;       A - направление 
+; на выходе если NС то ошибка ( выход за пределы карты или непонятное действие)
+; иначе в DE и MapCell_xy позиция действия
+calc_action_pos:
   LD IX, (activePersonage_ptr)
-  ; LD DE, (IX+Hero.pos);  D - x, E - y
-  LD D, (IX+Hero.pos.x);  D - x, E - y
-  LD E, (IX+Hero.pos.y);  D - x, E - y
-  LD A,C; направление 
+  LD D, (IX+Hero.pos.x)
+  LD E, (IX+Hero.pos.y)
+
+calc_action_pos_de: ; а вдруг кто-нибудь сразу сюда полезет? :)
   CP dir_up
   JR Z, check_up
   CP dir_down
@@ -265,8 +288,114 @@ charCheckAction:
   CP dir_up_right
   JR Z, check_up_right
 
-  JP check_no; фигня какая-то
+  CP dir_center
+  JR Z, check_center
 
+check_act_no:
+  ret_false
+  
+check_down_left:
+  m_check_down
+  m_check_left
+  JR check_act_yes
+
+check_down_right:
+  m_check_down
+  m_check_right
+  JR check_act_yes
+
+check_up_left:
+  m_check_up
+  m_check_left
+  JR check_act_yes
+
+check_up_right:
+  m_check_up
+  m_check_right
+  JR check_act_yes
+
+check_up:
+  m_check_up
+  JR check_act_yes
+
+check_down:
+  m_check_down
+  JR check_act_yes
+
+check_left:
+  m_check_left
+  JR check_act_yes
+
+check_right:
+  m_check_right
+
+check_center:
+check_act_yes: ; получили в DE новую позицию и в MapCell_ptr указатель на ячейку карты
+  LD (MapCell_xy), DE
+  CALL map.calc_pos
+  LD (MapCell_ptr), HL
+  ret_true
+
+; --------  end calc_action_pos
+ 
+
+/*
+; ------- двигаем персонажа на позицию MapCell_xy ( MapCell_ptr )
+char_to_map_moved:
+  LD IX, (activePersonage_ptr)  ;
+  LD D, (IX+Hero.pos.x)        ;
+  LD E, (IX+Hero.pos.y)
+  CALL map.calc_pos             ; определяем координаты позиции персонажа в HL
+  LD A,(IX+Hero.ground)         ;
+  LD (HL),A                     ; и ставим на карту спрайт пола
+  LD DE, ( MapCell_xy )
+  ; LD (IX+Hero.pos), DE
+  LD (IX+Hero.pos.x), D
+  LD (IX+Hero.pos.y), E
+  LD HL,( MapCell_ptr )
+  LD A,(HL)
+  LD (IX+Hero.ground),A         ; ячейку карты ставим на пол персонажа
+  LD A,(IX+Hero.sprite)
+  LD (HL),A                     ; ставим спрайт персонажа на карту
+  RET
+*/
+
+
+; Проверяем как персонаж выполняет скриптовое действие
+; На входе: 
+;   в B - действие
+;   в C - направление
+; На выходе: если установлен флаг SCF то переносить персонажа
+; на активируемую ячейку не нужно =)
+/*
+charCheckAction_no:
+  LD IX, (activePersonage_ptr)
+  ; LD DE, (IX+Hero.pos);  D - x, E - y
+  LD D, (IX+Hero.pos.x);  D - x, E - y
+  LD E, (IX+Hero.pos.y);  D - x, E - y
+  LD A,C; направление
+*/
+/*
+  CP dir_up
+  JR Z, check_up
+  CP dir_down
+  JR Z, check_down
+  CP dir_left
+  JR Z, check_left
+  CP dir_right
+  JR Z, check_right
+
+  CP dir_down_left
+  JR Z, check_down_left
+  CP dir_down_right
+  JR Z, check_down_right
+  CP dir_up_left
+  JR Z, check_up_left
+  CP dir_up_right
+  JR Z, check_up_right
+*/
+  ; JP check_no; фигня какая-то
+/*
 check_down_left:
   m_check_down
   m_check_left
@@ -301,9 +430,9 @@ check_left:
 
 check_right:
   m_check_right
-
+*/
 ; -- перед этим проверили на выходы за границы
-check_action: ; в DE у нас координаты ячейки на которую воздействует персонаж, в B - действие
+; check_action_no: ; в DE у нас координаты ячейки на которую воздействует персонаж, в B - действие
   ; PUSH bc
   ; PUSH DE 
 
@@ -313,15 +442,16 @@ check_action: ; в DE у нас координаты ячейки на кото�
   ; POP DE
   ; POP bc
 
+/*
   LD A,B
-  setVar zxengine.var_act, A; запоминаем в системной переменной действие
+  setVar zxengine.var_act; запоминаем в системной переменной действие
   LD A, 1
-  setVar zxengine.var_ret, A; запоминаем в системной переменной возврат 1
+  setVar zxengine.var_ret; запоминаем в системной переменной возврат 1
   LD ( MapCell_xy ), DE
   call map.calc_pos ; получаем указатель на ячейку карты в HL
   LD ( MapCell_ptr), HL
   LD A, (HL);  и берем оттуда индекс !
-check_action_index:
+check_action_index_no:
   CALL calcCellType
   ; LD IY, HL
   PUSH HL
@@ -330,23 +460,21 @@ check_action_index:
   LD L, (IY+CellType.script_ptr)
   LD H, (IY+CellType.script_ptr+1)
   CALL zxengine.process
-  getVar A, zxengine.var_ret
+  getVar zxengine.var_ret
   OR A
   JR Z, check_no
+; ret_false: ; сброшен CF
+*/
+
 check_yes:
   SCF ; устанавливаем бит переноса и инвертируем его ))
   CCF
   RET
+; ret_true: ; установлен CF
 check_no:
   SCF
   RET
 
-set_action_cell_me:
-  mLDA
-  PUSH HL
-  CALL set_action_cell
-  POP HL
-  JP zxengine.process
 
 ; -- устанавливаем новое значение ячейки на карте по адресу MapCell_ptr <- A
 set_action_cell:
