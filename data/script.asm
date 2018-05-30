@@ -43,7 +43,7 @@ binary_init:
 
 GAME_LOOP:
   SkanKeyTable key_table_hero
-  wait_halt 1
+  ; wait_halt 1
   ; CallCode screenfx.show_frames
   ; CallScript look_char
   ; CallCode zxengine.stop_measure
@@ -53,7 +53,7 @@ GAME_LOOP:
 ; читаем id предмета в руках
 binary_hand_to_var:
   CALL items.get_hero_hand_item
-  setVar zxengine.var_item_id, A; если A = 0 то предмета нет )
+  setVar zxengine.var_item_id; если A = 0 то предмета нет )
   RET
 
 ; показать GUI поверх карты =)
@@ -93,7 +93,7 @@ binary_show_gui_ret:
 ; для корректного вызова скрипта обработки предмета 
 ; нужно знать откуда брать его id - 
 ;       предмет может быть в руках персонажа
-;       предмет может лежать на карте 
+;       предмет может лежать на карте
 ;       или это может быть просто ячейка карты
 ; поэтому все это придется закодировать в CharDo
 ; а все богатство возможных последствий придется закодировать в 
@@ -179,7 +179,7 @@ look_char:
     CallCode Entities.lookChar
     CallCode binary_show_gui
     ; CallCode input.noKey ; ждем пока отпустит клавишу
-    wait_halt 5
+    ; wait_halt 5
     defb _endByte
 
 char_up:

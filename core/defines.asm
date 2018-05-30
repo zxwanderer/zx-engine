@@ -39,7 +39,7 @@ mapSize equ 32
 SCREEN_ADDR equ #4000
 ATTR_ADDR EQU SCREEN_ADDR+#1800
 
-STRUCT Point
+STRUCT Point; LD DE, (Point) получаем в D - x, в E - y
 y db 0
 x db 0
 ENDS
@@ -82,4 +82,15 @@ MACRO interrupt.init vec_
   LD   I,A
   IM   2
   EI
+ENDM
+
+MACRO ret_true
+  SCF ; устанавливаем бит переноса ( Carry = 1 )
+  RET
+ENDM
+
+MACRO ret_false
+  SCF ; устанавливаем бит переноса и инвертируем его ))
+  CCF
+  RET
 ENDM
