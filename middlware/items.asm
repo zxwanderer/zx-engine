@@ -91,7 +91,7 @@ add_item_to_map:
     LD (IX+Item.owner), #ff ; лежит на карте 
     PUSH IX
     POP IY; сохраняем в IY указатель на предмет
-    CALL Entities.find_char_on_map ; проверяем стоит ли на этой ячейке какой-либо герой
+    CALL Entities.is_char_on_map ; проверяем стоит ли на этой ячейке какой-либо герой
     JR NC, add_item_to_hero_ground_spr ; герой есть, переходим 
 add_item_to_map_spr:; героя нет, размещаем просто на карте
     ; надо закинуть спрайт предмета на карту и взять ground с нее

@@ -81,7 +81,6 @@ show_hand_item:
   CALL screenfx.show_sprite
 
 binary_show_gui_ret:
-
   ; CALL zxengine.stop_measure
   ; LD D, 0
   ; LD E, 1

@@ -33,30 +33,30 @@ CELL_TYPES:
 ; -- 0 --
 
 Cell_Type_Empty:    Entities.CellType Empty_cell_name,    no_script ; 0
-Cell_Type_Wall:     Entities.CellType Wall_cell_name,     wall_script ; 1
-Cell_Type_Door:     Entities.CellType Door_cell_name,     door_script ; 2
+Cell_Type_Wall:     Entities.CellType Wall_cell_name,     no_way_script ; 1
+Cell_Type_Door:     Entities.CellType Door_cell_name,     no_script ; 2
 Cell_Type_Floor:    Entities.CellType Floor_cell_name,    no_script ; 3
-Cell_Type_Computer: Entities.CellType Computer_cell_name, computer_on_script ; 4
-Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   ballon_script ; 5
-Cell_Type_GridWall: Entities.CellType Wall_cell_name,   wall_script ; 6
+Cell_Type_Computer: Entities.CellType Computer_cell_name, no_script ; 4
+Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   no_script ; 5
+Cell_Type_GridWall: Entities.CellType Wall_cell_name,     no_script ; 6
 Cell_Type_Canister: Entities.CellType Ballon_cell_name,   no_script ; 7
 Cell_Type_Palm:     Entities.CellType Ballon_cell_name,   no_script ; 8
 Cell_Type_Human:    Entities.CellType Ballon_cell_name,   no_script ; 9
 
-Cell_Type_0A:        Entities.CellType Ballon_cell_name,   no_script ; A
-Cell_Type_0B:        Entities.CellType Ballon_cell_name,   no_script ; B
-Cell_Type_0C:        Entities.CellType Ballon_cell_name,   no_script ; C
-Cell_Type_0D:        Entities.CellType Ballon_cell_name,   no_script ; D
-Cell_Type_0E:        Entities.CellType Ballon_cell_name,   no_script ; E
-Cell_Type_0F:        Entities.CellType Ballon_cell_name,   no_script ; F
+Cell_Type_0A:        Entities.CellType Ballon_cell_name,  no_script ; A
+Cell_Type_0B:        Entities.CellType Ballon_cell_name,  no_script ; B
+Cell_Type_0C:        Entities.CellType Ballon_cell_name,  no_script ; C
+Cell_Type_0D:        Entities.CellType Ballon_cell_name,  no_script ; D
+Cell_Type_0E:        Entities.CellType Ballon_cell_name,  no_script ; E
+Cell_Type_0F:        Entities.CellType Ballon_cell_name,  no_script ; F
 
 ; -- 01 --
 
 Cell_Type_10:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_11:        Entities.CellType Empty_cell_name,   no_script ; 1
-Cell_Type_12:        Entities.CellType Door_cell_name,    door_script ; 2
+Cell_Type_12:        Entities.CellType Door_cell_name,    no_script ; 2
 Cell_Type_13:        Entities.CellType Empty_cell_name,   no_script ; 3
-Cell_Type_Off_Computer: Entities.CellType Computer_cell_name, computer_off_script ; 4
+Cell_Type_Off_Computer: Entities.CellType Computer_cell_name, no_script; 4
 Cell_Type_15:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_16:        Entities.CellType Empty_cell_name,   no_script ; 6
 Cell_Type_17:        Entities.CellType Empty_cell_name,   no_script ; 7
@@ -73,9 +73,9 @@ Cell_Type_1F:        Entities.CellType Empty_cell_name,   no_script ; F
 
 Cell_Type_20:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_21:        Entities.CellType Empty_cell_name,   no_script ; 1
-Cell_Type_Door_Open: Entities.CellType Door_cell_name,    door_open_script ; 2
+Cell_Type_Door_Open: Entities.CellType Door_cell_name,    no_script ; 2
 Cell_Type_23:        Entities.CellType Empty_cell_name,   no_script ; 3
-Cell_Type_Computer_Break: Entities.CellType Computer_cell_name, computer_break_script ; 4
+Cell_Type_Computer_Break: Entities.CellType Computer_cell_name, no_script; 4
 Cell_Type_25:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_26:        Entities.CellType Empty_cell_name,   no_script ; 6
 Cell_Type_27:        Entities.CellType Empty_cell_name,   no_script ; 7
@@ -93,7 +93,7 @@ Cell_Type_2F:        Entities.CellType Empty_cell_name,   no_script ; F
 Cell_Type_30:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_31:        Entities.CellType Empty_cell_name,   no_script ; 1
 Cell_Type_32:        Entities.CellType Empty_cell_name,   no_script ; 2
-Cell_Type_33:        Entities.CellType Empty_cell_name,   chair_script ; 3
+Cell_Type_33:        Entities.CellType Empty_cell_name,   no_script ; 3
 Cell_Type_Shard:     Entities.CellType Shard_item_name,   no_script ; 4
 Cell_Type_35:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_36:        Entities.CellType Empty_cell_name,   no_script ; 6

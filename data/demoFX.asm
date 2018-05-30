@@ -32,7 +32,6 @@ play:
 	ld (sfxRoutineNoiseBorder +1),a
 	ld (sfxRoutineSampleBorder+1),a
 
-
 readData:
 	ld a,(ix+0)		;read block type
 	ld c,(ix+1)		;read duration 1
