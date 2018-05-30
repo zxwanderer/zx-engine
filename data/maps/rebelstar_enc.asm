@@ -262,21 +262,14 @@ computer_break_script:
   goto no_way_script
 
 binary_add_shard:
-; читаем что у нас подзорвалось
-  LD DE, (Vars.MapCell_xy)
-; Y+1 ( размещаем shard внизу взорвавшегося предмета )
-  INC E
-  ; INC E
-  ; INC E
+  LD DE, (Vars.MapCell_xy); читаем где у нас подзорвалось
+  INC E ; Y+1 ( размещаем shard внизу взорвавшегося предмета )
   LD A, Shard_Item
   CALL items.add_item_to_map
   RET
 
 PersonagesNum equ 2
-; описываем героев:
-CHARS_SET:
+
+CHARS_SET: ; описываем героев:
 Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
 Hero2: Entities.Hero 13,22, 9, 0, 0, tHeroName2, 00
-; , 0, 0, 0, 0, 0
-;Hero3: Entities.Hero 22,22, 12, 0, 0, tHeroName2
-;defb _endByte
