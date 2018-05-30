@@ -20,6 +20,7 @@ code_start:
   include "middlware/text.asm"
   include "middlware/screen.asm"
   include "middlware/map.asm"
+  include "middlware/vars.asm"
   include "middlware/entities.asm"
   include "middlware/items.asm"
 

@@ -20,13 +20,13 @@ MODULE screenfx
 ; ----- показать спрайт на месте действия ( например удар об стенку)
 fx_action_cell_me:
     PUSH HL
-    LD A, ( Entities.MapCell_xy+Point.y )
+    LD A, ( Vars.MapCell_xy+Point.y )
     LD HL, map.mapPos
     SUB (HL)
     ADD A,A ; так как у нас тайлы в 2 ячейки то умножаем результат на два
     LD E,A
     INC HL
-    LD A, ( Entities.MapCell_xy+Point.x )
+    LD A, ( Vars.MapCell_xy+Point.x )
     SUB (HL)
     ADD A,A ; так как у нас тайлы в 2 ячейки то умножаем результат на два
     LD D,A ; в DE - экранная позиция
