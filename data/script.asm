@@ -20,7 +20,7 @@
   CallCode input.waitKey
   CallCode binary_init
   ; setBorder PEN_BLACK
-  CallCode zxengine.start_measure
+  ; CallCode zxengine.start_measure
 LOOP_SCRIPT:
   ; wait_halt 1
   ; setBorder PEN_RED
@@ -43,7 +43,7 @@ binary_init:
 
 GAME_LOOP:
   SkanKeyTable key_table_hero
-  ; wait_halt 1
+  wait_halt 1
   ; CallCode screenfx.show_frames
   ; CallScript look_char
   ; CallCode zxengine.stop_measure

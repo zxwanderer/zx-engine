@@ -192,6 +192,9 @@ char_do:
   CP Entities.do_stand
   JR Z, char_do_stand; персонаж стоит
 
+  LD A, 1
+  CALL FX_SET; обиженно пиликаем 
+ 
   RET
 
 ; персонаж перемещается на MapCell_xy ( MapCell_ptr тоже установлен )
@@ -212,8 +215,8 @@ char_do_stand:
   OR A
   RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
  
-  LD A, 1
-  CALL FX_SET
+  ; LD A, 1
+  ; CALL FX_SET
   ; RET
 
   LD IX, (activePersonage_ptr)

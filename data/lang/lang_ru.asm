@@ -32,3 +32,4 @@ tHeroName1 defb "UNKNOWN1",0
 tHeroName2 defb "UNKNOWN2",0
 
 Take_chair_mess defb "я подобрал стул",0
+Computer_break_mess db "Ёкран компьютера треснул и разбилс€!",0

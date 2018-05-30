@@ -181,6 +181,9 @@ show_info_message_me:
     POP HL
     CALL show_info_message
 
+    CALL input.noKey
+    CALL input.waitKey
+
     POP HL
     JP zxengine.process
 
