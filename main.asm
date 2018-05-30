@@ -38,7 +38,7 @@ TILE_SET:
   include "data/graph/tiles_many.asm"
 TILE_SET_END
 MAP_SET:
-	include "data/maps/laboratory.asm"
+	include "data/maps/laboratory_old.asm"
 MAP_SET_END
 ENCOUNTER_SET:
 	include "data/maps/rebelstar_enc.asm"
@@ -71,8 +71,12 @@ display "font addr: ", p68_font
 display "after font:", _after_font
 display "----- all end: ", _all_end
 
-display "chair_script_binary ", chair_script_binary
-display "binary_get_or_drop_item ", binary_get_or_drop_item
+; display "chair_script_binary ", chair_script_binary
+; display "binary_get_or_drop_item ", binary_get_or_drop_item
+
+display "char_do_stand ", Entities.char_do_stand
+display "CELL_TYPES ", CELL_TYPES
+display "check_act_yes ", Entities.check_act_yes
 
 ; display "check_action: ", Entities.check_action
 ; display "fx_action_cell_me: ", screenfx.fx_action_cell_me
