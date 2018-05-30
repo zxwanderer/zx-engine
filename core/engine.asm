@@ -57,13 +57,6 @@ MODULE zxengine
 
 ; для использования внутри ассемблера
 
-; первые резервные переменные
-var_act equ 0; // переменная 0 - действие
-var_ret equ 1; // переменная 1 - что возвратили из скрипта
-var_item_id equ 2; // переменная 3 - чем воздействуем
-map_cell_x equ 2; //
-map_cell_y equ 3; // 
-
   MACRO setVar var; заносим значение из A в переменную движка
     LD ( zxengine.varsTab + var ), A
   ENDM
@@ -74,9 +67,6 @@ map_cell_y equ 3; //
 
 ; различные переменные для скриптов
 varsTab:
-; var_action_p db 00;
-; var_return_p db 00;
-; var_item_id_p db 00;
   DUP 256
     defb 00
   EDUP

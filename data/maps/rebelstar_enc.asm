@@ -154,7 +154,7 @@ Chair_5: items.Item Chair_Item, 5,23, Floor, #ff, 00
 ItemArraySize equ 100; максимальное число предметов 
 
 no_way_script: ; неуспех 
-  SetVar zxengine.var_ret, 0
+  SetVar Vars.var_ret, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
 
@@ -167,7 +167,8 @@ chair_script_binary:
   ; LD A, 5
   ; CALL FX_SET
 
-  LD A, (zxengine.varsTab + zxengine.var_act )
+  ; LD A, (zxengine.varsTab + zxengine.var_act )
+  getVar Vars.var_act
   CP Entities.do_stand
   RET Z
 
@@ -207,7 +208,7 @@ action_ring_explode:
 
 wall_script:
   shiruFX 2
-  ; CallScript action_ring_explode
+  CallScript action_ring_explode
   goto no_way_script
 
 door_open_script:
@@ -219,10 +220,10 @@ ballon_script:
 
 ; ----- проверяем дверь
 door_script:
-  CallCode binary_hand_to_var
-  IfVar zxengine.var_item_id, 0, door_script_1
-  goto no_way_script
-door_script_1:
+  ; CallCode binary_hand_to_var
+  ; IfVar zxengine.var_item_id, 0, door_script_1
+  ; goto no_way_script
+; door_script_1:
   shiruFX 43
   FxActionCell Door_half_open
   wait_halt 3
@@ -230,8 +231,8 @@ door_script_1:
   goto no_way_script
 
 computer_on_script:
-  CallCode binary_hand_to_var
-  IfVar zxengine.var_item_id, Chair_spr, computer_glass_destroy:
+  ; CallCode binary_hand_to_var
+  ; IfVar zxengine.var_item_id, Chair_spr, computer_glass_destroy:
   shiruFX 55
   SetActionCell Computer_off
   goto no_way_script
@@ -239,8 +240,8 @@ computer_on_script:
 computer_off_script:
   goto computer_glass_destroy
 
-  CallCode binary_hand_to_var
-  IfVar zxengine.var_item_id, Chair_spr, computer_glass_destroy:
+  ; CallCode binary_hand_to_var
+  ; IfVar zxengine.var_item_id, Chair_spr, computer_glass_destroy:
   shiruFX 55
   SetActionCell Computer_on
   goto no_way_script
@@ -262,7 +263,7 @@ computer_break_script:
 
 binary_add_shard:
 ; читаем что у нас подзорвалось
-  LD DE, (Entities.MapCell_xy)
+  LD DE, (Vars.MapCell_xy)
 ; Y+1 ( размещаем shard внизу взорвавшегося предмета )
   INC E
   ; INC E

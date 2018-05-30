@@ -1,4 +1,4 @@
-    MODULE Entities
+MODULE Entities
 
   MACRO SetActionCell value_p
     defw Entities.set_action_cell_me
@@ -11,6 +11,11 @@
     defb action_p
   ENDM
 
+; var_item_id equ 2; // переменная 3 - чем воздействуем
+; map_cell_x equ 2; //
+; map_cell_y equ 3; // 
+
+
 activePersonage_ptr:
   dw #0000 ; указатель на текущего персонажа
 CurPersonageNum:
@@ -18,17 +23,18 @@ CurPersonageNum:
 MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 
-MapCell_xy:
-  Point 0,0 ; координаты на карте на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
+; MapCell_xy equ 
+; MapCell_xy:
+  ; Point 0,0 ; координаты на карте на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 
 ; действия
-actions.act_end   EQU #00
+do_end   EQU #00
 do_stand EQU #01
 do_look  EQU #02
 do_take  EQU #03
 do_drop  EQU #03
 do_use   EQU #04
-do_smach EQU #05
+; do_smach EQU #05
 
 ; тип ячейки на карте или предмета
 STRUCT CellType
@@ -181,13 +187,13 @@ next_char:
 ; --------------------------------------------------
 char_do:
   LD A, B
-  setVar zxengine.var_act
+  setVar Vars.var_act
 
   LD A,C
   CALL calc_action_pos
   RET NC;  возвратили false - неправильное направление или действие
 
-  getVar zxengine.var_act
+  getVar Vars.var_act
 
   CP Entities.do_stand
   JR Z, char_do_stand; персонаж стоит
@@ -207,11 +213,11 @@ char_do_stand:
   PUSH HL
   POP IY
   LD A, 1
-  setVar zxengine.var_ret; возвращаем по умолчанию 1
+  setVar Vars.var_ret; возвращаем по умолчанию 1
   LD L, (IY+CellType.script_ptr)
   LD H, (IY+CellType.script_ptr+1)
   CALL zxengine.process
-  getVar zxengine.var_ret
+  getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
  
@@ -225,7 +231,7 @@ char_do_stand:
   CALL map.calc_pos             ; определяем координаты позиции персонажа в HL
   LD A,(IX+Hero.ground)         ;
   LD (HL),A                     ; и ставим на карту спрайт пола
-  LD DE, ( MapCell_xy )
+  LD DE, ( Vars.MapCell_xy )
   LD (IX+Hero.pos.x), D
   LD (IX+Hero.pos.y), E
   LD HL,( MapCell_ptr )
@@ -342,7 +348,7 @@ check_right:
 
 check_center:
 check_act_yes: ; получили в DE новую позицию и в MapCell_ptr указатель на ячейку карты
-  LD (MapCell_xy), DE
+  LD (Vars.MapCell_xy), DE
   CALL map.calc_pos
   LD (MapCell_ptr), HL
   ret_true
@@ -379,4 +385,4 @@ set_action_cell:
   LD (HL), A
   RET
 
-    ENDMODULE
+ENDMODULE

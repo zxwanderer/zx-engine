@@ -51,10 +51,10 @@ GAME_LOOP:
   defb _endByte
 
 ; читаем id предмета в руках
-binary_hand_to_var:
-  CALL items.get_hero_hand_item
-  setVar zxengine.var_item_id; если A = 0 то предмета нет )
-  RET
+; binary_hand_to_var:
+  ; CALL items.get_hero_hand_item
+  ; setVar zxengine.var_item_id; если A = 0 то предмета нет )
+  ; RET
 
 ; показать GUI поверх карты =)
 binary_show_gui:
