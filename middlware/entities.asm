@@ -27,6 +27,9 @@ CurPersonageNum:
 MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 
+activeItem_ptr:
+  dw #0000 ; указатель на используемый предмет
+
 ; тип ячейки на карте или предмета
 STRUCT CellType
 name_ptr dw 00; указатель на имя типа
@@ -255,17 +258,18 @@ char_do_get_drop:
   JR NC, char_no_get; предмета нет !
 
   ; в IX указатель на предмет
+  LD (activeItem_ptr), IX
   LD A, (IX+items.Item.itemID); взяли номер типа предмета
+  
   CALL items.calc_item_type;  получили указатель на описание типа предмета
   LD A, (HL)
   CALL call_cell_script
   getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - ошибка поднятия
-
-  LD A, 1
-  CALL FX_SET; обиженно пиликаем
-
+  LD IX, (activeItem_ptr)
+  LD IY, (activePersonage_ptr)
+  CALL items.pick_up_item
   RET
 
 char_no_get:
