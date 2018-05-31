@@ -27,6 +27,7 @@ Wall_cell_name: db "Стена",0
 Ballon_cell_name: db "Баллон",0
 
 Shard_item_name: db "Осколок",0
+Chair_item_name: db "Стул",0
 
 tHeroName1 defb "UNKNOWN1",0
 tHeroName2 defb "UNKNOWN2",0
