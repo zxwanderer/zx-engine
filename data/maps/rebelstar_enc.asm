@@ -169,7 +169,7 @@ chair_script_binary:
 
   ; LD A, (zxengine.varsTab + zxengine.var_act )
   getVar Vars.var_act
-  CP Entities.do_stand
+  CP do_stand
   RET Z
 
   ; LD A, 56

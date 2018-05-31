@@ -23,6 +23,7 @@ GAME_LOOP:
   ; CallScript look_char
   defb _endByte
 
+
 ; показать GUI поверх карты =)
 binary_show_gui:
 
@@ -32,7 +33,7 @@ show_ground_item:
   LD D, (IX+Entities.Hero.pos.x)
   LD E, (IX+Entities.Hero.pos.y)
   CALL items.find_item_on_map ; в IX указатель на найденный предмет
-  JR C, show_hand_item; не стоит
+  JR NC, show_hand_item; не стоит
 
   LD IX, (Entities.activePersonage_ptr)
   LD A, (IX+Entities.Hero.ground); берем спрайт на чем герой стоит
@@ -75,31 +76,32 @@ look_char:
     defb _endByte
 
 char_up:
-  CharDo Entities.do_stand, dir_up
+  CharDo do_stand, dir_up
   goto look_char
 char_down:
-  CharDo Entities.do_stand, dir_down
+  CharDo do_stand, dir_down
   goto look_char
 char_left:
-  CharDo Entities.do_stand, dir_left
+  CharDo do_stand, dir_left
   goto look_char
 char_right:
-  CharDo Entities.do_stand, dir_right
+  CharDo do_stand, dir_right
   goto look_char
 
 char_up_left:
-  CharDo Entities.do_stand, dir_up_left
+  CharDo do_stand, dir_up_left
   goto look_char
 char_up_right:
-  CharDo Entities.do_stand, dir_up_right
+  CharDo do_stand, dir_up_right
   goto look_char
 char_down_left:
-  CharDo Entities.do_stand, dir_down_left
+  CharDo do_stand, dir_down_left
   goto look_char
 char_down_right:
-  CharDo Entities.do_stand, dir_down_right
+  CharDo do_stand, dir_down_right
   goto look_char
 
 char_loot:
   ; CallCode binary_get_or_drop_item
+  CharDo do_get_drop, dir_down_right
   goto look_char

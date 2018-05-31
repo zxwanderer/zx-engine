@@ -12,6 +12,7 @@ code_start:
   jp zxengine.start
   include "core/scankeys.asm"
   include "core/engine.asm"
+  include "middlware/defines.asm"
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
   include "core/routines/input.asm"

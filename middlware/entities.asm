@@ -20,30 +20,12 @@ MODULE Entities
     defb action_p
   ENDM
 
-; var_item_id equ 2; // переменная 3 - чем воздействуем
-; map_cell_x equ 2; //
-; map_cell_y equ 3; // 
-
-
 activePersonage_ptr:
   dw #0000 ; указатель на текущего персонажа
 CurPersonageNum:
   db #00 ; текущий номер персонажа ( от 0 до PersonagesNum )
 MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
-
-; MapCell_xy equ 
-; MapCell_xy:
-  ; Point 0,0 ; координаты на карте на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
-
-; действия
-do_end   EQU #00
-do_stand EQU #01
-do_look  EQU #02
-do_take  EQU #03
-do_drop  EQU #03
-do_use   EQU #04
-; do_smach EQU #05
 
 ; тип ячейки на карте или предмета
 STRUCT CellType
@@ -107,9 +89,7 @@ init_loop: ; пробегаемся по всем персонажам и раз
 
   PUSH HL
   POP IX
-  ; LD IX,HL
 
-  ; LD DE, (IX+Hero.pos)
   LD D, (IX+Hero.pos.x)
   LD E, (IX+Hero.pos.y)
   call map.calc_pos
@@ -179,14 +159,15 @@ check_char:
     ; CP #FF; пустая запись
     ; JR Z, next_item
 ; нашли!
-    JP Entities.check_yes
+    ret_true
 next_char:
     PUSH BC
     LD BC, Hero
     ADD IX, BC
     POP BC
     DJNZ check_char
-    JP Entities.check_no
+    ; JP Entities.check_no
+    ret_false
 
 ; ----- текущий персонаж на что-то воздействует ----
 ; на входе 
@@ -204,15 +185,20 @@ char_do:
 
   getVar Vars.var_act
 
-  CP Entities.do_stand
+  CP do_stand
   JR Z, char_do_stand; персонаж стоит
+
+  CP do_get_drop
+  JR Z, char_do_get_drop; подбираем/бросаем
 
   LD A, 1
   CALL FX_SET; обиженно пиликаем 
  
   RET
 
+; -------------------------------------------------------------------
 ; персонаж перемещается на MapCell_xy ( MapCell_ptr тоже установлен )
+; -------------------------------------------------------------------
 char_do_stand:
 
 ; для начала читаем тип спрайта ячейки карты на которую он пытается переместится
@@ -230,10 +216,6 @@ char_do_stand:
   OR A
   RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
  
-  ; LD A, 1
-  ; CALL FX_SET
-  ; RET
-
   LD IX, (activePersonage_ptr)
   LD D, (IX+Hero.pos.x)
   LD E, (IX+Hero.pos.y)
@@ -249,10 +231,27 @@ char_do_stand:
   LD A,(IX+Hero.sprite)
   LD (HL),A                     ; ставим спрайт персонажа на карту
 
-  ; LD A, 10
-  ; CALL FX_SET
-
   RET
+
+; ------------------------------------------------------------------------------------
+; персонаж поднимает предмет или бросает на MapCell_xy ( MapCell_ptr тоже установлен )
+; ------------------------------------------------------------------------------------
+char_do_get_drop: ; проверяем свободны ли руки
+  
+  LD IX, (activePersonage_ptr)
+  LD A, (IX+Hero.hand_right_p_1)
+  AND A; 
+  JR NZ, char_do_drop; если руки не свободны - переходим на бросок предмета
+
+  LD A, 15
+  CALL FX_SET; обиженно пиликаем 
+  RET
+
+char_do_drop:
+  LD A, 12
+  CALL FX_SET; обиженно пиликаем 
+  RET
+    
 
   MACRO m_check_left:
     LD A,D
@@ -378,15 +377,12 @@ check_action_index_no:
 ; ret_false: ; сброшен CF
 */
 
-check_yes:
-  SCF ; устанавливаем бит переноса и инвертируем его ))
-  CCF
-  RET
-; ret_true: ; установлен CF
-check_no:
-  SCF
-  RET
+; для переходов JR Z - прям сюда )
+sys_check_no:
+  ret_false
 
+sys_check_yes:
+  ret_true
 
 ; -- устанавливаем новое значение ячейки на карте по адресу MapCell_ptr <- A
 set_action_cell:

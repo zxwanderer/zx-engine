@@ -70,10 +70,10 @@ search_empty_item:
 search_empty_item_loop:
     LD A, (IX+Item.itemID)
     CP #FF
-    JP Z, Entities.check_yes
+    JP Z, Entities.sys_check_yes
     ADD IX, DE
     DJNZ search_empty_item_loop
-    JP Entities.check_no
+    ret_false
 
 ; в DE позиция на карте
 ; в A - номер предмета
@@ -82,7 +82,7 @@ add_item_to_map:
     PUSH DE
     PUSH AF
     CALL search_empty_item; на выходе признак переноса и IX указатель на пустой предмет или сброшеный признак переноса
-    JR C, add_item_to_map_error
+    JR NC, add_item_to_map_error
     POP AF
     LD (IX+Item.itemID), A; сохранили тип предмета
     POP DE
@@ -92,7 +92,7 @@ add_item_to_map:
     PUSH IX
     POP IY; сохраняем в IY указатель на предмет
     CALL Entities.is_char_on_map ; проверяем стоит ли на этой ячейке какой-либо герой
-    JR NC, add_item_to_hero_ground_spr ; герой есть, переходим 
+    JR C, add_item_to_hero_ground_spr ; герой есть, переходим 
 add_item_to_map_spr:; героя нет, размещаем просто на карте
     ; надо закинуть спрайт предмета на карту и взять ground с нее
     CALL map.calc_pos ; в HL указатель на ячейку
@@ -104,7 +104,7 @@ add_item_to_map_spr:; героя нет, размещаем просто на к
     LD A, (HL) ; (IX+ItemType.spr_num)
     POP HL
     LD (HL),A
-    JP Entities.check_yes
+    ret_true
 add_item_to_hero_ground_spr:
 ; мы добавляем предмет на пол, а на полу стоит герой, ставим ему на пол спрайт
 ; у нас в IY указатель на предмет
@@ -115,11 +115,11 @@ add_item_to_hero_ground_spr:
     LD B, (IX+Entities.Hero.ground)
     LD (IX+Entities.Hero.ground), A; поместили спрайт на землю у героя
     LD (IY+Item.ground),B
-    JP Entities.check_yes
+    ret_true
 add_item_to_map_error:
     POP AF
     POP DE
-    JP Entities.check_no
+    ret_false
 
 ; герой подбирает предмет с карты
 ; на входе в IY указатель на персонажа, Entities.CurPersonageNum - текущий номер персонажа ( помечаются им предметы )
@@ -155,7 +155,6 @@ drop_down_item:
 
     LD (IY+Entities.Hero.hand_right_p+1), 0; освободили руку героя
     LD (IX+Item.owner), #ff; пометили предмет как свободный
-    ; LD DE, (IY+Entities.Hero.pos)
     LD D, (IY+Entities.Hero.pos.x)
     LD E, (IY+Entities.Hero.pos.y)
     
@@ -179,14 +178,14 @@ get_hero_hand_item:
     LD IX, (Entities.activePersonage_ptr)
     LD A, (IX+Entities.Hero.hand_right_p_1)
     AND A
-    JP Z, Entities.check_yes
+    JP Z, Entities.sys_check_no
     ; LD HL, (IX+Entities.Hero.hand_right_p)
     LD L, (IX+Entities.Hero.hand_right_p)
     LD H, (IX+Entities.Hero.hand_right_p+1)
     LD A, (HL)
     CALL items.calcItemType
     LD A,(HL)
-    JP Entities.check_no
+    ret_true
 
 ; в IX указатель на предмет в массиве предметов
 remove_item_from_map:
@@ -219,13 +218,13 @@ check_item:
     CP D
     JR NZ, next_item
 ; нашли!
-    JP Entities.check_yes
+    ret_true
 next_item:
     PUSH BC
     LD BC, Item
     ADD IX, BC
     POP BC
     DJNZ check_item
-    JP Entities.check_no
+    ret_false
 
 ENDMODULE
