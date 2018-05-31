@@ -76,9 +76,9 @@ display "----- all end: ", _all_end
 ; display "chair_script_binary ", chair_script_binary
 ; display "binary_get_or_drop_item ", binary_get_or_drop_item
 
-display "char_do_stand ", Entities.char_do_stand
+display "char_do_get_drop ", Entities.char_do_get_drop
 display "CELL_TYPES ", CELL_TYPES
-display "check_act_yes ", Entities.check_act_yes
+display "chair_script ", chair_script
 
 ; display "check_action: ", Entities.check_action
 ; display "fx_action_cell_me: ", screenfx.fx_action_cell_me

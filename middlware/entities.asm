@@ -68,12 +68,27 @@ set_action_cell_me:
   JP zxengine.process 
 
 ; на входе в A - индекс типа ячейки
-; на выходе - указатель на массив с ячейкой
+; на выходе - в HL указатель на массив с ячейкой
 calc_cell_type:
   LD DE, CellType
   CALL math.mul_ADE
   LD DE, CELL_TYPES
   ADD HL, DE
+  RET
+
+; по номеру ячейки вызываем скрипт обработки
+; на входе в A - номер ячейки
+; на выходе хм.. должен быть результат в Vars.var_ret = 1 то успешно
+; .... гадит в HL, IY
+call_cell_script:
+  CALL calc_cell_type; получили в HL указатель на описание ячейки
+  PUSH HL
+  POP IY
+  LD A, 1
+  setVar Vars.var_ret; возвращаем по умолчанию 1
+  LD L, (IY+CellType.script_ptr)
+  LD H, (IY+CellType.script_ptr+1)
+  CALL zxengine.process
   RET
 
 ; ------- инициализация на карте всех персонажей из CHAR_SET
@@ -204,14 +219,7 @@ char_do_stand:
 ; для начала читаем тип спрайта ячейки карты на которую он пытается переместится
   LD HL, (MapCell_ptr)
   LD A, (HL)
-  CALL calc_cell_type; получили в HL указатель на описание ячейки
-  PUSH HL
-  POP IY
-  LD A, 1
-  setVar Vars.var_ret; возвращаем по умолчанию 1
-  LD L, (IY+CellType.script_ptr)
-  LD H, (IY+CellType.script_ptr+1)
-  CALL zxengine.process
+  CALL call_cell_script:
   getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
@@ -236,20 +244,46 @@ char_do_stand:
 ; ------------------------------------------------------------------------------------
 ; персонаж поднимает предмет или бросает на MapCell_xy ( MapCell_ptr тоже установлен )
 ; ------------------------------------------------------------------------------------
-char_do_get_drop: ; проверяем свободны ли руки
+char_do_get_drop:
   
-  LD IX, (activePersonage_ptr)
-  LD A, (IX+Hero.hand_right_p_1)
-  AND A; 
-  JR NZ, char_do_drop; если руки не свободны - переходим на бросок предмета
+  CALL items.get_hero_hand_item; получаем предмет в руках
+  JR C, char_do_drop; если руки не свободны - переходим на бросок предмета
 
-  LD A, 15
-  CALL FX_SET; обиженно пиликаем 
+  ; предмета в руках нет, ищем на карте
+  LD DE, (Vars.MapCell_xy)
+  CALL items.find_item_on_map
+  JR NC, char_no_get; предмета нет !
+
+  ; в IX указатель на предмет
+  LD A, (IX+items.Item.itemID); взяли номер типа предмета
+  CALL items.calc_item_type;  получили указатель на описание типа предмета
+  LD A, (HL)
+  CALL call_cell_script
+  getVar Vars.var_ret
+  OR A
+  RET Z; после скрипта переменная установлена в 0 - ошибка поднятия
+
+  LD A, 1
+  CALL FX_SET; обиженно пиликаем
+
+  RET
+
+char_no_get:
+char_no_drop:
+  LD A, 10
+  CALL FX_SET; обиженно пиликаем
   RET
 
 char_do_drop:
-  LD A, 12
-  CALL FX_SET; обиженно пиликаем 
+
+  ; тут у нас в A номер спрайта, в HL - указатель на описание типа предмета
+  ; CALL call_cell_script
+  ; getVar Vars.var_ret
+  ; OR A
+  ; RET Z; после скрипта переменная установлена в 0 - ошибка бросания
+
+  ; LD A, 12
+  ; CALL FX_SET; обиженно пиликаем 
   RET
     
 
@@ -360,22 +394,6 @@ check_act_yes: ; получили в DE новую позицию и в MapCell_
   CALL map.calc_pos
   LD (MapCell_ptr), HL
   ret_true
-
-/*
-check_action_index_no:
-  CALL calcCellType
-  ; LD IY, HL
-  PUSH HL
-  POP IY
-  ; LD HL, (IY+CellType.script_ptr)
-  LD L, (IY+CellType.script_ptr)
-  LD H, (IY+CellType.script_ptr+1)
-  CALL zxengine.process
-  getVar zxengine.var_ret
-  OR A
-  JR Z, check_no
-; ret_false: ; сброшен CF
-*/
 
 ; для переходов JR Z - прям сюда )
 sys_check_no:

@@ -25,7 +25,7 @@ ENDS
 
 ; на входе в A - индекс типа предмета
 ; на выходе в HL - указатель на массив с данными предмета
-calcItemType:
+calc_item_type:
   LD DE, ItemType
   CALL math.mul_ADE
   LD DE, ITEM_TYPES
@@ -100,7 +100,7 @@ add_item_to_map_spr:; героя нет, размещаем просто на к
     LD (IY+Item.ground), A
     PUSH HL
     LD A, (IY+Item.itemID); взяли тип предмета
-    CALL calcItemType
+    CALL calc_item_type
     LD A, (HL) ; (IX+ItemType.spr_num)
     POP HL
     LD (HL),A
@@ -110,7 +110,7 @@ add_item_to_hero_ground_spr:
 ; у нас в IY указатель на предмет
 ; в IX указатель на героя
     LD A, (IY+Item.itemID); взяли тип предмета
-    CALL calcItemType; в HL указатель на предмет
+    CALL calc_item_type; в HL указатель на предмет
     LD A, (HL); забрали номер спрайта
     LD B, (IX+Entities.Hero.ground)
     LD (IX+Entities.Hero.ground), A; поместили спрайт на землю у героя
@@ -166,7 +166,7 @@ drop_down_item:
     LD (IX+Item.ground), A ; пишем в землю предмета
 
     LD A, (IX+Item.itemID) ; берем id предмета
-    CALL calcItemType
+    CALL calc_item_type
     LD A, (HL) ; в HL указатель на тип предмета, первый байт - номер спрайта
     LD (IY+Entities.Hero.ground), A
 
@@ -179,11 +179,10 @@ get_hero_hand_item:
     LD A, (IX+Entities.Hero.hand_right_p_1)
     AND A
     JP Z, Entities.sys_check_no
-    ; LD HL, (IX+Entities.Hero.hand_right_p)
     LD L, (IX+Entities.Hero.hand_right_p)
     LD H, (IX+Entities.Hero.hand_right_p+1)
     LD A, (HL)
-    CALL items.calcItemType
+    CALL items.calc_item_type
     LD A,(HL)
     ret_true
 
@@ -198,7 +197,7 @@ remove_item_from_map:
     RET
 
 ; в DE позиция на карте
-; на выходе если есть на этой позиции хотя бы один предмет, возвращаем NZ
+; на выходе если есть на этой позиции хотя бы один предмет, возвращаем true
 ; и IX - указатель на него
 find_item_on_map:
     LD IX, ITEM_ARRAY; указатель на массив предметов

@@ -93,7 +93,7 @@ Cell_Type_2F:        Entities.CellType Empty_cell_name,   no_script ; F
 Cell_Type_30:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_31:        Entities.CellType Empty_cell_name,   no_script ; 1
 Cell_Type_32:        Entities.CellType Empty_cell_name,   no_script ; 2
-Cell_Type_33:        Entities.CellType Empty_cell_name,   no_script ; 3
+Cell_Type_Chair:     Entities.CellType Chair_item_name,   chair_script ; 3
 Cell_Type_Shard:     Entities.CellType Shard_item_name,   no_script ; 4
 Cell_Type_35:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_36:        Entities.CellType Empty_cell_name,   no_script ; 6
@@ -161,33 +161,34 @@ no_script:  ;  никак не нужно обрабатывать коллиз�
 ; сигнал о получении приходит только после 
 ; НАЗАД и открыть аккаунт по-новой
 
-chair_script_binary:
+; chair_script_binary:
   ; ld a, zxengine.var_act
   ; call zxengine.getVar
   ; LD A, 5
   ; CALL FX_SET
 
   ; LD A, (zxengine.varsTab + zxengine.var_act )
-  getVar Vars.var_act
-  CP do_stand
-  RET Z
+  ; getVar Vars.var_act
+  ; CP do_stand
+  ; RET Z
 
   ; LD A, 56
   ; CALL FX_SET
 
   ; di
   ; halt
-  RET
+  ; RET
 
 chair_script:
-  CallCode chair_script_binary
+  ; CallCode chair_script_binary
+  ; ShowText Take_chair_mess
   ; IfVar zxengine.var_act, Entities.do_take, chair_take_script
-  ; shiruFX 55
+  shiruFX 53
   defb _endByte
 
-chair_take_script:
-  shiruFX 56
-  defb _endByte
+; chair_take_script:
+  ; shiruFX 56
+  ; defb _endByte
 
 action_ring_explode:
   FxActionCell Ring_expl_1
