@@ -158,7 +158,6 @@ drop_down_item:
     LD D, (IY+Entities.Hero.pos.x)
     LD E, (IY+Entities.Hero.pos.y)
     
-    ; LD (IX+Item.pos), DE ; помещаем предмет на позицию героя
     LD (IX+Item.pos.x), D ; помещаем предмет на позицию героя
     LD (IX+Item.pos.y), E ; помещаем предмет на позицию героя
 

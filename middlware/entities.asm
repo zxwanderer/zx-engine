@@ -273,23 +273,36 @@ char_do_get_drop:
   RET
 
 char_no_get:
-char_no_drop:
+; char_no_drop:
   LD A, 10
   CALL FX_SET; обиженно пиликаем
   RET
 
 char_do_drop:
-
   ; тут у нас в A номер спрайта, в HL - указатель на описание типа предмета
-  ; CALL call_cell_script
-  ; getVar Vars.var_ret
-  ; OR A
-  ; RET Z; после скрипта переменная установлена в 0 - ошибка бросания
+  LD IY, (activePersonage_ptr)
+  LD E, (IY+Entities.Hero.hand_right_p)
+  LD D, (IY+Entities.Hero.hand_right_p_1)
+  LD (activeItem_ptr), DE; заполняем указатель на активный предмет тем что в руках, так как он может использоваться в скриптах
+  CALL call_cell_script
+  getVar Vars.var_ret
+  OR A
+  RET Z; после скрипта переменная установлена в 0 - ошибка бросания
+  
+  ; проверяем лежит ли на карте уже предмет
+  LD DE, (Vars.MapCell_xy)
+  CALL items.find_item_on_map
+  JR C, char_do_drop_on_item; предмет есть 
 
-  ; LD A, 12
-  ; CALL FX_SET; обиженно пиликаем 
+  LD IX, (activeItem_ptr)
+  LD IY, (activePersonage_ptr)
+  CALL items.drop_down_item
+
   RET
-    
+char_do_drop_on_item:
+  ; пока сделаем так чтобы один предмет на другой нельзя было класть 
+  ; LD A, (IX+Item.ground) ; берем "пол" c найденного предмета
+  RET
 
   MACRO m_check_left:
     LD A,D
