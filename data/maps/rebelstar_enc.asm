@@ -266,7 +266,7 @@ binary_add_shard:
   LD DE, (Vars.MapCell_xy); читаем где у нас подзорвалось
   INC E ; Y+1 ( размещаем shard внизу взорвавшегося предмета )
   LD A, Shard_Item
-  CALL items.add_item_to_map
+  ; CALL items.add_item_to_map
   RET
 
 PersonagesNum equ 2
