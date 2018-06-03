@@ -26,9 +26,10 @@ CurPersonageNum:
   db #00 ; текущий номер персонажа ( от 0 до PersonagesNum )
 MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
-
-activeItem_ptr:
+ActiveItem_ptr:
   dw #0000 ; указатель на используемый предмет
+; ActiveItemType_ptr:
+  ; dw #0000 ; указатель на тип используемого предмета
 
 ; тип ячейки на карте или предмета
 STRUCT CellType
@@ -258,7 +259,7 @@ char_do_get_drop:
   JR NC, char_no_get; предмета нет !
 
   ; в IX указатель на предмет
-  LD (activeItem_ptr), IX
+  LD (ActiveItem_ptr), IX
   LD A, (IX+items.Item.itemID); взяли номер типа предмета
   
   CALL items.calc_item_type;  получили указатель на описание типа предмета
@@ -267,10 +268,23 @@ char_do_get_drop:
   getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - ошибка поднятия
-  LD IX, (activeItem_ptr)
-  LD IY, (activePersonage_ptr)
-  CALL items.pick_up_item
-  RET
+
+  LD (IY+Entities.Hero.hand_right_p_1), 00; предмет брошен
+
+  ; помечаем предмет как поднятый активным персонажем
+  LD IY, (Entities.ActiveItem_ptr);
+  PUSH IY
+  POP HL
+  
+  LD IX, (Entities.activePersonage_ptr)
+  LD (IX+Hero.hand_right_p), L
+  LD (IX+Hero.hand_right_p_1), H
+
+  LD A, ( CurPersonageNum )
+  LD (IY+items.Item.owner), A
+
+  JP items.push_item_from_map
+  ; RET
 
 char_no_get:
 ; char_no_drop:
@@ -283,25 +297,24 @@ char_do_drop:
   LD IY, (activePersonage_ptr)
   LD E, (IY+Entities.Hero.hand_right_p)
   LD D, (IY+Entities.Hero.hand_right_p_1)
-  LD (activeItem_ptr), DE; заполняем указатель на активный предмет тем что в руках, так как он может использоваться в скриптах
+  LD (ActiveItem_ptr), DE; заполняем указатель на активный предмет тем что в руках, так как он может использоваться в скриптах
   CALL call_cell_script
   getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - ошибка бросания
   
-  ; проверяем лежит ли на карте уже предмет
-  LD DE, (Vars.MapCell_xy)
-  CALL items.find_item_on_map
-  JR C, char_do_drop_on_item; предмет есть 
-
-  LD IX, (activeItem_ptr)
   LD IY, (activePersonage_ptr)
-  CALL items.drop_down_item
+  LD (IY+Entities.Hero.hand_right_p_1), 00; предмет брошен
+  
+  LD D, (IY+Entities.Hero.pos.x)
+  LD E, (IY+Entities.Hero.pos.y); координаты персонажа в DE
 
-  RET
-char_do_drop_on_item:
-  ; пока сделаем так чтобы один предмет на другой нельзя было класть 
-  ; LD A, (IX+Item.ground) ; берем "пол" c найденного предмета
+  LD IY, (Entities.ActiveItem_ptr);
+  LD (IY+items.Item.owner), #ff; помечаем предмет как брошеный на карту
+  LD (IY+items.Item.pos.x), D
+  LD (IY+items.Item.pos.y), E
+
+  JP items.pop_item_to_map
   RET
 
   MACRO m_check_left:
