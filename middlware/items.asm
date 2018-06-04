@@ -108,21 +108,14 @@ pop_item_to_map: ; "кладем" предмет на карту
     JR C, pop_item_to_map_set_chars
 
     CALL map.calc_pos
-    ; PUSH HL
-
     JR pop_item_to_map_set_ground
-
-    ; LD A, (IY+Item.itemID); взяли тип предмета
-    ; CALL calc_item_type
-    ; LD A, (HL) ; (IX+ItemType.spr_num)
-
-    ; POP HL
-    ; LD (HL),A
-    ; RET
 
 pop_item_to_map_no_items:
     CALL Entities.is_char_on_map
     JR NC, pop_item_to_map_no_heroes
+
+    LD A,(IX+Entities.Hero.ground); взяли землю героя ( так как предметов тут нет )
+    LD (IY+Item.ground), A; запоминаем землю в своем предмете 
 
 pop_item_to_map_set_chars:
     LD A, (IY+Item.itemID); взяли тип предмета
