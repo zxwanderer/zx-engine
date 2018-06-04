@@ -270,8 +270,6 @@ char_do_get_drop:
   RET Z; после скрипта переменная установлена в 0 - ошибка поднятия
 
   LD (IY+Entities.Hero.hand_right_p_1), 00; предмет брошен
-
-  ; помечаем предмет как поднятый активным персонажем
   LD IY, (Entities.ActiveItem_ptr);
   PUSH IY
   POP HL
