@@ -102,6 +102,5 @@ char_down_right:
   goto look_char
 
 char_loot:
-  ; CallCode binary_get_or_drop_item
   CharDo do_get_drop, dir_center
   goto look_char

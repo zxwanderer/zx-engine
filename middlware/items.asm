@@ -53,7 +53,7 @@ search_empty_item_loop:
     ret_false
 
 ; пробуем манипулировать предметом
-; на входе 
+; на входе
 ;   в ActiveItem_ptr указатель на предмет
 ; предмет уже принадлежит герою ( Item.owner ) поэтому в функциях поиска find_item_on_map он не принимает участие
 push_item_from_map: ;"забираем" предмет с карты
@@ -91,9 +91,6 @@ push_item_from_map_no_items: ; на карте нет предметов
     LD A, (IY+Item.ground)
     JR push_item_from_map_find_heroes
 
-    RET
-
-
 ; пробуем манипулировать предметом - кладем предмет на карту ( без проверок уже )
 ; на входе 
 ; в ActiveItem_ptr указатель на предмет с установленными pos x,y
@@ -106,13 +103,28 @@ pop_item_to_map: ; "кладем" предмет на карту
 
     LD A, (IX+Item.ground); берем землю из найденного предмета
     LD (IY+Item.ground), A; запоминаем в своем
-    ; CALL map.calc_pos ; в HL указатель на ячейку
-    ; JR pop_item_to_map_no_heroes_1;
+
+    CALL Entities.is_char_on_map
+    JR C, pop_item_to_map_set_chars
+
+    CALL map.calc_pos
+    ; PUSH HL
+
+    JR pop_item_to_map_set_ground
+
+    ; LD A, (IY+Item.itemID); взяли тип предмета
+    ; CALL calc_item_type
+    ; LD A, (HL) ; (IX+ItemType.spr_num)
+
+    ; POP HL
+    ; LD (HL),A
+    ; RET
 
 pop_item_to_map_no_items:
     CALL Entities.is_char_on_map
     JR NC, pop_item_to_map_no_heroes
 
+pop_item_to_map_set_chars:
     LD A, (IY+Item.itemID); взяли тип предмета
     CALL calc_item_type; в HL указатель на предмет
     LD A, (HL); забрали номер спрайта
@@ -124,6 +136,8 @@ pop_item_to_map_no_heroes: ; героев нет
     CALL map.calc_pos ; в HL указатель на ячейку
     LD A, (HL) ; забрали "землю"
     LD (IY+Item.ground), A
+
+pop_item_to_map_set_ground:
     PUSH HL; запомнили указатель на ячейку карты
     LD A, (IY+Item.itemID); взяли тип предмета
     CALL calc_item_type
@@ -132,10 +146,10 @@ pop_item_to_map_no_heroes: ; героев нет
     LD (HL),A
     RET
 
-/*
+; внезапно добавляем предмет на карту 
 ; в DE позиция на карте
-; в A - номер предмета
-; если в ячейке находится герой, то меняем землю у него на спрайт предмета чтобы он мог корректно уйти =)
+; в A - тип предмета
+; на выходе в IX указатель на предмет
 add_item_to_map:
     PUSH DE
     PUSH AF
@@ -146,94 +160,18 @@ add_item_to_map:
     POP DE
     LD (IX+Item.pos.x), D
     LD (IX+Item.pos.y), E ; сохранили позицию предмета
-    LD (IX+Item.owner), #ff ; лежит на карте 
+    LD (IX+Item.owner), #fe ;  временно маркируем предмет как занятый 
+    LD (Entities.ActiveItem_ptr), IX
     PUSH IX
-    POP IY; сохраняем в IY указатель на предмет
-    CALL Entities.is_char_on_map ; проверяем стоит ли на этой ячейке какой-либо герой
-    JR C, add_item_to_hero_ground_spr ; герой есть, переходим
-add_item_to_map_spr:; героя нет, размещаем просто на карте
-
-    ; надо закинуть спрайт предмета на карту и взять ground с нее
-    CALL map.calc_pos ; в HL указатель на ячейку
-    LD A, (HL) ; забрали "землю"
-    LD (IY+Item.ground), A
-    PUSH HL
-    LD A, (IY+Item.itemID); взяли тип предмета
-    CALL calc_item_type
-    LD A, (HL) ; (IX+ItemType.spr_num)
-    POP HL
-    LD (HL),A
-    ret_true
-add_item_to_hero_ground_spr:
-; мы добавляем предмет на пол, а на полу стоит герой, ставим ему на пол спрайт
-; у нас в IY указатель на предмет
-; в IX указатель на героя
-    LD A, (IY+Item.itemID); взяли тип предмета
-    CALL calc_item_type; в HL указатель на предмет
-    LD A, (HL); забрали номер спрайта
-    LD B, (IX+Entities.Hero.ground)
-    LD (IX+Entities.Hero.ground), A; поместили спрайт на землю у героя
-    LD (IY+Item.ground),B
+    CALL pop_item_to_map
+    POP IX
+    LD (IX+Item.owner), #ff ;положили на карту
     ret_true
 add_item_to_map_error:
     POP AF
     POP DE
     ret_false
-*/
 
-/*
-; герой подбирает предмет с карты
-; на входе в IY указатель на персонажа, Entities.CurPersonageNum - текущий номер персонажа ( помечаются им предметы )
-; на входе в IX указатель на предмет
-; на входе в IY + Entities.Hero.sprite - спрайт героя с предметом в руках
-pick_up_item:
-    LD A, (Entities.CurPersonageNum)
-    LD (IX+Item.owner), A; пометили предмет как принадлежащий текущему герою
-
-    LD A, (IX+Item.ground) ; земля предмета
-    LD (IY+Entities.Hero.ground), A; записываем землю предмета в землю героя, поэтому как только он сойдет с клетки,
-                          ; на старом месте появится не спрайт предмета а его земля
-    PUSH IX
-    POP HL
-    ; LD (IY+Entities.Hero.hand_right_p), HL
-    LD (IY+Entities.Hero.hand_right_p), L
-    LD (IY+Entities.Hero.hand_right_p+1), H
-
-upd_hero_map: ; обновляем спрайт героя на карте
-    ; LD DE, (IY+Entities.Hero.pos)
-    LD D, (IY+Entities.Hero.pos.x)
-    LD E, (IY+Entities.Hero.pos.y)
-    CALL map.calc_pos
-    LD A, (IY+Entities.Hero.sprite)
-    LD (HL), A
-    RET
-*/
-/*
-; герой бросает предмет из рук на карту
-; на входе в IY указатель на персонажа, Entities.CurPersonageNum - текущий номер персонажа ( помечаются им предметы )
-; на входе в IX указатель на предмет
-; на входе в IY + Entities.Hero.sprite - спрайт героя без предмета
-drop_down_item:
-    ; проверим есть ли уже предмет на карте
-
-    LD (IY+Entities.Hero.hand_right_p+1), 0; освободили руку героя
-    LD (IX+Item.owner), #ff; пометили предмет как свободный
-
-    LD D, (IY+Entities.Hero.pos.x)
-    LD E, (IY+Entities.Hero.pos.y)
-    LD (IX+Item.pos.x), D ; помещаем предмет на позицию героя
-    LD (IX+Item.pos.y), E ; помещаем предмет на позицию героя
-
-    LD A, (IY+Entities.Hero.ground); читаем землю героя
-    LD (IX+Item.ground), A ; пишем в землю предмета
-
-    LD A, (IX+Item.itemID) ; берем id предмета
-    CALL calc_item_type
-    LD A, (HL) ; в HL указатель на тип предмета, первый байт - номер спрайта
-    LD (IY+Entities.Hero.ground), A
-
-    JR upd_hero_map
-*/
 ; получить указатель на предмет в руках героя
 ; если NC то предмет есть, в A - номер спрайта, в HL указатель на тип предмета
 get_hero_hand_item:
@@ -247,18 +185,6 @@ get_hero_hand_item:
     CALL items.calc_item_type
     LD A,(HL)
     ret_true    
-
-/*
-; в IX указатель на предмет в массиве предметов
-remove_item_from_map:
-    LD ( IX+Item.itemID ), #ff; удалили :D
-    LD D, (IX+Item.pos.x)
-    LD E, (IX+Item.pos.y)
-    CALL map.calc_pos
-    LD A, (IX+Item.ground)
-    LD (HL),A
-    RET
-*/
 
 ; в DE позиция на карте
 ; на выходе если есть на этой позиции хотя бы один предмет, возвращаем true

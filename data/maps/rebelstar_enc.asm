@@ -145,6 +145,7 @@ Chair_1: items.Item Chair_Item, 5,7, Floor, #ff, 00
 Chair_2: items.Item Chair_Item, 5,11, Floor, #ff, 00
 Chair_3: items.Item Chair_Item, 5,15, Floor, #ff, 00
 Chair_4: items.Item Chair_Item, 5,19, Floor, #ff, 00
+; Shard_1: items.Item Shard_Item, 5,23, Floor, #ff, 00
 Chair_5: items.Item Chair_Item, 5,23, Floor, #ff, 00
 
   DUP items.Item*100-5
@@ -183,7 +184,7 @@ chair_script:
   ; CallCode chair_script_binary
   ; ShowText Take_chair_mess
   ; IfVar zxengine.var_act, Entities.do_take, chair_take_script
-  shiruFX 53
+  ; shiruFX 53
   defb _endByte
 
 ; chair_take_script:
@@ -266,7 +267,7 @@ binary_add_shard:
   LD DE, (Vars.MapCell_xy); читаем где у нас подзорвалось
   INC E ; Y+1 ( размещаем shard внизу взорвавшегося предмета )
   LD A, Shard_Item
-  ; CALL items.add_item_to_map
+  CALL items.add_item_to_map
   RET
 
 PersonagesNum equ 2

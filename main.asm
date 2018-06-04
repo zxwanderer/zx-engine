@@ -77,8 +77,11 @@ display "----- all end: ", _all_end
 ; display "binary_get_or_drop_item ", binary_get_or_drop_item
 
 display "char_do_get_drop ", Entities.char_do_get_drop
-display "CELL_TYPES ", CELL_TYPES
-display "chair_script ", chair_script
+; display "CELL_TYPES ", CELL_TYPES
+display "ITEM_ARRAY ", ITEM_ARRAY
+display "add_item_to_map ", items.add_item_to_map
+
+; display "chair_script ", chair_script
 
 ; display "check_action: ", Entities.check_action
 ; display "fx_action_cell_me: ", screenfx.fx_action_cell_me
