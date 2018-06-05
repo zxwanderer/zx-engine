@@ -310,11 +310,14 @@ char_do_drop:
   LD E, (IY+Entities.Hero.pos.y); координаты персонажа в DE
 
   LD IY, (Entities.ActiveItem_ptr);
-  LD (IY+items.Item.owner), #ff; помечаем предмет как брошеный на карту
+
   LD (IY+items.Item.pos.x), D
   LD (IY+items.Item.pos.y), E
-
-  JP items.pop_item_to_map
+  PUSH IY
+  CALL items.pop_item_to_map
+  POP IY
+  LD (IY+items.Item.owner), #ff; помечаем предмет как брошеный на карту
+  
   RET
 
   MACRO m_check_left:

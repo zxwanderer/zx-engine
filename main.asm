@@ -77,9 +77,9 @@ display "----- all end: ", _all_end
 ; display "chair_script_binary ", chair_script_binary
 ; display "binary_get_or_drop_item ", binary_get_or_drop_item
 
-; display "char_do_get_drop ", Entities.char_do_get_drop
+display "char_do_get_drop ", Entities.char_do_get_drop
 ; display "CELL_TYPES ", CELL_TYPES
-; display "ITEM_ARRAY ", ITEM_ARRAY
+display "ITEM_ARRAY ", ITEM_ARRAY
 ; display "add_item_to_map ", items.add_item_to_map
 
 ; display "chair_script ", chair_script
