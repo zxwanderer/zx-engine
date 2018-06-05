@@ -215,4 +215,17 @@ next_item:
     DJNZ check_item
     ret_false
 
+del_item_from_hand:
+  LD IX, (Entities.activePersonage_ptr)
+  LD A, (IX+Entities.Hero.hand_right_p_1)
+  AND A
+  RET Z
+  LD D,A
+  LD E, (IX+Entities.Hero.hand_right_p)
+  LD (IX+Entities.Hero.hand_right_p_1),0
+  PUSH DE
+  POP IY
+  LD (IY+Item.itemID), #ff 
+  RET
+
 ENDMODULE

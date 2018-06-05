@@ -29,8 +29,8 @@ Ballon_cell_name: db "Баллон",0
 Shard_item_name: db "Осколок",0
 Chair_item_name: db "Стул",0
 
-tHeroName1 defb "UNKNOWN1",0
-tHeroName2 defb "UNKNOWN2",0
+tHeroName1 defb "Робот",0
+tHeroName2 defb "HOMO",0
 
 Take_chair_mess defb "Я подобрал стул",0
 Computer_break_mess db "Экран компьютера треснул и разбился!",0

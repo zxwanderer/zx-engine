@@ -285,7 +285,9 @@ char_do_get_drop:
   ; RET
 
 char_no_get:
-; char_no_drop:
+  LD A, 0
+  setVar Vars.var_ret ; ставим ошибку поднятия
+
   LD A, 10
   CALL FX_SET; обиженно пиликаем
   RET
@@ -465,5 +467,6 @@ set_map:
 
 set_herow_sprite
   RET  
+
 
 ENDMODULE

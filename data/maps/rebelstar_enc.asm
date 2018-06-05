@@ -94,7 +94,7 @@ Cell_Type_30:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_31:        Entities.CellType Empty_cell_name,   no_script ; 1
 Cell_Type_32:        Entities.CellType Empty_cell_name,   no_script ; 2
 Cell_Type_Chair:     Entities.CellType Chair_item_name,   chair_script ; 3
-Cell_Type_Shard:     Entities.CellType Shard_item_name,   no_script ; 4
+Cell_Type_Shard:     Entities.CellType Shard_item_name,   shard_script ; 4
 Cell_Type_35:        Entities.CellType Empty_cell_name,   no_script ; 5
 Cell_Type_36:        Entities.CellType Empty_cell_name,   no_script ; 6
 Cell_Type_37:        Entities.CellType Empty_cell_name,   no_script ; 7
@@ -162,7 +162,11 @@ no_script:  ;  никак не нужно обрабатывать коллиз�
 ; сигнал о получении приходит только после 
 ; НАЗАД и открыть аккаунт по-новой
 
+shard_script:
+  defb _endByte
+
 chair_script:
+
   defb _endByte
 
 action_ring_explode:
@@ -225,6 +229,7 @@ computer_glass_destroy:
   CallScript action_ring_explode
   SetMapCell Computer_break
   CallCode binary_add_shard
+  CallCode items.del_item_from_hand
   CallCode Entities.lookChar; вывод текста ниже затормозит обновление экрана поэтому вызываем его вручную
   ShowText Computer_break_mess
   goto no_way_script
