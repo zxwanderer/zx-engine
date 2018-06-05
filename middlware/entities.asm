@@ -435,8 +435,11 @@ sys_check_yes:
 ;
 ; -- устанавливаем новое значение ячейки на карте по адресу MapCell_xy ( MapCell_ptr <- A )
 set_map_cell:
-  setVar Vars.var_item_id; запомнили A
   LD DE, (Vars.MapCell_xy)
+set_map_cell_DE:
+  setVar Vars.var_item_id; запомнили A
+  CALL map.calc_pos
+  LD (MapCell_ptr), HL
   CALL items.find_item_on_map ; есть ли на карте предметы?
   JR NC, set_map_cell_no_items
 

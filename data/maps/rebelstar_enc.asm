@@ -215,6 +215,7 @@ computer_on_script:
   IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy
   shiruFX 55
   SetMapCell Computer_off
+  CallCode binary_script_statis_off
   goto no_way_script
 
 computer_off_script:
@@ -222,6 +223,7 @@ computer_off_script:
   IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy
   shiruFX 55
   SetMapCell Computer_on
+  CallCode binary_script_statis_on
   goto no_way_script
 
 computer_glass_destroy:
@@ -239,6 +241,23 @@ computer_break_script:
   CallScript action_ring_explode
   SetMapCell Floor
   goto no_way_script
+
+
+binary_script_statis_on:
+  LD DE, (Vars.MapCell_xy)
+  DEC D
+  DEC D
+  LD A, #B3
+  CALL Entities.set_map_cell_DE
+  RET
+
+binary_script_statis_off:
+  LD DE, (Vars.MapCell_xy)
+  DEC D
+  DEC D
+  LD A, Floor
+  CALL Entities.set_map_cell_DE
+  RET
 
 binary_add_shard:
   LD DE, (Vars.MapCell_xy); читаем где у нас подзорвалось
