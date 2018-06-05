@@ -1,7 +1,7 @@
 MODULE Entities
 
-  MACRO SetActionCell value_p
-    defw Entities.set_action_cell_me
+  MACRO SetMapCell value_p
+    defw Entities.set_map_cell_me
     defb value_p
   ENDM
 
@@ -64,10 +64,10 @@ char_do_me:
   POP HL
   JP zxengine.process
 
-set_action_cell_me:
+set_map_cell_me:
   mLDA
   PUSH HL
-  CALL set_action_cell
+  CALL set_map_cell
   POP HL
   JP zxengine.process 
 
@@ -430,10 +430,40 @@ sys_check_no:
 sys_check_yes:
   ret_true
 
-; -- устанавливаем новое значение ячейки на карте по адресу MapCell_ptr <- A
-set_action_cell:
+;
+; -- устанавливаем новое значение ячейки на карте по адресу MapCell_xy ( MapCell_ptr <- A )
+set_map_cell:
+  setVar Vars.var_item_id; запомнили A
+  LD DE, (Vars.MapCell_xy)
+  CALL items.find_item_on_map ; есть ли на карте предметы?
+  JR NC, set_map_cell_no_items
+
+set_map_cell_next_item: ; есть - устанавливаем им всем новую "землю"
+  getVar Vars.var_item_id
+  LD (IX+items.Item.ground), A
+  CALL items.check_item
+  JR C, set_map_cell_next_item
+
+  ; героям и просто карте менять ничего не надо
+  RET
+
+set_map_cell_no_items: ; предметов нет
+; есть ли на карте герои?
+  CALL is_char_on_map
+  JR NC, set_map
+  ; если есть - меняем ему землю
+  getVar Vars.var_item_id
+  LD (IX+Hero.ground), A
+  RET
+
+; и героев нет 
+set_map:
+  getVar Vars.var_item_id
   LD HL, (MapCell_ptr)
   LD (HL), A
   RET
+
+set_herow_sprite
+  RET  
 
 ENDMODULE
