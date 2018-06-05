@@ -221,25 +221,26 @@ computer_on_script:
 computer_off_script:
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy
-  shiruFX 55
-  SetMapCell Computer_on
-  CallCode binary_script_statis_on
+  CallScript action_ring_explode
+  ; shiruFX 55
+  ; SetMapCell Computer_on
+  ; CallCode binary_script_statis_on
   goto no_way_script
 
 computer_glass_destroy:
   shiruFX 56
   CallScript action_ring_explode
   SetMapCell Computer_break
-  CallCode binary_add_shard
-  CallCode items.del_item_from_hand
   CallCode Entities.lookChar; вывод текста ниже затормозит обновление экрана поэтому вызываем его вручную
   ShowText Computer_break_mess
+  CallCode items.del_item_from_hand
   goto no_way_script
 
 computer_break_script:
   shiruFX 56
   CallScript action_ring_explode
   SetMapCell Floor
+  CallCode binary_add_shard
   goto no_way_script
 
 
@@ -255,7 +256,7 @@ binary_script_statis_off:
   LD DE, (Vars.MapCell_xy)
   DEC D
   DEC D
-  LD A, Floor
+  LD A, Hero_dead
   CALL Entities.set_map_cell_DE
   RET
 
@@ -270,4 +271,4 @@ PersonagesNum equ 2
 
 CHARS_SET: ; описываем героев:
 Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
-Hero2: Entities.Hero 13,22, 9, 0, 0, tHeroName2, 00
+Hero2: Entities.Hero 4,21, 9, 0, 0, tHeroName2, 00
