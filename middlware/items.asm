@@ -167,17 +167,23 @@ add_item_to_map_error:
 
 ; получить указатель на предмет в руках героя
 ; если NC то предмет есть, в A - номер спрайта, в HL указатель на тип предмета
+; если предмета нет то в Vars.var_item_id стоит #ff
 get_hero_hand_item:
     LD IX, (Entities.activePersonage_ptr)
     LD A, (IX+Entities.Hero.hand_right_p_1)
     AND A
-    JP Z, Entities.sys_check_no
+    JR NZ, get_hero_hand_item_yes
+    LD A, #ff
+    setVar Vars.var_item_id
+    JP Entities.sys_check_no
+get_hero_hand_item_yes:
     LD L, (IX+Entities.Hero.hand_right_p)
     LD H, (IX+Entities.Hero.hand_right_p+1)
     LD A, (HL)
     CALL items.calc_item_type
     LD A,(HL)
-    ret_true    
+    setVar Vars.var_item_id
+    ret_true
 
 ; в DE позиция на карте
 ; на выходе если есть на этой позиции хотя бы один предмет, возвращаем true
