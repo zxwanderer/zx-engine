@@ -24,6 +24,9 @@ GAME_LOOP:
   defb _endByte
 
 
+binary_show_screen:
+  CALL Entities.lookChar
+  
 ; показать GUI поверх карты =)
 binary_show_gui:
 

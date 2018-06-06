@@ -174,6 +174,10 @@ no_script:  ;  никак не нужно обрабатывать коллиз�
 ; НАЗАД и открыть аккаунт по-новой
 
 shard_script:
+  IfVar Vars.var_act, do_get, take_shard_script
+  defb _endByte
+take_shard_script:
+  ShowText Take_shard_mess
   defb _endByte
 
 chair_script:
@@ -204,6 +208,16 @@ action_ring_explode:
 wall_script:
   shiruFX 2
   CallScript action_ring_explode
+  CallCode items.get_hero_hand_item
+  IfVar Vars.var_item_id, Shard_spr, break_shard
+  CallCode binary_show_screen
+  ShowText Wall_mess
+  goto no_way_script
+
+break_shard:
+  CallCode items.del_item_from_hand
+  CallCode binary_show_screen
+  ShowText Break_shard_mess
   goto no_way_script
 
 grid_wall_script:
@@ -216,12 +230,16 @@ grid_wall_script:
   goto no_way_script
 grid_wall_break
   SetMapCell Soft_wall_break_spr
+  CallCode Entities.lookChar
+  ShowText Shard_to_soft_wall_mess
   goto no_way_script
 
 soft_wall_break_script:
   shiruFX 2
   CallScript action_ring_explode
   SetMapCell Wall_spr
+  CallCode binary_show_screen
+  ShowText Soft_wall_clean
   goto no_way_script
 
 door_open_script:
@@ -278,8 +296,9 @@ computer_break_script:
   CallScript action_ring_explode
   SetMapCell Floor
   CallCode binary_add_shard
+  CallCode Entities.lookChar
+  ShowText Computer_add_shard_mess
   goto no_way_script
-
 
 binary_script_statis_on:
   LD DE, (Vars.MapCell_xy)
