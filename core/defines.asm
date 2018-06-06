@@ -21,7 +21,7 @@ PAPER_WHITE   equ %111000
 
 _endByte equ 0
 
-scrHeight equ 12
+scrHeight equ 12-1
 scrWidth equ 16
 mapSize equ 32
 

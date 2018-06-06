@@ -30,6 +30,13 @@ Hero_hand_item_spr: equ #0B
 Hero_hand_empty: equ #09
 Hero_dead: equ #0A
 
+FX_Nope equ 53
+FX_Drop equ 5
+FX_Pickup equ 4
+FX_Poweroff equ 36
+FX_Computer equ 55
+FX_Yeah equ 56
+
 ; ENTITY_TABLE: [action][item1][item2][script_ptr]
 ; #ff - для любых предметов
 CELL_TYPES:
@@ -170,6 +177,11 @@ shard_script:
   defb _endByte
 
 chair_script:
+  IfVar Vars.var_act, do_get, take_chair_script
+  defb _endByte
+
+take_chair_script:
+  ShowText Take_chair_mess
   defb _endByte
 
 action_ring_explode:
@@ -199,6 +211,8 @@ grid_wall_script:
   CallScript action_ring_explode
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Shard_spr, grid_wall_break
+  CallCode Entities.lookChar
+  ShowText Soft_wall_hit_mess
   goto no_way_script
 grid_wall_break
   SetMapCell Soft_wall_break_spr
@@ -235,12 +249,16 @@ computer_on_script:
   shiruFX 55
   SetMapCell Computer_off
   CallCode binary_script_statis_off
+  CallCode Entities.lookChar
+  ShowText Computer_off_mess
   goto no_way_script
 
 computer_off_script:
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy
   CallScript action_ring_explode
+  CallCode Entities.lookChar
+  ShowText Computer_off_hit_mess
   ; shiruFX 55
   ; SetMapCell Computer_on
   ; CallCode binary_script_statis_on
