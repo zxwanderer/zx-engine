@@ -210,7 +210,7 @@ char_do:
   CP do_get_drop
   JR Z, char_do_get_drop; подбираем/бросаем
 
-  LD A, 1
+  LD A, 10
   CALL FX_SET; обиженно пиликаем 
  
   RET
@@ -285,13 +285,25 @@ char_do_get_drop:
   LD A, ( CurPersonageNum )
   LD (IY+items.Item.owner), A
 
-  JP items.push_item_from_map
-  ; RET
+  CALL items.push_item_from_map
+
+  LD A, FX_Pickup
+  CALL FX_SET
+
+  RET
 
 char_no_get:
-  LD A, 0
-  setVar Vars.var_ret ; ставим ошибку поднятия
 
+  CALL is_char_on_map
+  JR NC, char_no_get_no_char
+
+  LD A, (IX+Hero.ground)
+  CALL call_cell_script
+
+; setVar Vars.var_ret ; ставим ошибку поднятия
+; вызываем скрипт который на полу %)
+
+char_no_get_no_char:
   LD A, 10
   CALL FX_SET; обиженно пиликаем
   RET
@@ -327,6 +339,9 @@ char_do_drop:
   POP IY
   LD (IY+items.Item.owner), #ff; помечаем предмет как брошеный на карту
   
+  LD A, FX_Drop
+  CALL FX_SET
+
   RET
 
   MACRO m_check_left:

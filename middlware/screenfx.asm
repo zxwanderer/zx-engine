@@ -33,9 +33,13 @@ fx_action_cell_me:
     POP HL
     mLDA
     PUSH HL
-    CALL show_sprite    
+    CALL show_sprite
     POP HL
     JP zxengine.process
+
+; fx_action_cell:
+    RET
+
 
 show_sprite_me:
     mLDE; в DE позиция
@@ -181,8 +185,8 @@ show_info_message_me:
     POP HL
     CALL show_info_message
 
-    CALL input.noKey
-    CALL input.waitKey
+    ; CALL input.noKey
+    ; CALL input.waitKey
 
     POP HL
     JP zxengine.process

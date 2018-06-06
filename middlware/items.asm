@@ -228,4 +228,7 @@ del_item_from_hand:
   LD (IY+Item.itemID), #ff 
   RET
 
+del_all_items_from_cell:
+    
+
 ENDMODULE

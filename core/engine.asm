@@ -55,6 +55,13 @@ MODULE zxengine
 	  defw code_ptr
 	ENDM
 
+  MACRO IfVarN var_num, value_, code_ptr; переход 
+	  defw zxengine.if_var_not_me
+	  defb var_num
+	  defb value_
+	  defw code_ptr
+	ENDM
+
 ; для использования внутри ассемблера
 
   MACRO setVar var; заносим значение из A в переменную движка
@@ -199,7 +206,16 @@ if_var_me:
 if_var_me_no_goto:
 	INC HL
 	INC HL
-	JP process  
+	JP process
+
+; rIfVar var_num,value,code_ptr
+if_var_not_me
+	mLDA
+	CALL getVar
+	CP (HL)
+	INC HL
+	JP NZ, goto_me; переход по GOTO
+	JP if_var_me_no_goto
 
 set_var_me:
 	mLDA
