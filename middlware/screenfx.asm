@@ -194,7 +194,7 @@ show_info_message:
     LD E, 2
     CALL screenfx.clear_window
 
-    LD DE, #0017
+    LD DE, #0016
     CALL text.print_at
     RET
     
