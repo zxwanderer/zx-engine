@@ -40,8 +40,9 @@ TILE_SET:
   include "data/graph/tiles_many.asm"
 TILE_SET_END
 MAP_SET:
-	include "data/maps/laboratory.asm"
+	; include "data/maps/laboratory.asm"
   ; include "data/maps/laboratory_old.asm"
+  include "data/maps/laboratory_demo.asm"
 MAP_SET_END
 ENCOUNTER_SET:
 	include "data/maps/rebelstar_enc.asm"
@@ -57,7 +58,7 @@ ORG (high $+1)*256
 p68_font:
   incbin "data/fonts/tripfont_revert.fnt"
   ; incbin "data/fonts/Font57_revert.fnt"
-    ; incbin "data/fonts/casa2_revert.fnt"
+  ; incbin "data/fonts/casa2_revert.fnt"
 _after_font:
 
 _data_end
@@ -88,6 +89,8 @@ display "----- all end: ", _all_end
 ; display "fx_action_cell_me: ", screenfx.fx_action_cell_me
 ; display "lookChar: ", Entities.lookChar
 ; display "calc_ce: ", Text68.calc_ce
+
+display "char_no_get ", Entities.char_no_get
 
 LABELSLIST "mylabels.txt"
 SAVESNA "myzx.sna",code_start

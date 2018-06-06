@@ -74,7 +74,7 @@ next_char:
 look_char:
     CallCode Entities.lookChar
     CallCode binary_show_gui
-    ; CallCode input.noKey ; ждем пока отпустит клавишу
+    CallCode input.noKey ; ждем пока отпустит клавишу
     ; wait_halt 5
     defb _endByte
 
