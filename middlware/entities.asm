@@ -253,6 +253,10 @@ char_do_get_drop:
   CALL items.get_hero_hand_item; получаем предмет в руках
   JR C, char_do_drop; если руки не свободны - переходим на бросок предмета
 
+  ; решили что это поднятие
+  LD A, do_get
+  setVar Vars.var_act
+
   ; предмета в руках нет, ищем на карте
   LD DE, (Vars.MapCell_xy)
   CALL items.find_item_on_map
@@ -294,6 +298,11 @@ char_no_get:
 
 char_do_drop:
   ; тут у нас в A номер спрайта, в HL - указатель на описание типа предмета
+  PUSH AF
+  LD A, do_drop
+  setVar Vars.var_act
+  POP AF
+
   LD IY, (activePersonage_ptr)
   LD E, (IY+Entities.Hero.hand_right_p)
   LD D, (IY+Entities.Hero.hand_right_p_1)

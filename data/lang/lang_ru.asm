@@ -35,8 +35,19 @@ Chair_item_name: db "Стул",0
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
 
-Take_chair_mess defb "Я подобрал стул",0
+Take_chair_mess 
+  db "Я подобрал стул",0
+
 Computer_break_mess 
   db "Экран компьютера треснул и разбился!      "
-  db "[Реально? Стеклянный монитор в 3000 году?]"
-  db _endByte
+  db "[Реально? Стеклянный монитор в 3000 году?]",0
+
+Soft_wall_hit_mess:
+  db "Мягкая стенка полностью поглотила удар..",0
+
+Computer_off_mess:
+  db "Я понажимал клавиши наугад и компьютер     "
+  db "выключился...", 0
+
+Computer_off_hit_mess:
+  db "Выключено...", 0
