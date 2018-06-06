@@ -1,15 +1,56 @@
   setBorder PEN_BLACK
-  setScreen PAPER_BLACK or PEN_GREEN
+  setScreen PAPER_BLACK or PEN_CYAN
   printAt 0,0,HELLO_TXT
   CallCode input.waitKey
+  CallCode input.noKey
+  CallCode binary_clear_screen
   CallCode binary_init
+  SetVar varDoorUnlock,0
+  SetVar Vars.game_over,0
+
 LOOP_SCRIPT:
   ; wait_halt 1
   ; setBorder PEN_RED
   CallScript GAME_LOOP
   ; setBorder PEN_BLACK
+  IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
   defb _endByte
+
+HELP_SCRIPT:
+  CallCode binary_clear_screen
+  setScreen PAPER_BLACK or PEN_CYAN
+  printAt 0,0,HELP
+  shiruFX 46
+  CallCode input.waitKey
+  CallCode input.noKey
+  CallCode binary_show_screen
+  defb _endByte
+
+END_SCRIPT:
+  shiruFX 46
+  CallCode input.waitKey
+  goto END_SCRIPT
+
+game_over:
+  CallCode binary_clear_screen
+  IfVar Vars.game_over, 2, game_over_2
+game_over_1:
+  setScreen PAPER_BLACK or PEN_RED
+  printAt 0,0,GAMEOVER_1
+  goto END_SCRIPT
+  
+game_over_2
+  setScreen PAPER_BLACK or PEN_YELLOW
+  printAt 0,0,GAMEOVER_2
+  CallCode input.waitKey
+  goto END_SCRIPT
+
+binary_clear_screen:
+  LD D, 0
+  LD E, 23
+  CALL screenfx.clear_window
+  RET
 
 binary_init:
   CALL Entities.initHeroes
@@ -64,6 +105,8 @@ key_table_hero:
   KEY_E, char_up_right
   KEY_Z, char_down_left
   KEY_C, char_down_right
+
+  KEY_H, HELP_SCRIPT
 
   KEY_ENTER, char_loot
 

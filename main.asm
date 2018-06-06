@@ -94,3 +94,5 @@ display "char_no_get ", Entities.char_no_get
 
 LABELSLIST "mylabels.txt"
 SAVESNA "myzx.sna",code_start
+
+; SAVETAP "myzx.tap",code_start

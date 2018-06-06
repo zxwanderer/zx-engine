@@ -44,6 +44,7 @@ FX_Computer equ 55
 FX_Yeah equ 56
 FX_No equ 10
 
+FX_Boom equ 21
 FX_Wall equ 51
 FX_Cutt equ 7
 FX_Cutt1 equ 8
@@ -95,7 +96,7 @@ Cell_Type_1F:        Entities.CellType Empty_cell_name,   no_script ; F
 
 Cell_Type_20:        Entities.CellType Empty_cell_name,   no_script ; 0
 Cell_Type_21:        Entities.CellType Empty_cell_name,   no_script ; 1
-Cell_Type_Door_Open: Entities.CellType Door_cell_name,    no_script ; 2
+Cell_Type_Door_Open: Entities.CellType Door_cell_name,    door_open_script ; 2
 Cell_Type_23:        Entities.CellType Empty_cell_name,   no_script ; 3
 Cell_Type_Computer_Break: Entities.CellType Computer_cell_name, computer_break_script; 4
 Cell_Type_25:        Entities.CellType Empty_cell_name,   no_script ; 5
@@ -199,8 +200,11 @@ electronic_script_break:
   goto no_way_script
 
 electronic_script_off:
+  shiruFX 3
   ShowText Electronic_kick_open_mess
-  CallCode binary_open_door
+  ; CallCode binary_open_door
+  SetVar varDoorUnlock, 100
+  SetMapCell Electronic_break_spr
   goto no_way_script
 
 trash_script:
@@ -213,6 +217,10 @@ take_trash_script
 
 floor_script:
   IfVar Vars.var_act, do_get, take_floor_script
+  IfVarN Vars.var_pos_y, 7, floor_script_normal
+  SetVar Vars.game_over, 2
+  defb _endByte
+floor_script_normal:
   defb _endByte
 take_floor_script
   ShowText Take_floor_mess
@@ -261,15 +269,16 @@ action_ring_explode:
   defb _endByte
 
 wall_script:
-  shiruFX FX_Wall
-  CallScript action_ring_explode
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Shard_spr, break_shard
   ; CallCode binary_show_screen
+  shiruFX FX_Wall
+  CallScript action_ring_explode
   ShowText Wall_mess
   goto no_way_script
 
 break_shard:
+  shiruFX 21
   CallCode items.del_item_from_hand
   ; CallCode binary_show_screen
   ShowText Break_shard_mess
@@ -278,11 +287,20 @@ break_shard:
 grid_wall_script:
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Shard_spr, grid_wall_break
-  shiruFX 2
+  IfVar Vars.var_item_id, #ff, grid_wall_break_empty; руки пусты
+  shiruFX 17
   CallScript action_ring_explode
   CallCode binary_show_screen
+  ShowText Soft_wall_hit_item_mess
+  goto no_way_script
+
+grid_wall_break_empty:
+  shiruFX 2
+  CallScript action_ring_explode
+  ; CallCode binary_show_screen
   ShowText Soft_wall_hit_mess
   goto no_way_script
+
 grid_wall_break
   shiruFX FX_Cutt
   SetMapCell Soft_wall_break_spr
@@ -308,8 +326,8 @@ soft_wall_break_on:
   ShowText Soft_wall_clean
   goto no_way_script
 
-
 door_open_script:
+  shiruFX 38
   defb _endByte
 
 ballon_script:
@@ -318,6 +336,7 @@ ballon_script:
 
 ; ----- проверяем дверь
 door_script:
+  IfVar varDoorUnlock, 100, door_do_open
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair_spr, door_kick_chair
   IfVar Vars.var_item_id, Shard_spr, door_kick_shard
@@ -327,9 +346,16 @@ door_script:
   ; FxActionCell Door_half_open
   ; wait_halt 3
   ; SetMapCell Door_open
-  shiruFX 2
-  CallScript action_ring_explode
+  shiruFX FX_Nope
+  ; CallScript action_ring_explode
   ShowText Door_not_open_mess
+  goto no_way_script
+
+door_do_open:  
+  shiruFX 43
+  FxActionCell Door_half_open
+  wait_halt 3
+  SetMapCell Door_open
   goto no_way_script
 
 door_kick_chair:
@@ -339,14 +365,14 @@ door_kick_chair:
   goto no_way_script
 
 door_kick_shard:
-  shiruFX FX_Cutt1
+  shiruFX 39
   CallScript action_ring_explode
   ShowText Door_kick_shard_mess
   goto no_way_script
 
 computer_on_script:
   CallCode items.get_hero_hand_item
-  IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy
+  IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy_kill
   shiruFX 55
   SetMapCell Computer_off
   ; CallCode binary_script_statis_off
@@ -364,6 +390,13 @@ computer_off_script:
   ; SetMapCell Computer_on
   ; CallCode binary_script_statis_on
   ; ShowText Statis_on_mess
+  goto no_way_script
+
+computer_glass_destroy_kill:
+  shiruFX 19
+  CallScript action_ring_explode
+  SetMapCell Computer_break
+  SetVar Vars.game_over, 1
   goto no_way_script
 
 computer_glass_destroy:
@@ -414,8 +447,8 @@ binary_add_shard:
   CALL items.add_item_to_map
   RET
 
-PersonagesNum equ 2
+PersonagesNum equ 1
 
 CHARS_SET: ; описываем героев:
-Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
+; Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
 Hero2: Entities.Hero 4,21, 9, 0, 0, tHeroName2, 00
