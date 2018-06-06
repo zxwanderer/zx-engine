@@ -22,6 +22,10 @@ Chair_Item: equ 1
 Shard_spr: equ #34
 Chair_spr: equ #33
 
+Wall_spr: equ #01
+Soft_wall_spr: equ #06
+Soft_wall_break_spr: equ #26
+
 Hero_hand_item_spr: equ #0B
 Hero_hand_empty: equ #09
 Hero_dead: equ #0A
@@ -38,7 +42,7 @@ Cell_Type_Door:     Entities.CellType Door_cell_name,     door_script ; 2
 Cell_Type_Floor:    Entities.CellType Floor_cell_name,    no_script ; 3
 Cell_Type_Computer: Entities.CellType Computer_cell_name, computer_on_script ; 4
 Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   no_script ; 5
-Cell_Type_GridWall: Entities.CellType Wall_cell_name,     wall_script ; 6
+Cell_Type_GridWall: Entities.CellType Soft_wall_name,     grid_wall_script ; 6
 Cell_Type_Canister: Entities.CellType Ballon_cell_name,   no_script ; 7
 Cell_Type_Palm:     Entities.CellType Ballon_cell_name,   no_script ; 8
 Cell_Type_Human:    Entities.CellType Ballon_cell_name,   no_script ; 9
@@ -77,7 +81,7 @@ Cell_Type_Door_Open: Entities.CellType Door_cell_name,    no_script ; 2
 Cell_Type_23:        Entities.CellType Empty_cell_name,   no_script ; 3
 Cell_Type_Computer_Break: Entities.CellType Computer_cell_name, computer_break_script; 4
 Cell_Type_25:        Entities.CellType Empty_cell_name,   no_script ; 5
-Cell_Type_26:        Entities.CellType Empty_cell_name,   no_script ; 6
+Cell_Soft_Wall_Break: Entities.CellType Soft_wall_name,   soft_wall_break_script ; 6
 Cell_Type_27:        Entities.CellType Empty_cell_name,   no_script ; 7
 Cell_Type_28:        Entities.CellType Empty_cell_name,   no_script ; 8
 Cell_Type_29:        Entities.CellType Empty_cell_name,   no_script ; 9
@@ -166,7 +170,6 @@ shard_script:
   defb _endByte
 
 chair_script:
-
   defb _endByte
 
 action_ring_explode:
@@ -189,6 +192,22 @@ action_ring_explode:
 wall_script:
   shiruFX 2
   CallScript action_ring_explode
+  goto no_way_script
+
+grid_wall_script:
+  shiruFX 2
+  CallScript action_ring_explode
+  CallCode items.get_hero_hand_item
+  IfVar Vars.var_item_id, Shard_spr, grid_wall_break
+  goto no_way_script
+grid_wall_break
+  SetMapCell Soft_wall_break_spr
+  goto no_way_script
+
+soft_wall_break_script:
+  shiruFX 2
+  CallScript action_ring_explode
+  SetMapCell Wall_spr
   goto no_way_script
 
 door_open_script:
