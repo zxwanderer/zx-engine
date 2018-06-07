@@ -1,5 +1,4 @@
 
-
 ; обозначаем номера типов ячеек карты для лучшей адресации например открытие двери - SetActionCell Door_open
 Door_closed equ #02
 Door_half_open equ #12
@@ -202,7 +201,6 @@ electronic_script_break:
 electronic_script_off:
   shiruFX 3
   ShowText Electronic_kick_open_mess
-  ; CallCode binary_open_door
   SetVar varDoorUnlock, 100
   SetMapCell Electronic_break_spr
   goto no_way_script
@@ -271,7 +269,6 @@ action_ring_explode:
 wall_script:
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Shard_spr, break_shard
-  ; CallCode binary_show_screen
   shiruFX FX_Wall
   CallScript action_ring_explode
   ShowText Wall_mess
@@ -280,7 +277,6 @@ wall_script:
 break_shard:
   shiruFX 21
   CallCode items.del_item_from_hand
-  ; CallCode binary_show_screen
   ShowText Break_shard_mess
   goto no_way_script
 
@@ -290,21 +286,18 @@ grid_wall_script:
   IfVar Vars.var_item_id, #ff, grid_wall_break_empty; руки пусты
   shiruFX 17
   CallScript action_ring_explode
-  CallCode binary_show_screen
   ShowText Soft_wall_hit_item_mess
   goto no_way_script
 
 grid_wall_break_empty:
   shiruFX 2
   CallScript action_ring_explode
-  ; CallCode binary_show_screen
   ShowText Soft_wall_hit_mess
   goto no_way_script
 
 grid_wall_break
   shiruFX FX_Cutt
   SetMapCell Soft_wall_break_spr
-  ; CallCode binary_show_screen
   ShowText Shard_to_soft_wall_mess
   goto no_way_script
 
@@ -316,13 +309,11 @@ soft_wall_break_script:
 
 soft_wall_break_electronic_script:
   SetMapCell Electronic_spr
-  CallCode binary_show_screen
   ShowText Soft_wall_show_electronic
   goto no_way_script
 
 soft_wall_break_on:
   SetMapCell Wall_spr
-  CallCode binary_show_screen
   ShowText Soft_wall_clean
   goto no_way_script
 
@@ -340,14 +331,7 @@ door_script:
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair_spr, door_kick_chair
   IfVar Vars.var_item_id, Shard_spr, door_kick_shard
-  ; goto no_way_script
-; door_script_1:
-  ; shiruFX 43
-  ; FxActionCell Door_half_open
-  ; wait_halt 3
-  ; SetMapCell Door_open
   shiruFX FX_Nope
-  ; CallScript action_ring_explode
   ShowText Door_not_open_mess
   goto no_way_script
 
@@ -375,8 +359,6 @@ computer_on_script:
   IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy_kill
   shiruFX 55
   SetMapCell Computer_off
-  ; CallCode binary_script_statis_off
-  CallCode binary_show_screen
   ShowText Computer_off_mess
   goto no_way_script
 
@@ -384,12 +366,7 @@ computer_off_script:
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy
   shiruFX FX_Poweroff
-  ; CallScript action_ring_explode
-  ; CallCode binary_show_screen
   ShowText Computer_off_hit_mess
-  ; SetMapCell Computer_on
-  ; CallCode binary_script_statis_on
-  ; ShowText Statis_on_mess
   goto no_way_script
 
 computer_glass_destroy_kill:
@@ -403,8 +380,6 @@ computer_glass_destroy:
   shiruFX 56
   CallScript action_ring_explode
   SetMapCell Computer_break
-  ; CallCode Entities.lookChar; вывод текста ниже затормозит обновление экрана поэтому вызываем его вручную
-  CallCode binary_show_screen
   ShowText Computer_break_mess
   CallCode items.del_item_from_hand
   goto no_way_script
@@ -414,32 +389,9 @@ computer_break_script:
   CallScript action_ring_explode
   SetMapCell Trash_spr
   CallCode binary_add_shard
-  ; CallCode Entities.lookChar
-  CallCode binary_show_screen
   ShowText Computer_add_shard_mess
   goto no_way_script
 
-; binary_script_statis_on:
-  ; LD DE, (Vars.MapCell_xy)
-  ; DEC D
-  ; DEC D
-  ; LD A, #B3
-  ; CALL Entities.set_map_cell_DE
-  ; RET
-
-; binary_script_statis_off:
-  ; LD DE, (Vars.MapCell_xy)
-  ; DEC D
-  ; DEC D
-  ; LD A, Bed_spr
-  ; CALL Entities.set_map_cell_DE
-  ; RET
-
-binary_open_door:
-  ; LD A, Door_half_open
-  ; LD DE, #
-  RET
-  
 binary_add_shard:
   LD DE, (Vars.MapCell_xy); читаем где у нас подзорвалось
   INC E ; Y+1 ( размещаем shard внизу взорвавшегося предмета )
