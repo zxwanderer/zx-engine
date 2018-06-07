@@ -93,6 +93,6 @@ display "----- all end: ", _all_end
 display "interrupt.init ", interrupt.init
 
 LABELSLIST "mylabels.txt"
-SAVESNA "cell3326.sna",code_start
 
+SAVESNA "cell3326.sna",code_start
 SAVETAP "cell3326.tap",code_start
