@@ -1,20 +1,31 @@
-ORG  #E000
   MODULE interrupt
 
-interrupt_begin:
-  DEFS 257,#E1
+INT_VECTOR equ #E000
 
-/*
-  MACRO interrupt.init
+init: ;инициализация прерываний, из Survivesection
   DI
-  LD   A,#E0
-  LD   I,A
-  IM   2
+  LD HL,INT_VECTOR
+  LD B,0
+  LD A, (high INT_VECTOR)+1
+init_loop:
+  LD (HL),A
+  INC HL
+  DJNZ init_loop
+  LD (HL),A
+  LD H,(high INT_VECTOR)+1
+  LD L,H
+  LD (HL),#C3
+  INC HL
+  LD DE,interrupt_routine
+  LD (HL),E
+  INC HL
+  LD (HL),D
+  LD A,high INT_VECTOR
+  LD I,A
+  IM 2
   EI
-  ENDM
-*/
+  RET
 
-ORG  #E1E1
 interrupt_routine:
   DI
   push af             ; preserve registers.
