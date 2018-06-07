@@ -71,6 +71,7 @@ binary_show_screen:
 ; показать GUI поверх карты =)
 binary_show_gui:
 
+/*
 ; проверяем стоит ли герой на каком-нибудь предмете
 show_ground_item:
   LD IX, (Entities.activePersonage_ptr)
@@ -83,6 +84,7 @@ show_ground_item:
   LD A, (IX+Entities.Hero.ground); берем спрайт на чем герой стоит
   LD DE, #1D01
   CALL screenfx.show_sprite
+*/
 
 show_hand_item:
   CALL items.get_hero_hand_item
