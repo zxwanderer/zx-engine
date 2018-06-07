@@ -96,3 +96,12 @@ LABELSLIST "mylabels.txt"
 
 SAVESNA "cell3326.sna",code_start
 SAVETAP "cell3326.tap",code_start
+
+LOAD_ADDR equ #8000
+boot.begin equ LOAD_ADDR
+boot.end equ _all_end
+include "core/routines/basic_boot_trd.asm";
+
+  EMPTYTRD "cell3326.trd" ;create empty TRD image
+	SAVETRD "cell3326.trd", "CELL3326.B", boot.Basic, boot.EndBasic - boot.Basic
+  SAVETRD "cell3326.trd","CELL3326.C",boot.begin,boot.end-boot.begin
