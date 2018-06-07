@@ -65,13 +65,13 @@ MACRO mADDA hr,lr ; прибавляем A к регистровой паре hr
 	ld hr,a
 ENDM
 
-MACRO interrupt.init vec_
-  DI
-  LD   A,vec_
-  LD   I,A
-  IM   2
-  EI
-ENDM
+; MACRO interrupt.init vec_
+;   DI
+;   LD   A,vec_
+;   LD   I,A
+;   IM   2
+;   EI
+; ENDM
 
 MACRO ret_true
   SCF ; устанавливаем бит переноса ( Carry = 1 )

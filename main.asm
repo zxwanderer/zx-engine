@@ -1,4 +1,4 @@
-DEVICE zxspectrum48
+DEVICE zxspectrum128
 
   include "core/defines.asm"
 
@@ -8,7 +8,7 @@ ORG     #8000
 code_start:
   DI
   LD SP, my_stack_end
-  interrupt.init #E0
+  CALL interrupt.init
   jp zxengine.start
   include "core/scankeys.asm"
   include "core/engine.asm"
@@ -24,7 +24,7 @@ code_start:
   include "middlware/vars.asm"
   include "middlware/entities.asm"
   include "middlware/items.asm"
-
+  include "core/interrupt.asm"
 my_stack:
   DEFS 100, 00
 my_stack_end:
@@ -63,8 +63,6 @@ _after_font:
 
 _data_end
 
-  include "core/interrupt.asm"
-
 _all_end:
 
 display /D, _data_end-code_start, " size, ", /D, 0xE000-_data_end, " free"
@@ -90,9 +88,11 @@ display "----- all end: ", _all_end
 ; display "lookChar: ", Entities.lookChar
 ; display "calc_ce: ", Text68.calc_ce
 
-display "char_no_get ", Entities.char_no_get
+; display "char_no_get ", Entities.char_no_get
+
+display "interrupt.init ", interrupt.init
 
 LABELSLIST "mylabels.txt"
-SAVESNA "myzx.sna",code_start
+SAVESNA "cell3326.sna",code_start
 
-; SAVETAP "myzx.tap",code_start
+SAVETAP "cell3326.tap",code_start
