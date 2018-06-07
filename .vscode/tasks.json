@@ -13,7 +13,7 @@
         {
             "type": "shell",
             "label": "unreal",
-            "command": "open -a 'Unreal Speccy Portable' myzx.sna",
+            "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
             // "command": "open -a 'Fuse' -s myzx.sna",
             // "command": "open -a 'xpeccy' myzx.sna",
             "args": [
