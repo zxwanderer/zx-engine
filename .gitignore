@@ -2,3 +2,6 @@ bin
 main.out
 myzx.sna
 mylabels.txt
+*.sna
+*.trd
+*.tap
