@@ -13,9 +13,10 @@
         {
             "type": "shell",
             "label": "zx7",
-            "command": "./bin/zx7 main.out",
-            "problemMatcher": "$errmatcher-sjasmplus"
-            // --nofakes 
+            "command": "rm -f game.bin.zx7; ./bin/zx7 game.bin",
+            "dependsOn": [
+                "sjasmplus"
+            ],
         },
         {
             "type": "shell",

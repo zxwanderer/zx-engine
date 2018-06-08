@@ -1,4 +1,4 @@
-DEVICE zxspectrum128
+DEVICE zxspectrum48
 
   include "core/defines.asm"
 
@@ -95,8 +95,10 @@ display "interrupt.init ", interrupt.init
 
 LABELSLIST "mylabels.txt"
 
-SAVESNA "cell3326.sna",code_start
-; SAVETAP "cell3326.tap",code_start
+  SAVEBIN "game.bin", LOAD_ADDR, _all_end-LOAD_ADDR
+
+; SAVESNA "cell3326.sna",code_start
+  ; SAVETAP "cell3326.tap",LOAD_ADDR
 
 LOAD_ADDR equ #6000
 boot.begin equ LOAD_ADDR
