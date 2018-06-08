@@ -2,7 +2,7 @@ DEVICE zxspectrum128
 
   include "core/defines.asm"
 
-ORG     #8000
+ORG     #6000
 ; ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
 
 code_start:
@@ -16,6 +16,7 @@ code_start:
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
   include "core/routines/input.asm"
+  include "core/routines/zx7.a80"
   include "middlware/beeper.asm"
   include "middlware/screenfx.asm"
   include "middlware/text.asm"
@@ -95,9 +96,9 @@ display "interrupt.init ", interrupt.init
 LABELSLIST "mylabels.txt"
 
 SAVESNA "cell3326.sna",code_start
-SAVETAP "cell3326.tap",code_start
+; SAVETAP "cell3326.tap",code_start
 
-LOAD_ADDR equ #8000
+LOAD_ADDR equ #6000
 boot.begin equ LOAD_ADDR
 boot.end equ _all_end
 include "core/routines/basic_boot_trd.asm";

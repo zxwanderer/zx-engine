@@ -12,6 +12,13 @@
         },
         {
             "type": "shell",
+            "label": "zx7",
+            "command": "./bin/zx7 main.out",
+            "problemMatcher": "$errmatcher-sjasmplus"
+            // --nofakes 
+        },
+        {
+            "type": "shell",
             "label": "unreal",
             "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
             // "command": "open -a 'Fuse' -s myzx.sna",
@@ -19,7 +26,7 @@
             "args": [
             ],
             "dependsOn": [
-                "sjasmplus"
+                "zx7"
             ],
             "group": {
                 "kind": "build",
