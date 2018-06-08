@@ -21,7 +21,7 @@
         {
             "type": "shell",
             "label": "make_tape",
-            "command": "./bin/sjasmplus try_arch.asm; ./bin/mctrd new \"cell3326.tap\"; ./bin/mctrd add -b -a 10 \"cell3326.bas\" \"cell3326.tap\"; ./bin/mctrd add \"game.bin\" \"cell3326.tap\"; ",
+            "command": "./bin/sjasmplus try_arch.asm; ./bin/bin2tap -b -hp pack.bin -c 24575 -a 24576 -r 24576 ",
             "dependsOn": [
                 "zx7"
             ],

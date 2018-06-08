@@ -2,7 +2,7 @@
 
 HELLO_TXT:
 ; db "012345678901234567890123456789012345678901"
-  db " CELL 3326              v0.1 от 7.06.2018 "
+  db " CELL 3326            v0.1.2 от 8.06.2018 "
   db "------------------------------------------"
   db "Привет мир! Это небольшая пробная мини-   "
   db "игра. Цель - покинуть комнату :)          "
@@ -15,14 +15,13 @@ HELLO_TXT:
   db " -графический спрайтовый редактор Aseprite"
   db " -графический редактор ZX-Paintbrush      "
   db " -эмулятор Speccy Unreal Portable         "
+  db " -архиватор zx7, утилита bin2tap          "
   db "Некоторые идеи и код были позаимствованы  "
   db "из исходников игр SamStyle и SancheZ.     "
   db "Шрифт взят из игры Trip от STD.           "
   db "------------------------------------------"
-  db "My respect to coders: kalantaj, Wiev,     "
-  db "Шыншыл and big russian demoscene boss AAA,"
-  db "also special thanks to Alone Coder for    "
-  db "some z80 ideas and IDE cable :)           "
+  db "Thanks to xlat for tape-version attention "
+  db "and testing on real hardware              "
   db "------------------------------------------"
   db "my e-mail: wanderer[@]amberskynet.org"
   db _endByte

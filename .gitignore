@@ -5,3 +5,7 @@ mylabels.txt
 *.sna
 *.trd
 *.tap
+*.bin
+*.out
+*.bas
+*.zx7
