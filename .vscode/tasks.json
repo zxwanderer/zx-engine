@@ -20,8 +20,8 @@
         },
         {
             "type": "shell",
-            "label": "tape",
-            "command": "./bin/mctrd new \"cell3326.tap\"; ./bin/mctrd add -b -a 10 \"cell3326.bas\" \"cell3326.tap\"; ./bin/mctrd add \"game.bin\" \"cell3326.tap\"; ",
+            "label": "make_tape",
+            "command": "./bin/sjasmplus try_arch.asm; ./bin/mctrd new \"cell3326.tap\"; ./bin/mctrd add -b -a 10 \"cell3326.bas\" \"cell3326.tap\"; ./bin/mctrd add \"game.bin\" \"cell3326.tap\"; ",
             "dependsOn": [
                 "zx7"
             ],
@@ -35,7 +35,7 @@
             "args": [
             ],
             "dependsOn": [
-                "tape"
+                "make_tape"
             ],
             "group": {
                 "kind": "build",
