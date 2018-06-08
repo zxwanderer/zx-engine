@@ -6,7 +6,7 @@
         {
             "type": "shell",
             "label": "sjasmplus",
-            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol main.asm",
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol main.asm; ./bin/sjasmplus tape_loader.asm",
             "problemMatcher": "$errmatcher-sjasmplus"
             // --nofakes 
         },
@@ -20,6 +20,14 @@
         },
         {
             "type": "shell",
+            "label": "tape",
+            "command": "./bin/mctrd new \"cell3326.tap\"; ./bin/mctrd add -b -a 10 \"cell3326.bas\" \"cell3326.tap\"; ./bin/mctrd add \"game.bin\" \"cell3326.tap\"; ",
+            "dependsOn": [
+                "zx7"
+            ],
+        },
+        {
+            "type": "shell",
             "label": "unreal",
             "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
             // "command": "open -a 'Fuse' -s myzx.sna",
@@ -27,7 +35,7 @@
             "args": [
             ],
             "dependsOn": [
-                "zx7"
+                "tape"
             ],
             "group": {
                 "kind": "build",

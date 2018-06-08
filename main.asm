@@ -97,13 +97,12 @@ LABELSLIST "mylabels.txt"
 
   SAVEBIN "game.bin", LOAD_ADDR, _all_end-LOAD_ADDR
 
-; SAVESNA "cell3326.sna",code_start
-  ; SAVETAP "cell3326.tap",LOAD_ADDR
+SAVESNA "cell3326.sna",code_start
 
 LOAD_ADDR equ #6000
 boot.begin equ LOAD_ADDR
 boot.end equ _all_end
-include "core/routines/basic_boot_trd.asm";
+include "core/routines/basic_boot_trd.asm"
 
   EMPTYTRD "cell3326.trd" ;create empty TRD image
 	SAVETRD "cell3326.trd", "CELL3326.B", boot.Basic, boot.EndBasic - boot.Basic
