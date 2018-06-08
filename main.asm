@@ -2,7 +2,7 @@ DEVICE zxspectrum48
 
   include "core/defines.asm"
 
-ORG     #6000
+ORG     #8000
 ; ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
 
 code_start:
@@ -99,7 +99,7 @@ LABELSLIST "mylabels.txt"
 
 SAVESNA "cell3326.sna",code_start
 
-LOAD_ADDR equ #6000
+LOAD_ADDR equ #8000
 boot.begin equ LOAD_ADDR
 boot.end equ _all_end
 include "core/routines/basic_boot_trd.asm"
