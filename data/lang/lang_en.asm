@@ -31,61 +31,58 @@ HELP:
   db " [H]elp                                   "
   db "------------------------------------------"
   db "                                          "
-  db "H - главная клавиша, при нажатии показыва-"
-  db "ется этот хелп :)                         "
+  db "H-BIG main key, shows this help screen :) "
   db "                                          "
-  db "QWEDCXZA - передвижение (как в Rebel Star)"
+  db "QWEDCXZA-movement like a Rebel Star game  "
   db "                                          "
-  db "Enter - бросить предмет из рук или        "
-  db "поднять с земли если руки не заняты       "
-  db "                                          "
+  db "Enter - drop or take an item to hand      "
   db _endByte
 
 GAMEOVER_1:
   db "------------------------------------------"
-  db " Конец игры                               "
+  db "Happy end!                                "
   db "------------------------------------------"
-  db "Я со всей силы ударил стулом по компью-   "
-  db "теру. Он взорвался с оглушительным грохо- "
-  db "том, пронзив мое тело острыми осколками   "
-  db "пластика и горячего металла..             "
+  db "I hit the terminal with a chair...        "
+  db "He exploded with a deafening blow,        "
+  db "piercing my body with sharp fragments     "
+  db "of plastic and hot metal.                 "
   db "------------------------------------------"
-  db "Герой погиб, так уж получилось."
+  db "The hero is died, so it happened...       "
   db _endByte
 
 GAMEOVER_2:
   db "------------------------------------------"
-  db " GAME OVER!                               "
+  db "Congratulations!                          "
   db "------------------------------------------"
-  db "Створки двери раскрылись и я вышел из ка- "
-  db "меры в коридор, пытаясь вспомнить как сюда"
-  db "попал и что делать дальше..               "
+  db "The doors slide open and I left the cell  " 
+  db "to the corridor, trying to remember how   "
+  db "I got here and what to do next ..         "
   db "------------------------------------------"
-  db "Поздавляю! Вы успешно прошли мини-игру,   "
-  db "ура-ура-ура!"
+  db "You have successfully passed              "
+  db "the mini-game, hurray-hurray!             "
   db _endByte
 
 varDoorUnlock equ 100; признак открытия двери
 
 CELL_TYPE_NAMES:
-Empty_cell_name: db "Нечто",0
-Floor_cell_name: db "Плитка",0
-Computer_cell_name: db "Терминал",0
-Door_cell_name: db "Дверь",0
-Wall_cell_name: db "Стена",0
-Ballon_cell_name: db "Баллон",0
-Bed_cell_name: db "Кровать",0
-Trash_cell_name: db "Мелкие обломки и мусор",0
+Empty_cell_name: db "Something",0
+Floor_cell_name: db "Floor",0
+Computer_cell_name: db "Terminal",0
+Door_cell_name: db "Door",0
+Wall_cell_name: db "Wall",0
+Ballon_cell_name: db "Ballon",0
+Bed_cell_name: db "Bed",0
+Trash_cell_name: db "Small debris and trash",0
 
-Soft_wall_name: db "Декоративная стена",0
+Soft_wall_name: db "Decorative wall",0
 
-Shard_item_name: db "Осколок",0
-Chair_item_name: db "Стул",0
+Shard_item_name: db "Shard",0
+Chair_item_name: db "Chair",0
 
-Electronic_cell_name: db "Электронный блок управления",0
-Electronic_break_name: db "Сломанная электроника", 0
+Electronic_cell_name: db "Electronic control unit ",0
+Electronic_break_name: db "Broken electronic", 0
 
-tHeroName1 defb "Робот",0
+tHeroName1 defb "Robot",0
 tHeroName2 defb "HOMO",0
 
 Electronic_break_mess:
@@ -130,10 +127,6 @@ Wall_mess:
 Break_shard_mess
   db "Острый кусок пластика раскололся в руках..",0
 
-; Statis_on_mess
-  ; db "Я нажал на кнопки и над кроватью загудел   "
-  ; db "сверкающий колпак статис-поля...",0
-
 Take_shard_mess
   db "Я подобрал острый осколок пластика..",0
 
@@ -145,22 +138,23 @@ Soft_wall_clean
   db "Я содрал остатки декоративной стенки.",0
 
 Computer_break_mess 
-  db "Стул в руках развалился, но зкран компью- "
-  db "тера треснул..",0
+  db "The chair fell apart, but the terminal    "
+  db "screen cracked.",0
 
 Computer_add_shard_mess 
-  db "Еще один хороший удар и компьютер был     "
-  db "полностью разбит..",0
+  db "Another powerful hit and the computer     "
+  db "was completely broken.",0
 
 Soft_wall_hit_mess:
-  db "Мягкая стенка полностью поглотила удар..",0
+  db "The impact is absorbed by the soft wall..",0
 
 Soft_wall_hit_item_mess:
-  db "Бесполезно. Удар поглощен мягкой стенкой.",0
+  db "Useless. The impact is absorbed         "
+  db "by the soft wall.",0
 
 Computer_off_mess:
-  db "Я понажимал клавиши наугад и терминал     "
-  db "отключился..", 0
+  db "I pressed the keys at random sequence and "
+  db "the terminal turned off...",0
 
 Computer_off_hit_mess:
-  db "Выключено..", 0
+  db "Тurned off..", 0
