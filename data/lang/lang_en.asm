@@ -4,8 +4,8 @@ HELLO_TXT:
 ; db "012345678901234567890123456789012345678901"
   db " CELL 3326            v0.1.2 от 8.06.2018 "
   db "------------------------------------------"
-  db "Привет мир! Это небольшая пробная мини-   "
-  db "игра. Цель - покинуть комнату :)          "
+  db "Hello wordl! This is a small testing mini-"
+  db "game. Main target - leave the room :)     "
   db "------------------------------------------"
   db "При разработке были использованы:         "
   db " -компилятор ассемблера Z80 sjasmplus     "
@@ -86,70 +86,71 @@ tHeroName1 defb "Robot",0
 tHeroName2 defb "HOMO",0
 
 Electronic_break_mess:
-  db "И так уже все сломано дальше некуда...",0
+  db "And so everything is broken..",0
 
 Soft_wall_show_electronic:
-  db "Под декоративной стенкой обнаружилась     "
-  db "панель управления..",0
+  db "A control panel was found..",0
 
 Electronic_kick_mess:
-  db "Хрупкие микросхемы сломались!!",0
+  db "Fragile electronic block broke..",0
 
 Electronic_kick_open_mess:
-  db "Готово! Питание с двери снято.",0
+  db "Done! Power from the door is removed.",0
 
 Door_kick_chair_mess:
-  db "Безрезультатно. Дверь даже не шелохнулась.",0
+  db "It's useless. Door don't budged.",0
 
 Door_kick_shard_mess:
-  db "На двери не осталось ни царапины..",0
+  db "The door does not even scratch.",0
 
 Door_not_open_mess:
-  db "Дверь не открывалась..",0
+  db "The door did not open.",0
 
 Take_bed_mess:
-  db "Кровать была прикреплена к полу и не      "
-  db "поднималась.. ",0
+  db "The bed was attached to the floor and     "  
+  db "did not go up.",0
 
 Take_floor_mess:
-  db "На полу ничего не было..",0
+  db "There was nothing on the floor.",0
 
 Take_trash_mess:
-  db "Мелкие обломки и мусор.. Бесполезное.",0
+  db "Small debris and trash.. Uselesses.",0
 
 Take_chair_mess
-  db "Я подобрал стул..",0
+  db "I'm picked up a chair..",0
 
 Wall_mess:
-  db "Я стукнул ногой по тяжелой бронированой   "
-  db "плите... Безрезультатно.",0
+  db "I knocked my foot on the heavy armored    "
+  db "plate.. To no avail.",0
 
 Break_shard_mess
-  db "Острый кусок пластика раскололся в руках..",0
+  db "A sharp piece of plastic splintered       "
+  db "in my the hands..",0
 
 Take_shard_mess
-  db "Я подобрал острый осколок пластика..",0
+  db "I'm picked up a sharp piece of plastic..",0
 
 Shard_to_soft_wall_mess
-  db "Острым осколком я прорезал дырку в мягкой "
-  db "декоративной стенке..",0
+  db "I cut a hole with a sharp piece           "
+  db "of plastic in soft decorative wall ",0
 
 Soft_wall_clean
-  db "Я содрал остатки декоративной стенки.",0
+  db "I removed the remains of the decorative   "
+  db "wall.",0
 
 Computer_break_mess 
   db "The chair fell apart, but the terminal    "
   db "screen cracked.",0
 
 Computer_add_shard_mess 
-  db "Another powerful hit and the computer     "
+  db "Another powerful hit and the terminal     "
   db "was completely broken.",0
 
 Soft_wall_hit_mess:
-  db "The impact is absorbed by the soft wall..",0
+  db "The impact is absorbed by the soft wall.. ",0
 
 Soft_wall_hit_item_mess:
-  db "Useless. The impact is absorbed         "
+  db "Useless. The impact is absorbed           "
   db "by the soft wall.",0
 
 Computer_off_mess:
