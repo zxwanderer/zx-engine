@@ -35,7 +35,8 @@ code_end:
 START_SCRIPT:
   include "data/script.asm"
 LANG_SET:
-  include "data/lang/lang_ru.asm"
+  ; include "data/lang/lang_ru.asm"
+    include "data/lang/lang_en.asm"
 LANG_SET_END
 TILE_SET:
   include "data/graph/tiles_many.asm"
