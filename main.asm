@@ -32,15 +32,31 @@ my_stack_end:
 
 code_end:
 
-START_SCRIPT:
-  include "data/script.asm"
-LANG_SET:
-  ; include "data/lang/lang_ru.asm"
-    include "data/lang/lang_en.asm"
-LANG_SET_END
+static_data_begin:
+FX_SET:
+  include "data/demoFX.asm"
+FX_SET_END
+
 TILE_SET:
   include "data/graph/tiles_many.asm"
 TILE_SET_END
+
+LANG_SET:
+  include "data/lang/lang_ru.asm"
+  ; include "data/lang/lang_en.asm"
+LANG_SET_END
+
+ORG (high $+1)*256
+p68_font:
+  incbin "data/fonts/tripfont_revert.fnt"
+  ; incbin "data/fonts/Font57_revert.fnt"
+  ; incbin "data/fonts/casa2_revert.fnt"
+_after_font:
+
+static_data_end:
+
+START_SCRIPT:
+  include "data/script.asm"
 MAP_SET:
 	; include "data/maps/laboratory.asm"
   ; include "data/maps/laboratory_old.asm"
@@ -50,18 +66,7 @@ ENCOUNTER_SET:
 	include "data/maps/rebelstar_enc.asm"
 ENCOUNTER_SET_END
 
-FX_SET:
-  include "data/demoFX.asm"
-FX_SET_END
-
-_logic_data_end:
-
-ORG (high $+1)*256
-p68_font:
-  incbin "data/fonts/tripfont_revert.fnt"
-  ; incbin "data/fonts/Font57_revert.fnt"
-  ; incbin "data/fonts/casa2_revert.fnt"
-_after_font:
+; _logic_data_end:
 
 _data_end
 
@@ -70,9 +75,11 @@ _all_end:
 display /D, _data_end-code_start, " size, ", /D, 0xE000-_data_end, " free"
 display "----- code start: ", code_start
 display "code end: ", code_end, ", engine size :", /D, code_end-code_start
-display "data end: ", _logic_data_end, ", data size: ", /D, _logic_data_end-code_end
 display "font addr: ", p68_font
-display "after font:", _after_font
+display "static data end: ", static_data_end, ", data size: ", /D, static_data_end-code_end
+; display "data end: ", _logic_data_end, ", data size: ", /D, _logic_data_end-code_end
+; display "after font:", _after_font
+display "dynamic data end: ", _data_end, ", data size: ", /D, _data_end-static_data_end
 display "----- all end: ", _all_end
 
 ; display "chair_script_binary ", chair_script_binary
@@ -92,7 +99,7 @@ display "----- all end: ", _all_end
 
 ; display "char_no_get ", Entities.char_no_get
 
-display "interrupt.init ", interrupt.init
+; display "interrupt.init ", interrupt.init
 
 LABELSLIST "mylabels.txt"
 
