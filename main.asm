@@ -67,8 +67,9 @@ MAP_SET:
   include "data/maps/laboratory_demo.asm"
 MAP_SET_END
 ENCOUNTER_SET:
-  include "data/items/shard.asm"
 	include "data/maps/rebelstar_enc.asm"
+  include "data/cells/shard.asm"
+  include "data/cells/chair.asm"
 ENCOUNTER_SET_END
 
 dynamic_end:

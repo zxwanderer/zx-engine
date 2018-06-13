@@ -31,32 +31,6 @@ ActiveItem_ptr:
 ; ActiveItemType_ptr:
   ; dw #0000 ; указатель на тип используемого предмета
 
-; ; тип ячейки на карте или предмета
-; STRUCT CellType
-; name_ptr dw 00; указатель на имя типа
-; script_ptr dw 00; указатель на скрипт обработки действий
-; ;--- разные части
-; ;prot db 00; проницаемость для предметов, 00 - полностью проницаем
-; ;force_destr db 00; сила для уничтожения
-; ENDS
-
-; STRUCT Hero
-; pos Point 0,0 ; позиция на карте
-; sprite db 00; текущий спрайт
-; ground db 00; на чем стоит
-; flags db 00; признаки-флаги
-; name_p dw #0000
-; ; указатели на предметы в правой и левой руке, hand_right_p_1 00 - в руке пусто
-; hand_right_p db 00
-; hand_right_p_1 db 00
-; ; hand_left_p dw 00
-; ; --- одежда
-; ; head dw 00
-; ; mask dw 00
-; ; torse dw 00
-; ; boot dw 00
-; ENDS
-
 char_do_me:
   mLBC
   PUSH HL

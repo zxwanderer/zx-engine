@@ -1,12 +1,21 @@
 
+  MACRO SETUP_CELL_TYPE _name, _script
+    ORG CELL_TYPES+spr*CellType
+    CellType _name, _script
+  ENDM
+
+  MACRO SETUP_ITEM_TYPE
+    ORG ITEM_TYPES+item*CellType
+    ItemType spr, 0, 10
+  ENDM
     
-    MACRO CELL_TYPE _name, _script
-      CellType _name,  _script ; 34
-    ENDM
+    ; MACRO CELL_TYPE _name, _script
+      ; CellType _name,  _script ; 34
+    ; ENDM
     
-    MACRO ITEM_TYPE _spr_num, _round, _weight
-      ItemType _spr_num, _round, _weight
-    ENDM
+    ; MACRO ITEM_TYPE _spr_num, _round, _weight
+      ; ItemType _spr_num, _round, _weight
+    ; ENDM
 
 ; обозначаем номера типов ячеек карты для лучшей адресации например открытие двери - SetActionCell Door_open
 Door_closed equ #02
@@ -25,12 +34,12 @@ Ring_expl_3 equ #b2
 Ring_expl_4 equ #b3
 
 ; Shard_Item: equ 0
-Chair_Item: equ 1
+; Chair_Item: equ 1
 
 Bed_spr: equ #13
 
 ; Shard_spr: equ #34
-Chair_spr: equ #33
+; Chair_spr: equ #33
 Trash_spr: equ #32
 
 Wall_spr: equ #01
@@ -38,7 +47,6 @@ Soft_wall_spr: equ #06
 Soft_wall_break_spr: equ #26
 Electronic_spr: equ #27
 Electronic_break_spr: equ #28
-
 
 Hero_hand_item_spr: equ #0B
 Hero_hand_empty: equ #09
@@ -57,8 +65,6 @@ FX_Wall equ 51
 FX_Cutt equ 7
 FX_Cutt1 equ 8
 
-; ENTITY_TABLE: [action][item1][item2][script_ptr]
-; #ff - для любых предметов
 CELL_TYPES:
 
 ; -- 0 --
@@ -124,11 +130,8 @@ Cell_Type_2F:        CellType Empty_cell_name,   no_script ; F
 Cell_Type_30:        CellType Empty_cell_name,   no_script ; 0
 Cell_Type_31:        CellType Empty_cell_name,   no_script ; 1
 Cell_Type_32:        CellType Trash_cell_name,   trash_script ; 2
-Cell_Type_Chair:     CellType Chair_item_name,   chair_script ; 3
-; Cell_Type_Shard
-; Cell_Type_Shard:     Entities.CellType Shard_item_name,   shard_script ; 4
-  CELL_TYPE Shard_item_name, shard_script
-  
+Cell_Type_33:        CellType Empty_cell_name,   no_script ; 4
+Cell_Type_34:        CellType Empty_cell_name,   no_script ; 4
 Cell_Type_35:        CellType Empty_cell_name,   no_script ; 5
 Cell_Type_36:        CellType Empty_cell_name,   no_script ; 6
 Cell_Type_37:        CellType Empty_cell_name,   no_script ; 7
@@ -141,35 +144,17 @@ Cell_Type_3D:        CellType Empty_cell_name,   no_script ; D
 Cell_Type_3E:        CellType Empty_cell_name,   no_script ; E
 Cell_Type_3F:        CellType Empty_cell_name,   no_script ; F
 
-; -- 04 --
-
-Cell_Type_40:        CellType Empty_cell_name,   no_script ; 0
-Cell_Type_41:        CellType Empty_cell_name,   no_script ; 1
-Cell_Type_42:        CellType Empty_cell_name,   no_script ; 2
-Cell_Type_43:        CellType Empty_cell_name,   no_script ; 3
-Cell_Type_44:        CellType Empty_cell_name,   no_script ; 4
-Cell_Type_45:        CellType Empty_cell_name,   no_script ; 5
-Cell_Type_46:        CellType Empty_cell_name,   no_script ; 6
-Cell_Type_47:        CellType Empty_cell_name,   no_script ; 7
-Cell_Type_48:        CellType Empty_cell_name,   no_script ; 8
-Cell_Type_49:        CellType Empty_cell_name,   no_script ; 9
-Cell_Type_4A:        CellType Empty_cell_name,   no_script ; A
-Cell_Type_4B:        CellType Empty_cell_name,   no_script ; B
-Cell_Type_4C:        CellType Empty_cell_name,   no_script ; C
-Cell_Type_4D:        CellType Empty_cell_name,   no_script ; D
-Cell_Type_4E:        CellType Empty_cell_name,   no_script ; E
-Cell_Type_4F:        CellType Empty_cell_name,   no_script ; F
-
-  DUP CellType*256-#4F
-    CELL_TYPE Empty_cell_name, no_way_script
+  DUP CellType*256-#3F
+    CellType Empty_cell_name, no_way_script
   EDUP
 
 ITEM_TYPES:
   ; Shard_Item_Type
-Shard_Item_Type: 
-  ItemType Shard_spr, 0, 10
+; Shard_Item_Type: 
+  ; ItemType Shard_spr, 0, 10
 ; Shard_Item_Type
-Chair_Item_Type: ItemType Chair_spr, 0, 10
+  ; ItemType Chair_spr, 0, 10
+; Chair_Item_Type: ItemType Chair_spr, 0, 10
 
   DUP ItemType*100
     defb 00
@@ -177,12 +162,12 @@ Chair_Item_Type: ItemType Chair_spr, 0, 10
 
 ITEM_ARRAY:
 
-Chair_1: Item Chair_Item, 5,7, Floor, #ff, 00
-Chair_2: Item Chair_Item, 5,11, Floor, #ff, 00
-Chair_3: Item Chair_Item, 5,15, Floor, #ff, 00
-Chair_4: Item Chair_Item, 5,19, Floor, #ff, 00
+; Chair_1: Item Chair.item, 5,7, Floor, #ff, 00
+; Chair_2: Item Chair.item, 5,11, Floor, #ff, 00
+; Chair_3: Item Chair.item, 5,15, Floor, #ff, 00
+; Chair_4: Item Chair.item, 5,19, Floor, #ff, 00
 ; Shard_1: items.Item Shard_Item, 5,23, Floor, #ff, 00
-Chair_5: Item Chair_Item, 5,23, Floor, #ff, 00
+Chair_5: Item Chair.item, 5,23, Floor, #ff, 00
 
   DUP Item*100-5
     defb #ff; item.itemID = #ff - признак того что предмета нет 
@@ -204,7 +189,7 @@ electronic_break_script
 
 electronic_script
   CallCode items.get_hero_hand_item
-  IfVar Vars.var_item_id, Shard_spr, electronic_script_off
+  IfVar Vars.var_item_id, Shard.spr, electronic_script_off
 electronic_script_break:
   shiruFX FX_Wall
   ShowText Electronic_kick_mess
@@ -248,21 +233,6 @@ take_bed_script
 ; сигнал о получении приходит только после 
 ; НАЗАД и открыть аккаунт по-новой
 
-; shard_script:
-;   IfVar Vars.var_act, do_get, take_shard_script
-;   defb _endByte
-; take_shard_script:
-;   ShowText Take_shard_mess
-;   defb _endByte
-
-chair_script:
-  IfVar Vars.var_act, do_get, take_chair_script
-  defb _endByte
-
-take_chair_script:
-  ShowText Take_chair_mess
-  defb _endByte
-
 action_ring_explode:
   FxActionCell Ring_expl_1
   wait_halt 3
@@ -282,7 +252,7 @@ action_ring_explode:
 
 wall_script:
   CallCode items.get_hero_hand_item
-  IfVar Vars.var_item_id, Shard_spr, break_shard
+  IfVar Vars.var_item_id, Shard.spr, break_shard
   shiruFX FX_Wall
   CallScript action_ring_explode
   ShowText Wall_mess
@@ -296,7 +266,7 @@ break_shard:
 
 grid_wall_script:
   CallCode items.get_hero_hand_item
-  IfVar Vars.var_item_id, Shard_spr, grid_wall_break
+  IfVar Vars.var_item_id, Shard.spr, grid_wall_break
   IfVar Vars.var_item_id, #ff, grid_wall_break_empty; руки пусты
   shiruFX 17
   CallScript action_ring_explode
@@ -343,8 +313,8 @@ ballon_script:
 door_script:
   IfVar varDoorUnlock, 100, door_do_open
   CallCode items.get_hero_hand_item
-  IfVar Vars.var_item_id, Chair_spr, door_kick_chair
-  IfVar Vars.var_item_id, Shard_spr, door_kick_shard
+  IfVar Vars.var_item_id, Chair.spr, door_kick_chair
+  IfVar Vars.var_item_id, Shard.spr, door_kick_shard
   shiruFX FX_Nope
   ShowText Door_not_open_mess
   goto no_way_script
@@ -370,7 +340,7 @@ door_kick_shard:
 
 computer_on_script:
   CallCode items.get_hero_hand_item
-  IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy_kill
+  IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy_kill
   shiruFX 55
   SetMapCell Computer_off
   ShowText Computer_off_mess
@@ -378,7 +348,7 @@ computer_on_script:
 
 computer_off_script:
   CallCode items.get_hero_hand_item
-  IfVar Vars.var_item_id, Chair_spr, computer_glass_destroy
+  IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
   shiruFX FX_Poweroff
   ShowText Computer_off_hit_mess
   goto no_way_script
@@ -409,7 +379,7 @@ computer_break_script:
 binary_add_shard:
   LD DE, (Vars.MapCell_xy); читаем где у нас подзорвалось
   INC E ; Y+1 ( размещаем shard внизу взорвавшегося предмета )
-  LD A, Shard_Item
+  LD A, Shard.item
   CALL items.add_item_to_map
   RET
 
