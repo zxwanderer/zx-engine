@@ -1,4 +1,13 @@
 
+    
+    MACRO CELL_TYPE _name, _script
+      CellType _name,  _script ; 34
+    ENDM
+    
+    MACRO ITEM_TYPE _spr_num, _round, _weight
+      ItemType _spr_num, _round, _weight
+    ENDM
+
 ; обозначаем номера типов ячеек карты для лучшей адресации например открытие двери - SetActionCell Door_open
 Door_closed equ #02
 Door_half_open equ #12
@@ -15,12 +24,12 @@ Ring_expl_2 equ #b1
 Ring_expl_3 equ #b2
 Ring_expl_4 equ #b3
 
-Shard_Item: equ 0
+; Shard_Item: equ 0
 Chair_Item: equ 1
 
 Bed_spr: equ #13
 
-Shard_spr: equ #34
+; Shard_spr: equ #34
 Chair_spr: equ #33
 Trash_spr: equ #32
 
@@ -54,123 +63,128 @@ CELL_TYPES:
 
 ; -- 0 --
 
-Cell_Type_Empty:    Entities.CellType Empty_cell_name,    no_script ; 0
-Cell_Type_Wall:     Entities.CellType Wall_cell_name,     wall_script ; 1
-Cell_Type_Door:     Entities.CellType Door_cell_name,     door_script ; 2
-Cell_Type_Floor:    Entities.CellType Floor_cell_name,    floor_script ; 3
-Cell_Type_Computer: Entities.CellType Computer_cell_name, computer_on_script ; 4
-Cell_Type_Ballon:   Entities.CellType Ballon_cell_name,   no_script ; 5
-Cell_Type_GridWall: Entities.CellType Soft_wall_name,     grid_wall_script ; 6
-Cell_Type_Canister: Entities.CellType Ballon_cell_name,   no_script ; 7
-Cell_Type_Palm:     Entities.CellType Ballon_cell_name,   no_script ; 8
-Cell_Type_Human:    Entities.CellType Ballon_cell_name,   no_script ; 9
+Cell_Type_Empty:    CellType Empty_cell_name,    no_script ; 0
+Cell_Type_Wall:     CellType Wall_cell_name,     wall_script ; 1
+Cell_Type_Door:     CellType Door_cell_name,     door_script ; 2
+Cell_Type_Floor:    CellType Floor_cell_name,    floor_script ; 3
+Cell_Type_Computer: CellType Computer_cell_name, computer_on_script ; 4
+Cell_Type_Ballon:   CellType Ballon_cell_name,   no_script ; 5
+Cell_Type_GridWall: CellType Soft_wall_name,     grid_wall_script ; 6
+Cell_Type_Canister: CellType Ballon_cell_name,   no_script ; 7
+Cell_Type_Palm:     CellType Ballon_cell_name,   no_script ; 8
+Cell_Type_Human:    CellType Ballon_cell_name,   no_script ; 9
 
-Cell_Type_0A:        Entities.CellType Ballon_cell_name,  no_script ; A
-Cell_Type_0B:        Entities.CellType Ballon_cell_name,  no_script ; B
-Cell_Type_0C:        Entities.CellType Ballon_cell_name,  no_script ; C
-Cell_Type_0D:        Entities.CellType Ballon_cell_name,  no_script ; D
-Cell_Type_0E:        Entities.CellType Ballon_cell_name,  no_script ; E
-Cell_Type_0F:        Entities.CellType Ballon_cell_name,  no_script ; F
+Cell_Type_0A:       CellType Ballon_cell_name,  no_script ; A
+Cell_Type_0B:       CellType Ballon_cell_name,  no_script ; B
+Cell_Type_0C:       CellType Ballon_cell_name,  no_script ; C
+Cell_Type_0D:       CellType Ballon_cell_name,  no_script ; D
+Cell_Type_0E:       CellType Ballon_cell_name,  no_script ; E
+Cell_Type_0F:       CellType Ballon_cell_name,  no_script ; F
 
 ; -- 01 --
 
-Cell_Type_10:        Entities.CellType Empty_cell_name,   no_script ; 0
-Cell_Type_11:        Entities.CellType Empty_cell_name,   no_script ; 1
-Cell_Type_12:        Entities.CellType Door_cell_name,    no_script ; 2
-Cell_Type_13:        Entities.CellType Bed_cell_name,   bed_script ; 3
-Cell_Type_Off_Computer: Entities.CellType Computer_cell_name, computer_off_script; 4
-Cell_Type_15:        Entities.CellType Empty_cell_name,   no_script ; 5
-Cell_Type_16:        Entities.CellType Empty_cell_name,   no_script ; 6
-Cell_Type_17:        Entities.CellType Empty_cell_name,   no_script ; 7
-Cell_Type_18:        Entities.CellType Empty_cell_name,   no_script ; 8
-Cell_Type_19:        Entities.CellType Empty_cell_name,   no_script ; 9
-Cell_Type_1A:        Entities.CellType Empty_cell_name,   no_script ; A
-Cell_Type_1B:        Entities.CellType Empty_cell_name,   no_script ; B
-Cell_Type_1C:        Entities.CellType Empty_cell_name,   no_script ; C
-Cell_Type_1D:        Entities.CellType Empty_cell_name,   no_script ; D
-Cell_Type_1E:        Entities.CellType Empty_cell_name,   no_script ; E
-Cell_Type_1F:        Entities.CellType Empty_cell_name,   no_script ; F
+Cell_Type_10:        CellType Empty_cell_name,   no_script ; 0
+Cell_Type_11:        CellType Empty_cell_name,   no_script ; 1
+Cell_Type_12:        CellType Door_cell_name,    no_script ; 2
+Cell_Type_13:        CellType Bed_cell_name,   bed_script ; 3
+Cell_Type_Off_Computer: CellType Computer_cell_name, computer_off_script; 4
+Cell_Type_15:        CellType Empty_cell_name,   no_script ; 5
+Cell_Type_16:        CellType Empty_cell_name,   no_script ; 6
+Cell_Type_17:        CellType Empty_cell_name,   no_script ; 7
+Cell_Type_18:        CellType Empty_cell_name,   no_script ; 8
+Cell_Type_19:        CellType Empty_cell_name,   no_script ; 9
+Cell_Type_1A:        CellType Empty_cell_name,   no_script ; A
+Cell_Type_1B:        CellType Empty_cell_name,   no_script ; B
+Cell_Type_1C:        CellType Empty_cell_name,   no_script ; C
+Cell_Type_1D:        CellType Empty_cell_name,   no_script ; D
+Cell_Type_1E:        CellType Empty_cell_name,   no_script ; E
+Cell_Type_1F:        CellType Empty_cell_name,   no_script ; F
 
 ; -- 02 --
 
-Cell_Type_20:        Entities.CellType Empty_cell_name,   no_script ; 0
-Cell_Type_21:        Entities.CellType Empty_cell_name,   no_script ; 1
-Cell_Type_Door_Open: Entities.CellType Door_cell_name,    door_open_script ; 2
-Cell_Type_23:        Entities.CellType Empty_cell_name,   no_script ; 3
-Cell_Type_Computer_Break: Entities.CellType Computer_cell_name, computer_break_script; 4
-Cell_Type_25:        Entities.CellType Empty_cell_name,   no_script ; 5
-Cell_Soft_Wall_Break: Entities.CellType Soft_wall_name,   soft_wall_break_script ; 6
-Cell_Electronic:     Entities.CellType Electronic_cell_name, electronic_script ; 7
-Cell_Type_28:        Entities.CellType Electronic_break_name, electronic_break_script; 8
-Cell_Type_29:        Entities.CellType Empty_cell_name,   no_script ; 9
-Cell_Type_2A:        Entities.CellType Empty_cell_name,   no_script ; A
-Cell_Type_2B:        Entities.CellType Empty_cell_name,   no_script ; B
-Cell_Type_2C:        Entities.CellType Empty_cell_name,   no_script ; C
-Cell_Type_2D:        Entities.CellType Empty_cell_name,   no_script ; D
-Cell_Type_2E:        Entities.CellType Empty_cell_name,   no_script ; E
-Cell_Type_2F:        Entities.CellType Empty_cell_name,   no_script ; F
+Cell_Type_20:        CellType Empty_cell_name,   no_script ; 0
+Cell_Type_21:        CellType Empty_cell_name,   no_script ; 1
+Cell_Type_Door_Open: CellType Door_cell_name,    door_open_script ; 2
+Cell_Type_23:        CellType Empty_cell_name,   no_script ; 3
+Cell_Type_Computer_Break: CellType Computer_cell_name, computer_break_script; 4
+Cell_Type_25:        CellType Empty_cell_name,   no_script ; 5
+Cell_Soft_Wall_Break: CellType Soft_wall_name,   soft_wall_break_script ; 6
+Cell_Electronic:     CellType Electronic_cell_name, electronic_script ; 7
+Cell_Type_28:        CellType Electronic_break_name, electronic_break_script; 8
+Cell_Type_29:        CellType Empty_cell_name,   no_script ; 9
+Cell_Type_2A:        CellType Empty_cell_name,   no_script ; A
+Cell_Type_2B:        CellType Empty_cell_name,   no_script ; B
+Cell_Type_2C:        CellType Empty_cell_name,   no_script ; C
+Cell_Type_2D:        CellType Empty_cell_name,   no_script ; D
+Cell_Type_2E:        CellType Empty_cell_name,   no_script ; E
+Cell_Type_2F:        CellType Empty_cell_name,   no_script ; F
 
 ; -- 03 --
 
-Cell_Type_30:        Entities.CellType Empty_cell_name,   no_script ; 0
-Cell_Type_31:        Entities.CellType Empty_cell_name,   no_script ; 1
-Cell_Type_32:        Entities.CellType Trash_cell_name,   trash_script ; 2
-Cell_Type_Chair:     Entities.CellType Chair_item_name,   chair_script ; 3
-Cell_Type_Shard:     Entities.CellType Shard_item_name,   shard_script ; 4
-Cell_Type_35:        Entities.CellType Empty_cell_name,   no_script ; 5
-Cell_Type_36:        Entities.CellType Empty_cell_name,   no_script ; 6
-Cell_Type_37:        Entities.CellType Empty_cell_name,   no_script ; 7
-Cell_Type_38:        Entities.CellType Empty_cell_name,   no_script ; 8
-Cell_Type_39:        Entities.CellType Empty_cell_name,   no_script ; 9
-Cell_Type_3A:        Entities.CellType Empty_cell_name,   no_script ; A
-Cell_Type_3B:        Entities.CellType Empty_cell_name,   no_script ; B
-Cell_Type_3C:        Entities.CellType Empty_cell_name,   no_script ; C
-Cell_Type_3D:        Entities.CellType Empty_cell_name,   no_script ; D
-Cell_Type_3E:        Entities.CellType Empty_cell_name,   no_script ; E
-Cell_Type_3F:        Entities.CellType Empty_cell_name,   no_script ; F
+Cell_Type_30:        CellType Empty_cell_name,   no_script ; 0
+Cell_Type_31:        CellType Empty_cell_name,   no_script ; 1
+Cell_Type_32:        CellType Trash_cell_name,   trash_script ; 2
+Cell_Type_Chair:     CellType Chair_item_name,   chair_script ; 3
+; Cell_Type_Shard
+; Cell_Type_Shard:     Entities.CellType Shard_item_name,   shard_script ; 4
+  CELL_TYPE Shard_item_name, shard_script
+  
+Cell_Type_35:        CellType Empty_cell_name,   no_script ; 5
+Cell_Type_36:        CellType Empty_cell_name,   no_script ; 6
+Cell_Type_37:        CellType Empty_cell_name,   no_script ; 7
+Cell_Type_38:        CellType Empty_cell_name,   no_script ; 8
+Cell_Type_39:        CellType Empty_cell_name,   no_script ; 9
+Cell_Type_3A:        CellType Empty_cell_name,   no_script ; A
+Cell_Type_3B:        CellType Empty_cell_name,   no_script ; B
+Cell_Type_3C:        CellType Empty_cell_name,   no_script ; C
+Cell_Type_3D:        CellType Empty_cell_name,   no_script ; D
+Cell_Type_3E:        CellType Empty_cell_name,   no_script ; E
+Cell_Type_3F:        CellType Empty_cell_name,   no_script ; F
 
 ; -- 04 --
 
-Cell_Type_40:        Entities.CellType Empty_cell_name,   no_script ; 0
-Cell_Type_41:        Entities.CellType Empty_cell_name,   no_script ; 1
-Cell_Type_42:        Entities.CellType Empty_cell_name,   no_script ; 2
-Cell_Type_43:        Entities.CellType Empty_cell_name,   no_script ; 3
-Cell_Type_44:        Entities.CellType Empty_cell_name,   no_script ; 4
-Cell_Type_45:        Entities.CellType Empty_cell_name,   no_script ; 5
-Cell_Type_46:        Entities.CellType Empty_cell_name,   no_script ; 6
-Cell_Type_47:        Entities.CellType Empty_cell_name,   no_script ; 7
-Cell_Type_48:        Entities.CellType Empty_cell_name,   no_script ; 8
-Cell_Type_49:        Entities.CellType Empty_cell_name,   no_script ; 9
-Cell_Type_4A:        Entities.CellType Empty_cell_name,   no_script ; A
-Cell_Type_4B:        Entities.CellType Empty_cell_name,   no_script ; B
-Cell_Type_4C:        Entities.CellType Empty_cell_name,   no_script ; C
-Cell_Type_4D:        Entities.CellType Empty_cell_name,   no_script ; D
-Cell_Type_4E:        Entities.CellType Empty_cell_name,   no_script ; E
-Cell_Type_4F:        Entities.CellType Empty_cell_name,   no_script ; F
+Cell_Type_40:        CellType Empty_cell_name,   no_script ; 0
+Cell_Type_41:        CellType Empty_cell_name,   no_script ; 1
+Cell_Type_42:        CellType Empty_cell_name,   no_script ; 2
+Cell_Type_43:        CellType Empty_cell_name,   no_script ; 3
+Cell_Type_44:        CellType Empty_cell_name,   no_script ; 4
+Cell_Type_45:        CellType Empty_cell_name,   no_script ; 5
+Cell_Type_46:        CellType Empty_cell_name,   no_script ; 6
+Cell_Type_47:        CellType Empty_cell_name,   no_script ; 7
+Cell_Type_48:        CellType Empty_cell_name,   no_script ; 8
+Cell_Type_49:        CellType Empty_cell_name,   no_script ; 9
+Cell_Type_4A:        CellType Empty_cell_name,   no_script ; A
+Cell_Type_4B:        CellType Empty_cell_name,   no_script ; B
+Cell_Type_4C:        CellType Empty_cell_name,   no_script ; C
+Cell_Type_4D:        CellType Empty_cell_name,   no_script ; D
+Cell_Type_4E:        CellType Empty_cell_name,   no_script ; E
+Cell_Type_4F:        CellType Empty_cell_name,   no_script ; F
 
-  DUP Entities.CellType*256
-    Entities.CellType Empty_cell_name,   no_way_script
+  DUP CellType*256-#4F
+    CELL_TYPE Empty_cell_name, no_way_script
   EDUP
 
 ITEM_TYPES:
+  ; Shard_Item_Type
+Shard_Item_Type: 
+  ItemType Shard_spr, 0, 10
+; Shard_Item_Type
+Chair_Item_Type: ItemType Chair_spr, 0, 10
 
-Shard_Item_Type: items.ItemType Shard_spr, 0, 10
-Chair_Item_Type: items.ItemType Chair_spr, 0, 10
-
-  DUP items.ItemType*100
+  DUP ItemType*100
     defb 00
    EDUP 
 
 ITEM_ARRAY:
 
-Chair_1: items.Item Chair_Item, 5,7, Floor, #ff, 00
-Chair_2: items.Item Chair_Item, 5,11, Floor, #ff, 00
-Chair_3: items.Item Chair_Item, 5,15, Floor, #ff, 00
-Chair_4: items.Item Chair_Item, 5,19, Floor, #ff, 00
+Chair_1: Item Chair_Item, 5,7, Floor, #ff, 00
+Chair_2: Item Chair_Item, 5,11, Floor, #ff, 00
+Chair_3: Item Chair_Item, 5,15, Floor, #ff, 00
+Chair_4: Item Chair_Item, 5,19, Floor, #ff, 00
 ; Shard_1: items.Item Shard_Item, 5,23, Floor, #ff, 00
-Chair_5: items.Item Chair_Item, 5,23, Floor, #ff, 00
+Chair_5: Item Chair_Item, 5,23, Floor, #ff, 00
 
-  DUP items.Item*100-5
+  DUP Item*100-5
     defb #ff; item.itemID = #ff - признак того что предмета нет 
    EDUP
 
@@ -234,12 +248,12 @@ take_bed_script
 ; сигнал о получении приходит только после 
 ; НАЗАД и открыть аккаунт по-новой
 
-shard_script:
-  IfVar Vars.var_act, do_get, take_shard_script
-  defb _endByte
-take_shard_script:
-  ShowText Take_shard_mess
-  defb _endByte
+; shard_script:
+;   IfVar Vars.var_act, do_get, take_shard_script
+;   defb _endByte
+; take_shard_script:
+;   ShowText Take_shard_mess
+;   defb _endByte
 
 chair_script:
   IfVar Vars.var_act, do_get, take_chair_script
@@ -403,4 +417,4 @@ PersonagesNum equ 1
 
 CHARS_SET: ; описываем героев:
 ; Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
-Hero2: Entities.Hero 4,21, 9, 0, 0, tHeroName2, 00
+Hero2: Hero 4,21, 9, 0, 0, tHeroName2, 00

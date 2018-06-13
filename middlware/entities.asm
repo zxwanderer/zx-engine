@@ -31,31 +31,31 @@ ActiveItem_ptr:
 ; ActiveItemType_ptr:
   ; dw #0000 ; указатель на тип используемого предмета
 
-; тип ячейки на карте или предмета
-STRUCT CellType
-name_ptr dw 00; указатель на имя типа
-script_ptr dw 00; указатель на скрипт обработки действий
-;--- разные части
-;prot db 00; проницаемость для предметов, 00 - полностью проницаем
-;force_destr db 00; сила для уничтожения
-ENDS
+; ; тип ячейки на карте или предмета
+; STRUCT CellType
+; name_ptr dw 00; указатель на имя типа
+; script_ptr dw 00; указатель на скрипт обработки действий
+; ;--- разные части
+; ;prot db 00; проницаемость для предметов, 00 - полностью проницаем
+; ;force_destr db 00; сила для уничтожения
+; ENDS
 
-STRUCT Hero
-pos Point 0,0 ; позиция на карте
-sprite db 00; текущий спрайт
-ground db 00; на чем стоит
-flags db 00; признаки-флаги
-name_p dw #0000
-; указатели на предметы в правой и левой руке, hand_right_p_1 00 - в руке пусто
-hand_right_p db 00
-hand_right_p_1 db 00
-; hand_left_p dw 00
-; --- одежда
-; head dw 00
-; mask dw 00
-; torse dw 00
-; boot dw 00
-ENDS
+; STRUCT Hero
+; pos Point 0,0 ; позиция на карте
+; sprite db 00; текущий спрайт
+; ground db 00; на чем стоит
+; flags db 00; признаки-флаги
+; name_p dw #0000
+; ; указатели на предметы в правой и левой руке, hand_right_p_1 00 - в руке пусто
+; hand_right_p db 00
+; hand_right_p_1 db 00
+; ; hand_left_p dw 00
+; ; --- одежда
+; ; head dw 00
+; ; mask dw 00
+; ; torse dw 00
+; ; boot dw 00
+; ENDS
 
 char_do_me:
   mLBC
@@ -264,7 +264,7 @@ char_do_get_drop:
 
   ; в IX указатель на предмет
   LD (ActiveItem_ptr), IX
-  LD A, (IX+items.Item.itemID); взяли номер типа предмета
+  LD A, (IX+Item.itemID); взяли номер типа предмета
   
   CALL items.calc_item_type;  получили указатель на описание типа предмета
   LD A, (HL)
@@ -273,7 +273,7 @@ char_do_get_drop:
   OR A
   RET Z; после скрипта переменная установлена в 0 - ошибка поднятия
 
-  LD (IY+Entities.Hero.hand_right_p_1), 00; предмет брошен
+  LD (IY+Hero.hand_right_p_1), 00; предмет брошен
   LD IY, (Entities.ActiveItem_ptr);
   PUSH IY
   POP HL
@@ -283,7 +283,7 @@ char_do_get_drop:
   LD (IX+Hero.hand_right_p_1), H
 
   LD A, ( CurPersonageNum )
-  LD (IY+items.Item.owner), A
+  LD (IY+Item.owner), A
 
   CALL items.push_item_from_map
 
@@ -316,8 +316,8 @@ char_do_drop:
   POP AF
 
   LD IY, (activePersonage_ptr)
-  LD E, (IY+Entities.Hero.hand_right_p)
-  LD D, (IY+Entities.Hero.hand_right_p_1)
+  LD E, (IY+Hero.hand_right_p)
+  LD D, (IY+Hero.hand_right_p_1)
   LD (ActiveItem_ptr), DE; заполняем указатель на активный предмет тем что в руках, так как он может использоваться в скриптах
   CALL call_cell_script
   getVar Vars.var_ret
@@ -325,19 +325,19 @@ char_do_drop:
   RET Z; после скрипта переменная установлена в 0 - ошибка бросания
   
   LD IY, (activePersonage_ptr)
-  LD (IY+Entities.Hero.hand_right_p_1), 00; предмет брошен
+  LD (IY+Hero.hand_right_p_1), 00; предмет брошен
   
-  LD D, (IY+Entities.Hero.pos.x)
-  LD E, (IY+Entities.Hero.pos.y); координаты персонажа в DE
+  LD D, (IY+Hero.pos.x)
+  LD E, (IY+Hero.pos.y); координаты персонажа в DE
 
   LD IY, (Entities.ActiveItem_ptr);
 
-  LD (IY+items.Item.pos.x), D
-  LD (IY+items.Item.pos.y), E
+  LD (IY+Item.pos.x), D
+  LD (IY+Item.pos.y), E
   PUSH IY
   CALL items.pop_item_to_map
   POP IY
-  LD (IY+items.Item.owner), #ff; помечаем предмет как брошеный на карту
+  LD (IY+Item.owner), #ff; помечаем предмет как брошеный на карту
   
   LD A, FX_Drop
   CALL FX_SET
@@ -472,7 +472,7 @@ set_map_cell_DE:
 
 set_map_cell_next_item: ; есть - устанавливаем им всем новую "землю"
   getVar Vars.var_item_id
-  LD (IX+items.Item.ground), A
+  LD (IX+Item.ground), A
   CALL items.check_item
   JR C, set_map_cell_next_item
 

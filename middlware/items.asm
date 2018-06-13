@@ -1,27 +1,27 @@
 MODULE items
 
-STRUCT ItemType
-spr_num db 00; номер спрайта предмета, должен идти первым 
-; чтобы после вызова функции calcItemType 
-; можно было получать номер спрайта как LD A, (HL)
-; а не через PUSH HL/POP IX/LD A,(IX+ItemType.spr_num)
-;--- прочие части
-; name_ptr dw 00; не нужно, у нас показывается по name_ptr в спрайте
-round db 00; скажем, заряд
-weight db 00; скажем, вес
-    db 00
-; script_ptr dw 00; указатель на скрипт обработки действий
-ENDS
+; STRUCT ItemType
+; spr_num db 00; номер спрайта предмета, должен идти первым 
+; ; чтобы после вызова функции calcItemType 
+; ; можно было получать номер спрайта как LD A, (HL)
+; ; а не через PUSH HL/POP IX/LD A,(IX+ItemType.spr_num)
+; ;--- прочие части
+; ; name_ptr dw 00; не нужно, у нас показывается по name_ptr в спрайте
+; round db 00; скажем, заряд
+; weight db 00; скажем, вес
+;     db 00
+; ; script_ptr dw 00; указатель на скрипт обработки действий
+; ENDS
 
-STRUCT Item
-itemID db 00; номер типа предмета
-pos Point 0,0 ; позиция на карте
-ground db 00; что оказалось на земле когда бросили предмет
-owner db 00; номер героя в инвентаре которого находится предмет, если #ff то лежит на карте
-;--- типа заряд :)
-rounds db 00;
-; parent_ptr dw 0; у кого лежит, если 0000 то лежит на карте, иначе указатель на hero
-ENDS
+; STRUCT Item
+; itemID db 00; номер типа предмета
+; pos Point 0,0 ; позиция на карте
+; ground db 00; что оказалось на земле когда бросили предмет
+; owner db 00; номер героя в инвентаре которого находится предмет, если #ff то лежит на карте
+; ;--- типа заряд :)
+; rounds db 00;
+; ; parent_ptr dw 0; у кого лежит, если 0000 то лежит на карте, иначе указатель на hero
+; ENDS
 
 ; на входе в A - индекс типа предмета
 ; на выходе в HL - указатель на массив с данными предмета
@@ -76,7 +76,7 @@ push_item_from_map_find_heroes:
     CALL Entities.is_char_on_map
     JR NC, push_item_from_map_no_heroes
     POP AF; взяли номер спрайта предмета 
-    LD (IX+Entities.Hero.ground), A
+    LD (IX+Hero.ground), A
     RET
 
 push_item_from_map_no_heroes:
@@ -114,14 +114,14 @@ pop_item_to_map_no_items:
     CALL Entities.is_char_on_map
     JR NC, pop_item_to_map_no_heroes
 
-    LD A,(IX+Entities.Hero.ground); взяли землю героя ( так как предметов тут нет )
+    LD A,(IX+Hero.ground); взяли землю героя ( так как предметов тут нет )
     LD (IY+Item.ground), A; запоминаем землю в своем предмете 
 
 pop_item_to_map_set_chars:
     LD A, (IY+Item.itemID); взяли тип предмета
     CALL calc_item_type; в HL указатель на предмет
     LD A, (HL); забрали номер спрайта
-    LD (IX+Entities.Hero.ground), A; поместили спрайт на землю у героя
+    LD (IX+Hero.ground), A; поместили спрайт на землю у героя
     RET
 
 pop_item_to_map_no_heroes: ; героев нет
@@ -170,15 +170,15 @@ add_item_to_map_error:
 ; если предмета нет то в Vars.var_item_id стоит #ff
 get_hero_hand_item:
     LD IX, (Entities.activePersonage_ptr)
-    LD A, (IX+Entities.Hero.hand_right_p_1)
+    LD A, (IX+Hero.hand_right_p_1)
     AND A
     JR NZ, get_hero_hand_item_yes
     LD A, #ff
     setVar Vars.var_item_id
     JP Entities.sys_check_no
 get_hero_hand_item_yes:
-    LD L, (IX+Entities.Hero.hand_right_p)
-    LD H, (IX+Entities.Hero.hand_right_p+1)
+    LD L, (IX+Hero.hand_right_p)
+    LD H, (IX+Hero.hand_right_p+1)
     LD A, (HL)
     CALL items.calc_item_type
     LD A,(HL)
@@ -217,12 +217,12 @@ next_item:
 
 del_item_from_hand:
   LD IX, (Entities.activePersonage_ptr)
-  LD A, (IX+Entities.Hero.hand_right_p_1)
+  LD A, (IX+Hero.hand_right_p_1)
   AND A
   RET Z
   LD D,A
-  LD E, (IX+Entities.Hero.hand_right_p)
-  LD (IX+Entities.Hero.hand_right_p_1),0
+  LD E, (IX+Hero.hand_right_p)
+  LD (IX+Hero.hand_right_p_1),0
   PUSH DE
   POP IY
   LD (IY+Item.itemID), #ff 
