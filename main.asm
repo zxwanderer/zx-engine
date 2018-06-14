@@ -76,6 +76,7 @@ ENCOUNTER_SET:
   include "data/cells/door_open.asm"
   include "data/cells/electronic/electronic.asm"
   include "data/cells/electronic/electronic_break.asm"
+  include "data/cells/wall/soft_wall_break.asm"
 ENCOUNTER_SET_END
 
 dynamic_end:
