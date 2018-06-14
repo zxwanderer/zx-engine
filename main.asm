@@ -70,6 +70,9 @@ ENCOUNTER_SET:
 	include "data/maps/rebelstar_enc.asm"
   include "data/cells/shard.asm"
   include "data/cells/chair.asm"
+  include "data/cells/floor.asm"
+  include "data/cells/trash.asm"
+  include "data/cells/bed.asm"
 ENCOUNTER_SET_END
 
 dynamic_end:

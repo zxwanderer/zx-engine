@@ -22,7 +22,7 @@ Door_closed equ #02
 Door_half_open equ #12
 Door_open equ #22
 
-Floor equ #03
+; Floor equ #03
 
 Computer_on equ #04
 Computer_off equ #14
@@ -36,11 +36,11 @@ Ring_expl_4 equ #b3
 ; Shard_Item: equ 0
 ; Chair_Item: equ 1
 
-Bed_spr: equ #13
+; Bed_spr: equ #13
 
 ; Shard_spr: equ #34
 ; Chair_spr: equ #33
-Trash_spr: equ #32
+; Trash_spr: equ #32
 
 Wall_spr: equ #01
 Soft_wall_spr: equ #06
@@ -72,7 +72,9 @@ CELL_TYPES:
 Cell_Type_Empty:    CellType Empty_cell_name,    no_script ; 0
 Cell_Type_Wall:     CellType Wall_cell_name,     wall_script ; 1
 Cell_Type_Door:     CellType Door_cell_name,     door_script ; 2
-Cell_Type_Floor:    CellType Floor_cell_name,    floor_script ; 3
+; Cell_Type_Floor:    CellType Floor_cell_name,    floor_script ; 3
+Cell_Type_03:        CellType Empty_cell_name,   no_script ; 3
+
 Cell_Type_Computer: CellType Computer_cell_name, computer_on_script ; 4
 Cell_Type_Ballon:   CellType Ballon_cell_name,   no_script ; 5
 Cell_Type_GridWall: CellType Soft_wall_name,     grid_wall_script ; 6
@@ -92,7 +94,8 @@ Cell_Type_0F:       CellType Ballon_cell_name,  no_script ; F
 Cell_Type_10:        CellType Empty_cell_name,   no_script ; 0
 Cell_Type_11:        CellType Empty_cell_name,   no_script ; 1
 Cell_Type_12:        CellType Door_cell_name,    no_script ; 2
-Cell_Type_13:        CellType Bed_cell_name,   bed_script ; 3
+; Cell_Type_13:        CellType Bed_cell_name,   bed_script ; 3
+Cell_Type_13:        CellType Empty_cell_name,   no_script ; 3
 Cell_Type_Off_Computer: CellType Computer_cell_name, computer_off_script; 4
 Cell_Type_15:        CellType Empty_cell_name,   no_script ; 5
 Cell_Type_16:        CellType Empty_cell_name,   no_script ; 6
@@ -125,26 +128,26 @@ Cell_Type_2D:        CellType Empty_cell_name,   no_script ; D
 Cell_Type_2E:        CellType Empty_cell_name,   no_script ; E
 Cell_Type_2F:        CellType Empty_cell_name,   no_script ; F
 
-; -- 03 --
+; ; -- 03 --
+; Cell_Type_30:        CellType Empty_cell_name,   no_script ; 0
+; Cell_Type_31:        CellType Empty_cell_name,   no_script ; 1
+; ; Cell_Type_32:        CellType Trash_cell_name,   trash_script ; 2
+; Cell_Type_32:        CellType Empty_cell_name,   no_script ; 2
+; Cell_Type_33:        CellType Empty_cell_name,   no_script ; 3
+; Cell_Type_34:        CellType Empty_cell_name,   no_script ; 4
+; Cell_Type_35:        CellType Empty_cell_name,   no_script ; 5
+; Cell_Type_36:        CellType Empty_cell_name,   no_script ; 6
+; Cell_Type_37:        CellType Empty_cell_name,   no_script ; 7
+; Cell_Type_38:        CellType Empty_cell_name,   no_script ; 8
+; Cell_Type_39:        CellType Empty_cell_name,   no_script ; 9
+; Cell_Type_3A:        CellType Empty_cell_name,   no_script ; A
+; Cell_Type_3B:        CellType Empty_cell_name,   no_script ; B
+; Cell_Type_3C:        CellType Empty_cell_name,   no_script ; C
+; Cell_Type_3D:        CellType Empty_cell_name,   no_script ; D
+; Cell_Type_3E:        CellType Empty_cell_name,   no_script ; E
+; Cell_Type_3F:        CellType Empty_cell_name,   no_script ; F
 
-Cell_Type_30:        CellType Empty_cell_name,   no_script ; 0
-Cell_Type_31:        CellType Empty_cell_name,   no_script ; 1
-Cell_Type_32:        CellType Trash_cell_name,   trash_script ; 2
-Cell_Type_33:        CellType Empty_cell_name,   no_script ; 4
-Cell_Type_34:        CellType Empty_cell_name,   no_script ; 4
-Cell_Type_35:        CellType Empty_cell_name,   no_script ; 5
-Cell_Type_36:        CellType Empty_cell_name,   no_script ; 6
-Cell_Type_37:        CellType Empty_cell_name,   no_script ; 7
-Cell_Type_38:        CellType Empty_cell_name,   no_script ; 8
-Cell_Type_39:        CellType Empty_cell_name,   no_script ; 9
-Cell_Type_3A:        CellType Empty_cell_name,   no_script ; A
-Cell_Type_3B:        CellType Empty_cell_name,   no_script ; B
-Cell_Type_3C:        CellType Empty_cell_name,   no_script ; C
-Cell_Type_3D:        CellType Empty_cell_name,   no_script ; D
-Cell_Type_3E:        CellType Empty_cell_name,   no_script ; E
-Cell_Type_3F:        CellType Empty_cell_name,   no_script ; F
-
-  DUP CellType*256-#3F
+  DUP CellType*256-#2F
     CellType Empty_cell_name, no_way_script
   EDUP
 
@@ -167,7 +170,7 @@ ITEM_ARRAY:
 ; Chair_3: Item Chair.item, 5,15, Floor, #ff, 00
 ; Chair_4: Item Chair.item, 5,19, Floor, #ff, 00
 ; Shard_1: items.Item Shard_Item, 5,23, Floor, #ff, 00
-Chair_5: Item Chair.item, 5,23, Floor, #ff, 00
+Chair_5: Item Chair.item, 5,23, Floor.spr, #ff, 00
 
   DUP Item*100-5
     defb #ff; item.itemID = #ff - признак того что предмета нет 
@@ -203,32 +206,6 @@ electronic_script_off:
   SetVar varDoorUnlock, 100
   SetMapCell Electronic_break_spr
   goto no_way_script
-
-trash_script:
-  IfVar Vars.var_act, do_get, take_trash_script
-  defb _endByte
-
-take_trash_script
-  ShowText Take_trash_mess
-  defb _endByte
-
-floor_script:
-  IfVar Vars.var_act, do_get, take_floor_script
-  IfVarN Vars.var_pos_y, 7, floor_script_normal
-  SetVar Vars.game_over, 2
-  defb _endByte
-floor_script_normal:
-  defb _endByte
-take_floor_script
-  ShowText Take_floor_mess
-  defb _endByte
-
-bed_script:
-  IfVar Vars.var_act, do_get, take_bed_script
-  defb _endByte
-take_bed_script
-  ShowText Take_bed_mess
-  defb _endByte
 
 ; сигнал о получении приходит только после 
 ; НАЗАД и открыть аккаунт по-новой
@@ -371,7 +348,7 @@ computer_glass_destroy:
 computer_break_script:
   shiruFX 56
   CallScript action_ring_explode
-  SetMapCell Trash_spr
+  SetMapCell Trash.spr
   CallCode binary_add_shard
   ShowText Computer_add_shard_mess
   goto no_way_script
