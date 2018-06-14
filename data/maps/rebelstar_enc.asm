@@ -20,7 +20,7 @@
 ; обозначаем номера типов ячеек карты для лучшей адресации например открытие двери - SetActionCell Door_open
 Door_closed equ #02
 Door_half_open equ #12
-Door_open equ #22
+; Door_open equ #22
 
 ; Floor equ #03
 
@@ -113,13 +113,14 @@ Cell_Type_1F:        CellType Empty_cell_name,   no_script ; F
 
 Cell_Type_20:        CellType Empty_cell_name,   no_script ; 0
 Cell_Type_21:        CellType Empty_cell_name,   no_script ; 1
-Cell_Type_Door_Open: CellType Door_cell_name,    door_open_script ; 2
+Cell_Type_22:        CellType Empty_cell_name,   no_script ; 2
+; Cell_Type_Door_Open: CellType Door_cell_name,    door_open_script ; 2
 Cell_Type_23:        CellType Empty_cell_name,   no_script ; 3
 Cell_Type_Computer_Break: CellType Computer_cell_name, computer_break_script; 4
 Cell_Type_25:        CellType Empty_cell_name,   no_script ; 5
 Cell_Soft_Wall_Break: CellType Soft_wall_name,   soft_wall_break_script ; 6
 Cell_Electronic:     CellType Electronic_cell_name, electronic_script ; 7
-Cell_Type_28:        CellType Electronic_break_name, electronic_break_script; 8
+Cell_Electronic_break:  CellType Electronic_break_name, electronic_break_script; 8
 Cell_Type_29:        CellType Empty_cell_name,   no_script ; 9
 Cell_Type_2A:        CellType Empty_cell_name,   no_script ; A
 Cell_Type_2B:        CellType Empty_cell_name,   no_script ; B
@@ -127,25 +128,6 @@ Cell_Type_2C:        CellType Empty_cell_name,   no_script ; C
 Cell_Type_2D:        CellType Empty_cell_name,   no_script ; D
 Cell_Type_2E:        CellType Empty_cell_name,   no_script ; E
 Cell_Type_2F:        CellType Empty_cell_name,   no_script ; F
-
-; ; -- 03 --
-; Cell_Type_30:        CellType Empty_cell_name,   no_script ; 0
-; Cell_Type_31:        CellType Empty_cell_name,   no_script ; 1
-; ; Cell_Type_32:        CellType Trash_cell_name,   trash_script ; 2
-; Cell_Type_32:        CellType Empty_cell_name,   no_script ; 2
-; Cell_Type_33:        CellType Empty_cell_name,   no_script ; 3
-; Cell_Type_34:        CellType Empty_cell_name,   no_script ; 4
-; Cell_Type_35:        CellType Empty_cell_name,   no_script ; 5
-; Cell_Type_36:        CellType Empty_cell_name,   no_script ; 6
-; Cell_Type_37:        CellType Empty_cell_name,   no_script ; 7
-; Cell_Type_38:        CellType Empty_cell_name,   no_script ; 8
-; Cell_Type_39:        CellType Empty_cell_name,   no_script ; 9
-; Cell_Type_3A:        CellType Empty_cell_name,   no_script ; A
-; Cell_Type_3B:        CellType Empty_cell_name,   no_script ; B
-; Cell_Type_3C:        CellType Empty_cell_name,   no_script ; C
-; Cell_Type_3D:        CellType Empty_cell_name,   no_script ; D
-; Cell_Type_3E:        CellType Empty_cell_name,   no_script ; E
-; Cell_Type_3F:        CellType Empty_cell_name,   no_script ; F
 
   DUP CellType*256-#2F
     CellType Empty_cell_name, no_way_script
@@ -278,10 +260,6 @@ soft_wall_break_on:
   ShowText Soft_wall_clean
   goto no_way_script
 
-door_open_script:
-  shiruFX 38
-  defb _endByte
-
 ballon_script:
   CallScript action_ring_explode
   goto no_way_script
@@ -300,7 +278,7 @@ door_do_open:
   shiruFX 43
   FxActionCell Door_half_open
   wait_halt 3
-  SetMapCell Door_open
+  SetMapCell DoorOpen.spr
   goto no_way_script
 
 door_kick_chair:
