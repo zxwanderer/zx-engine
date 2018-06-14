@@ -1,5 +1,3 @@
-	; org 60000
-
 ;BeepFX player by Shiru
 ;You are free to do whatever you want with this code
 

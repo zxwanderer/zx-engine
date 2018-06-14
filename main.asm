@@ -1,6 +1,7 @@
 DEVICE zxspectrum128
 
   include "core/defines.asm"
+  include "middlware/defines.asm"
   include "middlware/defines/CellType.asm"
   include "middlware/defines/ItemType.asm"
   include "middlware/defines/Item.asm"
@@ -16,7 +17,6 @@ code_start:
   jp zxengine.start
   include "core/scankeys.asm"
   include "core/engine.asm"
-  include "middlware/defines.asm"
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
   include "core/routines/input.asm"
@@ -67,13 +67,14 @@ MAP_SET:
   include "data/maps/laboratory_demo.asm"
 MAP_SET_END
 ENCOUNTER_SET:
-	include "data/maps/rebelstar_enc.asm"
+	include "data/rebelstar_enc.asm"
   include "data/cells/shard.asm"
   include "data/cells/chair.asm"
   include "data/cells/floor.asm"
   include "data/cells/trash.asm"
   include "data/cells/bed.asm"
   include "data/cells/door_open.asm"
+  include "data/cells/electronic_break.asm"
 ENCOUNTER_SET_END
 
 dynamic_end:
