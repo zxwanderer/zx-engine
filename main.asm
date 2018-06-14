@@ -68,6 +68,7 @@ MAP_SET:
 MAP_SET_END
 ENCOUNTER_SET:
 	include "data/rebelstar_enc.asm"
+  include "data/cells/empty.asm"
   include "data/cells/shard.asm"
   include "data/cells/chair.asm"
   include "data/cells/floor.asm"
