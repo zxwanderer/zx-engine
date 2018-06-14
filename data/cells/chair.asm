@@ -6,12 +6,6 @@ Chair.spr: equ #33
 
 _temp equ $; запоминаем адрес
 
-;   ORG CELL_TYPES+spr*CellType
-;   CellType Chair_item_name, chair_script
-
-;   ORG ITEM_TYPES+item*CellType
-;   ItemType spr, 0, 10
-
     SETUP_CELL_TYPE Chair_item_name, chair_script
 
     SETUP_ITEM_TYPE

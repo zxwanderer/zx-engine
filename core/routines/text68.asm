@@ -80,9 +80,12 @@ PR1:
   LD A,(DE)
   OR H
   LD (DE),A
+  ; out(#fe),a
+  ; halt
   INC E
   LD A,L
   LD (DE),A
+  ; out(#fe),a
   DEC E
   INC D
   POP HL
