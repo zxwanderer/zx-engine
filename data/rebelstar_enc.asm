@@ -44,7 +44,7 @@ Ring_expl_4 equ #b3
 
 Wall_spr: equ #01
 Soft_wall_spr: equ #06
-Soft_wall_break_spr: equ #26
+; Soft_wall_break_spr: equ #26
 ; Electronic_spr: equ #27
 ; Electronic_break_spr: equ #28
 
@@ -118,7 +118,8 @@ Cell_Type_22:        CellType Empty_cell_name,   no_script ; 2
 Cell_Type_23:        CellType Empty_cell_name,   no_script ; 3
 Cell_Type_Computer_Break: CellType Computer_cell_name, computer_break_script; 4
 Cell_Type_25:        CellType Empty_cell_name,   no_script ; 5
-Cell_Soft_Wall_Break: CellType Soft_wall_name,   soft_wall_break_script ; 6
+; Cell_Soft_Wall_Break: CellType Soft_wall_name,   soft_wall_break_script ; 6
+Cell_Type_26:        CellType Empty_cell_name,   no_script ; 6
 ; Cell_Electronic:     CellType Electronic_cell_name, electronic_script ; 7
 Cell_Type_27:        CellType Empty_cell_name,   no_script ; 7
 ; Cell_Electronic_break:  CellType Electronic_break_name, electronic_break_script; 8
@@ -218,24 +219,8 @@ grid_wall_break_empty:
 
 grid_wall_break
   shiruFX FX_Cutt
-  SetMapCell Soft_wall_break_spr
+  SetMapCell SoftWallBreak.spr
   ShowText Shard_to_soft_wall_mess
-  goto no_way_script
-
-soft_wall_break_script:
-  shiruFX FX_Cutt1
-  CallScript action_ring_explode
-  IfVarN Vars.var_pos_y, 6, soft_wall_break_on
-  IfVarN Vars.var_pos_x, 22, soft_wall_break_on
-
-soft_wall_break_electronic_script:
-  SetMapCell Electronic.spr
-  ShowText Soft_wall_show_electronic
-  goto no_way_script
-
-soft_wall_break_on:
-  SetMapCell Wall_spr
-  ShowText Soft_wall_clean
   goto no_way_script
 
 ballon_script:
