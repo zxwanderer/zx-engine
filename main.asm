@@ -7,7 +7,7 @@ DEVICE zxspectrum128
   include "middlware/defines/Item.asm"
   include "middlware/defines/Hero.asm"
 
-ORG     #6000
+ORG #6000
 ; ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
 
 code_start:
@@ -73,10 +73,16 @@ ENCOUNTER_SET:
   include "data/cells/floor.asm"
   include "data/cells/trash.asm"
   include "data/cells/bed.asm"
-  include "data/cells/door_open.asm"
+  include "data/cells/computer/computer_break.asm"
+  include "data/cells/computer/computer_off.asm"
+  include "data/cells/computer/computer.asm"
+  include "data/cells/door/door_open.asm"
+  include "data/cells/door/door.asm"
   include "data/cells/electronic/electronic.asm"
   include "data/cells/electronic/electronic_break.asm"
   include "data/cells/wall/soft_wall_break.asm"
+  include "data/cells/wall/soft_wall.asm"
+  include "data/cells/wall/wall.asm"
 ENCOUNTER_SET_END
 
 dynamic_end:

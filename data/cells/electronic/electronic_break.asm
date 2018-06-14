@@ -13,7 +13,7 @@ electronic_break_script
   shiruFX FX_Wall
   CallScript action_ring_explode
   ShowText Electronic_break_mess
-  SetMapCell Wall_spr
+  SetMapCell Wall.spr
   goto no_way_script
 
   ENDMODULE
