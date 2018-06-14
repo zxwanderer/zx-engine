@@ -21,7 +21,7 @@ soft_wall_break_electronic_script:
   goto no_way_script
 
 soft_wall_break_on:
-  SetMapCell Wall_spr
+  SetMapCell Wall.spr
   ShowText Soft_wall_clean
   goto no_way_script
 
