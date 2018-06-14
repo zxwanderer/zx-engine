@@ -73,6 +73,7 @@ ENCOUNTER_SET:
   include "data/cells/floor.asm"
   include "data/cells/trash.asm"
   include "data/cells/bed.asm"
+  include "data/cells/door_open.asm"
 ENCOUNTER_SET_END
 
 dynamic_end:
