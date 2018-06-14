@@ -46,7 +46,7 @@ Wall_spr: equ #01
 Soft_wall_spr: equ #06
 Soft_wall_break_spr: equ #26
 Electronic_spr: equ #27
-Electronic_break_spr: equ #28
+; Electronic_break_spr: equ #28
 
 Hero_hand_item_spr: equ #0B
 Hero_hand_empty: equ #09
@@ -120,7 +120,8 @@ Cell_Type_Computer_Break: CellType Computer_cell_name, computer_break_script; 4
 Cell_Type_25:        CellType Empty_cell_name,   no_script ; 5
 Cell_Soft_Wall_Break: CellType Soft_wall_name,   soft_wall_break_script ; 6
 Cell_Electronic:     CellType Electronic_cell_name, electronic_script ; 7
-Cell_Electronic_break:  CellType Electronic_break_name, electronic_break_script; 8
+; Cell_Electronic_break:  CellType Electronic_break_name, electronic_break_script; 8
+Cell_Type_28:        CellType Empty_cell_name,   no_script ; 8
 Cell_Type_29:        CellType Empty_cell_name,   no_script ; 9
 Cell_Type_2A:        CellType Empty_cell_name,   no_script ; A
 Cell_Type_2B:        CellType Empty_cell_name,   no_script ; B
@@ -165,13 +166,6 @@ no_way_script: ; неуспех
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
 
-electronic_break_script
-  shiruFX FX_Wall
-  CallScript action_ring_explode
-  ShowText Electronic_break_mess
-  SetMapCell Wall_spr
-  goto no_way_script
-
 electronic_script
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Shard.spr, electronic_script_off
@@ -179,14 +173,14 @@ electronic_script_break:
   shiruFX FX_Wall
   ShowText Electronic_kick_mess
   CallScript action_ring_explode
-  SetMapCell Electronic_break_spr
+  SetMapCell ElectronicBreak.spr
   goto no_way_script
 
 electronic_script_off:
   shiruFX 3
   ShowText Electronic_kick_open_mess
   SetVar varDoorUnlock, 100
-  SetMapCell Electronic_break_spr
+  SetMapCell ElectronicBreak.spr
   goto no_way_script
 
 ; сигнал о получении приходит только после 
