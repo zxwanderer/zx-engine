@@ -1,5 +1,6 @@
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_CYAN
+  CallCode binary_clear_screen
   printAt 0,0,HELLO_TXT
   CallCode input.waitKey
   CallCode input.noKey
@@ -117,8 +118,8 @@ key_table_hero:
   defb _endByte
 
 RESTART
-    CallCode zxengine.clear_data
-    CallCode zxengine.start
+    ; CallCode zxengine.clear_data
+    CallCode zxengine.init; переходим на инициализацию
 
 next_char:
     CallCode Entities.loopNextChar
