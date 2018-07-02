@@ -1,6 +1,8 @@
 ; файл определений, 
 ; никаких данных только дефайны и макросы!
 
+INT_VECTOR equ #E000
+
 PEN_BLACK     equ %000
 PEN_BLUE      equ %001
 PEN_RED       equ %010

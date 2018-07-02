@@ -14,7 +14,6 @@ t1beg	db 0xfd,0xb0		; clear val "
 	; db 0xfb			; cls
 	; db 0x0d
 t1len	equ $-t1beg
-
 	db 0,20
 	dw t2len
 t2beg	db 0xef			; load
