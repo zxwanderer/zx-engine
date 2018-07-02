@@ -1,6 +1,0 @@
-  include "core/defines.asm"
-  include "middlware/defines.asm"
-  include "middlware/defines/CellType.asm"
-  include "middlware/defines/ItemType.asm"
-  include "middlware/defines/Item.asm"
-  include "middlware/defines/Hero.asm"

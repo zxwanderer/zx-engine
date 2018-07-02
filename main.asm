@@ -1,9 +1,5 @@
-DEVICE zxspectrum128
-ORG #5B00
-; ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
-; [code][static][dynamic]
 
-code
+code:
   include "code.asm"
 static:
   include "static.asm"
@@ -12,12 +8,12 @@ dynamic:
 
 _all_end:
 
-display /D, _all_end-code, " size, ", /D, 0x10000-_all_end, " free"
+display /D, _all_end-code, " size, ", /D, INT_VECTOR-_all_end, " free"
 
 display "----- code start: ", code
 display "engine size: ", /D, static-code, ", code end: ", static
 display "static data size: ", /D, dynamic-static, ", static end: ", static
-display "font addr: ", p68_font
+display "font addr: ", p68_font, ", pre-font unused size: ", /D, p68_font - LANG_SET_END
 display "dynamic data size: ", /D, _all_end-dynamic, ", dynamic end: ", _all_end
 display "----- all end: ", _all_end
 

@@ -1,7 +1,5 @@
   MODULE interrupt
 
-INT_VECTOR equ #E000
-
 init: ;инициализация прерываний, из Survivesection
   DI
   LD HL,INT_VECTOR
