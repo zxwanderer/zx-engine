@@ -1,8 +1,10 @@
-DEVICE zxspectrum128
-; ORG #8000
-ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
+include "defines.asm"
+ORG PROG_ADDR
 ; [code][static][dynamic]
 
-include "main.asm"
+incbin "static.bin"
+incbin "dynamic.bin"
+; pack_dynamic:
+incbin "dynamic.bin.zx7"
 
-SAVESNA "cell3326.sna",code
+SAVESNA "cell3326.sna",PROG_ADDR

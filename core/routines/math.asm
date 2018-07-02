@@ -5,11 +5,9 @@ MODULE math
 ; в B - сколько ячеек надо заполнить
 ; в A - чем заполняем
 memset:
-	LD C,0; обнуляем C иначе может сбросится из-за особенностей DJNZ
-memset_loop:
   LD (HL),A
   INC HL
-  DJNZ memset_loop
+  DJNZ memset
   RET
 
 ;   процедура перевода числа из А в десятичное представление в регистрах BCD

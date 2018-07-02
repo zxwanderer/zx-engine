@@ -72,22 +72,28 @@ MODULE zxengine
     LD A, ( zxengine.varsTab + var )
   ENDM
 
+; наш внутренний стек 
+my_stack:
+  DEFS 100, 00
+my_stack_end:
+
 ; различные переменные для скриптов
 varsTab:
   DUP 256
     defb 00
   EDUP
 
-; наш внутренний стек 
-my_stack:
-  DEFS 100, 00
-my_stack_end:
-
 init:
   DI
+
+  LD HL,pack_dynamic
+  LD DE, dynamic
+  CALL dzx7_standard
+
+  CALL clearVars
+
   LD SP, my_stack_end
   CALL interrupt.init
-  CALL clearVars
 
 start:
   EI
@@ -103,6 +109,13 @@ process:
   LD (process_goto+1), DE
 process_goto:
   JP #0000 // в DE - указатель на данные
+
+clear_data:
+  LD HL,pack_dynamic
+  LD DE, dynamic
+  CALL dzx7_standard
+  ; CALL clearVars
+  RET
 
 call_code_me:
   mLDE
@@ -250,8 +263,8 @@ getVar:
 ; --- обнулить массив переменных
 clearVars:
   LD HL, varsTab
-  XOR A
-  LD B, #ff
+  LD A, 1
+  LD B, 255
   JP math.memset
 
 frames_cnt: dw 0000;

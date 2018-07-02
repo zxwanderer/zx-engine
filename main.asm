@@ -2,9 +2,11 @@
 code:
   include "code.asm"
 static:
-  include "static.asm"
 dynamic:
+  include "static.asm"
   include "dynamic.asm"
+
+pack_dynamic:
 
 _all_end:
 

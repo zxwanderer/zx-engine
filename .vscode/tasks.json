@@ -7,13 +7,47 @@
             "type": "shell",
             "label": "sjasmplus_sna",
             "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_sna.asm",
+            "problemMatcher": "$errmatcher-sjasmplus",
+            "dependsOn": [
+                "zx7"
+            ],
+        },
+        {
+            "type": "shell",
+            "label": "sjasmplus_trd",
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_trd.asm",
+            "problemMatcher": "$errmatcher-sjasmplus",
+            "dependsOn": [
+                "zx7"
+            ],
+        },
+        {
+            "type": "shell",
+            "label": "run_sna",
+            "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "sjasmplus_sna"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "sjasmplus_parts", // делаем static.bin и dynamic.bin
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol parts.asm",
             "problemMatcher": "$errmatcher-sjasmplus"
         },
         {
             "type": "shell",
-            "label": "sjasmplus_parts",
-            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol parts.asm",
-            "problemMatcher": "$errmatcher-sjasmplus"
+            "label": "run_trd",
+            "command": "open -a 'Unreal Speccy Portable' cell3326.trd --args -m 0 ",
+            "dependsOn": [
+                "sjasmplus_trd"
+            ],
+            "problemMatcher": []
         },
         // {
         //     "type": "shell",
@@ -28,19 +62,6 @@
         //     "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_tape.asm",
         //     "problemMatcher": "$errmatcher-sjasmplus"
         // },
-        {
-            "type": "shell",
-            "label": "run_sna",
-            "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "dependsOn": [
-                "sjasmplus_sna"
-            ],
-            "problemMatcher": []
-        },
         {
             "type": "shell",
             "label": "zx7",
