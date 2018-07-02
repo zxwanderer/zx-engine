@@ -5,16 +5,22 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "sjasmplus_main",
-            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol main.asm;",
+            "label": "sjasmplus_sna",
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_sna.asm",
             "problemMatcher": "$errmatcher-sjasmplus"
         },
         {
             "type": "shell",
-            "label": "sjasmplus_tape",
-            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol tape_loader.asm",
+            "label": "sjasmplus_trd",
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_trd.asm",
             "problemMatcher": "$errmatcher-sjasmplus"
         },
+        // {
+            // "type": "shell",
+            // "label": "sjasmplus_tape",
+            // "command": "./bin/sjasmplus --dos866 --nofakes --dirbol tape_loader.asm",
+            // "problemMatcher": "$errmatcher-sjasmplus"
+        // },
         {
             "type": "shell",
             "label": "unreal",
@@ -24,8 +30,9 @@
                 "isDefault": true
             },
             "dependsOn": [
-                "sjasmplus_main"
-            ]
+                "sjasmplus_sna"
+            ],
+            "problemMatcher": []
         },
         {
             "type": "shell",
