@@ -78,6 +78,9 @@ varsTab:
     defb 00
   EDUP
 
+init:
+  CALL clearVars
+
 start:
   EI
   LD HL, START_SCRIPT
@@ -235,6 +238,13 @@ getVar:
 	mADDA D,E
 	ld A,(DE)
 	ret
+
+; --- обнулить массив переменных
+clearVars:
+  LD HL, varsTab
+  XOR A
+  LD B, #ff
+  JP math.memset
 
 frames_cnt: dw 0000;
 frames_measured: dw 0000;
