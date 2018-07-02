@@ -114,7 +114,7 @@ clear_data:
   LD HL,pack_dynamic
   LD DE, dynamic
   CALL dzx7_standard
-  ; CALL clearVars
+  CALL clearVars
   RET
 
 call_code_me:
@@ -263,7 +263,7 @@ getVar:
 ; --- обнулить массив переменных
 clearVars:
   LD HL, varsTab
-  LD A, 1
+  LD A, 0
   LD B, 255
   JP math.memset
 
