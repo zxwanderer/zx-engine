@@ -110,9 +110,15 @@ key_table_hero:
 
   KEY_H, HELP_SCRIPT
 
+  KEY_G, RESTART
+
   KEY_ENTER, char_loot
 
   defb _endByte
+
+RESTART
+    CallCode zxengine.clear_data
+    CallCode zxengine.start
 
 next_char:
     CallCode Entities.loopNextChar

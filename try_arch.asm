@@ -1,6 +1,5 @@
- DEVICE zxspectrum48
-
-    ORG #6000
+;  DEVICE zxspectrum48
+    ; ORG #6000
 depack:
     ld HL,begin
     LD DE, #8000
@@ -12,10 +11,10 @@ begin:
     incbin "game.bin.zx7"
 end:
 
- DISPLAY " ---------- "
- DISPLAY "end: ", end
- DISPLAY "pack size: ", /D, end-depack
+;  DISPLAY " ---------- "
+;  DISPLAY "end: ", end
+;  DISPLAY "pack size: ", /D, end-depack
 
- savebin "pack.bin",depack,end-depack
+;  savebin "pack.bin",depack,end-depack
  
 ;   ./bin/bin2tap -b -hp pack.bin -c 24575 -a 24576 -r 24576

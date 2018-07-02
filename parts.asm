@@ -1,10 +1,9 @@
-DEVICE zxspectrum128
-; ORG #8000
-ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
-; [code][static][dynamic]
+include "defines.asm"
+ORG PROG_ADDR
 
 include "main.asm"
 
-  ; прикрепляем к engine скрипты и определения
+; pack_dynamic: ; фейковый указатель на запакованную динамическую часть
+
   SAVEBIN "static.bin", code, dynamic-code
   SAVEBIN "dynamic.bin", dynamic, _all_end-dynamic
