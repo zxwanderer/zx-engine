@@ -6,14 +6,16 @@ DEVICE zxspectrum128
   include "middlware/defines/ItemType.asm"
   include "middlware/defines/Item.asm"
   include "middlware/defines/Hero.asm"
-
-ORG #6000
+ORG #5B00
 ; ORG #5B00 ; уся память в наших руках c собственным IM 2!!!
+
+; [code][static][dynamic]
 
 code_start:
   DI
   LD SP, my_stack_end
   CALL interrupt.init
+  CALL zxengine.init
   jp zxengine.start
   include "core/scankeys.asm"
   include "core/engine.asm"
@@ -26,7 +28,7 @@ code_start:
   include "middlware/text.asm"
   include "middlware/screen.asm"
   include "middlware/map.asm"
-  include "middlware/vars.asm"
+  include "middlware/defines/Vars.asm" ; если разместить в начале, то тупой компилятор ругается на forvard reference из-за ссылки на zxengine.varsTab несмотря на два прохода
   include "middlware/entities.asm"
   include "middlware/items.asm"
   include "core/interrupt.asm"
@@ -34,7 +36,7 @@ my_stack:
   DEFS 100, 00
 my_stack_end:
 
-code_end:
+; code_end:
 
 static_start:
 FX_SET:
@@ -57,15 +59,9 @@ p68_font:
   ; incbin "data/fonts/casa2_revert.fnt"
 _after_font:
 
-static_end:
-
 START_SCRIPT:
   include "data/script.asm"
-MAP_SET:
-	; include "data/maps/laboratory.asm"
-  ; include "data/maps/laboratory_old.asm"
-  include "data/maps/laboratory_demo.asm"
-MAP_SET_END
+
 ENCOUNTER_SET:
 	include "data/rebelstar_enc.asm"
   include "data/cells/empty.asm"
@@ -86,30 +82,39 @@ ENCOUNTER_SET:
   include "data/cells/wall/wall.asm"
 ENCOUNTER_SET_END
 
-dynamic_end:
+; static_end:
+
+dynamic_start:
+
+MAP_SET:
+	; include "data/maps/laboratory.asm"
+  ; include "data/maps/laboratory_old.asm"
+  include "data/maps/laboratory_demo.asm"
+  include "data/heroes.asm"
+MAP_SET_END
+
+; dynamic_end:
 
 _all_end:
 
-display "----- code start: ", code_start
-display /D, _all_end-code_start, " size, ", /D, 0xE000-_all_end, " free"
-display "----- all end: ", _all_end
-
 ; display "----- code start: ", code_start
-; display "code end: ", code_end, ", engine size :", /D, code_end-code_start
-; display "font addr: ", p68_font
-; display "static data end: ", static_data_end, ", data size: ", /D, static_data_end-code_end
-; display "dynamic data end: ", _data_end, ", data size: ", /D, _data_end-static_data_end
+display /D, _all_end-code_start, " size, ", /D, 0x10000-_all_end, " free"
 ; display "----- all end: ", _all_end
 
-LABELSLIST "mylabels.txt"
+display "----- code start: ", code_start
+display "engine size: ", /D, static_start-code_start, ", code end: ", static_start
+display "static data size: ", /D, dynamic_start-static_start, ", static end: ", static_start
+display "font addr: ", p68_font
+display "dynamic data size: ", /D, _all_end-dynamic_start, ", dynamic end: ", _all_end
+; display "static data end: ", static_data_end, ", data size: ", /D, static_data_end-code_end
+; display "dynamic data end: ", _data_end, ", data size: ", /D, _data_end-static_data_end
+display "----- all end: ", _all_end
 
-  ; display "engine: ", code_start, " ", /D, code_end-code_start
-  ; display "static: ", code_end, " ", /D, static_end-code_end
-  ; display "dynamic: ", static_end, " ", /D, dynamic_end-static_end
+; LABELSLIST "mylabels.txt"
 
-  ; SAVEBIN "engine.bin", code_start, code_end-code_start
-  ; SAVEBIN "static.bin", code_end, static_end-code_end
-  ; SAVEBIN "dynamic.bin", static_end, dynamic_end-static_end
+  ; прикрепляем к engine скрипты и определения
+  SAVEBIN "static.bin", code_start, dynamic_start-code_start
+  SAVEBIN "dynamic.bin", dynamic_start, _all_end-dynamic_start
 
 SAVESNA "cell3326.sna",code_start
 
