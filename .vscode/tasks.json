@@ -5,41 +5,45 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "sjasmplus",
-            // "command": "./bin/sjasmplus --dos866 --nofakes --dirbol main.asm; ./bin/sjasmplus tape_loader.asm",
+            "label": "sjasmplus_main",
             "command": "./bin/sjasmplus --dos866 --nofakes --dirbol main.asm;",
             "problemMatcher": "$errmatcher-sjasmplus"
-            // --nofakes 
+        },
+        {
+            "type": "shell",
+            "label": "sjasmplus_tape",
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol tape_loader.asm",
+            "problemMatcher": "$errmatcher-sjasmplus"
         },
         {
             "type": "shell",
             "label": "unreal",
             "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
-            // "command": "open -a 'Fuse' -s myzx.sna",
-            // "command": "open -a 'xpeccy' myzx.sna",
-            "dependsOn": [
-                "sjasmplus"
-            ],
-        },
-        {
-            "type": "shell",
-            "label": "zx7",
-            "command": "rm -f *.zx7; ./bin/zx7 static.bin; ./bin/zx7 dynamic.bin;",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "dependsOn": [
-                "sjasmplus"
+                "sjasmplus_main"
+            ]
+        },
+        {
+            "type": "shell",
+            "label": "zx7",
+            "command": "rm -f *.zx7; ./bin/zx7 static.bin; ./bin/zx7 dynamic.bin;",
+            "dependsOn": [
+                "sjasmplus_main"
             ],
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "make_tape",
+            "command": "./bin/sjasmplus try_arch.asm; ./bin/bin2tap -b -hp pack.bin -c 24575 -a 24576 -r 24576 ",
+            "dependsOn": [
+                "zx7"
+            ],
+            "problemMatcher": []
         }
-        // {
-        //     "type": "shell",
-        //     "label": "make_tape",
-        //     "command": "./bin/sjasmplus try_arch.asm; ./bin/bin2tap -b -hp pack.bin -c 24575 -a 24576 -r 24576 ",
-        //     "dependsOn": [
-        //         "zx7"
-        //     ],
-        // },
     ]
 }

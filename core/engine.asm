@@ -78,7 +78,15 @@ varsTab:
     defb 00
   EDUP
 
+; наш внутренний стек 
+my_stack:
+  DEFS 100, 00
+my_stack_end:
+
 init:
+  DI
+  LD SP, my_stack_end
+  CALL interrupt.init
   CALL clearVars
 
 start:
