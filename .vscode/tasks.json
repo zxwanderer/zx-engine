@@ -42,11 +42,11 @@
         },
         {
             "type": "shell",
-            "label": "sjasmplus_one", // склеиваем все parts (static.bin и dynamic.bin) в один бинарь 
+            "label": "sjasmplus_one", // склеиваем все parts (static.bin и dynamic.bin и dynamic.bin.zx7 ) в один бинарь
             "command": "./bin/sjasmplus --dos866 --nofakes --dirbol one.asm",
             "problemMatcher": "$errmatcher-sjasmplus",
             "dependsOn": [
-                "sjasmplus_parts"
+                "zx7"
             ],
         },
         {
@@ -58,13 +58,6 @@
             ],
             "problemMatcher": []
         },
-        // {
-        //     "type": "shell",
-        //     "label": "sjasmplus_tape",
-        //     // "command": "./bin/sjasmplus --dos866 --nofakes --dirbol tape_loader.asm",
-        //     "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_tape.asm",
-        //     "problemMatcher": "$errmatcher-sjasmplus"
-        // },
         {
             "type": "shell",
             "label": "zx7",
