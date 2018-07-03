@@ -10,6 +10,7 @@ _end:
 LOAD_ADDR equ PROG_ADDR
 boot.begin equ PROG_ADDR
 boot.end equ _end
+boot.START_ADDR equ 
 
   include "core/routines/basic_boot_trd.asm"
   EMPTYTRD "cell3326.trd" ;create empty TRD image

@@ -18,6 +18,7 @@ unpacker:
 
 _end_all:
 
+  display "BINARY SIZE: ", /D, _end_all-dynamic_pack, " ", _end_all-dynamic_pack
   display "BINARY BEGIN: ", dynamic_pack, " (", /D, dynamic_pack, ")"
   display "BINARY START: ", unpacker, " (", /D, unpacker, ")"
   SAVEBIN "game.bin", dynamic_pack, _end_all-dynamic_pack

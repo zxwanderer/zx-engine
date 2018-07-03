@@ -6,14 +6,11 @@
   CallCode input.noKey
   CallCode binary_clear_screen
   CallCode binary_init
-  SetVar varDoorUnlock,0
-  SetVar Vars.game_over,0
+  SetVar varDoorUnlock, 0
+  SetVar Vars.game_over, 0
 
 LOOP_SCRIPT:
-  ; wait_halt 1
-  ; setBorder PEN_RED
   CallScript GAME_LOOP
-  ; setBorder PEN_BLACK
   IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
   defb _endByte
@@ -31,7 +28,9 @@ HELP_SCRIPT:
 END_SCRIPT:
   shiruFX 46
   CallCode input.waitKey
-  goto END_SCRIPT
+  CallCode input.noKey
+  goto RESTART
+  ; goto END_SCRIPT
 
 game_over:
   CallCode binary_clear_screen

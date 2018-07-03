@@ -68,9 +68,9 @@
             "problemMatcher": []
         },
         {
-            "type": "shell",
+            "type": "shell", // надо заменить -a -r еа значения из консоли make_one
             "label": "make_tape",
-            "command": "./bin/bin2tap -b -hp game.bin -c 24575 -a 48447 -r 56043 ",
+            "command": "./bin/bin2tap -b -hp game.bin -c 24575 -a 48451 -r 56015 ",
             "dependsOn": [
                 "sjasmplus_one"
             ],
