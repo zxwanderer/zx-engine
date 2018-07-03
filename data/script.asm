@@ -49,7 +49,7 @@ game_over_2
 
 binary_clear_screen:
   LD D, 0
-  LD E, 23
+  LD E, 24
   CALL screenfx.clear_window
   RET
 
