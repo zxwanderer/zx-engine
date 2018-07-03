@@ -1,9 +1,25 @@
 include "defines.asm"
 ORG PROG_ADDR
 
-incbin "static.bin"
-incbin "dynamic.bin"
-incbin "dynamic.bin.zx7"
+static:
+    incbin "static.bin"
+dynamic:
+    incbin "dynamic.bin"
+dynamic_pack:
+    incbin "dynamic.bin.zx7"
+static_pack:
+    incbin "static.bin.zx7"
+unpacker:
+    LD HL,static_pack
+    LD DE, static
+    CALL dzx7_standard
+    JP static
+    include "core/routines/zx7.a80"
 
-  SAVEBIN "game.bin", PROG_ADDR, $-PROG_ADDR
+_end_all:
+
+  display "BINARY BEGIN: ", dynamic_pack, " (", /D, dynamic_pack, ")"
+  display "BINARY START: ", unpacker, " (", /D, unpacker, ")"
+  SAVEBIN "game.bin", dynamic_pack, _end_all-dynamic_pack
+;   SAVEBIN "game.bin", PROG_ADDR, $-PROG_ADDR
   

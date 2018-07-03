@@ -2,7 +2,7 @@
 
 HELLO_TXT:
 ; db "012345678901234567890123456789012345678901"
-  db " CELL 3326         v0.1.2[en]  12.06.2018 "
+  db " CELL 3326         v0.1.3[en]  03.07.2018 "
   db "------------------------------------------"
   db "Hello wordl! This is a small testing mini-"
   db "game. Main target - leave the room :)     "
@@ -30,6 +30,8 @@ HELP:
   db "------------------------------------------"
   db "                                          "
   db "H-BIG main key, shows this help screen :) "
+  db "                                          "
+  db "G - restart game ( exit to menu )         "
   db "                                          "
   db "QWEDCXZA-movement like a Rebel Star game  "
   db "                                          "
@@ -60,7 +62,7 @@ GAMEOVER_2:
   db "the mini-game, hurray-hurray!             "
   db _endByte
 
-varDoorUnlock equ 100; признак открытия двери
+varDoorUnlock equ 100; пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
 CELL_TYPE_NAMES:
 Empty_cell_name: db "Something",0
@@ -156,4 +158,4 @@ Computer_off_mess:
   db "the terminal turned off...",0
 
 Computer_off_hit_mess:
-  db "Тurned off..", 0
+  db "пїЅurned off..", 0
