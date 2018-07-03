@@ -22,7 +22,7 @@ Line1:
  sectors boot.begin,boot.end
  call #3d13
 
- jp LOAD_ADDR
+ jp START_ADDR
 
  db "yo,lamer!"
  db #0D
