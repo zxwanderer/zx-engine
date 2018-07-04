@@ -1,16 +1,27 @@
 include "defines.asm"
 ORG PROG_ADDR
 
-incbin "static.bin"
-incbin "dynamic.bin"
-incbin "dynamic.bin.zx7"
+static:
+    incbin "static.bin"
+dynamic:
+    incbin "dynamic.bin"
+dynamic_pack:
+    incbin "dynamic.bin.zx7"
+static_pack:
+    incbin "static.bin.zx7"
+unpacker:
+    LD HL,static_pack
+    LD DE, static
+    CALL dzx7_standard
+    JP static
+    include "core/routines/zx7.a80"
 
 _end:
 
-LOAD_ADDR equ PROG_ADDR
-boot.begin equ PROG_ADDR
+LOAD_ADDR equ dynamic_pack
+boot.begin equ dynamic_pack
 boot.end equ _end
-boot.START_ADDR equ 
+boot.START_ADDR equ unpacker
 
   include "core/routines/basic_boot_trd.asm"
   EMPTYTRD "cell3326.trd" ;create empty TRD image

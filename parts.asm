@@ -1,6 +1,8 @@
 include "defines.asm"
 ORG PROG_ADDR
 
+define LANG_FILE "data/lang/lang_ru.asm"
+
 include "main.asm"
 
   SAVEBIN "static.bin", code, dynamic-code
