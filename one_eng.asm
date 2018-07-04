@@ -2,13 +2,13 @@ include "defines.asm"
 ORG PROG_ADDR
 
 static:
-    incbin "static.bin"
+    incbin "static_eng.bin"
 dynamic:
-    incbin "dynamic.bin"
+    incbin "dynamic_eng.bin"
 dynamic_pack:
-    incbin "dynamic.bin.zx7"
+    incbin "dynamic_eng.bin.zx7"
 static_pack:
-    incbin "static.bin.zx7"
+    incbin "static_eng.bin.zx7"
 unpacker:
     LD HL,static_pack
     LD DE, static
@@ -21,6 +21,6 @@ _end_all:
   display "BINARY SIZE: ", /D, _end_all-dynamic_pack, " ", _end_all-dynamic_pack
   display "BINARY BEGIN: ", dynamic_pack, " (", /D, dynamic_pack, ")"
   display "BINARY START: ", unpacker, " (", /D, unpacker, ")"
-  SAVEBIN "cell3326.bin", dynamic_pack, _end_all-dynamic_pack
+  SAVEBIN "cell3326_eng.bin", dynamic_pack, _end_all-dynamic_pack
 ;   SAVEBIN "game.bin", PROG_ADDR, $-PROG_ADDR
   

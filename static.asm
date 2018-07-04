@@ -7,7 +7,7 @@ TILE_SET:
 TILE_SET_END
 
 LANG_SET:
-  include "data/lang/lang_ru.asm"
+  INCLUDE LANG_FILE
   ; include "data/lang/lang_en.asm"
 LANG_SET_END
 

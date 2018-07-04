@@ -14,15 +14,6 @@
         },
         {
             "type": "shell",
-            "label": "make_trd",
-            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_trd.asm",
-            "problemMatcher": "$errmatcher-sjasmplus",
-            "dependsOn": [
-                "zx7"
-            ],
-        },
-        {
-            "type": "shell",
             "label": "run_sna",
             "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
             "group": {
@@ -68,13 +59,66 @@
             "problemMatcher": []
         },
         {
+            "type": "shell",
+            "label": "make_trd",
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_trd.asm",
+            "problemMatcher": "$errmatcher-sjasmplus",
+            "dependsOn": [
+                "zx7"
+            ],
+        },
+        {
             "type": "shell", // надо заменить -a -r еа значения из консоли make_one
             "label": "make_tape",
-            "command": "./bin/bin2tap -b -hp game.bin -c 24575 -a 48451 -r 56015 ",
+            "command": "./bin/bin2tap -b -hp cell3326.bin -c 24575 -a 48451 -r 56015 ",
             "dependsOn": [
                 "sjasmplus_one"
             ],
             "problemMatcher": []
+        },
+
+        {
+            "type": "shell",
+            "label": "sjasmplus_parts_eng", // делаем static.bin и dynamic.bin
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol parts_eng.asm",
+            "problemMatcher": "$errmatcher-sjasmplus"
+        },
+        {
+            "type": "shell",
+            "label": "zx7_eng",
+            "command": "rm -f *.zx7; ./bin/zx7 static_eng.bin; ./bin/zx7 dynamic_eng.bin;",
+            "dependsOn": [
+                "sjasmplus_parts_eng"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "sjasmplus_one_eng", // склеиваем все parts (static.bin и dynamic.bin и dynamic.bin.zx7 ) в один бинарь
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol one_eng.asm",
+            "problemMatcher": "$errmatcher-sjasmplus",
+            "dependsOn": [
+                "zx7_eng"
+            ],
+        },
+        {
+            "type": "shell",
+            "label": "sjasmplus_one_eng", // склеиваем все parts (static.bin и dynamic.bin и dynamic.bin.zx7 ) в один бинарь
+            "command": "./bin/sjasmplus --dos866 --nofakes --dirbol one_eng.asm",
+            "problemMatcher": "$errmatcher-sjasmplus",
+            "dependsOn": [
+                "zx7_eng"
+            ],
+        },
+        {
+            "type": "shell", // надо заменить -a -r еа значения из консоли make_one
+            "label": "make_tape_eng",
+            "command": "./bin/bin2tap -b -hp cell3326_eng.bin -c 24575 -a 48451 -r 55843 ",
+            "dependsOn": [
+                "sjasmplus_one_eng"
+            ],
+            "problemMatcher": []
         }
+
     ]
 }
