@@ -113,7 +113,7 @@
         {
             "type": "shell", // надо заменить -a -r еа значения из консоли make_one
             "label": "make_tape_eng",
-            "command": "./bin/bin2tap -b -hp cell3326_eng.bin -c 24575 -a 48451 -r 55843 ",
+            "command": "./bin/bin2tap -b -hp cell3326_eng.bin -c 24575 -a 48451 -r 55835 ",
             "dependsOn": [
                 "sjasmplus_one_eng"
             ],
