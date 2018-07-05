@@ -147,14 +147,14 @@ Computer_add_shard_mess
   db "was completely broken.",0
 
 Soft_wall_hit_mess:
-  db "The impact is absorbed by the soft wall.. ",0
+  db "The impact was absorbed by the soft wall..",0
 
 Soft_wall_hit_item_mess:
-  db "Useless. The impact is absorbed           "
+  db "Useless. The impact was absorbed          "
   db "by the soft wall.",0
 
 Computer_off_mess:
-  db "I pressed the keys at random sequence and "
+  db "I pressed the keys in random order and    "
   db "the terminal turned off...",0
 
 Computer_off_hit_mess:
