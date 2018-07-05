@@ -2,24 +2,24 @@
 
 HELLO_TXT:
 ; db "012345678901234567890123456789012345678901"
-  db " CELL 3326         v0.1.3[en]  03.07.2018 "
+  db " CELL 3326       v0.1.3.1[en]  05.07.2018 "
   db "------------------------------------------"
-  db "Hello wordl! This is a small testing mini-"
+  db "Hello world! This is a small testing mini-"
   db "game. Main target - leave the room :)     "
   db "------------------------------------------"
-  db "In the development was used:              "
+  db " Tools used in development:               "
   db " - Z80 assembler sjasmplus                "
   db " - beepFX engine and samples by Shiru     "
   db " - text editor Visual Studio Code         "
   db " - tile map editor Tiled                  "
   db " - sprite editor Aseprite                 "
   db " - graphic editor ZX-Paintbrush           "
-  db " - Speccy Unreal Portable                 "
+  db " - Unreal Speccy Portable                 "
   db " - packer zx7                             "
   db " - bin2tap for tape-version               "
   db "Some ideas and code were borrowed from    "
-  db "game source by SamStyle and SancheZ.      "
-  db "Font was get from game Trip by STD.       "
+  db "game sources by SamStyle and SancheZ.     "
+  db "The font comes from Trip game by STD.     "
   db "------------------------------------------"
   db "my e-mail: wanderer[@]amberskynet.org"
   db _endByte
@@ -43,7 +43,7 @@ GAMEOVER_1:
   db "Happy end!                                "
   db "------------------------------------------"
   db "I hit the terminal with a chair...        "
-  db "He exploded with a deafening blow,        "
+  db "It exploded with a deafening blow,        "
   db "piercing my body with sharp fragments     "
   db "of plastic and hot metal.                 "
   db "------------------------------------------"
@@ -62,7 +62,7 @@ GAMEOVER_2:
   db "the mini-game, hurray-hurray!             "
   db _endByte
 
-varDoorUnlock equ 100; пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+varDoorUnlock equ 100; признак открытия двери
 
 CELL_TYPE_NAMES:
 Empty_cell_name: db "Something",0
@@ -117,7 +117,7 @@ Take_trash_mess:
   db "Small debris and trash.. Uselesses.",0
 
 Take_chair_mess
-  db "I'm picked up a chair..",0
+  db "I picked up a chair..",0
 
 Wall_mess:
   db "I knocked my foot on the heavy armored    "
@@ -128,11 +128,11 @@ Break_shard_mess
   db "in my the hands..",0
 
 Take_shard_mess
-  db "I'm picked up a sharp piece of plastic..",0
+  db "I picked up a sharp piece of plastic..",0
 
 Shard_to_soft_wall_mess
   db "I cut a hole with a sharp piece           "
-  db "of plastic in soft decorative wall ",0
+  db "of plastic in the soft decorative wall ",0
 
 Soft_wall_clean
   db "I removed the remains of the decorative   "
@@ -158,4 +158,4 @@ Computer_off_mess:
   db "the terminal turned off...",0
 
 Computer_off_hit_mess:
-  db "пїЅurned off..", 0
+  db "It's offline..", 0
