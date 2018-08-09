@@ -2,6 +2,12 @@ FX_SET:
   include "data/demoFX.asm"
 FX_SET_END
 
+TRITONE:
+  include "core/routines/music_tritone.asm"
+  include "data/music/AER/foryou.asm"
+TRITONE_END
+
+
 TILE_SET:
   include "data/graph/tiles_many.asm"
 TILE_SET_END

@@ -2,7 +2,7 @@
 
 HELLO_TXT:
 ; db "012345678901234567890123456789012345678901"
-  db " CELL 3326       v0.1.3.1[en]  05.07.2018 "
+  db " CELL 3326             v0.1.4  09.08.2018 "
   db "------------------------------------------"
   db "Hello world! This is a small testing mini-"
   db "game. Main target - leave the room :)     "
@@ -21,7 +21,8 @@ HELLO_TXT:
   db "game sources by SamStyle and SancheZ.     "
   db "The font comes from Trip game by STD.     "
   db "------------------------------------------"
-  db "my e-mail: wanderer[@]amberskynet.org"
+  db " music by AER 'ForYOU' special for game   "
+  db "------------------------------------------"
   db _endByte
 
 HELP:
@@ -62,7 +63,7 @@ GAMEOVER_2:
   db "the mini-game, hurray-hurray!             "
   db _endByte
 
-varDoorUnlock equ 100; признак открытия двери
+varDoorUnlock equ 100; пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
 CELL_TYPE_NAMES:
 Empty_cell_name: db "Something",0
