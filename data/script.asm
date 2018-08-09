@@ -2,8 +2,10 @@
   setScreen PAPER_BLACK or PEN_CYAN
   CallCode binary_clear_screen
   printAt 0,0,HELLO_TXT
-  CallCode input.waitKey
+  CallCode binary_play_intro
+  ; CallCode input.waitKey
   CallCode input.noKey
+
   CallCode binary_clear_screen
   CallCode binary_init
   SetVar varDoorUnlock, 0
@@ -64,6 +66,11 @@ GAME_LOOP:
   ; CallScript look_char
   defb _endByte
 
+
+binary_play_intro:
+  LD HL, MUSICDATA
+  CALL TRI_PLAY
+  RET
 
 binary_show_screen:
   CALL Entities.lookChar
