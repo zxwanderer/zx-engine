@@ -19,8 +19,8 @@ LANG_SET_END
 
 ORG (high $+1)*256
 p68_font:
-  incbin "data/fonts/tripfont_revert.fnt"
-  ; incbin "data/fonts/Font57_revert.fnt"
+  ; incbin "data/fonts/tripfont_revert.fnt"
+  incbin "data/fonts/Font57_revert.fnt"
   ; incbin "data/fonts/casa2_revert.fnt"
 _after_font:
 

@@ -1,9 +1,10 @@
+BEGIN_SCRIPT:
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_CYAN
   CallCode binary_clear_screen
   printAt 0,0,HELLO_TXT
   CallCode binary_play_intro
-  ; CallCode input.waitKey
+  SkanKeyTable key_table_intro
   CallCode input.noKey
 
   CallCode binary_clear_screen
@@ -15,6 +16,25 @@ LOOP_SCRIPT:
   CallScript GAME_LOOP
   IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
+  defb _endByte
+
+ABOUT_INTRO:
+  CallCode binary_clear_screen
+  setScreen PAPER_BLACK or PEN_GREEN
+  printAt 0,0,ABOUT_TXT
+  CallCode input.waitKey
+  goto BEGIN_SCRIPT
+  defb _endByte
+
+HELP_SCRIPT_INTRO:
+  CallCode binary_clear_screen
+  setScreen PAPER_BLACK or PEN_GREEN
+  printAt 0,0,HELP
+  ; shiruFX 46
+  CallCode input.waitKey
+  goto BEGIN_SCRIPT
+  ; CallCode input.noKey
+  ; CallCode binary_show_screen
   defb _endByte
 
 HELP_SCRIPT:
@@ -101,6 +121,11 @@ show_hand_item:
 
 binary_show_gui_ret:
   RET
+
+key_table_intro
+  KEY_H, HELP_SCRIPT_INTRO
+  KEY_I, ABOUT_INTRO
+  defb _endByte
 
 key_table_hero:
   KEY_N, next_char
