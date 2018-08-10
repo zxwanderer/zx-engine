@@ -2,8 +2,8 @@
 code:
   include "code.asm"
 static:
-dynamic:
   include "static.asm"
+dynamic:
   include "dynamic.asm"
 
 pack_dynamic:
