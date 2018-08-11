@@ -3,10 +3,26 @@ FX_SET:
 FX_SET_END
 
 TRITONE:
+
   include "core/routines/music_tritone.asm"
+
   include "data/music/AER/foryou.asm"
+
+  MODULE gameover
+  include "data/music/AER/gameover.asm"
+  ENDMODULE
+
+  MODULE gameend
+  include "data/music/AER/gameend.asm"
+  ENDMODULE
+
 TRITONE_END
 
+; 0 - игра не окончена никак
+; 1 - хеппи-енд
+; 2 - геймовер
+IS_GAME_OVER
+  defb 00
 
 TILE_SET:
   include "data/graph/tiles_many.asm"
