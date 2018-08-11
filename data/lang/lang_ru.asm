@@ -18,15 +18,13 @@ HELLO_TXT:
   db "                                          "
   db "любую другую для начала игры              "
   db "                                          "
-  ; db "------------------------------------------"
-  ; db "Шрифт позаиствован из игры Trip от STD.   "
   db "------------------------------------------"
   db "Выражаю благодарность AER за музыку,      "
   db "специально написанную для intro этой игры."
   db "Получилось очень атмосферно.              "
   db "------------------------------------------"
-  db " https: zxwanderer.github.io/cell3326     "
-  db " email: wanderer@amberksynet.org          "
+  db "https: zxwanderer.github.io/cell3326      "
+  db "email: wanderer@amberksynet.org           "
   db _endByte
 
 ABOUT_TXT:

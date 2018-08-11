@@ -57,16 +57,18 @@ END_SCRIPT:
 game_over:
   CallCode binary_clear_screen
   IfVar Vars.game_over, 2, game_over_2
+
 game_over_1:
   setScreen PAPER_BLACK or PEN_RED
   printAt 0,0,GAMEOVER_1
-  goto END_SCRIPT
+  CallCode play_gameover
+  goto RESTART
   
 game_over_2
   setScreen PAPER_BLACK or PEN_YELLOW
   printAt 0,0,GAMEOVER_2
-  CallCode input.waitKey
-  goto END_SCRIPT
+  CallCode play_happy
+  goto RESTART
 
 binary_clear_screen:
   LD D, 0
@@ -88,9 +90,20 @@ GAME_LOOP:
 
 
 binary_play_intro:
-  LD HL, MUSICDATA
-  CALL TRI_PLAY
-  RET
+  LD A, (IS_GAME_OVER)
+  AND A
+  JR Z, play_normal
+  DEC A
+  JR Z, play_happy
+play_gameover:
+  LD HL, gameover.MUSICDATA
+  JP TRI_PLAY
+play_normal:
+  LD HL,MUSICDATA
+  JP TRI_PLAY
+play_happy:
+  LD HL, gameend.MUSICDATA
+  JP TRI_PLAY
 
 binary_show_screen:
   CALL Entities.lookChar
