@@ -19,12 +19,9 @@ HELLO_TXT:
   db "любую другую для начала игры              "
   db "                                          "
   db "------------------------------------------"
-  db "Выражаю благодарность AER за музыку,      "
-  db "специально написанную для intro этой игры."
-  db "Получилось очень атмосферно.              "
+  db "CODE: WANDERER / MUSIC: AER               "
   db "------------------------------------------"
-  db "https: zxwanderer.github.io/cell3326      "
-  db "email: wanderer@amberksynet.org           "
+  db "https://zxwanderer.github.io/cell3326     "
   db _endByte
 
 ABOUT_TXT:
@@ -56,16 +53,15 @@ HELP:
   db "                                          "
   db " Передвижение:                            "
   db "                                          "
-  db " W - вверх                                "
-  db " X - вниз                                 "
-  db " A - влево                                "
-  db " D - вправо                               "
-  db " Q,E,Z,C - движения наискосок             "
+  db " Клавиши курсора, а так же                "
+  db " Q - вверх                                "
+  db " A - вниз                                 "
+  db " O - влево                                "
+  db " P - вправо                               "
   db "                                          "
-  db " Enter - поднять/бросить предмет          "
+  db " Enter - поднять/бросить предмет на пол   "
   db "                                          "
   db " H - вызов справки ( вот этой )           "
-  db "                                          "
   db " G - выход из игры в меню                 "
   db _endByte
 

@@ -1,11 +1,11 @@
 BEGIN_SCRIPT:
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_CYAN
-  ; CallCode binary_clear_screen
-  ; printAt 0,0,HELLO_TXT
-  ; CallCode binary_play_intro
-  ; SkanKeyTable key_table_intro
-  ; CallCode input.noKey
+  CallCode binary_clear_screen
+  printAt 0,0,HELLO_TXT
+  CallCode binary_play_intro
+  SkanKeyTable key_table_intro
+  CallCode input.noKey
 
   CallCode binary_clear_screen
   CallCode binary_init
@@ -145,15 +145,15 @@ key_table_hero:
 
   KEY_N, next_char
 
-  KEY_W, char_up
-  KEY_X, char_down
-  KEY_A, char_left
-  KEY_D, char_right
+  KEY_Q, char_up
+  KEY_A, char_down
+  KEY_O, char_left
+  KEY_P, char_right
 
-  KEY_Q, char_up_left
-  KEY_E, char_up_right
-  KEY_Z, char_down_left
-  KEY_C, char_down_right
+  ; KEY_Q, char_up_left
+  ; KEY_E, char_up_right
+  ; KEY_Z, char_down_left
+  ; KEY_C, char_down_right
 
   KEY_H, HELP_SCRIPT
 
