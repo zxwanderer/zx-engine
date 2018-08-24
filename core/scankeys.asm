@@ -23,8 +23,8 @@ DEFINE KEY_P dw 0x01df
 ; $EF - 6, 7, 8, 9, 0
 DEFINE KEY_6 dw 0x10ef
 DEFINE KEY_7 dw 0x08ef
-DEFINE KEY_9 dw 0x04ef
-DEFINE KEY_8 dw 0x02ef
+DEFINE KEY_8 dw 0x04ef
+DEFINE KEY_9 dw 0x02ef
 DEFINE KEY_0 dw 0x01ef
 
 ; $F7 - 5, 4, 3, 2, 1
