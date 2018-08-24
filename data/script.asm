@@ -141,6 +141,8 @@ key_table_intro
   defb _endByte
 
 key_table_hero:
+  KEY_CAPS_SHIFT, scan_cursor_keys
+
   KEY_N, next_char
 
   KEY_W, char_up
@@ -159,12 +161,11 @@ key_table_hero:
 
   KEY_ENTER, char_loot
 
-  KEY_CAPS_SHIFT, scan_cursor_keys
   defb _endByte
 
 scan_cursor_keys:
   SkanKeyTable cursor_table_hero
-  goto look_char
+  ; goto look_char
   defb _endByte
 
 cursor_table_hero:
