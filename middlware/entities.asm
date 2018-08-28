@@ -236,6 +236,7 @@ char_do_get_drop:
   CALL items.find_item_on_map
   JR NC, char_no_get; предмета нет !
 
+char_pickup_item:
   ; в IX указатель на предмет
   LD (ActiveItem_ptr), IX
   LD A, (IX+Item.itemID); взяли номер типа предмета
@@ -274,8 +275,9 @@ char_no_get:
   LD A, (IX+Hero.ground)
   CALL call_cell_script
 
-; setVar Vars.var_ret ; ставим ошибку поднятия
-; вызываем скрипт который на полу %)
+  getVar Vars.var_ret; проверяем если нет ошибки поднятия - возврат
+  OR A
+  RET Z
 
 char_no_get_no_char:
   LD A, 10

@@ -229,6 +229,28 @@ del_item_from_hand:
   RET
 
 del_all_items_from_cell:
-    
+
+; создаем предмет прямо в руках героя
+; в A - тип предмета
+; на выходе в IX указатель на предмет
+add_item_to_hand:
+  LD DE, #0000
+  CALL add_item_to_map; на выходе в IX - указатель на предмет
+  CALL Entities.char_pickup_item
+;   LD A, 0
+;   setVar Vars.var_ret; возвращаем по умолчанию 1
+  RET
+; ;   LD ( Entities.ActiveItem_ptr), IX
+;   LD A, ( Entities.CurPersonageNum )
+;   LD (IY+Item.owner), A
+
+;   PUSH IY
+;   POP HL
+  
+;   LD IX, (Entities.activePersonage_ptr)
+;   LD (IX+Hero.hand_right_p), L
+;   LD (IX+Hero.hand_right_p_1), H
+
+;   RET
 
 ENDMODULE
