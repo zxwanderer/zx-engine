@@ -236,21 +236,16 @@ del_all_items_from_cell:
 add_item_to_hand:
   LD DE, #0000
   CALL add_item_to_map; на выходе в IX - указатель на предмет
-  CALL Entities.char_pickup_item
-;   LD A, 0
-;   setVar Vars.var_ret; возвращаем по умолчанию 1
+  PUSH IX
+  POP HL
+
+  LD A, ( Entities.CurPersonageNum )
+  LD (IX+Item.owner), A
+
+  LD IX, (Entities.activePersonage_ptr)
+  LD (IX+Hero.hand_right_p), L
+  LD (IX+Hero.hand_right_p_1), H
+
   RET
-; ;   LD ( Entities.ActiveItem_ptr), IX
-;   LD A, ( Entities.CurPersonageNum )
-;   LD (IY+Item.owner), A
-
-;   PUSH IY
-;   POP HL
-  
-;   LD IX, (Entities.activePersonage_ptr)
-;   LD (IX+Hero.hand_right_p), L
-;   LD (IX+Hero.hand_right_p_1), H
-
-;   RET
 
 ENDMODULE
