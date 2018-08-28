@@ -14,7 +14,15 @@ trash_script:
   defb _endByte
 
 take_trash_script
-  ShowText Take_trash_mess
+  ; ShowText Take_trash_mess
+  CallCode binary_get_shard
   defb _endByte
+
+binary_get_shard:
+  LD A, Shard.item
+  CALL items.add_item_to_hand
+  LD A, 0
+  setVar Vars.var_ret; возвращаем по умолчанию 1
+  RET
 
   ENDMODULE

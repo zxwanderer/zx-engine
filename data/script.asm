@@ -1,11 +1,11 @@
 BEGIN_SCRIPT:
   setBorder PEN_BLACK
-  setScreen PAPER_BLACK or PEN_CYAN
-  CallCode binary_clear_screen
-  printAt 0,0,HELLO_TXT
-  CallCode binary_play_intro
-  SkanKeyTable key_table_intro
-  CallCode input.noKey
+  ; setScreen PAPER_BLACK or PEN_CYAN
+  ; CallCode binary_clear_screen
+  ; printAt 0,0,HELLO_TXT
+  ; CallCode binary_play_intro
+  ; SkanKeyTable key_table_intro
+  ; CallCode input.noKey
 
   CallCode binary_clear_screen
   CallCode binary_init
