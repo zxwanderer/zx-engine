@@ -236,7 +236,7 @@ char_do_get_drop:
   CALL items.find_item_on_map
   JR NC, char_no_get; предмета нет !
 
-char_pickup_item:
+; char_pickup_item:
   ; в IX указатель на предмет
   LD (ActiveItem_ptr), IX
   LD A, (IX+Item.itemID); взяли номер типа предмета
@@ -248,11 +248,12 @@ char_pickup_item:
   OR A
   RET Z; после скрипта переменная установлена в 0 - ошибка поднятия
 
-  LD (IY+Hero.hand_right_p_1), 00; предмет брошен
+  ; LD (IY+Hero.hand_right_p_1), 00; предмет брошен
+; char_pickup_item_no_call:
   LD IY, (Entities.ActiveItem_ptr);
   PUSH IY
   POP HL
-  
+
   LD IX, (Entities.activePersonage_ptr)
   LD (IX+Hero.hand_right_p), L
   LD (IX+Hero.hand_right_p_1), H
