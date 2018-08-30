@@ -12,11 +12,11 @@ _temp equ $; запоминаем адрес
   
 floor_script:
   IfVar Vars.var_act, do_get, take_floor_script
-  IfVarN Vars.var_pos_y, 7, floor_script_normal
-  SetVar Vars.game_over, 2
+  ; IfVarN Vars.var_pos_y, 7, floor_script_normal
+  ; SetVar Vars.game_over, 2
   defb _endByte
-floor_script_normal:
-  defb _endByte
+; floor_script_normal:
+  ; defb _endByte
 take_floor_script
   ShowText Take_floor_mess
   defb _endByte
