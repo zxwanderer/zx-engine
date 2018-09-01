@@ -40,6 +40,9 @@ interrupt_routine:
   INC HL
   LD (frame_counter), HL
 
+  CALL screenfx.show_cursor
+  ; show_cursor
+
   ; CALL screenfx.show_frames
 return_routine:
   pop iy

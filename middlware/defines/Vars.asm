@@ -8,5 +8,8 @@ var_pos_x equ 3
 MapCell_xy equ zxengine.varsTab+2; положение воздействия автоматом доступно из скриптов если пишется в переменные Engine =)
 var_item_id equ 4; id активного предмета
 game_over equ 5
+cursor_pos_y equ 6
+cursor_pos_x equ 7
+Cursor_pos equ zxengine.varsTab+6; позиция курсора на экране
 
 ENDMODULE
