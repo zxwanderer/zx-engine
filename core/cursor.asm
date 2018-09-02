@@ -47,17 +47,15 @@ scr_right
 
 ; на выходе в HL указатель на ячейку карты
 getCell:
-  LD DE, (Vars.MapCell_xy)
+  LD DE, (map.mapPos)
   LD HL, (Vars.Cursor_pos)
   ADD HL, DE
   LD (mapCurPos), HL; D-x E-y
-  PUSH HL
-  POP DE
+  EX HL, DE
   call map.calc_pos
   LD (mapCurPos_ptr), HL
   LD A, (HL)
   RET
-
 
 show_cursor:
     ; LD DE, #1008

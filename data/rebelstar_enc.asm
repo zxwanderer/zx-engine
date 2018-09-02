@@ -5,7 +5,7 @@
   ENDM
 
   MACRO SETUP_ITEM_TYPE
-    ORG ITEM_TYPES+item*CellType
+    ORG ITEM_TYPES+item*ItemType
     ItemType spr, 0, 10
   ENDM
 
