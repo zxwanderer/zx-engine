@@ -36,5 +36,8 @@ cursor_right:
 binary_show_cell_info:
     CALL cursor.getCell
     CALL Entities.calc_cell_type; в HL указатель на опмсание типа ячейки
+    LD (binary_show_cell_info_ptr+1), HL
+binary_show_cell_info_ptr
+    LD HL, (#4000)
     CALL screenfx.show_info_message
     RET
