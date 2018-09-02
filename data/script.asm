@@ -14,6 +14,7 @@ BEGIN_SCRIPT:
 
 LOOP_SCRIPT:
   CallScript GAME_LOOP
+  ; CallScript LOOK_CURSOR_LOOP
   IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
   defb _endByte
@@ -112,7 +113,7 @@ binary_show_screen:
   
 ; показать GUI поверх карты =)
 binary_show_gui:
-  CALL cursor.show_cursor
+  ; CALL cursor.show_cursor
 /*
 ; проверяем стоит ли герой на каком-нибудь предмете
 show_ground_item:
@@ -147,15 +148,16 @@ key_table_hero:
 
   KEY_N, next_char
 
-  ; KEY_Q, char_up
-  ; KEY_A, char_down
-  ; KEY_O, char_left
-  ; KEY_P, char_right
+  KEY_Q, char_up
+  KEY_A, char_down
+  KEY_O, char_left
+  KEY_P, char_right
 
-  KEY_Q, cursor_up
-  KEY_A, cursor_down
-  KEY_O, cursor_left
-  KEY_P, cursor_right
+  KEY_I, cursor_loop
+  ; KEY_Q, cursor_up
+  ; KEY_A, cursor_down
+  ; KEY_O, cursor_left
+  ; KEY_P, cursor_right
 
   ; KEY_Q, char_up_left
   ; KEY_E, char_up_right
@@ -176,15 +178,20 @@ scan_cursor_keys:
   defb _endByte
 
 cursor_table_hero:
-  ; KEY_8, char_right
-  ; KEY_7, char_up
-  ; KEY_6, char_down
-  ; KEY_5, char_left
-  KEY_8, cursor_right
-  KEY_7, cursor_up
-  KEY_6, cursor_down
-  KEY_5, cursor_left
+  KEY_8, char_right
+  KEY_7, char_up
+  KEY_6, char_down
+  KEY_5, char_left
   defb _endByte
+
+; LOOK_CURSOR_LOOP:
+  ; SkanKeyTable cursor_table_hero
+  ; wait_halt 1
+  ; CallCode screenfx.show_frames
+  ; goto LOOK_CURSOR_LOOP
+  ; CallScript look_char
+  ; defb _endByte
+
 
 RESTART
     ; CallCode zxengine.clear_data
@@ -210,19 +217,6 @@ char_left:
   goto look_char
 char_right:
   CharDo do_stand, dir_right
-  goto look_char
-
-cursor_up:
-  CallCode cursor.up
-  goto look_char
-cursor_down:
-  CallCode cursor.down
-  goto look_char
-cursor_left:
-  CallCode cursor.left
-  goto look_char
-cursor_right:
-  CallCode cursor.right
   goto look_char
 
 char_up_left:
