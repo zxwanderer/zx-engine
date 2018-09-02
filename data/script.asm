@@ -110,7 +110,7 @@ binary_show_screen:
   
 ; показать GUI поверх карты =)
 binary_show_gui:
-  CALL screenfx.show_cursor
+  CALL cursor.show_cursor
 /*
 ; проверяем стоит ли герой на каком-нибудь предмете
 show_ground_item:
