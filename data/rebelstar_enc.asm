@@ -35,7 +35,8 @@ FX_Cutt1 equ 8
 
 CELL_TYPES:
   DUP CellType*256
-    CellType Empty_cell_name, no_way_script
+    ; CellType Empty_cell_name, no_way_script
+    defb 00
   EDUP
 
 ITEM_TYPES:
