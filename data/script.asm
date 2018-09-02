@@ -77,6 +77,8 @@ binary_clear_screen:
   RET
 
 binary_init:
+  ; LD DE, #1008
+  ; LD ( Vars.Cursor_pos ), DE
   CALL Entities.initHeroes
   CALL Entities.lookChar
   RET
@@ -145,10 +147,15 @@ key_table_hero:
 
   KEY_N, next_char
 
-  KEY_Q, char_up
-  KEY_A, char_down
-  KEY_O, char_left
-  KEY_P, char_right
+  ; KEY_Q, char_up
+  ; KEY_A, char_down
+  ; KEY_O, char_left
+  ; KEY_P, char_right
+
+  KEY_Q, cursor_up
+  KEY_A, cursor_down
+  KEY_O, cursor_left
+  KEY_P, cursor_right
 
   ; KEY_Q, char_up_left
   ; KEY_E, char_up_right
@@ -169,10 +176,14 @@ scan_cursor_keys:
   defb _endByte
 
 cursor_table_hero:
-  KEY_8, char_right
-  KEY_7, char_up
-  KEY_6, char_down
-  KEY_5, char_left
+  ; KEY_8, char_right
+  ; KEY_7, char_up
+  ; KEY_6, char_down
+  ; KEY_5, char_left
+  KEY_8, cursor_right
+  KEY_7, cursor_up
+  KEY_6, cursor_down
+  KEY_5, cursor_left
   defb _endByte
 
 RESTART
@@ -199,6 +210,19 @@ char_left:
   goto look_char
 char_right:
   CharDo do_stand, dir_right
+  goto look_char
+
+cursor_up:
+  CallCode cursor.up
+  goto look_char
+cursor_down:
+  CallCode cursor.down
+  goto look_char
+cursor_left:
+  CallCode cursor.left
+  goto look_char
+cursor_right:
+  CallCode cursor.right
   goto look_char
 
 char_up_left:

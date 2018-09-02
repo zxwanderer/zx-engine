@@ -2,45 +2,49 @@ MODULE cursor
 
 ; двигаем курсор
 up:
-  LD A, (Vars.cursor_pos_y)
+  LD A, (Vars.Cursor_pos_y)
   DEC A
   JP M, scr_up
-  LD (Vars.cursor_pos_y),A
+  LD (Vars.Cursor_pos_y),A
   RET
 
 left:
-  LD A, (Vars.cursor_pos_x)
+  LD A, (Vars.Cursor_pos_x)
   DEC A
   JP M, scr_left
-  LD (Vars.cursor_pos_x),A
+  LD (Vars.Cursor_pos_x),A
   RET
 
 down:
-  LD A, (Vars.cursor_pos_y)
+  LD A, (Vars.Cursor_pos_y)
   INC A
   CP scrHeight
   JP NC, scr_down
-  LD (Vars.cursor_pos_y),A
+  LD (Vars.Cursor_pos_y),A
   RET
 
 right:
-  LD A, (Vars.cursor_pos_x)
+  LD A, (Vars.Cursor_pos_x)
   INC A
   CP scrWidth
   JP NC, scr_right
-  LD (Vars.cursor_pos_x),A
+  LD (Vars.Cursor_pos_x),A
   RET
 
 scr_up
 scr_down
 scr_left
 scr_right
+;   LD A, 10
+;   CALL FX_SET; обиженно пиликаем 
   RET
   
 show_cursor:
     ; LD DE, #1008
     ; LD ( Vars.Cursor_pos ), DE
-    LD DE, ( Vars.Cursor_pos ); нашли указатель курсора
+    LD HL, ( Vars.Cursor_pos ); нашли указатель курсора
+    ADD HL, HL
+    EX DE, HL
     CALL math.pos_scr
     PUSH DE
     EX HL, DE

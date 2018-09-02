@@ -11,5 +11,7 @@ game_over equ 5
 cursor_pos_y equ 6
 cursor_pos_x equ 7
 Cursor_pos equ zxengine.varsTab+6; позиция курсора на экране
+Cursor_pos_y equ zxengine.varsTab+6; позиция курсора на экране
+Cursor_pos_x equ zxengine.varsTab+7; позиция курсора на экране
 
 ENDMODULE
