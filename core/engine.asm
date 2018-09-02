@@ -169,7 +169,7 @@ scan_keys_me: ; ================ scan keys
 	PUSH HL
 	EX DE, HL
 	call scanKeys; возвратились из scankeys, в DE - указатель на процедуру
-	JR NZ, call_script_call; если флаг не 0 то клавиша есть
+	JP NZ, call_script_call; если флаг не 0 то клавиша есть
 	POP HL
 	JP process
 
