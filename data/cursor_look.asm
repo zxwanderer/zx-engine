@@ -7,6 +7,7 @@ cursor_loop:
 cursor_post_update:
     CallCode Entities.lookChar
     CallCode binary_show_gui
+    CallCode binary_show_cell_info
     goto cursor_loop
 
 cursor_table_look:
@@ -31,3 +32,9 @@ cursor_left:
 cursor_right:
   CallCode cursor.right
   goto cursor_post_update
+
+binary_show_cell_info:
+    CALL cursor.getCell
+    CALL Entities.calc_cell_type; в HL указатель на опмсание типа ячейки
+    CALL screenfx.show_info_message
+    RET

@@ -1,5 +1,11 @@
 MODULE cursor
 
+mapCurPos:
+    Point 0,0;
+
+mapCurPos_ptr:
+    defw 0
+
 ; двигаем курсор
 up:
   LD A, (Vars.Cursor_pos_y)
@@ -38,7 +44,21 @@ scr_right
 ;   LD A, 10
 ;   CALL FX_SET; обиженно пиликаем 
   RET
-  
+
+; на выходе в HL указатель на ячейку карты
+getCell:
+  LD DE, (Vars.MapCell_xy)
+  LD HL, (Vars.Cursor_pos)
+  ADD HL, DE
+  LD (mapCurPos), HL; D-x E-y
+  PUSH HL
+  POP DE
+  call map.calc_pos
+  LD (mapCurPos_ptr), HL
+  LD A, (HL)
+  RET
+
+
 show_cursor:
     ; LD DE, #1008
     ; LD ( Vars.Cursor_pos ), DE
