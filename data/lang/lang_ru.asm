@@ -89,10 +89,10 @@ GAMEOVER_2:
   db "ура-ура-ура!"
   db _endByte
 
-varDoorUnlock equ 100; признак открытия двери
+; varDoorUnlock equ 100; признак открытия двери
 
 CELL_TYPE_NAMES:
-Empty_cell_name: db "Нечто",0
+Empty_cell_name: db " ",0
 Floor_cell_name: db "Плитка",0
 Computer_cell_name: db "Терминал",0
 Door_cell_name: db "Дверь",0

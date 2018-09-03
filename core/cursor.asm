@@ -86,7 +86,8 @@ show_cursor:
     LD (HL), A
     INC HL
     
-    LD A, %00000011
+    LD A, %11111111
+    ; %00000011
     XOR (HL)
     LD (HL), A
     DEC HL
@@ -98,7 +99,8 @@ show_cursor:
     EX HL, DE
 
     DUP 6
-    LD A, %11000000
+    LD A, %11111111
+    ; %11000000
     XOR (HL)
     LD (HL), A
     INC HL
