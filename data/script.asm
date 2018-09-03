@@ -164,9 +164,16 @@ key_table_hero:
   defb _endByte
 
 set_cursor_look:
+  CallCode binary_calc_hero_cursor_pos
   SetVar Vars.var_mode, 1; cursor_look
   CallCode input.noKey
   defb _endByte
+
+binary_calc_hero_cursor_pos
+  CALL Entities.calc_hero_cursor_pos
+  ; ADD HL, HL
+  LD ( Vars.Cursor_pos ), HL
+  RET
 
 scan_cursor_keys:
   SkanKeyTable cursor_table_hero
