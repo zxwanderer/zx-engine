@@ -14,7 +14,6 @@ BEGIN_SCRIPT:
 
 LOOP_SCRIPT:
   CallScript GAME_LOOP
-  ; CallScript LOOK_CURSOR_LOOP
   IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
   defb _endByte
@@ -85,6 +84,7 @@ binary_init:
   RET
 
 GAME_LOOP:
+  IfVar Vars.var_mode, 1, cursor_look
   SkanKeyTable key_table_hero
   wait_halt 1
   ; CallCode screenfx.show_frames
@@ -153,16 +153,7 @@ key_table_hero:
   KEY_O, char_left
   KEY_P, char_right
 
-  KEY_I, cursor_loop
-  ; KEY_Q, cursor_up
-  ; KEY_A, cursor_down
-  ; KEY_O, cursor_left
-  ; KEY_P, cursor_right
-
-  ; KEY_Q, char_up_left
-  ; KEY_E, char_up_right
-  ; KEY_Z, char_down_left
-  ; KEY_C, char_down_right
+  KEY_I, set_cursor_look
 
   KEY_H, HELP_SCRIPT
 
@@ -172,9 +163,13 @@ key_table_hero:
 
   defb _endByte
 
+set_cursor_look:
+  SetVar Vars.var_mode, 1; cursor_look
+  CallCode input.noKey
+  defb _endByte
+
 scan_cursor_keys:
   SkanKeyTable cursor_table_hero
-  ; goto look_char
   defb _endByte
 
 cursor_table_hero:
@@ -209,28 +204,31 @@ look_char:
 char_up:
   CharDo do_stand, dir_up
   goto look_char
+
 char_down:
   CharDo do_stand, dir_down
   goto look_char
+
 char_left:
   CharDo do_stand, dir_left
   goto look_char
+
 char_right:
   CharDo do_stand, dir_right
   goto look_char
 
-char_up_left:
-  CharDo do_stand, dir_up_left
-  goto look_char
-char_up_right:
-  CharDo do_stand, dir_up_right
-  goto look_char
-char_down_left:
-  CharDo do_stand, dir_down_left
-  goto look_char
-char_down_right:
-  CharDo do_stand, dir_down_right
-  goto look_char
+; char_up_left:
+;   CharDo do_stand, dir_up_left
+;   goto look_char
+; char_up_right:
+;   CharDo do_stand, dir_up_right
+;   goto look_char
+; char_down_left:
+;   CharDo do_stand, dir_down_left
+;   goto look_char
+; char_down_right:
+;   CharDo do_stand, dir_down_right
+;   goto look_char
 
 char_loot:
   CharDo do_get_drop, dir_center
