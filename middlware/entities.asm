@@ -123,6 +123,26 @@ nextChar:
   OR 2
   RET
 
+; ------- вычислить координаты курсора на экране который указывает на текущего героя
+; на выходе в HL позиция на экране где находится наш герой
+calc_hero_cursor_pos:
+  LD IX, (activePersonage_ptr)
+ 
+  LD BC, (map.mapPos)
+
+  LD A, (IX+Hero.pos.x)
+  SUB B
+  ; SUB (map.mapPos+Point.x)
+  LD H,A
+  
+  LD A, (IX+Hero.pos.y)
+  SUB C
+  ; SUB (map.mapPos+Point.y)
+  LD L,A
+
+  RET
+
+  
 ; ------- показать карту с текущим персонажем на экране
 lookChar:
   LD IX, (activePersonage_ptr)
