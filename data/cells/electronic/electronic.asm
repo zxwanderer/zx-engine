@@ -21,8 +21,19 @@ electronic_script_break:
 electronic_script_off:
   shiruFX 3
   ShowText Electronic_kick_open_mess
-  SetVar varDoorUnlock, 100
   SetMapCell ElectronicBreak.spr
+  FxActionCell ElectronicBreak.spr; обновляем сразу спрайт на экране
+  CallCode binary_set_active_cell_left
+  shiruFX 43
+  FxActionCell Door_half_open
+  wait_halt 3
+  SetMapCell DoorOpen.spr
   goto no_way_script
+
+binary_set_active_cell_left:
+  LD A, ( Vars.MapCell_xy+Point.x )
+  DEC A
+  LD ( Vars.MapCell_xy+Point.x ), A
+  RET
 
   ENDMODULE

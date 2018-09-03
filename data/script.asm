@@ -9,8 +9,8 @@ BEGIN_SCRIPT:
 
   CallCode binary_clear_screen
   CallCode binary_init
-  SetVar varDoorUnlock, 0
-  SetVar Vars.game_over, 0
+  ; SetVar varDoorUnlock, 0
+  ; SetVar Vars.game_over, 0
 
 LOOP_SCRIPT:
   CallScript GAME_LOOP
