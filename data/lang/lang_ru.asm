@@ -96,7 +96,7 @@ Empty_cell_name: db " ",0
 Floor_cell_name: db "Плитка",0
 Computer_cell_name: db "Терминал",0
 Door_cell_name: db "Дверь",0
-Wall_cell_name: db "Стена",0
+Wall_cell_name: db "Тяжелая бронеплита",0
 Ballon_cell_name: db "Баллон",0
 Bed_cell_name: db "Кровать",0
 Trash_cell_name: db "Мелкие обломки и мусор",0

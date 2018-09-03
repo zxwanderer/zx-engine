@@ -12,6 +12,11 @@ cursor_post_update:
   defb _endByte
 
 cursor_table_look:
+  KEY_Q, cursor_up
+  KEY_A, cursor_down
+  KEY_O, cursor_left
+  KEY_P, cursor_right
+
   KEY_8, cursor_right
   KEY_7, cursor_up
   KEY_6, cursor_down
@@ -47,6 +52,6 @@ binary_show_cell_info:
     CALL Entities.calc_cell_type; в HL указатель на опмсание типа ячейки
     LD (binary_show_cell_info_ptr+1), HL
 binary_show_cell_info_ptr
-    LD HL, (#4000)
+    LD HL, (#0000)
     CALL screenfx.show_info_message
     RET
