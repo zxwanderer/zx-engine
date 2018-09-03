@@ -59,6 +59,8 @@ ENCOUNTER_SET:
   include "data/cells/door/door.asm"
   include "data/cells/electronic/electronic.asm"
   include "data/cells/electronic/electronic_break.asm"
+  include "data/cells/heroes/Hero09.asm"
+  include "data/cells/heroes/HeroDead.asm"
   include "data/cells/wall/soft_wall_break.asm"
   include "data/cells/wall/soft_wall.asm"
   include "data/cells/wall/wall.asm"

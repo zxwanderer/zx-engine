@@ -18,7 +18,6 @@ Ring_expl_4 equ #b3
 
 Hero_hand_item_spr: equ #0B
 Hero_hand_empty: equ #09
-Hero_dead: equ #0A
 
 FX_Nope equ 53
 FX_Drop equ 5
