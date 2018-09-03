@@ -13,5 +13,5 @@ cursor_pos_x equ 7
 Cursor_pos equ zxengine.varsTab+6; позиция курсора на экране
 Cursor_pos_y equ zxengine.varsTab+6; позиция курсора на экране
 Cursor_pos_x equ zxengine.varsTab+7; позиция курсора на экране
-
+var_mode equ 8; текущий режим игры: 0 - игрок двигается, 1 - курсор двигается
 ENDMODULE
