@@ -64,6 +64,7 @@ ENCOUNTER_SET:
   include "data/cells/door/door_blue.asm"
   include "data/cells/door/door_white_open.asm"
   include "data/cells/door/door_white.asm"
+  include "data/cells/door/door_red_hard_open.asm"
   include "data/cells/door/door_red_hard.asm"
   include "data/cells/electronic/electronic.asm"
   include "data/cells/electronic/electronic_break.asm"
