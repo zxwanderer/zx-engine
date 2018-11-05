@@ -10,8 +10,8 @@ _temp equ $; запоминаем адрес
   ORG _temp; восстанавливаем адрес
 
 empty_script:
-  IfVarN Vars.var_pos_y, 7, no_script
-  SetVar Vars.game_over, 2
+  ; IfVarN Vars.var_pos_y, 7, no_script
+  ; SetVar Vars.game_over, 2
   ; goto no_script
   defb _endByte
 
