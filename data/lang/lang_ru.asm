@@ -118,6 +118,11 @@ Toilet_cell_name: db "Туалет",0
 Sink_cell_name: db "Раковина",0
 Table_cell_name: db "Стол", 0
 
+Keramit_cell_name: db "Керамит", 0
+
+Locker_cell_name: db "Шкафчик", 0
+Safe_cell_name: db "Сейф", 0
+
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
 
@@ -174,7 +179,16 @@ Break_shard_mess
   db "Острый кусок пластика раскололся в руках..",0
 
 Bush_mess:
-  db "Сквозь куст пройти не получилось...",0
+  db "Сквозь куст пройти не получилось..",0
+
+Locker_mess:
+  db "Шкафчик не открылся..", 0
+
+Safe_mess:
+  db "Сейф отозвался на удар глухим звуком..", 0
+
+Keramit_mess:
+  db "Стучать по керамиту было бессмысленно..", 0
 
 ; Statis_on_mess
   ; db "Я нажал на кнопки и над кроватью загудел   "

@@ -109,3 +109,16 @@ table_script:
   ShowText Table_mess
   goto no_way_script    
   ENDMODULE
+
+Keramit.spr: equ 175
+  MODULE Keramit
+_temp equ $; запоминаем адрес
+    SETUP_CELL_TYPE Keramit_cell_name, keramit_script
+  ORG _temp; восстанавливаем адрес    
+keramit_script:
+  shiruFX FX_Wall
+  ; CallScript action_ring_explode
+  ShowText Keramit_mess
+  goto no_way_script    
+  ENDMODULE
+
