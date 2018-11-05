@@ -113,6 +113,10 @@ Grass_cell_name: db "Трава", 0
 Bush_cell_name: db "Кустарник", 0
 Gravel_cell_name: db "Гравий", 0
 Sand_cell_name: db "Песок", 0
+CraterSmall_cell_name: db "Вмятина на земле", 0
+Toilet_cell_name: db "Туалет",0
+Sink_cell_name: db "Раковина",0
+Table_cell_name: db "Стол", 0
 
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
