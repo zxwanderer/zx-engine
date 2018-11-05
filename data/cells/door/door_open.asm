@@ -10,7 +10,7 @@ _temp equ $; запоминаем адрес
   ORG _temp; восстанавливаем адрес
   
 DoorOpen_script:
-  shiruFX 38
+  ; shiruFX 38
   defb _endByte
 
   ENDMODULE
