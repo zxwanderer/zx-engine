@@ -27,21 +27,26 @@ _temp equ $; запоминаем адрес
 Bush.spr: equ 49
   MODULE Bush
 _temp equ $; запоминаем адрес
-    SETUP_CELL_TYPE Bush_cell_name, no_way_script
+    SETUP_CELL_TYPE Bush_cell_name, bush_script
   ORG _temp; восстанавливаем адрес
+bush_script:
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  ShowText Bush_mess
+  goto no_way_script    
   ENDMODULE
 
 Bush2.spr: equ 48
   MODULE Bush2
 _temp equ $; запоминаем адрес
-    SETUP_CELL_TYPE Bush_cell_name, no_way_script
+    SETUP_CELL_TYPE Bush_cell_name, Bush.bush_script
   ORG _temp; восстанавливаем адрес
   ENDMODULE
 
 Bush3.spr: equ 64
   MODULE Bush3
 _temp equ $; запоминаем адрес
-    SETUP_CELL_TYPE Bush_cell_name, no_way_script
+    SETUP_CELL_TYPE Bush_cell_name, Bush.bush_script
   ORG _temp; восстанавливаем адрес
   ENDMODULE
 
@@ -72,20 +77,35 @@ _temp equ $; запоминаем адрес
 Toilet.spr: equ 102
   MODULE Toilet
 _temp equ $; запоминаем адрес
-    SETUP_CELL_TYPE Toilet_cell_name, no_way_script
+    SETUP_CELL_TYPE Toilet_cell_name, toilet_script
   ORG _temp; восстанавливаем адрес
+toilet_script:
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  ShowText Toilet_mess
+  goto no_way_script    
   ENDMODULE
 
 Sink.spr: equ 103
   MODULE Sink
 _temp equ $; запоминаем адрес
-    SETUP_CELL_TYPE Sink_cell_name, no_way_script
+    SETUP_CELL_TYPE Sink_cell_name, sink_script
   ORG _temp; восстанавливаем адрес
+sink_script:
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  ShowText Sink_mess
+  goto no_way_script    
   ENDMODULE
 
 Table.spr: equ 35
   MODULE Table
 _temp equ $; запоминаем адрес
-    SETUP_CELL_TYPE Table_cell_name, no_way_script
-  ORG _temp; восстанавливаем адрес
+    SETUP_CELL_TYPE Table_cell_name, table_script
+  ORG _temp; восстанавливаем адрес    
+table_script:
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  ShowText Table_mess
+  goto no_way_script    
   ENDMODULE
