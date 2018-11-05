@@ -11,6 +11,7 @@ _temp equ $; запоминаем адрес
   ORG _temp; восстанавливаем адрес
   
 door_script:
+  goto door_do_open
   ; IfVar varDoorUnlock, 100, door_do_open
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair.spr, door_kick_chair
@@ -19,12 +20,12 @@ door_script:
   ShowText Door_not_open_mess
   goto no_way_script
 
-; door_do_open:  
-;   shiruFX 43
+door_do_open:  
+  shiruFX 43
 ;   FxActionCell Door_half_open
 ;   wait_halt 3
-;   SetMapCell DoorOpen.spr
-;   goto no_way_script
+  SetMapCell DoorOpen.spr
+  goto no_way_script
 
 door_kick_chair:
   shiruFX FX_Wall

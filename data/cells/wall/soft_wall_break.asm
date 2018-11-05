@@ -12,8 +12,8 @@ _temp equ $; запоминаем адрес
 soft_wall_break_script:
   shiruFX FX_Cutt1
   CallScript action_ring_explode
-  IfVarN Vars.var_pos_y, 6, soft_wall_break_on
-  IfVarN Vars.var_pos_x, 22, soft_wall_break_on
+  IfVarN Vars.var_pos_y, 4, soft_wall_break_on
+  IfVarN Vars.var_pos_x, 14, soft_wall_break_on
 
 soft_wall_break_electronic_script:
   SetMapCell Electronic.spr
