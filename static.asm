@@ -49,6 +49,7 @@ ENCOUNTER_SET:
   include "data/cells/empty.asm"
   include "data/cells/shard.asm"
   include "data/cells/chair.asm"
+  include "data/cells/grass.asm"
   include "data/cells/floor.asm"
   include "data/cells/floor_white.asm"
   include "data/cells/floor_cyan.asm"
