@@ -1,7 +1,7 @@
 
-DoorBlueOpen.spr: equ #8c
+DoorWhiteOpen.spr: equ #7c
 
-  MODULE DoorBlueOpen
+  MODULE DoorWhiteOpen
 
 _temp equ $; запоминаем адрес
 
@@ -12,6 +12,13 @@ _temp equ $; запоминаем адрес
 ; door_script:
 ;   shiruFX FX_Nope
 ;   ShowText Door_not_open_mess
+;   goto no_way_script
+
+; door_do_open:
+;   shiruFX 43
+;   FxActionCell Door_half_open
+;   wait_halt 3
+;   SetMapCell DoorOpen.spr
 ;   goto no_way_script
 
   ENDMODULE
