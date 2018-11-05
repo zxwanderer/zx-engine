@@ -60,3 +60,32 @@ _temp equ $; запоминаем адрес
     SETUP_CELL_TYPE Sand_cell_name, Floor.floor_script
   ORG _temp; восстанавливаем адрес
   ENDMODULE
+
+; --- вмятина на земле
+CraterSmall.spr: equ 65
+  MODULE CraterSmall
+_temp equ $; запоминаем адрес
+    SETUP_CELL_TYPE CraterSmall_cell_name, Floor.floor_script
+  ORG _temp; восстанавливаем адрес
+  ENDMODULE
+
+Toilet.spr: equ 102
+  MODULE Toilet
+_temp equ $; запоминаем адрес
+    SETUP_CELL_TYPE Toilet_cell_name, no_way_script
+  ORG _temp; восстанавливаем адрес
+  ENDMODULE
+
+Sink.spr: equ 103
+  MODULE Sink
+_temp equ $; запоминаем адрес
+    SETUP_CELL_TYPE Sink_cell_name, no_way_script
+  ORG _temp; восстанавливаем адрес
+  ENDMODULE
+
+Table.spr: equ 35
+  MODULE Table
+_temp equ $; запоминаем адрес
+    SETUP_CELL_TYPE Table_cell_name, no_way_script
+  ORG _temp; восстанавливаем адрес
+  ENDMODULE
