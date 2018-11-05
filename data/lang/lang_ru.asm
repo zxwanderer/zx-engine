@@ -109,6 +109,11 @@ Chair_item_name: db "Стул",0
 Electronic_cell_name: db "Электронный блок управления",0
 Electronic_break_name: db "Сломанная электроника", 0
 
+Grass_cell_name: db "Трава", 0
+Bush_cell_name: db "Кустарник", 0
+Gravel_cell_name: db "Гравий", 0
+Sand_cell_name: db "Песок", 0
+
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
 
@@ -139,7 +144,7 @@ Take_bed_mess:
   db "поднималась.. ",0
 
 Take_floor_mess:
-  db "На полу ничего не было..",0
+  db "Ничего не нашел..",0
 
 Take_trash_mess:
   db "Я подобрал из кучи обломков острый кусок  "
