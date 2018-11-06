@@ -58,32 +58,18 @@ CraterSmall.spr: equ 65
 
 Toilet.spr: equ 102
   MODULE Toilet
-    SETUP_CELL_TYPE_N Toilet_cell_name, toilet_script
-toilet_script:
-  shiruFX FX_Wall
-  CallScript action_ring_explode
-  ShowText Toilet_mess
-  goto no_way_script    
+    SETUP_CELL_TYPE_N Toilet_cell_name, say_no_way
   ENDMODULE
 
 Sink.spr: equ 103
   MODULE Sink
-    SETUP_CELL_TYPE_N Sink_cell_name, sink_script
+    SETUP_CELL_TYPE_N Sink_cell_name, say_no_way
 sink_script:
-  shiruFX FX_Wall
-  CallScript action_ring_explode
-  ShowText Sink_mess
-  goto no_way_script    
   ENDMODULE
 
 Table.spr: equ 35
   MODULE Table
-    SETUP_CELL_TYPE_N Table_cell_name, table_script
-table_script:
-  shiruFX FX_Wall
-  CallScript action_ring_explode
-  ShowText Table_mess
-  goto no_way_script    
+    SETUP_CELL_TYPE_N Table_cell_name, say_no_way
   ENDMODULE
 
 Keramit.spr: equ 175
@@ -91,7 +77,6 @@ Keramit.spr: equ 175
     SETUP_CELL_TYPE_N Keramit_cell_name, keramit_script
 keramit_script:
   shiruFX FX_Wall
-  ; CallScript action_ring_explode
   ShowText Keramit_mess
   goto no_way_script    
   ENDMODULE
