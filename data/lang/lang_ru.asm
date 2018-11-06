@@ -117,11 +117,21 @@ CraterSmall_cell_name: db "Вмятина на земле", 0
 Toilet_cell_name: db "Туалет",0
 Sink_cell_name: db "Раковина",0
 Table_cell_name: db "Стол", 0
-
 Keramit_cell_name: db "Керамит", 0
-
 Locker_cell_name: db "Шкафчик", 0
 Safe_cell_name: db "Сейф", 0
+
+PDA_cell_name: db "Электронный планшет", 0
+Book_cell_name: db "Книга", 0
+
+Canister_cell_name: db "Биоконтейнер", 0
+Generator_cell_name: db "Биотопливный генератор", 0
+
+Memo_cell_name: db "Ментограмма", 0
+Anabiose_cell_name: db "Анабиозная камера", 0
+Analyzer_cell_name: db "Анализатор", 0
+Mentoscanner_cell_name: db "Ментосканнер", 0
+Medicbox_cell_name: db "Контейнер с мед. инструментами", 0
 
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
@@ -132,6 +142,9 @@ Electronic_break_mess:
 Soft_wall_show_electronic:
   db "Под декоративной стенкой обнаружилась     "
   db "панель управления..",0
+
+no_way_mess:
+  db "Пройти не получилось..",0
 
 Electronic_kick_mess:
   db "Хрупкие микросхемы сломались!!",0
