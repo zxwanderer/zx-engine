@@ -3,11 +3,11 @@ SoftWallBreak.spr: equ #26
 
   MODULE SoftWallBreak
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Soft_wall_name,   soft_wall_break_script
+    SETUP_CELL_TYPE_N Soft_wall_name,   soft_wall_break_script
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
   
 soft_wall_break_script:
   shiruFX FX_Cutt1

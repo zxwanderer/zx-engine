@@ -4,11 +4,11 @@ Door_half_open equ #12
 
   MODULE Door
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Door_cell_name, door_script
+    SETUP_CELL_TYPE_N Door_cell_name, door_script
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
   
 door_script:
   goto door_do_open

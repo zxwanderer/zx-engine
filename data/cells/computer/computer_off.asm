@@ -3,11 +3,11 @@ ComputerOff.spr equ #14
 
   MODULE ComputerOff
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Computer_cell_name, computer_off_script
+    SETUP_CELL_TYPE_N Computer_cell_name, computer_off_script
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
   
 computer_off_script:
   CallCode items.get_hero_hand_item

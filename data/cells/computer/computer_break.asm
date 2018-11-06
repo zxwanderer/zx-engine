@@ -3,11 +3,11 @@ ComputerBreak.spr equ #24
 
   MODULE ComputerBreak
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Computer_cell_name, computer_break_script
+    SETUP_CELL_TYPE_N Computer_cell_name, computer_break_script
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
   
 computer_break_script:
   shiruFX 56
