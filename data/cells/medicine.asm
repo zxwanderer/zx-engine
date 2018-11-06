@@ -9,14 +9,23 @@ AnabioseOff.spr: equ 82
     SETUP_CELL_TYPE_N Anabiose_cell_name, say_no_way
   ENDMODULE
 
-Analyzer.spr: equ 57
-  MODULE Analyzer
-    SETUP_CELL_TYPE_N Analyzer_cell_name, say_no_way
-  ENDMODULE
-
 Mentoscanner.spr: equ 59
   MODULE Mentoscanner
-    SETUP_CELL_TYPE_N Mentoscanner_cell_name, say_no_way
+    SETUP_CELL_TYPE_N Mentoscanner_cell_name, Mentoscanner_break_script
+
+Mentoscanner_break_script
+  shiruFX FX_Boom
+  CallScript action_ring_explode
+  ShowText Mentoscanner_kick_mess
+  SetMapCell ElectonicDestroy.spr
+  goto no_way_script
+
+; Mentoscanner_kick_mess
+  ENDMODULE
+
+Analyzer.spr: equ 57
+  MODULE Analyzer
+    SETUP_CELL_TYPE_N Analyzer_cell_name, Mentoscanner.Mentoscanner_break_script
   ENDMODULE
 
 Medicbox.spr: equ 53

@@ -52,6 +52,8 @@ ENCOUNTER_SET:
   include "data/cells/grass.asm"
   include "data/cells/floor.asm"
   include "data/cells/trash.asm"
+  include "data/cells/breaking.asm"
+  include "data/cells/body.asm"
   include "data/cells/bed.asm"
   include "data/cells/pda.asm"
   include "data/cells/memo.asm"

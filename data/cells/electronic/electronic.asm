@@ -33,3 +33,8 @@ binary_set_active_cell_left:
   RET
 
   ENDMODULE
+
+FoodDispenser.spr: equ 87
+  MODULE FoodDispenser
+    SETUP_CELL_TYPE_N FoodDispenser_cell_name, say_no_way
+  ENDMODULE
