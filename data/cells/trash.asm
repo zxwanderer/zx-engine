@@ -3,11 +3,11 @@ Trash.spr equ #32
 
   MODULE Trash
 
-_temp equ $
+; _temp equ $
 
-  SETUP_CELL_TYPE Trash_cell_name,  trash_script
+  SETUP_CELL_TYPE_N Trash_cell_name,  trash_script
 
-  ORG _temp
+  ; ORG _temp
 
 trash_script:
   IfVar Vars.var_act, do_get, take_trash_script

@@ -1,12 +1,26 @@
 
-  MACRO SETUP_CELL_TYPE _name, _script
+  ; MACRO SETUP_CELL_TYPE _name, _script
+  ;   ORG CELL_TYPES+spr*CellType
+  ;   CellType _name, _script
+  ; ENDM
+
+  MACRO SETUP_CELL_TYPE_N _name, _script
+._temp equ $; запоминаем адрес
     ORG CELL_TYPES+spr*CellType
     CellType _name, _script
+    ORG ._temp
   ENDM
 
-  MACRO SETUP_ITEM_TYPE
+  ; MACRO SETUP_ITEM_TYPE
+  ;   ORG ITEM_TYPES+item*ItemType
+  ;   ItemType spr, 0, 10
+  ; ENDM
+
+  MACRO SETUP_ITEM_TYPE_N
+._temp equ $; запоминаем адрес  
     ORG ITEM_TYPES+item*ItemType
     ItemType spr, 0, 10
+    ORG ._temp
   ENDM
 
 ; обозначаем номера типов ячеек карты для лучшей адресации например открытие двери - SetActionCell Door_open

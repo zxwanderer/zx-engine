@@ -3,11 +3,11 @@ Wall.spr: equ #01
 
   MODULE Wall
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Wall_cell_name,     wall_script
+    SETUP_CELL_TYPE_N Wall_cell_name,     wall_script
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
   
 wall_script:
   CallCode items.get_hero_hand_item

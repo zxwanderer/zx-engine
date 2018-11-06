@@ -4,11 +4,11 @@ Floor.spr: equ #03
 
   MODULE Floor
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Floor_cell_name, floor_script
+    SETUP_CELL_TYPE_N Floor_cell_name, floor_script
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
   
 floor_script:
   IfVar Vars.var_act, do_get, take_floor_script
@@ -20,6 +20,5 @@ floor_script:
 take_floor_script
   ShowText Take_floor_mess
   defb _endByte
-
 
   ENDMODULE

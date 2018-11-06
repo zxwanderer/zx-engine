@@ -2,11 +2,11 @@ SoftWall.spr: equ #06
 
   MODULE SoftWall
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Soft_wall_name, soft_wall_script
+    SETUP_CELL_TYPE_N Soft_wall_name, soft_wall_script
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
   
 soft_wall_script:
   CallCode items.get_hero_hand_item

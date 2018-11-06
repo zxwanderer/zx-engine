@@ -4,13 +4,13 @@ Chair.spr: equ #33
 
   MODULE Chair
 
-_temp equ $; запоминаем адрес
+; _temp equ $; запоминаем адрес
 
-    SETUP_CELL_TYPE Chair_item_name, chair_script
+    SETUP_CELL_TYPE_N Chair_item_name, chair_script
 
-    SETUP_ITEM_TYPE
+    SETUP_ITEM_TYPE_N
 
-  ORG _temp; восстанавливаем адрес
+  ; ORG _temp; восстанавливаем адрес
 
 chair_script:
   IfVar Vars.var_act, do_get, take_chair_script
