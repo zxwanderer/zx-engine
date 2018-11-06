@@ -3,11 +3,7 @@ DoorWhiteOpen.spr: equ #7c
 
   MODULE DoorWhiteOpen
 
-; _temp equ $; запоминаем адрес
-
     SETUP_CELL_TYPE_N Door_cell_name, DoorOpen.DoorOpen_script
-
-  ; ORG _temp; восстанавливаем адрес
   
 ; door_script:
 ;   shiruFX FX_Nope

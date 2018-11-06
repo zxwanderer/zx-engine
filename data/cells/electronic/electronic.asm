@@ -2,11 +2,7 @@ Electronic.spr: equ #27
 
   MODULE Electronic
 
-; _temp equ $; запоминаем адрес
-
     SETUP_CELL_TYPE_N Electronic_cell_name, electronic_script
-
-  ; ORG _temp; восстанавливаем адрес
   
 electronic_script
   CallCode items.get_hero_hand_item

@@ -3,11 +3,7 @@ ElectronicBreak.spr: equ #28
 
   MODULE ElectronicBreak
 
-; _temp equ $; запоминаем адрес
-
     SETUP_CELL_TYPE_N Electronic_break_name, electronic_break_script
-
-  ; ORG _temp; восстанавливаем адрес
   
 electronic_break_script
   shiruFX FX_Wall
