@@ -127,11 +127,17 @@ Book_cell_name: db "Книга", 0
 Canister_cell_name: db "Биоконтейнер", 0
 Generator_cell_name: db "Биотопливный генератор", 0
 
+Body_cell_name: db "Тело гуманоида", 0
 Memo_cell_name: db "Ментограмма", 0
 Anabiose_cell_name: db "Анабиозная камера", 0
 Analyzer_cell_name: db "Анализатор", 0
 Mentoscanner_cell_name: db "Ментосканнер", 0
 Medicbox_cell_name: db "Контейнер с мед. инструментами", 0
+FoodDispenser_cell_name: db "Пищевой раздатчик", 0
+ElectonicDestroy_cell_name: db "Обломки оборудования..", 0
+
+Mentoscanner_kick_mess:
+  db "От сильного удара хрупкий прибор сломался...",0
 
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
