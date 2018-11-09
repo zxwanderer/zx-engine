@@ -243,5 +243,6 @@ char_right:
 ;   goto look_char
 
 char_loot:
-  CharDo do_get_drop, dir_center
+  ; CharDo do_get_drop, dir_center
+  CharDoDir do_get_drop
   goto look_char

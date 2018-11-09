@@ -19,6 +19,11 @@ MODULE Entities
     defb dir_p
   ENDM
 
+  MACRO CharDoDir action_p
+    defw Entities.char_do_dir_me
+    defb action_p
+  ENDM
+
   MACRO CharDo action_p, dir_p
     defw Entities.char_do_me
     defb dir_p
@@ -60,6 +65,13 @@ char_do_me:
   mLBC
   PUSH HL
   CALL char_do
+  POP HL
+  JP zxengine.process
+
+char_do_dir_me:
+  mLDB
+  PUSH HL
+  CALL char_do_dir
   POP HL
   JP zxengine.process
 
@@ -227,6 +239,11 @@ char_not_move:
 
   RET
 
+; в B - action
+char_do_dir:
+  LD IX, (activePersonage_ptr)
+  LD C, (IX+Hero.dir)
+  ; LD C, 
 
 ; ----- текущий персонаж на что-то воздействует ----
 ; на входе 
