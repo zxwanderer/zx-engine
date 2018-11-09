@@ -202,27 +202,31 @@ next_char:
 look_char:
     CallCode Entities.lookChar
     CallCode binary_show_gui
-    CallCode input.noKey ; ждем пока отпустит клавишу
+    ; CallCode input.noKey ; ждем пока отпустит клавишу
     ; wait_halt 5
     defb _endByte
 
 char_up:
   ; CharDo do_stand, dir_up
-  CharDoForward do_stand
+  CharRotMove dir_up
+  ; CharDoForward do_stand
   goto look_char
 
 char_down:
   ; CharDo do_stand, dir_down
+  CharRotMove dir_down
   goto look_char
 
 char_left:
-  CharRotLeft
+  ; CharRotLeft
   ; CharDo do_stand, dir_left
+  CharRotMove dir_left
   goto look_char
 
 char_right:
   ; CharDo do_stand, dir_right
-  CharRotRight
+  ; CharRotRight
+  CharRotMove dir_right
   goto look_char
 
 ; char_up_left:
