@@ -20,6 +20,19 @@ MODULE Entities
     defb action_p
   ENDM
 
+  MACRO CharDoForward dir_p
+    defw Entities.char_do_forward_me
+    defb dir_p
+  ENDM  
+
+  MACRO CharRotLeft
+    defw Entities.char_rot_left_me
+  ENDM
+
+  MACRO CharRotRight
+    defw Entities.char_rot_right_me
+  ENDM
+
 activePersonage_ptr:
   dw #0000 ; указатель на текущего персонажа
 CurPersonageNum:
@@ -34,6 +47,16 @@ ActiveItem_ptr:
 char_do_me:
   mLBC
   PUSH HL
+  CALL char_do
+  POP HL
+  JP zxengine.process
+
+char_do_forward_me:
+  mLDB
+  PUSH HL
+  LD IX, (activePersonage_ptr)
+  ; CALL char_do
+  LD C, (IX+Hero.dir)
   CALL char_do
   POP HL
   JP zxengine.process
@@ -192,15 +215,72 @@ char_do:
   getVar Vars.var_act
 
   CP do_stand
-  JR Z, char_do_stand; персонаж стоит
+  JP Z, char_do_stand; персонаж стоит
 
   CP do_get_drop
-  JR Z, char_do_get_drop; подбираем/бросаем
+  JP Z, char_do_get_drop; подбираем/бросаем
 
   LD A, 10
   CALL FX_SET; обиженно пиликаем 
  
   RET
+
+; -------------------------------------------------------------------
+; меняем спрайт героя в зависимости от направления персонажа ( в IX указатель на героя )
+; -------------------------------------------------------------------
+char_update_sprite:
+  LD B,(IX+Hero.base_spr)
+  LD A,(IX+Hero.dir)
+  ADD A, B
+  LD (IX+Hero.sprite), A
+  LD D, (IX+Hero.pos.x)
+  LD E, (IX+Hero.pos.y)
+  CALL map.calc_pos             ; определяем координаты позиции персонажа в HL
+  LD A, (IX+Hero.sprite)
+  LD (HL),A                     ; ставим спрайт персонажа на карту
+  RET
+
+char_rot_left_me:
+  PUSH HL
+  CALL char_rot_left
+  POP HL
+  JP zxengine.process 
+
+char_rot_right_me:
+  PUSH HL
+  CALL char_rot_right
+  POP HL
+  JP zxengine.process 
+
+; -------------------------------------------------------------------
+; вертим персонажа влево
+; -------------------------------------------------------------------
+char_rot_left:
+  LD IX, (activePersonage_ptr)
+  LD A, (IX+Hero.dir)
+  DEC A
+  JP P, char_rot_no_over
+  LD A, dir_down_right
+char_rot_no_over:
+  LD (IX+Hero.dir), A
+  JP char_update_sprite
+  RET
+
+; -------------------------------------------------------------------
+; вертим персонажа вправо
+; -------------------------------------------------------------------
+char_rot_right:
+  LD IX, (activePersonage_ptr)
+  LD A, (IX+Hero.dir)
+  INC A
+  CP dir_down_right+1
+  JR NZ, char_rot_no_over
+  XOR A
+  JR char_rot_no_over
+; char_rot__no_over:  
+;   LD (IX+Hero.dir), A
+;   JP char_update_sprite
+;   RET
 
 ; -------------------------------------------------------------------
 ; персонаж перемещается на MapCell_xy ( MapCell_ptr тоже установлен )
@@ -227,9 +307,9 @@ char_do_stand:
   LD HL,( MapCell_ptr )
   LD A,(HL)
   LD (IX+Hero.ground),A         ; ячейку карты ставим на пол персонажа
-  LD A,(IX+Hero.sprite)
-  LD (HL),A                     ; ставим спрайт персонажа на карту
 
+  LD A, (IX+Hero.sprite)
+  LD (HL),A                     ; ставим спрайт персонажа на карту
   RET
 
 ; ------------------------------------------------------------------------------------

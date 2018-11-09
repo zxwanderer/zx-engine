@@ -207,19 +207,22 @@ look_char:
     defb _endByte
 
 char_up:
-  CharDo do_stand, dir_up
+  ; CharDo do_stand, dir_up
+  CharDoForward do_stand
   goto look_char
 
 char_down:
-  CharDo do_stand, dir_down
+  ; CharDo do_stand, dir_down
   goto look_char
 
 char_left:
-  CharDo do_stand, dir_left
+  CharRotLeft
+  ; CharDo do_stand, dir_left
   goto look_char
 
 char_right:
-  CharDo do_stand, dir_right
+  ; CharDo do_stand, dir_right
+  CharRotRight
   goto look_char
 
 ; char_up_left:
