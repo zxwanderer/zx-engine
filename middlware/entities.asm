@@ -14,6 +14,11 @@ MODULE Entities
 ; а все богатство возможных последствий придется закодировать в 
 ; скриптах
 
+  MACRO CharRotMove dir_p
+    defw Entities.char_rot_move_me
+    defb dir_p
+  ENDM
+
   MACRO CharDo action_p, dir_p
     defw Entities.char_do_me
     defb dir_p
@@ -43,6 +48,13 @@ ActiveItem_ptr:
   dw #0000 ; указатель на используемый предмет
 ; ActiveItemType_ptr:
   ; dw #0000 ; указатель на тип используемого предмета
+
+char_rot_move_me:
+  mLDB
+  PUSH HL
+  CALL char_rot_move
+  POP HL
+  JP zxengine.process
 
 char_do_me:
   mLBC
@@ -197,6 +209,24 @@ next_char:
     DJNZ check_char
     ; JP Entities.check_no
     ret_false
+
+; вертим героя в нужном направлении или двигаем если уже смотрим в этом направлении
+; в B - направление
+char_rot_move:
+  LD IX, (activePersonage_ptr)
+  LD A, (IX+Hero.dir)
+  CP B
+  JR NZ, char_not_move
+  LD C, A
+  LD B, do_stand
+  JP char_do
+char_not_move:
+  LD A, B
+  LD (IX+Hero.dir), B
+  JP char_update_sprite
+
+  RET
+
 
 ; ----- текущий персонаж на что-то воздействует ----
 ; на входе 
