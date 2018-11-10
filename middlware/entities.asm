@@ -410,17 +410,21 @@ char_do_get_drop:
 
 char_no_get:
 
-  CALL is_char_on_map
-  JR NC, char_no_get_no_char
+  ; CALL is_char_on_map
+  ; JR NC, char_no_get_no_char
 
-  LD A, (IX+Hero.ground)
+  ; LD A, (IX+Hero.ground)
+  LD HL, ( MapCell_ptr )
+  LD A, ( HL )
+  
   CALL call_cell_script
+  ; тут все переделать так как у нас чар собственно поднимал с пола на чем стоял все %)
 
   getVar Vars.var_ret; проверяем если нет ошибки поднятия - возврат
   OR A
   RET Z
 
-char_no_get_no_char:
+; char_no_get_no_char:
   LD A, 10
   CALL FX_SET; обиженно пиликаем
   RET
@@ -444,8 +448,9 @@ char_do_drop:
   LD IY, (activePersonage_ptr)
   LD (IY+Hero.hand_right_p_1), 00; предмет брошен
   
-  LD D, (IY+Hero.pos.x)
-  LD E, (IY+Hero.pos.y); координаты персонажа в DE
+  ; LD D, (IY+Hero.pos.x)
+  ; LD E, (IY+Hero.pos.y); координаты персонажа в DE
+  LD DE, ( Vars.MapCell_xy )
 
   LD IY, (Entities.ActiveItem_ptr);
 
