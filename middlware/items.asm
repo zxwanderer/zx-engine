@@ -58,8 +58,9 @@ search_empty_item_loop:
 ; предмет уже принадлежит герою ( Item.owner ) поэтому в функциях поиска find_item_on_map он не принимает участие
 push_item_from_map: ;"забираем" предмет с карты
     LD IY, (Entities.ActiveItem_ptr)
-    LD D, (IY+Item.pos.x)
-    LD E, (IY+Item.pos.y); в DE - текущая позиция 
+    ; LD D, (IY+Item.pos.x)
+    ; LD E, (IY+Item.pos.y); в DE - текущая позиция 
+    LD DE, (Vars.MapCell_xy)
 
 ; смотрим есть ли на этой ячейке карты предметы ?
     CALL find_item_on_map
@@ -71,8 +72,9 @@ push_item_from_map: ;"забираем" предмет с карты
 
 push_item_from_map_find_heroes:
     PUSH AF; запомнили его
-    LD D, (IY+Item.pos.x)
-    LD E, (IY+Item.pos.y); в DE - текущая позиция 
+    ; LD D, (IY+Item.pos.x)
+    ; LD E, (IY+Item.pos.y); в DE - текущая позиция 
+    LD DE, (Vars.MapCell_xy)
     CALL Entities.is_char_on_map
     JR NC, push_item_from_map_no_heroes
     POP AF; взяли номер спрайта предмета 
@@ -98,6 +100,7 @@ pop_item_to_map: ; "кладем" предмет на карту
     LD IY, (Entities.ActiveItem_ptr)
     LD D, (IY+Item.pos.x)
     LD E, (IY+Item.pos.y); в DE - текущая позиция
+    ; LD DE, (Vars.MapCell_xy)
     CALL find_item_on_map
     JR NC, pop_item_to_map_no_items
 
@@ -147,7 +150,7 @@ add_item_to_map:
     PUSH DE
     PUSH AF
     CALL search_empty_item; на выходе признак переноса и IX указатель на пустой предмет или сброшеный признак переноса
-    JR NC, add_item_to_map_error
+    JP NC, add_item_to_map_error
     POP AF
     LD (IX+Item.itemID), A; сохранили тип предмета
     POP DE
@@ -228,7 +231,7 @@ del_item_from_hand:
   LD (IY+Item.itemID), #ff 
   RET
 
-del_all_items_from_cell:
+; del_all_items_from_cell:
 
 ; создаем предмет прямо в руках героя
 ; в A - тип предмета
