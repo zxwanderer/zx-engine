@@ -6,10 +6,11 @@ ComputerOff.spr equ #14
     SETUP_CELL_TYPE_N Computer_cell_name, computer_off_script
 
 computer_off_script:
-  IfVar Vars.var_act, do_get, use_script
+  IfVar Vars.var_act, do_drop, drop_script
   goto no_way_script
-use_script:
-  CallCode items.get_hero_hand_item
+
+drop_script:
+  ; CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
   shiruFX FX_Poweroff
   ShowText Computer_off_hit_mess
