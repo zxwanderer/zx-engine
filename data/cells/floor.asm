@@ -5,12 +5,13 @@ Floor.spr: equ #03
     SETUP_CELL_TYPE_N Floor_cell_name, floor_script
   
 floor_script:
-  IfVar Vars.var_act, do_stand, stand_script
-  IfVar Vars.var_act, do_get_drop, take_script
+  IfVar Vars.var_act, do_get, get_script
+  ; IfVar Vars.var_act, do_stand, stand_script
   defb _endByte
-take_script:
+get_script:
   ShowText Take_floor_mess
   CallCode Entities.action_fault
+  SetVar Vars.var_ret, 0
   defb _endByte
   ENDMODULE
 
