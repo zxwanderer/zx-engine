@@ -417,10 +417,6 @@ char_do_drop:
   JP NC, drop_on_ground; бросаем прямо на пол
 
 drop_on_item: ;бросаем на другой предмет, в IX - указатель на него  
-  LD IY, (Entities.activePersonage_ptr)
-  LD L, (IY+Hero.hand_right_p)
-  LD H, (IY+Hero.hand_right_p+1); указатель на предмет в руках
-
   LD A, (IX+Item.ground); берем землю из найденного предмета
   LD (IY+Item.ground), A; запоминаем в своем
   JP drop_end
@@ -445,7 +441,7 @@ drop_end:
   LD IY, (Entities.activePersonage_ptr)
   LD (IY+Hero.hand_right_p), A
   LD (IY+Hero.hand_right_p+1), A 
-  RET
+  JP action_drop
 
 ; поднимаем предмет с пола!
 char_do_get:
@@ -468,15 +464,18 @@ char_do_get:
   LD DE, (Vars.MapCell_xy)
   CALL items.find_item_on_map
   JP C, get_from_item; поднимали с предмета, который нашли и поместили указатель в IY
-
 get_from_ground: ; поднимали с земли, ставим в IY указатель на поднятый предмет
   LD IY, (ActiveItem_ptr_ground)
-
-get_from_item:
   LD A, (IY+Item.ground)
+get_end:
   LD HL, ( MapCell_ptr )
   LD (HL), A
   JP action_pickup
+get_from_item:
+  LD A, (IX+Item.itemID)
+  CALL items.calc_item_type
+  LD A,(HL)
+  JP get_end
 
 action_drop:
   LD A, FX_Drop
