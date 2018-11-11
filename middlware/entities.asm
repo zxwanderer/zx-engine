@@ -24,24 +24,24 @@ MODULE Entities
     defb action_p
   ENDM
 
-  MACRO CharDo action_p, dir_p
-    defw Entities.char_do_me
-    defb dir_p
-    defb action_p
-  ENDM
+  ; MACRO CharDo action_p, dir_p
+  ;   defw Entities.char_do_me
+  ;   defb dir_p
+  ;   defb action_p
+  ; ENDM
 
-  MACRO CharDoForward dir_p
-    defw Entities.char_do_forward_me
-    defb dir_p
-  ENDM  
+  ; MACRO CharDoForward dir_p
+  ;   defw Entities.char_do_forward_me
+  ;   defb dir_p
+  ; ENDM
 
-  MACRO CharRotLeft
-    defw Entities.char_rot_left_me
-  ENDM
+  ; MACRO CharRotLeft
+  ;   defw Entities.char_rot_left_me
+  ; ENDM
 
-  MACRO CharRotRight
-    defw Entities.char_rot_right_me
-  ENDM
+  ; MACRO CharRotRight
+  ;   defw Entities.char_rot_right_me
+  ; ENDM
 
 activePersonage_ptr:
   dw #0000 ; указатель на текущего персонажа
@@ -63,12 +63,12 @@ char_rot_move_me:
   POP HL
   JP zxengine.process
 
-char_do_me:
-  mLBC
-  PUSH HL
-  CALL char_do
-  POP HL
-  JP zxengine.process
+; char_do_me:
+;   mLBC
+;   PUSH HL
+;   CALL char_do
+;   POP HL
+;   JP zxengine.process
 
 char_do_dir_me:
   mLDB
@@ -77,15 +77,15 @@ char_do_dir_me:
   POP HL
   JP zxengine.process
 
-char_do_forward_me:
-  mLDB
-  PUSH HL
-  LD IX, (activePersonage_ptr)
-  ; CALL char_do
-  LD C, (IX+Hero.dir)
-  CALL char_do
-  POP HL
-  JP zxengine.process
+; char_do_forward_me:
+;   mLDB
+;   PUSH HL
+;   LD IX, (activePersonage_ptr)
+;   ; CALL char_do
+;   LD C, (IX+Hero.dir)
+;   CALL char_do
+;   POP HL
+;   JP zxengine.process
 
 set_map_cell_me:
   mLDA
@@ -239,14 +239,12 @@ char_not_move:
   LD (IX+Hero.dir), B
   JP char_update_sprite
 
-  RET
+  ; RET
 
 ; в B - action
 char_do_dir:
   LD IX, (activePersonage_ptr)
   LD C, (IX+Hero.dir)
-  ; LD C, 
-
 ; ----- текущий персонаж на что-то воздействует ----
 ; на входе 
 ; activePersonage_ptr указатель на персонажа
@@ -286,17 +284,16 @@ no_item_in_hand: ; предмета в руках нет - значить под
   setVar Vars.var_act
 
 char_do_2:
-
   LD HL, (MapCell_ptr)
   LD A, (HL)
   CALL call_cell_script
-
   getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - значит все обработано, по дефолту обрабатывать не нужно
 
 ; -- дефолтная обработка - если хотим встать - становимся,
-; если хотим бросить - бросаем, если хотим поднять - поднимаем!
+; -- если хотим бросить - бросаем, если хотим поднять - поднимаем!
+
   getVar Vars.var_act
 
   CP do_stand
@@ -328,17 +325,17 @@ char_update_sprite:
   LD (HL),A                     ; ставим спрайт персонажа на карту
   RET
 
-char_rot_left_me:
-  PUSH HL
-  CALL char_rot_left
-  POP HL
-  JP zxengine.process 
+; char_rot_left_me:
+;   PUSH HL
+;   CALL char_rot_left
+;   POP HL
+;   JP zxengine.process 
 
-char_rot_right_me:
-  PUSH HL
-  CALL char_rot_right
-  POP HL
-  JP zxengine.process 
+; char_rot_right_me:
+;   PUSH HL
+;   CALL char_rot_right
+;   POP HL
+;   JP zxengine.process 
 
 ; -------------------------------------------------------------------
 ; вертим персонажа влево
@@ -406,9 +403,48 @@ char_do_stand:
 ; ------------------------------------------------------------------------------------
 ; персонаж использует ячейку MapCell_xy ( MapCell_ptr тоже установлен )
 ; ------------------------------------------------------------------------------------
-; char_do_use:
 
+; бросаем предмет из рук на пол ( предмет в руках есть )
 char_do_drop:
+  LD IY, (Entities.activePersonage_ptr)
+  LD L, (IY+Hero.hand_right_p)
+  LD H, (IY+Hero.hand_right_p+1); 
+  PUSH HL
+  POP IY; запоминаем в IY указатель на предмет в руках
+
+  LD DE, (Vars.MapCell_xy)
+  CALL items.find_item_on_map
+  JP NC, drop_on_ground; бросаем прямо на пол
+
+drop_on_item: ;бросаем на другой предмет, в IX - указатель на него  
+  LD IY, (Entities.activePersonage_ptr)
+  LD L, (IY+Hero.hand_right_p)
+  LD H, (IY+Hero.hand_right_p+1); указатель на предмет в руках
+
+  LD A, (IX+Item.ground); берем землю из найденного предмета
+  LD (IY+Item.ground), A; запоминаем в своем
+  JP drop_end
+
+drop_on_ground: ; в IY - предмет в руках
+  LD HL, ( MapCell_ptr )
+  LD A, (HL)
+  LD (IY+Item.ground), A
+  
+drop_end:
+  LD A, #ff
+  LD (IY+Item.owner), A
+  LD DE, (Vars.MapCell_xy)
+  
+  LD (IY+Item.pos.x), D
+  LD (IY+Item.pos.y), E
+
+  getVar Vars.var_item_id
+  LD HL, ( MapCell_ptr )
+  LD (HL), A
+  XOR A
+  LD IY, (Entities.activePersonage_ptr)
+  LD (IY+Hero.hand_right_p), A
+  LD (IY+Hero.hand_right_p+1), A 
   RET
 
 ; поднимаем предмет с пола!

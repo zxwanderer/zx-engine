@@ -56,7 +56,7 @@ ITEM_TYPES:
   DUP ItemType*100
     defb 00
    EDUP
-
+   
 say_no_way:
   shiruFX FX_Wall
   CallScript action_ring_explode
