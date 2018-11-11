@@ -5,6 +5,10 @@ SoftWall.spr: equ #06
     SETUP_CELL_TYPE_N Soft_wall_name, soft_wall_script
   
 soft_wall_script:
+  IfVar Vars.var_act, do_get, use_soft_wall_script
+  goto no_way_script
+  
+use_soft_wall_script:
   CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Shard.spr, soft_wall_break
   IfVar Vars.var_item_id, #ff, soft_wall_break_empty; руки пусты

@@ -6,6 +6,9 @@ ComputerBreak.spr equ #24
     SETUP_CELL_TYPE_N Computer_cell_name, computer_break_script
   
 computer_break_script:
+  IfVar Vars.var_act, do_get, use_script
+  goto no_way_script
+use_script:
   shiruFX 56
   CallScript action_ring_explode
   SetMapCell Trash.spr
