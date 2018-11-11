@@ -55,7 +55,7 @@ CELL_TYPES:
 ITEM_TYPES:
   DUP ItemType*100
     defb 00
-   EDUP 
+   EDUP
 
 say_no_way:
   shiruFX FX_Wall
@@ -66,10 +66,9 @@ no_way_script: ; неуспех
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
 
-
-stand_script:
-  CallCode Entities.char_do_stand
-  defb _endByte
+; stand_script:
+;   CallCode Entities.char_do_stand
+;   defb _endByte
 
 ; сигнал о получении приходит только после 
 ; НАЗАД и открыть аккаунт по-новой

@@ -51,6 +51,8 @@ MapCell_ptr:
   dw #0000 ;указатель на ячейку карты на которую воздействует персонаж ( заполняется в процедуре charCheckAction )
 ActiveItem_ptr:
   dw #0000 ; указатель на используемый предмет
+ActiveItem_ptr_ground:
+  dw #0000 ; указатель на используемый предмет на земле
 ; ActiveItemType_ptr:
   ; dw #0000 ; указатель на тип используемого предмета
 
@@ -263,27 +265,53 @@ char_do:
 ; подготавливаем переменные для обработки в скриптах
   CALL items.get_hero_hand_item; устанавливаем в Vars.var_item_id id предмета
 
+; проверяем поднимаем мы или бросаем
+  getVar Vars.var_act
+  CP do_get_drop
+  JP NZ, char_do_2; если это не поднятие/бросание то переходим на 2ю фазу
+
+; начинаем высчитывать что это - поднятие или бросание...
+; есть ли предмет в руках?
+  getVar Vars.var_item_id
+  CP #FF
+  JR Z, no_item_in_hand
+
+yes_item_in_hand: ; предмет в руках есть - значить бросаем его!
+  LD A, do_drop
+  setVar Vars.var_act
+  JR char_do_2
+
+no_item_in_hand: ; предмета в руках нет - значить поднимаем !
+  LD A, do_get
+  setVar Vars.var_act
+
+char_do_2:
+
   LD HL, (MapCell_ptr)
   LD A, (HL)
   CALL call_cell_script
-  RET
 
-  ; getVar Vars.var_ret
-  ; OR A
-  ; RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
+  getVar Vars.var_ret
+  OR A
+  RET Z; после скрипта переменная установлена в 0 - значит все обработано, по дефолту обрабатывать не нужно
 
-  ; getVar Vars.var_act
+; -- дефолтная обработка - если хотим встать - становимся,
+; если хотим бросить - бросаем, если хотим поднять - поднимаем!
+  getVar Vars.var_act
 
-  ; CP do_stand
-  ; JP Z, char_do_stand; персонаж перемещается туда
+  CP do_stand
+  JP Z, char_do_stand; персонаж перемещается туда
 
-  ; CP do_get_drop
-  ; JP Z, char_do_use; подбираем/бросаем
+  CP do_get
+  JP Z, char_do_get; подбираем/бросаем
+
+  CP do_drop
+  JP Z, char_do_drop; подбираем/бросаем
 
   ; LD A, 10
   ; CALL FX_SET; обиженно пиликаем 
  
-  ; RET
+  RET
 
 ; -------------------------------------------------------------------
 ; меняем спрайт героя в зависимости от направления персонажа ( в IX указатель на героя )
@@ -347,14 +375,6 @@ char_rot_right:
 ; -------------------------------------------------------------------
 char_do_stand:
 
-; для начала читаем тип спрайта ячейки карты на которую он пытается переместится
-; LD HL, (MapCell_ptr)
-; LD A, (HL)
-; CALL call_cell_script
-; getVar Vars.var_ret
-; OR A
-; RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
- 
   LD IX, (activePersonage_ptr)
   LD D, (IX+Hero.pos.x)
   LD E, (IX+Hero.pos.y)
@@ -386,8 +406,41 @@ char_do_stand:
 ; ------------------------------------------------------------------------------------
 ; персонаж использует ячейку MapCell_xy ( MapCell_ptr тоже установлен )
 ; ------------------------------------------------------------------------------------
-char_do_use:
+; char_do_use:
 
+char_do_drop:
+  RET
+
+; поднимаем предмет с пола!
+char_do_get:
+  LD DE, (Vars.MapCell_xy)
+  CALL items.find_item_on_map
+  JP NC, action_fault; предмета нет, поднять нельзя.. 
+; предмет есть
+  LD (ActiveItem_ptr_ground), IX; ix - указатель на предмет
+  LD IY, (Entities.activePersonage_ptr) ; iy - указатель на персонажа
+
+  LD A, ( Entities.CurPersonageNum )
+  LD (IX+Item.owner), A ; присваиваем ID персонажа предмету
+
+  PUSH IX
+  POP HL
+  LD (IY+Hero.hand_right_p), L
+  LD (IY+Hero.hand_right_p_1), H ; ставим "в руки" персонажа указатель на предмет
+
+  ; есть ли еще предметы? 
+  LD DE, (Vars.MapCell_xy)
+  CALL items.find_item_on_map
+  JP C, get_from_item; поднимали с предмета, который нашли и поместили указатель в IY
+
+get_from_ground: ; поднимали с земли, ставим в IY указатель на поднятый предмет
+  LD IY, (ActiveItem_ptr_ground)
+
+get_from_item:
+  LD A, (IY+Item.ground)
+  LD HL, ( MapCell_ptr )
+  LD (HL), A
+  JP action_pickup
 
 action_drop:
   LD A, FX_Drop
