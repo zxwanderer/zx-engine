@@ -258,19 +258,32 @@ char_do:
   LD A,C
   CALL calc_action_pos
   RET NC;  возвратили false - неправильное направление или действие
+; Vars.MapCell_xy - позиция, MapCell_ptr - указатель на ячейку
 
-  getVar Vars.var_act
+; подготавливаем переменные для обработки в скриптах
+  CALL items.get_hero_hand_item; устанавливаем в Vars.var_item_id id предмета
 
-  CP do_stand
-  JP Z, char_do_stand; персонаж стоит
-
-  CP do_get_drop
-  JP Z, char_do_get_drop; подбираем/бросаем
-
-  LD A, 10
-  CALL FX_SET; обиженно пиликаем 
- 
+  LD HL, (MapCell_ptr)
+  LD A, (HL)
+  CALL call_cell_script
   RET
+
+  ; getVar Vars.var_ret
+  ; OR A
+  ; RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
+
+  ; getVar Vars.var_act
+
+  ; CP do_stand
+  ; JP Z, char_do_stand; персонаж перемещается туда
+
+  ; CP do_get_drop
+  ; JP Z, char_do_use; подбираем/бросаем
+
+  ; LD A, 10
+  ; CALL FX_SET; обиженно пиликаем 
+ 
+  ; RET
 
 ; -------------------------------------------------------------------
 ; меняем спрайт героя в зависимости от направления персонажа ( в IX указатель на героя )
@@ -335,12 +348,12 @@ char_rot_right:
 char_do_stand:
 
 ; для начала читаем тип спрайта ячейки карты на которую он пытается переместится
-  LD HL, (MapCell_ptr)
-  LD A, (HL)
-  CALL call_cell_script:
-  getVar Vars.var_ret
-  OR A
-  RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
+; LD HL, (MapCell_ptr)
+; LD A, (HL)
+; CALL call_cell_script
+; getVar Vars.var_ret
+; OR A
+; RET Z; после скрипта переменная установлена в 0 - перемещать не нужно
  
   LD IX, (activePersonage_ptr)
   LD D, (IX+Hero.pos.x)
@@ -359,11 +372,40 @@ char_do_stand:
   LD (HL),A                     ; ставим спрайт персонажа на карту
   RET
 
+; ; ------------------------------------------------------------------------------------
+; ; персонаж поднимает предмет или бросает на MapCell_xy ( MapCell_ptr тоже установлен )
+; ; ------------------------------------------------------------------------------------
+; char_do_get_drop:
+; ; сначала определяем есть ли предметы
+
+;   ; CALL items.get_hero_hand_item; получаем предмет в руках
+;   ; JR C, char_do_use; если руки не свободны - переходим на использование предмета
+
+; char_do_drop:
+
 ; ------------------------------------------------------------------------------------
-; персонаж поднимает предмет или бросает на MapCell_xy ( MapCell_ptr тоже установлен )
+; персонаж использует ячейку MapCell_xy ( MapCell_ptr тоже установлен )
 ; ------------------------------------------------------------------------------------
-char_do_get_drop:
-  
+char_do_use:
+
+
+action_drop:
+  LD A, FX_Drop
+  CALL FX_SET; обиженно пиликаем
+  RET
+
+action_pickup:
+  LD A, FX_Pickup
+  CALL FX_SET; обиженно пиликаем
+  RET
+
+action_fault:
+  LD A, 10
+  CALL FX_SET; обиженно пиликаем
+  RET
+
+
+/*
   CALL items.get_hero_hand_item; получаем предмет в руках
   JR C, char_do_drop; если руки не свободны - переходим на бросок предмета
 
@@ -410,15 +452,10 @@ char_do_get_drop:
 
 char_no_get:
 
-  ; CALL is_char_on_map
-  ; JR NC, char_no_get_no_char
-
-  ; LD A, (IX+Hero.ground)
   LD HL, ( MapCell_ptr )
   LD A, ( HL )
   
   CALL call_cell_script
-  ; тут все переделать так как у нас чар собственно поднимал с пола на чем стоял все %)
 
   getVar Vars.var_ret; проверяем если нет ошибки поднятия - возврат
   OR A
@@ -436,11 +473,19 @@ char_do_drop:
   setVar Vars.var_act
   POP AF
 
+  LD HL, ( MapCell_ptr )
+  LD A, ( HL )
+  CALL call_cell_script
+  getVar Vars.var_ret; проверяем если нет ошибки поднятия - возврат
+  OR A
+  RET Z
+
+
   LD IY, (activePersonage_ptr)
   LD E, (IY+Hero.hand_right_p)
   LD D, (IY+Hero.hand_right_p_1)
   LD (ActiveItem_ptr), DE; заполняем указатель на активный предмет тем что в руках, так как он может использоваться в скриптах
-  CALL call_cell_script
+  CALL call_cell_script ; обрабатываем бросок 
   getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - ошибка бросания
@@ -465,6 +510,7 @@ char_do_drop:
   CALL FX_SET
 
   RET
+*/
 
   MACRO m_check_left:
     LD A,D
