@@ -7,11 +7,16 @@ Door_half_open equ #12
     SETUP_CELL_TYPE_N Door_cell_name, door_script
   
 door_script:
-  goto door_do_open
+  ; goto door_do_open
   ; IfVar varDoorUnlock, 100, door_do_open
-  CallCode items.get_hero_hand_item
+  IfVar Vars.var_act, do_get, get_script
+  IfVar Vars.var_act, do_drop, drop_script
+  goto no_way_script
+
+drop_script:
   IfVar Vars.var_item_id, Chair.spr, door_kick_chair
   IfVar Vars.var_item_id, Shard.spr, door_kick_shard
+get_script:
   shiruFX FX_Nope
   ShowText Door_not_open_mess
   goto no_way_script

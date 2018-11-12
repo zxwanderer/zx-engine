@@ -7,11 +7,12 @@ ComputerOff.spr equ #14
 
 computer_off_script:
   IfVar Vars.var_act, do_drop, drop_script
+  IfVar Vars.var_act, do_get, take_script
   goto no_way_script
 
 drop_script:
-  ; CallCode items.get_hero_hand_item
   IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
+take_script:
   shiruFX FX_Poweroff
   ShowText Computer_off_hit_mess
   goto no_way_script
