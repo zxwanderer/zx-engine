@@ -158,6 +158,8 @@ key_table_hero:
   KEY_G, RESTART
 
   KEY_ENTER, char_loot
+  KEY_M, char_loot
+  KEY_SPACE, char_loot
 
   defb _endByte
 
