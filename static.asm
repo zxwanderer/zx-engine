@@ -63,7 +63,7 @@ ENCOUNTER_SET:
   include "data/cells/computer/computer_break.asm"
   include "data/cells/computer/computer_off.asm"
   include "data/cells/computer/computer.asm"
-  include "data/cells/door/door.asm"
+  include "data/cells/door.asm"
   include "data/cells/electronic/electronic.asm"
   include "data/cells/electronic/electronic_break.asm"
   include "data/cells/heroes/Hero09.asm"
