@@ -42,7 +42,7 @@ _after_font:
 
 START_SCRIPT:
   include "data/script.asm"
-  include "data/cursor_look.asm"
+  ; include "data/cursor_look.asm"
 
 ENCOUNTER_SET:
 	include "data/rebelstar_enc.asm"

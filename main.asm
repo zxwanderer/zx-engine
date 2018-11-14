@@ -19,7 +19,7 @@ display "font addr: ", p68_font, ", pre-font unused size: ", /D, p68_font - LANG
 display "dynamic data size: ", /D, _all_end-dynamic, ", dynamic end: ", _all_end
 display "----- all end: ", _all_end
 
-display binary_calc_hero_cursor_pos
+; display binary_calc_hero_cursor_pos
 ; display CELL_TYPES
 ; display Computer_cell_name
 ; display ComputerBreak.computer_break_script

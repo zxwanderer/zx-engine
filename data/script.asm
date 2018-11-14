@@ -82,7 +82,7 @@ binary_init:
   RET
 
 GAME_LOOP:
-  IfVar Vars.var_mode, 1, cursor_look
+  ; IfVar Vars.var_mode, 1, cursor_look
   SkanKeyTable key_table_hero
   wait_halt 1
   ; CallCode screenfx.show_frames
