@@ -61,7 +61,7 @@ say_no_way:
   shiruFX FX_Wall
   CallScript action_ring_explode
   ShowText no_way_mess
-no_way_script: ; неуспех 
+no_way_script: ; неуспех
   SetVar Vars.var_ret, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
   defb _endByte
