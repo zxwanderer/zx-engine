@@ -237,11 +237,13 @@ del_item_from_hand:
 ; в A - тип предмета
 ; на выходе в IX указатель на предмет
 add_item_to_hand:
-  PUSH AF
+;   PUSH AF
+  LD ( add_item_to_hand_2+1), A
   CALL search_empty_item; на выходе признак переноса и IX указатель на пустой предмет или сброшеный признак переноса
-  JP NC, add_item_to_hand_error
-  POP AF
-
+  RET NC
+;   POP AF
+add_item_to_hand_2:
+  LD A, #00
   LD (IX+Item.itemID), A; сохранили тип предмета
   
   LD A, ( Entities.CurPersonageNum )
@@ -252,9 +254,10 @@ add_item_to_hand:
   LD IX, (Entities.activePersonage_ptr)
   LD (IX+Hero.hand_right_p), L
   LD (IX+Hero.hand_right_p_1), H
-  
-add_item_to_hand_error:
-    POP AF
-    RET
+  RET
+
+; add_item_to_hand_error:
+    ; POP AF
+    ; RET
 
 ENDMODULE
