@@ -174,15 +174,31 @@ nextChar:
 
 ; ------- вычислить координаты курсора на экране который указывает на текущего героя
 ; на выходе в HL позиция на экране где находится наш герой
-calc_hero_cursor_pos:
-  LD IX, (activePersonage_ptr) 
-  LD BC, (map.mapPos)
-  LD A, (IX+Hero.pos.x)
-  SUB B
-  LD H,A  
-  LD A, (IX+Hero.pos.y)
-  SUB C
-  LD L,A
+; calc_hero_cursor_pos:
+  ; LD IX, (activePersonage_ptr) 
+  ; LD BC, (map.mapPos)
+  ; LD A, (IX+Hero.pos.x)
+  ; SUB B
+  ; LD H,A  
+  ; LD A, (IX+Hero.pos.y)
+  ; SUB C
+  ; LD L,A
+  ; RET
+
+; ------- показать информацию о ячейке на которую смотрит персонаж
+; (!) на данный момент учитывает только спрайты с карты
+lookCharSeeCellInfo:
+  LD IX, (activePersonage_ptr)
+  LD A, (IX+Hero.dir)
+  CALL calc_action_pos; в MapCell_ptr получили указатель на ячейку карты
+  RET NC
+  LD HL, (MapCell_ptr)
+  LD A, (HL)
+  CALL calc_cell_type
+  LD (lookCharSeeCellInfo_p+1), HL
+lookCharSeeCellInfo_p:
+  LD HL, (#0000)
+  CALL screenfx.show_info_message
   RET
 
 ; ------- показать карту с текущим персонажем на экране
@@ -634,7 +650,7 @@ char_do_drop:
 ;       activePersonage_ptr указатель на персонажа
 ;       A - направление 
 ; на выходе если NС то ошибка ( выход за пределы карты или непонятное действие)
-; иначе в DE и MapCell_xy позиция действия
+; иначе в DE и MapCell_xy позиция действия, MapCell_ptr - указатель на ячейку карты
 calc_action_pos:
   LD IX, (activePersonage_ptr)
   LD D, (IX+Hero.pos.x)
@@ -750,8 +766,7 @@ set_map:
   LD (HL), A
   RET
 
-set_herow_sprite
-  RET  
-
+; set_herow_sprite
+;   RET 
 
 ENDMODULE

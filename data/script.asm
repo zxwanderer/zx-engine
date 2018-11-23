@@ -89,7 +89,6 @@ GAME_LOOP:
   ; CallScript look_char
   defb _endByte
 
-
 binary_play_intro:
   LD A, (IS_GAME_OVER)
   AND A
@@ -111,21 +110,6 @@ binary_show_screen:
   
 ; показать GUI поверх карты =)
 binary_show_gui:
-  ; CALL cursor.show_cursor
-/*
-; проверяем стоит ли герой на каком-нибудь предмете
-show_ground_item:
-  LD IX, (Entities.activePersonage_ptr)
-  LD D, (IX+Entities.Hero.pos.x)
-  LD E, (IX+Entities.Hero.pos.y)
-  CALL items.find_item_on_map ; в IX указатель на найденный предмет
-  JR NC, show_hand_item; не стоит
-
-  LD IX, (Entities.activePersonage_ptr)
-  LD A, (IX+Entities.Hero.ground); берем спрайт на чем герой стоит
-  LD DE, #1D01
-  CALL screenfx.show_sprite
-*/
 
 show_hand_item:
   CALL items.get_hero_hand_item
@@ -151,7 +135,7 @@ key_table_hero:
   KEY_O, char_left
   KEY_P, char_right
 
-  KEY_I, set_cursor_look
+  ; KEY_I, set_cursor_look
 
   KEY_H, HELP_SCRIPT
 
@@ -163,17 +147,17 @@ key_table_hero:
 
   defb _endByte
 
-set_cursor_look:
-  CallCode binary_calc_hero_cursor_pos
-  SetVar Vars.var_mode, 1; cursor_look
-  CallCode input.noKey
-  defb _endByte
+; set_cursor_look:
+  ; CallCode binary_calc_hero_cursor_pos
+  ; SetVar Vars.var_mode, 1; cursor_look
+  ; CallCode input.noKey
+  ; defb _endByte
 
-binary_calc_hero_cursor_pos
-  CALL Entities.calc_hero_cursor_pos
+; binary_calc_hero_cursor_pos
+  ; CALL Entities.calc_hero_cursor_pos
   ; ADD HL, HL
-  LD ( Vars.Cursor_pos ), HL
-  RET
+  ; LD ( Vars.Cursor_pos ), HL
+  ; RET
 
 scan_cursor_keys:
   SkanKeyTable cursor_table_hero
@@ -211,24 +195,28 @@ look_char:
 char_up:
   ; CharDo do_stand, dir_up
   CharRotMove dir_up
+  CallCode Entities.lookCharSeeCellInfo
   ; CharDoForward do_stand
   goto look_char
 
 char_down:
   ; CharDo do_stand, dir_down
   CharRotMove dir_down
+  CallCode Entities.lookCharSeeCellInfo
   goto look_char
 
 char_left:
   ; CharRotLeft
   ; CharDo do_stand, dir_left
   CharRotMove dir_left
+  CallCode Entities.lookCharSeeCellInfo
   goto look_char
 
 char_right:
   ; CharDo do_stand, dir_right
   ; CharRotRight
   CharRotMove dir_right
+  CallCode Entities.lookCharSeeCellInfo
   goto look_char
 
 ; char_up_left:
