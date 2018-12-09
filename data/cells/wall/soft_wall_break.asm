@@ -10,19 +10,30 @@ soft_wal_script:
   goto no_way_script
 
 soft_wall_break:
+  SetVar Vars.var_ret, 0
   shiruFX FX_Cutt1
   CallScript action_ring_explode
-  IfVarN Vars.var_pos_y, 4, soft_wall_break_on
-  IfVarN Vars.var_pos_x, 14, soft_wall_break_on
+
+  ScanPosTable soft_wall_panel_table
+  IfVar Vars.var_ret, 1, no_way_script
+  
+soft_wall_break_on:
+  SetMapCell Wall.spr
+  ShowText Soft_wall_clean
+  goto no_way_script; на выходе должно быть 0 тогда дальше обрабатываться не будет
 
 soft_wall_break_electronic_script:
   SetMapCell Electronic.spr
   ShowText Soft_wall_show_electronic
-  goto no_way_script
+  SetVar Vars.var_ret, 1
+  defb _endByte
 
-soft_wall_break_on:
-  SetMapCell Wall.spr
-  ShowText Soft_wall_clean
-  goto no_way_script
+soft_wall_panel_table:
+  defb 14,4
+  defw soft_wall_break_electronic_script
+  defb _endByte
 
   ENDMODULE
+
+display "soft_wall_panel_table", SoftWallBreak.soft_wall_panel_table
+display "soft_wall_break_electronic_script", SoftWallBreak.soft_wall_break_electronic_script

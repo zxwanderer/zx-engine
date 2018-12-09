@@ -2,10 +2,10 @@ BEGIN_SCRIPT:
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_CYAN
   CallCode binary_clear_screen
-  printAt 0,0,HELLO_TXT
-  CallCode binary_play_intro
-  SkanKeyTable key_table_intro
-  CallCode input.noKey
+  ; printAt 0,0,HELLO_TXT
+  ; CallCode binary_play_intro
+  ; SkanKeyTable key_table_intro
+  ; CallCode input.noKey
 
   CallCode binary_clear_screen
   CallCode binary_init
@@ -83,7 +83,7 @@ binary_init:
 
 GAME_LOOP:
   ; IfVar Vars.var_mode, 1, cursor_look
-  SkanKeyTable key_table_hero
+  ScanKeyTable key_table_hero
   wait_halt 1
   ; CallCode screenfx.show_frames
   ; CallScript look_char
@@ -160,7 +160,7 @@ key_table_hero:
   ; RET
 
 scan_cursor_keys:
-  SkanKeyTable cursor_table_hero
+  ScanKeyTable cursor_table_hero
   defb _endByte
 
 cursor_table_hero:
