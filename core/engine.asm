@@ -30,8 +30,14 @@ MODULE zxengine
   ENDM
 
 ; сканировать таблицу в зависимости от нажатой клавиши
-  MACRO SkanKeyTable ptr
+  MACRO ScanKeyTable ptr
     defw zxengine.scan_keys_me
+    defw ptr
+  ENDM
+
+; сканировать таблицу в зависимости от нажатой клавиши
+  MACRO ScanPosTable ptr
+    defw zxengine.scan_pos_table_me
     defw ptr
   ENDM
 
@@ -148,21 +154,39 @@ wait_me_loop:
   DJNZ wait_me_loop
   JP process
 
-scan_var_me:
-	mLDE; table_ptr
-  mLDA; A - var num
-  PUSH HL; script_pointer
+; scan_var_me:
+; 	mLDE; table_ptr
+;   mLDA; A - var num
+;   PUSH HL; script_pointer
 
-  PUSH DE
+;   PUSH DE
   
-  call getVar ; A - значение var
-  LD B,A
+;   call getVar ; A - значение var
+;   LD B,A
   
+;   POP HL
+;   call scan_sctipt_table
+;   JR NZ, call_script_call; если флаг не 0 то переменная найдена
+;   POP HL
+;   JP process
+
+scan_pos_table_me: ; ================ сканируем позицию 
+	mLDE
+	PUSH HL
+  LD HL,Vars.MapCell_xy
+  LD B,(HL)
+  INC HL 
+  LD C,(HL)
+  EX DE, HL
+  CALL scan_table_xy; в HL адрес
+  LD E, (HL)
+  INC HL
+  LD D, (HL)
+  ; LD DE, (HL)
+	; EX DE, HL
+  JP NZ, call_script_call; если флаг не 0 то есть координаты
   POP HL
-  call scan_sctipt_table
-  JR NZ, call_script_call; если флаг не 0 то переменная найдена
-  POP HL
-  JP process
+	JP process
 
 scan_keys_me: ; ================ scan keys
 	mLDE
@@ -178,20 +202,53 @@ scan_keys_me: ; ================ scan keys
 ;   в HL указатель на таблицу вида [ptr],[value]
 ; выход:
 ; z=1 если найдено, в DE указатель на скрипт
-scan_sctipt_table:
+; scan_sctipt_table:
+;   LD A,(HL) ;//  загружаем первый байт
+;   AND A
+;   RET Z ; возвращаем если конец таблицы
+;   LD E,A
+;   INC HL
+;   LD D,(HL)
+;   INC HL
+;   LD A,(HL) ;//  загружаем value
+;   INC HL
+;   CP B
+;   JR NZ,scan_sctipt_table
+; 	OR 2
+; 	RET
+
+; вход:
+;   в B,C - значения переменной
+;   в HL указатель на таблицу вида [value_b][value_c][ptr]
+; выход:
+; Z=1 если найдено, в HL указатель на скрипт
+scan_table_xy:
   LD A,(HL) ;//  загружаем первый байт
   AND A
-  RET Z ; возвращаем если конец таблицы
+  RET Z
   LD E,A
   INC HL
-  LD D,(HL)
-  INC HL
-  LD A,(HL) ;//  загружаем value
+  LD A,(HL)
   INC HL
   CP B
-  JR NZ,scan_sctipt_table
-	OR 2
-	RET
+  JP NZ, scan_table_xy_next
+  LD A,E
+  CP C
+  JP NZ, scan_table_xy_next
+  OR 2
+  RET
+scan_table_xy_next:
+  INC HL
+  INC HL
+  JP scan_table_xy
+  ; LD E,A
+  ; INC HL
+  ; LD D,(HL)
+  ; INC HL
+  ; LD A,(HL) ;//  загружаем value
+  ; INC HL
+  ; CP B
+	; RET
 
 	; честно стырено из движка Wanderers
 scanKeys:
@@ -284,3 +341,5 @@ stop_measure:
   RET
 
 ENDMODULE
+
+display "zxengine.scan_table_xy", zxengine.scan_table_xy
