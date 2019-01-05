@@ -5,8 +5,30 @@ MODULE View
 ; в HL адрес первого тайла карты
 copy:
     LD IX, View.buffer
-    ; LD A, (HL)
-    ; LD (IX), A
+    LD B, scrHeight
+copy_loop2:
+    PUSH BC
+    PUSH HL
+
+    LD B,scrWidth
+copy_loop1:
+    PUSH BC
+
+    LD A, (HL)
+    LD (IX), A
+    INC IX
+    INC HL
+    
+    POP BC
+    DJNZ copy_loop1
+
+    POP HL
+    LD BC, mapSize
+    ADD HL, BC; прибавляем к указателю на начало тайлов ширину - сдвигаем указатель вниз на 1 тайл
+
+    POP BC
+    DJNZ copy_loop2
+
     RET
 
 ; отрисовываем тайлы на экране
