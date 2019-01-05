@@ -12,6 +12,7 @@
   ; include "core/cursor.asm"
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
+  include "core/routines/view.asm"
   include "core/routines/input.asm"
   include "core/routines/zx7.a80"
   include "middlware/beeper.asm"
