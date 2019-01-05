@@ -31,6 +31,16 @@ soft_wall_break_electronic_script:
 soft_wall_panel_table:
   defb 14,4
   defw soft_wall_break_electronic_script
+  defb 18,4
+  defw soft_wall_break_electronic_script
+
+  defb 14,16
+  defw soft_wall_break_electronic_script
+  defb 18,16
+  defw soft_wall_break_electronic_script
+  defb 22,16
+  defw soft_wall_break_electronic_script
+
   defb _endByte
 
   ENDMODULE
