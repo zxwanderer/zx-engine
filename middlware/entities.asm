@@ -207,8 +207,10 @@ lookChar:
   LD D, (IX+Hero.pos.x)
   LD E, (IX+Hero.pos.y)
   CALL map.center_map
-  JP Tiles16.show_tile_map
-  RET
+  CALL View.copy
+  JP View.draw
+  ; JP Tiles16.show_tile_map
+  ; RET
 
 ; найти персонажа по адресу DE
 ; на выходе 
