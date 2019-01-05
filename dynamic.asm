@@ -1,6 +1,6 @@
 MAP_MASK:
   DUP mapSize*mapSize
-  defb 0
+  defb 0; 0 - ячейка еще не просмотрена
   EDUP
 
 MAP_SET:

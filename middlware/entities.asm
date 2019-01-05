@@ -206,8 +206,10 @@ lookChar:
   LD IX, (activePersonage_ptr)
   LD D, (IX+Hero.pos.x)
   LD E, (IX+Hero.pos.y)
-  CALL map.center_map
-  CALL View.copy
+  LD A, (IX+Hero.dir)
+  CALL View.look
+  ; CALL map.center_map
+  ; CALL View.copy
   JP View.draw
   ; JP Tiles16.show_tile_map
   ; RET
