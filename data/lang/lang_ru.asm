@@ -125,6 +125,8 @@ Book_cell_name: db "Книга", 0
 Canister_cell_name: db "Биоконтейнер", 0
 Generator_cell_name: db "Биотопливный генератор", 0
 
+WallHole_name: db "Большая дыра в стене",0
+
 Body_cell_name: db "Тело гуманоида", 0
 Memo_cell_name: db "Ментограмма", 0
 Anabiose_cell_name: db "Анабиозная камера", 0

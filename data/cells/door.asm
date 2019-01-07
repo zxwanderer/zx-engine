@@ -66,7 +66,7 @@ DoorYellowOpen.spr: equ #6c
 
 DoorWhite.spr: equ #7b
   MODULE DoorWhite
-    SETUP_CELL_TYPE_N Door_cell_name, door_script
+    SETUP_CELL_TYPE_N Door_cell_name, Door.door_script
 
 door_script:
   shiruFX 43
@@ -82,7 +82,7 @@ DoorWhiteOpen.spr: equ #7c
 
 DoorBlue.spr: equ #8b
   MODULE DoorBlue
-    SETUP_CELL_TYPE_N Door_cell_name, door_script
+    SETUP_CELL_TYPE_N Door_cell_name, Door.door_script
 door_script:
   shiruFX 43
   SetMapCell DoorBlueOpen.spr
@@ -96,7 +96,7 @@ DoorBlueOpen.spr: equ #8c
 
 DoorRedHard.spr: equ #64
   MODULE DoorRedHard
-    SETUP_CELL_TYPE_N Door_cell_name, door_script  
+    SETUP_CELL_TYPE_N Door_cell_name, Door.door_script  
 door_script:
   shiruFX 43
   SetMapCell DoorRedHardOpen.spr
