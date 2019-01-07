@@ -28,7 +28,14 @@ soft_wall_break_electronic_script:
   SetVar Vars.var_ret, 1
   defb _endByte
 
+soft_wall_make_hole_script:
+  SetMapCell WallHole.spr
+  ShowText WallHole_name
+  SetVar Vars.var_ret, 1
+  defb _endByte
+
 soft_wall_panel_table:
+
   defb 14,4
   defw soft_wall_break_electronic_script
   defb 18,4
@@ -41,9 +48,22 @@ soft_wall_panel_table:
   defb 22,16
   defw soft_wall_break_electronic_script
 
+  defb 21,4
+  defw soft_wall_make_hole_script
+  defb 12,10
+  defw soft_wall_make_hole_script
+  defb 15,10
+  defw soft_wall_make_hole_script
+
   defb _endByte
 
   ENDMODULE
 
-display "soft_wall_panel_table", SoftWallBreak.soft_wall_panel_table
-display "soft_wall_break_electronic_script", SoftWallBreak.soft_wall_break_electronic_script
+WallHole.spr: equ 72
+
+  MODULE WallHole
+    SETUP_CELL_TYPE_N WallHole_name, Floor.floor_script
+  ENDMODULE
+
+; display "soft_wall_panel_table", SoftWallBreak.soft_wall_panel_table
+; display "soft_wall_break_electronic_script", SoftWallBreak.soft_wall_break_electronic_script
