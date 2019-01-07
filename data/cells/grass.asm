@@ -50,6 +50,11 @@ Sand.spr: equ 80
     SETUP_CELL_TYPE_N Sand_cell_name, Floor.floor_script
   ENDMODULE
 
+PlantPot.spr: equ 24
+  MODULE PlantPot
+    SETUP_CELL_TYPE_N PlantPot_cell_name, Bush.bush_script
+  ENDMODULE
+
 ; --- вмятина на земле
 CraterSmall.spr: equ 65
   MODULE CraterSmall
@@ -58,23 +63,23 @@ CraterSmall.spr: equ 65
 
 Toilet.spr: equ 102
   MODULE Toilet
-    SETUP_CELL_TYPE_N Toilet_cell_name, say_no_way
+    SETUP_CELL_TYPE_N Toilet_cell_name, no_way_script
   ENDMODULE
 
 Sink.spr: equ 103
   MODULE Sink
-    SETUP_CELL_TYPE_N Sink_cell_name, say_no_way
+    SETUP_CELL_TYPE_N Sink_cell_name, no_way_script
 sink_script:
   ENDMODULE
 
 Table.spr: equ 35
   MODULE Table
-    SETUP_CELL_TYPE_N Table_cell_name, say_no_way
+    SETUP_CELL_TYPE_N Table_cell_name, no_way_script
   ENDMODULE
 
 Keramit.spr: equ 175
   MODULE Keramit
-    SETUP_CELL_TYPE_N Keramit_cell_name, keramit_script
+    SETUP_CELL_TYPE_N Keramit_cell_name, no_way_script
 keramit_script:
   shiruFX FX_Wall
   ShowText Keramit_mess
