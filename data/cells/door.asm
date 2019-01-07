@@ -48,6 +48,22 @@ DoorOpen_script:
   defb _endByte
   ENDMODULE
 
+DoorYellow.spr: equ #6b
+  MODULE DoorYellow
+    SETUP_CELL_TYPE_N Door_cell_name, door_script
+
+door_script:
+  shiruFX 43
+  SetMapCell DoorYellowOpen.spr
+  goto no_way_script
+
+  ENDMODULE
+
+DoorYellowOpen.spr: equ #6c
+  MODULE DoorYellowOpen
+    SETUP_CELL_TYPE_N Door_cell_name, DoorOpen.DoorOpen_script
+  ENDMODULE
+
 DoorWhite.spr: equ #7b
   MODULE DoorWhite
     SETUP_CELL_TYPE_N Door_cell_name, door_script

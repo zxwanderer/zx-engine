@@ -2,10 +2,10 @@ BEGIN_SCRIPT:
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_CYAN
   CallCode binary_clear_screen
-  ; printAt 0,0,HELLO_TXT
-  ; CallCode binary_play_intro
-  ; SkanKeyTable key_table_intro
-  ; CallCode input.noKey
+  printAt 0,0,HELLO_TXT
+  CallCode binary_play_intro
+  ScanKeyTable key_table_intro
+  CallCode input.noKey
 
   CallCode binary_clear_screen
   CallCode binary_init
@@ -120,7 +120,7 @@ show_hand_item:
 binary_show_gui_ret:
   RET
 
-key_table_intro
+key_table_intro:
   KEY_H, HELP_SCRIPT_INTRO
   KEY_I, ABOUT_INTRO
   defb _endByte

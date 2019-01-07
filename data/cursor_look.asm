@@ -2,7 +2,7 @@
 cursor_look:
   CallCode cursor.show_cursor
   wait_halt 1
-  SkanKeyTable cursor_table_look
+  ScanKeyTable cursor_table_look
   defb _endByte
 
 cursor_post_update:

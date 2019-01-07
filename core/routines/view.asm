@@ -8,19 +8,26 @@ MODULE View
     POP DE
   ENDM
 
-
 ; вход:
 ; D - x, E - y,
 ; A - dir
 look:
     m_look_dir dir_down
+
     m_look_dir dir_down_left
+
     m_look_dir dir_left
+
     m_look_dir dir_up_left
+
     m_look_dir dir_up
+
     m_look_dir dir_up_right
+
     m_look_dir dir_right
+
     m_look_dir dir_down_right
+
     m_look_dir dir_center
 
     CALL map.center_map
