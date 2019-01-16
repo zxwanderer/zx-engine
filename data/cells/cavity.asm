@@ -1,7 +1,7 @@
 
-CavityGrid.spr: equ 43
+WallCavity.spr: equ 43
 
-  MODULE CavityGrid
+  MODULE WallCavity
     SETUP_CELL_TYPE_N WallCavity_name,     cavity_script
 
 cavity_script:
