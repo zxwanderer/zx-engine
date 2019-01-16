@@ -7,6 +7,7 @@ ComputerBreak.spr equ #24
   
 computer_break_script:
   IfVar Vars.var_act, do_get, use_script
+  IfVar Vars.var_act, do_drop, use_script
   goto no_way_script
 use_script:
   shiruFX 56
