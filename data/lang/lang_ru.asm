@@ -147,6 +147,9 @@ tHeroName2 defb "HOMO",0
 Electronic_break_mess:
   db "И так уже все сломано дальше некуда...",0
 
+WallGrid_false_mess:
+  db "Толстые прутья решетки не поддавались...",0
+
 Soft_wall_show_electronic:
   db "Под декоративной стенкой обнаружилась     "
   db "панель управления..",0
