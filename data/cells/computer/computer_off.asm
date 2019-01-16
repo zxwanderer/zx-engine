@@ -12,6 +12,7 @@ computer_off_script:
 
 drop_script:
   IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
+  IfVar Vars.var_item_id, Shard.spr, computer_screen_destroy
 take_script:
   shiruFX FX_Poweroff
   ShowText Computer_off_hit_mess
@@ -22,6 +23,14 @@ computer_glass_destroy:
   CallScript action_ring_explode
   SetMapCell ComputerBreak.spr
   ShowText Computer_break_mess
+  CallCode items.del_item_from_hand
+  goto no_way_script
+
+computer_screen_destroy:
+  shiruFX 56
+  CallScript action_ring_explode
+  SetMapCell ComputerBreak.spr
+  ShowText Computer_break_screen_mess
   CallCode items.del_item_from_hand
   goto no_way_script
 
