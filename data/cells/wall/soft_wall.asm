@@ -13,7 +13,7 @@ drop_script:
   IfVar Vars.var_item_id, Shard.spr, soft_wall_break
   shiruFX 17
   CallScript action_ring_explode
-  ShowText Soft_wall_hit_item_mess
+  ShowText Soft_wall_hit_mess
   goto no_way_script
 
 get_script:
