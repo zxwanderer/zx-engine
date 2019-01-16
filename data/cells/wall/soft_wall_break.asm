@@ -29,8 +29,8 @@ soft_wall_break_electronic_script:
   defb _endByte
 
 soft_wall_make_hole_script:
-  SetMapCell WallHole.spr
-  ShowText WallHole_name
+  SetMapCell WallGrid.spr
+  ShowText WallGrid_name
   SetVar Vars.var_ret, 1
   defb _endByte
 

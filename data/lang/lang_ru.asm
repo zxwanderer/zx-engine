@@ -126,6 +126,8 @@ Canister_cell_name: db "Биоконтейнер", 0
 Generator_cell_name: db "Биотопливный генератор", 0
 
 WallHole_name: db "Большая дыра в стене",0
+WallGrid_name: db "Металлическая решетка", 0
+WallCavity_name: db "Короб под электронику", 0
 
 Body_cell_name: db "Тело гуманоида", 0
 Memo_cell_name: db "Ментограмма", 0
