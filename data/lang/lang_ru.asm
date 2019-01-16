@@ -98,7 +98,7 @@ Ballon_cell_name: db "Баллон",0
 Bed_cell_name: db "Кровать",0
 Trash_cell_name: db "Мелкие обломки и мусор",0
 
-Soft_wall_name: db "Декоративная стена",0
+Soft_wall_name: db "Мягкая декоративная стена",0
 
 Shard_item_name: db "Осколок",0
 Chair_item_name: db "Стул",0
@@ -144,8 +144,8 @@ Mentoscanner_kick_mess:
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
 
-Electronic_break_mess:
-  db "И так уже все сломано дальше некуда...",0
+; Electronic_break_mess:
+  ; db "И так уже все сломано дальше некуда...",0
 
 WallGrid_false_mess:
   db "Толстые прутья решетки не поддавались...",0
@@ -222,8 +222,8 @@ Take_shard_mess
   db "Я подобрал острый осколок пластика..",0
 
 Shard_to_soft_wall_mess
-  db "Острым осколком я прорезал дырку в мягкой "
-  db "декоративной стенке..",0
+  db "Я прорезал дырку в мягкой декоративной    "
+  db "стенке..",0
 
 Soft_wall_clean
   db "Я содрал остатки декоративной стенки.",0
