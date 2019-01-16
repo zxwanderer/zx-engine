@@ -34,13 +34,18 @@ soft_wall_make_hole_script:
   SetVar Vars.var_ret, 1
   defb _endByte
 
+soft_wall_make_cavity_script:
+  SetMapCell WallCavity.spr
+  ShowText WallCavity_name
+  SetVar Vars.var_ret, 1
+  defb _endByte
+
 soft_wall_panel_table:
 
   defb 14,4
   defw soft_wall_break_electronic_script
   defb 18,4
   defw soft_wall_break_electronic_script
-
   defb 14,16
   defw soft_wall_break_electronic_script
   defb 18,16
@@ -54,6 +59,9 @@ soft_wall_panel_table:
   defw soft_wall_make_hole_script
   defb 15,10
   defw soft_wall_make_hole_script
+
+  defb 22, 4
+  defw soft_wall_make_cavity_script
 
   defb _endByte
 
