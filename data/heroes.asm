@@ -9,6 +9,8 @@ Chair_1: Item Chair.item, 3,21, Floor.spr, #ff, 00
 Chair_2: Item Chair.item, 3,19, Floor.spr, #ff, 00
 Chair_3: Item Chair.item, 3,15, Floor.spr, #ff, 00
 
+Nippers_1: Item Nippers.item, 18,14, Floor.spr, #ff, 00
+
   DUP Item*100
     defb #ff; item.itemID = #ff - признак того что предмета нет 
    EDUP
