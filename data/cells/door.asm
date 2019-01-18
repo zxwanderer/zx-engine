@@ -14,6 +14,7 @@ door_script:
 
 drop_script:
   IfVar Vars.var_item_id, Chair.spr, door_kick_chair
+  IfVar Vars.var_item_id, Nippers.spr, door_kick_chair
   IfVar Vars.var_item_id, Shard.spr, door_kick_shard
 get_script:
   ShowText Door_not_open_mess
@@ -51,6 +52,12 @@ DoorYellow.spr: equ #6b
     SETUP_CELL_TYPE_N Door_cell_name, door_script
 
 door_script:
+  IfVar Vars.var_act, do_stand, open_script
+  IfVar Vars.var_act, do_get, open_script
+  IfVar Vars.var_act, do_drop, Door.drop_script
+  goto no_way_script
+
+open_script:
   shiruFX 43
   SetMapCell DoorYellowOpen.spr
   goto no_way_script
