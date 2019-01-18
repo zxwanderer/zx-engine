@@ -47,8 +47,9 @@ START_SCRIPT:
 ENCOUNTER_SET:
 	include "data/rebelstar_enc.asm"
   include "data/cells/empty.asm"
-  include "data/cells/shard.asm"
-  include "data/cells/chair.asm"
+  include "data/cells/items/shard.asm"
+  include "data/cells/items/chair.asm"
+  include "data/cells/items/nippers.asm"
   include "data/cells/grass.asm"
   include "data/cells/floor.asm"
   include "data/cells/trash.asm"

@@ -10,7 +10,7 @@ wallgrid_script:
   goto no_way_script
 
 drop_script:
-  IfVar Vars.var_item_id, Shard.spr, break_grid
+  IfVar Vars.var_item_id, Nippers.spr, break_grid
 
 get_script:
   shiruFX FX_Wall
