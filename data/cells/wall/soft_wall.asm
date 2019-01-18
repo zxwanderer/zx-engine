@@ -11,6 +11,7 @@ soft_wall_script:
   
 drop_script:
   IfVar Vars.var_item_id, Shard.spr, soft_wall_break
+  IfVar Vars.var_item_id, Nippers.spr, soft_wall_break
   shiruFX 17
   CallScript action_ring_explode
   ShowText Soft_wall_hit_mess
