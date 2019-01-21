@@ -1,5 +1,5 @@
 
-Bed.spr equ #13
+Bed.spr equ 19
 
   MODULE Bed
 
@@ -9,7 +9,7 @@ Bed.spr equ #13
 
 bed_script:
   IfVar Vars.var_act, do_get, take_bed_script
-  FxActionCell Ring_expl_1
+  ; FxActionCell Ring_expl_1
   defb _endByte
 take_bed_script
   ShowText Take_bed_mess

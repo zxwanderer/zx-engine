@@ -56,7 +56,13 @@ ITEM_TYPES:
   DUP ItemType*100
     defb 00
    EDUP
-   
+
+kick_shard_fault: ; неуспех резания острым
+  shiruFX 39
+  CallScript action_ring_explode
+  ShowText Kick_shard_mess
+  goto no_way_script
+
 say_no_way:
   shiruFX FX_Wall
   CallScript action_ring_explode

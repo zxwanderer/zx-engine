@@ -176,8 +176,8 @@ Electronic_kick_open_mess:
 Door_kick_chair_mess:
   db "Безрезультатно. Дверь даже не шелохнулась.",0
 
-Door_kick_shard_mess:
-  db "На двери не осталось ни царапины..",0
+Kick_shard_mess:
+  db "Даже царапины не осталось..",0
 
 Door_not_open_mess:
   db "Дверь не открывалась..",0

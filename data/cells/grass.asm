@@ -72,16 +72,11 @@ Sink.spr: equ 103
 sink_script:
   ENDMODULE
 
-Table.spr: equ 35
-  MODULE Table
-    SETUP_CELL_TYPE_N Table_cell_name, no_way_script
-  ENDMODULE
-
 Keramit.spr: equ 175
   MODULE Keramit
     SETUP_CELL_TYPE_N Keramit_cell_name, no_way_script
-keramit_script:
-  shiruFX FX_Wall
-  ShowText Keramit_mess
-  goto no_way_script    
+; keramit_script:
+  ; shiruFX FX_Wall
+  ; ShowText Keramit_mess
+  ; goto no_way_script    
   ENDMODULE
