@@ -101,14 +101,39 @@ DoorBlueOpen.spr: equ #8c
 
 DoorRedHard.spr: equ #64
   MODULE DoorRedHard
-    SETUP_CELL_TYPE_N Door_cell_name, Door.door_script  
-door_script:
-  shiruFX 43
+    SETUP_CELL_TYPE_N Door_cell_name, DoorRedHard_script
+
+DoorRedHard_script:
+  IfVar Vars.var_act, do_drop, DoorRedHard_drop_script
+  IfVar Vars.var_act, do_stand, no_way_script
+  defb _endByte
+
+DoorRedHard_drop_script:
+  IfVar Vars.var_item_id, Wrench.spr, DoorRedHard_force_open_script
+  goto no_way_script
+
+DoorRedHard_force_open_script:
+  shiruFX FX_Boom
+  CallScript action_ring_explode
   SetMapCell DoorRedHardOpen.spr
   goto no_way_script
   ENDMODULE
 
 DoorRedHardOpen.spr: equ #63
   MODULE DoorRedHardOpen
-    SETUP_CELL_TYPE_N Door_cell_name, DoorOpen.DoorOpen_script
+    SETUP_CELL_TYPE_N Door_cell_name, DoorRedHardOpen_script
+
+DoorRedHardOpen_script:
+  IfVar Vars.var_act, do_drop, DoorRedHardOpen_drop_script
+  defb _endByte
+
+DoorRedHardOpen_drop_script:
+  IfVar Vars.var_item_id, Wrench.spr, DoorRedHardOpen_force_close_script
+  goto no_way_script
+
+DoorRedHardOpen_force_close_script:
+  shiruFX FX_Boom
+  CallScript action_ring_explode
+  SetMapCell DoorRedHard.spr
+  goto no_way_script
   ENDMODULE  
