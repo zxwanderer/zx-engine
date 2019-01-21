@@ -34,11 +34,11 @@ soft_wall_make_grid_script:
   SetVar Vars.var_ret, 1
   defb _endByte
 
-; soft_wall_make_cavity_script:
-;   SetMapCell WallCavity.spr
-;   ShowText WallCavity_name
-;   SetVar Vars.var_ret, 1
-;   defb _endByte
+soft_wall_make_cavity_script:
+  SetMapCell WallCavity.spr
+  ShowText WallCavity_name
+  SetVar Vars.var_ret, 1
+  defb _endByte
 
 soft_wall_panel_table:
 
@@ -60,6 +60,10 @@ soft_wall_panel_table:
   defb 3,8
   defw soft_wall_make_grid_script
 
+  defb 17,5
+  defw soft_wall_make_cavity_script
+  defb 17,9
+  defw soft_wall_make_cavity_script
 
   defb _endByte
 

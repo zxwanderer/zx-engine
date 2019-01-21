@@ -5,9 +5,15 @@ CHARS_SET: ; описываем героев:
 Hero2: Hero 3,10, 0, 160, 160, 0, 0, tHeroName2, 00
 
 ITEM_ARRAY:
-Chair_1: Item Chair.item, 4,6, Floor.spr, #ff, 00
-Chair_2: Item Chair.item, 4,12, Floor.spr, #ff, 00
-Chair_3: Item Chair.item, 4,18, Floor.spr, #ff, 00
+  Item Chair.item, 4,6, Floor.spr, #ff, 00
+  Item Chair.item, 4,12, Floor.spr, #ff, 00
+  Item Chair.item, 4,18, Floor.spr, #ff, 00
+  Item Chair.item, 11,6, Floor.spr, #ff, 00
+  Item Chair.item, 11,12, Floor.spr, #ff, 00
+
+  Item CanisterEmpty.item, 10,16, Floor.spr, #ff, 00
+  Item CanisterEmpty.item, 10,17, Floor.spr, #ff, 00
+  Item CanisterEmpty.item, 11,16, Floor.spr, #ff, 00
 
 Nippers_1: Item Nippers.item, 11,11, Floor.spr, #ff, 00
 
