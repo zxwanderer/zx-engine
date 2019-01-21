@@ -28,40 +28,38 @@ soft_wall_break_electronic_script:
   SetVar Vars.var_ret, 1
   defb _endByte
 
-soft_wall_make_hole_script:
+soft_wall_make_grid_script:
   SetMapCell WallGrid.spr
   ShowText WallGrid_name
   SetVar Vars.var_ret, 1
   defb _endByte
 
-soft_wall_make_cavity_script:
-  SetMapCell WallCavity.spr
-  ShowText WallCavity_name
-  SetVar Vars.var_ret, 1
-  defb _endByte
+; soft_wall_make_cavity_script:
+;   SetMapCell WallCavity.spr
+;   ShowText WallCavity_name
+;   SetVar Vars.var_ret, 1
+;   defb _endByte
 
 soft_wall_panel_table:
 
-  defb 14,4
+  defb 5,5
   defw soft_wall_break_electronic_script
-  defb 18,4
+  defb 11,5
   defw soft_wall_break_electronic_script
-  defb 14,16
+  defb 5,9
   defw soft_wall_break_electronic_script
-  defb 18,16
-  defw soft_wall_break_electronic_script
-  defb 22,16
+  defb 11,9
   defw soft_wall_break_electronic_script
 
-  defb 21,4
-  defw soft_wall_make_hole_script
-  defb 12,10
-  defw soft_wall_make_hole_script
-  defb 15,10
-  defw soft_wall_make_hole_script
+  defb 16,5
+  defw soft_wall_make_grid_script
+  defb 16,9
+  defw soft_wall_make_grid_script
+  defb 3,6
+  defw soft_wall_make_grid_script
+  defb 3,8
+  defw soft_wall_make_grid_script
 
-  defb 22, 4
-  defw soft_wall_make_cavity_script
 
   defb _endByte
 
