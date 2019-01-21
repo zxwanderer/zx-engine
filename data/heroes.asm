@@ -15,6 +15,8 @@ ITEM_ARRAY:
   Item CanisterEmpty.item, 10,17, Floor.spr, #ff, 00
   Item CanisterEmpty.item, 11,16, Floor.spr, #ff, 00
 
+  Item Canister.item, 9,20, FloorCyan.spr, #ff, 00
+
 Nippers_1: Item Nippers.item, 11,11, Floor.spr, #ff, 00
 
   DUP Item*100
