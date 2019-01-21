@@ -148,6 +148,10 @@ FoodDispenser_cell_name: db "Пищевой раздатчик", 0
 ElectonicDestroy_cell_name: db "Обломки оборудования..", 0
 
 Nippers_item_name: db "Гидравлические ножницы", 0
+Wrench_cell_name: db "Гаечный ключ-лом", 0
+
+ScafPlace_cell_name: db "Место для скафандра", 0
+Scaf_cell_name: db "Легкий скафандр", 0
 
 Mentoscanner_kick_mess:
   db "От сильного удара хрупкий прибор сломался...",0
