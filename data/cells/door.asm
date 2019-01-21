@@ -15,7 +15,7 @@ door_script:
 drop_script:
   IfVar Vars.var_item_id, Chair.spr, door_kick_chair
   IfVar Vars.var_item_id, Nippers.spr, door_kick_chair
-  IfVar Vars.var_item_id, Shard.spr, door_kick_shard
+  IfVar Vars.var_item_id, Shard.spr, kick_shard_fault
 get_script:
   ShowText Door_not_open_mess
   shiruFX FX_Nope
@@ -32,11 +32,11 @@ door_kick_chair:
   ShowText Door_kick_chair_mess
   goto no_way_script
 
-door_kick_shard:
-  shiruFX 39
-  CallScript action_ring_explode
-  ShowText Door_kick_shard_mess
-  goto no_way_script
+; door_kick_shard:
+;   shiruFX 39
+;   CallScript action_ring_explode
+;   ShowText Kick_shard_mess
+;   goto no_way_script
 
   ENDMODULE
 

@@ -75,4 +75,5 @@ ENCOUNTER_SET:
   include "data/cells/wall/soft_wall.asm"
   include "data/cells/wall/wall_grid.asm"
   include "data/cells/wall/wall.asm"
+  include "data/cells/_index.asm"
 ENCOUNTER_SET_END

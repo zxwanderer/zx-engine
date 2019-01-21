@@ -11,7 +11,7 @@ wallgrid_script:
 
 drop_script:
   IfVar Vars.var_item_id, Nippers.spr, break_grid
-
+  IfVar Vars.var_item_id, Shard.spr, kick_shard_fault
 get_script:
   shiruFX FX_Wall
   CallScript action_ring_explode
@@ -24,4 +24,5 @@ break_grid:
   ShowText WallHole_name
   SetMapCell WallHole.spr
   goto no_way_script
+  
   ENDMODULE
