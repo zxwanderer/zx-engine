@@ -8,10 +8,11 @@ CanisterEmpty.spr: equ 29
     
 script:
   IfVar Vars.var_act, do_get, no_script
+  IfVar Vars.var_act, do_drop, drop
   goto no_way_script
 
-; take:
-  ; defb _endByte
+drop:
+
 
   ENDMODULE
 
