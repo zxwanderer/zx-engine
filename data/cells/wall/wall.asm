@@ -12,6 +12,7 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, Shard.spr, base_kick_shard_fault
+  goto base_kick_fault
 
 ; get_:
   ; shiruFX FX_Wall

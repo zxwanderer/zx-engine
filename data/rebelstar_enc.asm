@@ -60,7 +60,7 @@ ITEM_TYPES:
 base_kick_fault: ; неуспех удара предметом
   shiruFX FX_Wall
   CallScript action_ring_explode
-  ShowText Kick_fault_mess
+  ; ShowText Kick_fault_mess
   goto no_way_script
 
 base_kick_shard_fault: ; неуспех резания острым
