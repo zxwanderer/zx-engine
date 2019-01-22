@@ -1,5 +1,6 @@
     include "table.asm"
     include "scaf_place.asm"
+    include "nipple.asm"
     
     include "items/0_shard.asm"
     include "items/1_chair.asm"
