@@ -74,7 +74,7 @@ soft_wall_panel_table:
 WallHole.spr: equ 72
 
   MODULE WallHole
-    SETUP_CELL_TYPE_N WallHole_name, Floor.floor_script
+    SETUP_CELL_TYPE_N WallHole_name, Floor.script
   ENDMODULE
 
 ; display "soft_wall_panel_table", SoftWallBreak.soft_wall_panel_table

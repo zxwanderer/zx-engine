@@ -129,8 +129,8 @@ Acid_cell_name: db "Лужица кислоты", 0
 ; Sink_cell_name: db "Раковина",0
 Table_cell_name: db "Стол", 0
 Keramit_cell_name: db "Керамит", 0
-Locker_cell_name: db "Шкафчик", 0
-Safe_cell_name: db "Сейф", 0
+; Locker_cell_name: db "Шкафчик", 0
+; Safe_cell_name: db "Сейф", 0
 
 PDA_cell_name: db "Электронный планшет", 0
 Book_cell_name: db "Книга", 0
@@ -221,8 +221,8 @@ Toilet_mess:
 Break_shard_mess
   db "Острый кусок пластика раскололся в руках..",0
 
-Bush_mess:
-  db "Сквозь куст пройти не получилось..",0
+; Bush_mess:
+;   db "Сквозь куст пройти не получилось..",0
 
 Locker_mess:
   db "Шкафчик не открылся..", 0

@@ -69,7 +69,7 @@ ENCOUNTER_SET:
   include "data/cells/electronic/electronic_break.asm"
   include "data/cells/heroes/Hero09.asm"
   include "data/cells/heroes/HeroDead.asm"
-  include "data/cells/locker.asm"
+  ; include "data/cells/locker.asm"
   include "data/cells/cavity.asm"
   include "data/cells/wall/soft_wall_break.asm"
   include "data/cells/wall/soft_wall.asm"
