@@ -17,14 +17,23 @@ Grass3.spr: equ #10
   ENDMODULE
 
 ; --- кустарник 
-
 Bush.spr: equ 49
   MODULE Bush
     SETUP_CELL_TYPE_N Bush_cell_name, script
 script:
-  ; shiruFX FX_Wall
-  ; CallScript action_ring_explode
-  ; ShowText Bush_mess
+  IfVar Vars.var_act, do_stand, no_way_script
+  IfVar Vars.var_act, do_get, base_kick_fault
+  IfVar Vars.var_act, do_drop, drop_
+  defb _endByte
+
+drop_:
+  IfVar Vars.var_item_id, Nippers.spr, cut_
+  goto base_kick_fault
+
+cut_:
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  SetMapCell Acid.spr
   goto no_way_script
   ENDMODULE
 
@@ -48,18 +57,6 @@ Gravel.spr: equ 42
 Sand.spr: equ 80
   MODULE Sand
     SETUP_CELL_TYPE_N Sand_cell_name, Floor.script
-  ENDMODULE
-
-; --- посадочная площадка
-AirLand.spr: equ 37
-  MODULE AirLand
-    SETUP_CELL_TYPE_N AirLand_cell_name, Floor.script
-  ENDMODULE
-
-NavLight.spr: equ 177
-
-  MODULE NavLight
-    SETUP_CELL_TYPE_N NavLight_cell_name, Bush.script
   ENDMODULE
 
 PlantPot.spr: equ 24
