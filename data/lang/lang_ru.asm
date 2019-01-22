@@ -133,7 +133,7 @@ Book_cell_name: db "Книга", 0
 
 Canister_cell_name: db "Биоконтейнер", 0
 CanisterEmpty_cell_name: db "Биоконтейнер (пустой)", 0
-; Generator_cell_name: db "Биотопливный генератор", 0
+Generator_cell_name: db "Биотопливный генератор", 0
 
 WallHole_name: db "Большая дыра в стене",0
 WallGrid_name: db "Металлическая решетка", 0
@@ -148,7 +148,7 @@ Medicbox_cell_name: db "Контейнер с мед. инструментами", 0
 ; FoodDispenser_cell_name: db "Пищевой раздатчик", 0
 ElectonicDestroy_cell_name: db "Обломки оборудования..", 0
 
-Nippers_item_name: db "Гидравлические ножницы", 0
+Nippers_item_name: db "Кислотостойкие гидравлические ножницы", 0
 Wrench_cell_name: db "Гаечный ключ-лом", 0
 
 ScafPlace_cell_name: db "Место для скафандра", 0

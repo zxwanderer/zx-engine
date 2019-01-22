@@ -64,6 +64,8 @@ soft_wall_panel_table:
   defw soft_wall_make_cavity_script
   defb 17,9
   defw soft_wall_make_cavity_script
+  defb 19,3
+  defw soft_wall_make_cavity_script
 
   defb _endByte
 
