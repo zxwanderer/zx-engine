@@ -8,7 +8,7 @@ Wrench.spr: equ 61
     
 Wrench_script:
   IfVar Vars.var_act, do_get, Wrench_take_script
-  goto say_no_way
+  defb _endByte
 
 Wrench_take_script:
   defb _endByte

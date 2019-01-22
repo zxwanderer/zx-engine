@@ -101,7 +101,7 @@ DoorBlueOpen.spr: equ #8c
 
 DoorRedHard.spr: equ #64
   MODULE DoorRedHard
-    SETUP_CELL_TYPE_N Door_cell_name, DoorRedHard_script
+    SETUP_CELL_TYPE_N DoorHard_cell_name, DoorRedHard_script
 
 DoorRedHard_script:
   IfVar Vars.var_act, do_drop, DoorRedHard_drop_script
@@ -121,7 +121,7 @@ DoorRedHard_force_open_script:
 
 DoorRedHardOpen.spr: equ #63
   MODULE DoorRedHardOpen
-    SETUP_CELL_TYPE_N Door_cell_name, DoorRedHardOpen_script
+    SETUP_CELL_TYPE_N DoorHard_cell_name, DoorRedHardOpen_script
 
 DoorRedHardOpen_script:
   IfVar Vars.var_act, do_drop, DoorRedHardOpen_drop_script

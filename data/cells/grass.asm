@@ -61,16 +61,16 @@ CraterSmall.spr: equ 65
     SETUP_CELL_TYPE_N CraterSmall_cell_name, Floor.floor_script
   ENDMODULE
 
-Toilet.spr: equ 102
-  MODULE Toilet
-    SETUP_CELL_TYPE_N Toilet_cell_name, no_way_script
-  ENDMODULE
+; Toilet.spr: equ 102
+;   MODULE Toilet
+;     SETUP_CELL_TYPE_N Toilet_cell_name, no_way_script
+;   ENDMODULE
 
-Sink.spr: equ 103
-  MODULE Sink
-    SETUP_CELL_TYPE_N Sink_cell_name, no_way_script
-sink_script:
-  ENDMODULE
+; Sink.spr: equ 103
+;   MODULE Sink
+;     SETUP_CELL_TYPE_N Sink_cell_name, no_way_script
+; sink_script:
+;   ENDMODULE
 
 Keramit.spr: equ 175
   MODULE Keramit
