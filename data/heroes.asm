@@ -30,29 +30,30 @@ ITEM_ARRAY:
   Item Chair.item, 21,30, Floor.spr, #ff, 00
 
 ; склад
-  Item CanisterEmpty.item, 10,16, Floor.spr, #ff, 00
-  Item CanisterEmpty.item, 10,17, Floor.spr, #ff, 00
-  Item CanisterEmpty.item, 11,16, Floor.spr, #ff, 00
+  Item Canister.item, 10,16, FloorRed.spr, #ff, 00
+  Item CanisterEmpty.item, 10,17, FloorRed.spr, #ff, 00
+  Item CanisterEmpty.item, 11,16, FloorRed.spr, #ff, 00
 
 ; лаборатория
   Item CanisterEmpty.item, 25,6, FloorWhite.spr, #ff, 00
   Item CanisterEmpty.item, 28,6, FloorWhite.spr, #ff, 00
 
 ; генераторная
-  Item CanisterEmpty.item, 25,19, FloorRed.spr, #ff, 00
-  Item CanisterEmpty.item, 25,17, FloorRed.spr, #ff, 00
-  Item CanisterEmpty.item, 26,17, FloorRed.spr, #ff, 00
-  Item CanisterEmpty.item, 27,17, FloorRed.spr, #ff, 00
+  Item CanisterEmpty.item, 25,19, Nipple.spr, #ff, 00
+  Item CanisterEmpty.item, 25,17, Nipple.spr, #ff, 00
+  Item CanisterEmpty.item, 26,17, Nipple.spr, #ff, 00
+  Item CanisterEmpty.item, 27,17, Nipple.spr, #ff, 00
 
 ; заросли
-  Item CanisterEmpty.item, 18,9, FloorRed.spr, #ff, 00
+  Item CanisterEmpty.item, 18,9, Grass.spr, #ff, 00
 
 ; канистра в скафандерной
-  Item Canister.item, 9,20, FloorCyan.spr, #ff, 00
+; Item Canister.item, 9,20, FloorCyan.spr, #ff, 00
 
   Item Wrench.item, 11,17, FloorCyan.spr, #ff, 00
 
   Item Nippers.item, 11,11, Floor.spr, #ff, 00
+  Item Nippers.item, 17,10, Grass.spr, #ff, 00
 
   DUP Item*50
     defb #ff; item.itemID = #ff - признак того что предмета нет 

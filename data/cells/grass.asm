@@ -50,6 +50,18 @@ Sand.spr: equ 80
     SETUP_CELL_TYPE_N Sand_cell_name, Floor.floor_script
   ENDMODULE
 
+; --- посадочная площадка
+AirLand.spr: equ 37
+  MODULE AirLand
+    SETUP_CELL_TYPE_N AirLand_cell_name, Floor.floor_script
+  ENDMODULE
+
+NavLight.spr: equ 177
+
+  MODULE NavLight
+    SETUP_CELL_TYPE_N NavLight_cell_name, Bush.bush_script
+  ENDMODULE
+
 PlantPot.spr: equ 24
   MODULE PlantPot
     SETUP_CELL_TYPE_N PlantPot_cell_name, Bush.bush_script

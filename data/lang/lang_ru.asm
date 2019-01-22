@@ -121,6 +121,8 @@ PlantPot_cell_name: db "Растение в горшке", 0
 Gravel_cell_name: db "Гравий", 0
 Sand_cell_name: db "Песок", 0
 CraterSmall_cell_name: db "Вмятина на земле", 0
+AirLand_cell_name: db "Посадочная площадка", 0
+NavLight_cell_name: db "Навигационные огни", 0
 ; Toilet_cell_name: db "Туалет",0
 ; Sink_cell_name: db "Раковина",0
 Table_cell_name: db "Стол", 0
@@ -148,11 +150,13 @@ Medicbox_cell_name: db "Контейнер с мед. инструментами", 0
 ; FoodDispenser_cell_name: db "Пищевой раздатчик", 0
 ElectonicDestroy_cell_name: db "Обломки оборудования..", 0
 
-Nippers_item_name: db "Кислотостойкие гидравлические ножницы", 0
+Nippers_item_name: db "Кислотоупорные гидравлические ножницы", 0
 Wrench_cell_name: db "Гаечный ключ-лом", 0
 
 ScafPlace_cell_name: db "Место для скафандра", 0
 Scaf_cell_name: db "Легкий скафандр", 0
+
+Nipple_cell_name: db "Патрубок для биоконтейнера", 0
 
 Mentoscanner_kick_mess:
   db "От сильного удара хрупкий прибор сломался...",0
