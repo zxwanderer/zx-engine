@@ -50,7 +50,7 @@ ITEM_ARRAY:
 ; канистра в скафандерной
 ; Item Canister.item, 9,20, FloorCyan.spr, #ff, 00
 
-  Item Wrench.item, 11,17, FloorCyan.spr, #ff, 00
+  Item Wrench.item, 11,17, FloorRed.spr, #ff, 00
 
   Item Nippers.item, 11,11, Floor.spr, #ff, 00
   Item Nippers.item, 17,10, Grass.spr, #ff, 00
