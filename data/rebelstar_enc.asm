@@ -55,6 +55,14 @@ ITEM_TYPES:
     defb 00
    EDUP
 
+;  общие бинарные процедуры 
+binary_set_active_cell_left:
+  LD A, ( Vars.MapCell_xy+Point.x )
+  DEC A
+  LD ( Vars.MapCell_xy+Point.x ), A
+  RET
+
+
 ; общие скрипты:
 
 base_kick_fault: ; неуспех удара предметом
