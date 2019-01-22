@@ -34,12 +34,6 @@ electronic_script_off:
   SetMapCell DoorOpen.spr
   goto no_way_script
 
-binary_set_active_cell_left:
-  LD A, ( Vars.MapCell_xy+Point.x )
-  DEC A
-  LD ( Vars.MapCell_xy+Point.x ), A
-  RET
-
   ENDMODULE
 
 ; FoodDispenser.spr: equ 87
