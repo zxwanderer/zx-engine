@@ -7,30 +7,30 @@ Door_half_open equ #12
     SETUP_CELL_TYPE_N Door_cell_name, door_script
   
 door_script:
-  IfVar Vars.var_act, do_stand, get_script
-  IfVar Vars.var_act, do_get, get_script
-  IfVar Vars.var_act, do_drop, drop_script
-  goto no_way_script
+  IfVar Vars.var_act, do_stand, get_
+  IfVar Vars.var_act, do_get, get_
+  IfVar Vars.var_act, do_drop, drop_
+  defb _endByte
 
-drop_script:
-  IfVar Vars.var_item_id, Chair.spr, door_kick_chair
-  IfVar Vars.var_item_id, Nippers.spr, door_kick_chair
-  IfVar Vars.var_item_id, Shard.spr, kick_shard_fault
-get_script:
+drop_:
+  IfVar Vars.var_item_id, Chair.spr, base_kick_fault
+  IfVar Vars.var_item_id, Nippers.spr, base_kick_fault
+  IfVar Vars.var_item_id, Shard.spr, base_kick_shard_fault
+get_:
   ShowText Door_not_open_mess
   shiruFX FX_Nope
   goto no_way_script
 
-door_do_open:  
+open_:
   shiruFX 43
   SetMapCell DoorOpen.spr
   goto no_way_script
 
-door_kick_chair:
-  shiruFX FX_Wall
-  CallScript action_ring_explode
-  ShowText Door_kick_chair_mess
-  goto no_way_script
+; door_kick_chair:
+;   shiruFX FX_Wall
+;   CallScript action_ring_explode
+;   ShowText Kick_fault_mess
+;   goto no_way_script
 
 ; door_kick_shard:
 ;   shiruFX 39
@@ -54,7 +54,7 @@ DoorGreen.spr: equ #6b
 door_script:
   IfVar Vars.var_act, do_stand, open_script
   IfVar Vars.var_act, do_get, open_script
-  IfVar Vars.var_act, do_drop, Door.drop_script
+  IfVar Vars.var_act, do_drop, Door.drop_
   goto no_way_script
 
 open_script:

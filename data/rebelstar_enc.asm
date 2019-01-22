@@ -23,15 +23,13 @@
     ORG ._temp
   ENDM
 
-; обозначаем номера типов ячеек карты для лучшей адресации например открытие двери - SetActionCell Door_open
-
 Ring_expl_1 equ #b0
 Ring_expl_2 equ #b1
 Ring_expl_3 equ #b2
 Ring_expl_4 equ #b3
 
-Hero_hand_item_spr: equ #0B
-Hero_hand_empty: equ #09
+; Hero_hand_item_spr: equ #0B
+; Hero_hand_empty: equ #09
 
 FX_Nope equ 53
 FX_Drop equ 5
@@ -57,16 +55,25 @@ ITEM_TYPES:
     defb 00
    EDUP
 
-kick_shard_fault: ; неуспех резания острым
+; общие скрипты:
+
+base_kick_fault: ; неуспех удара предметом
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  ShowText Kick_fault_mess
+  goto no_way_script
+
+base_kick_shard_fault: ; неуспех резания острым
   shiruFX 39
   CallScript action_ring_explode
   ShowText Kick_shard_mess
   goto no_way_script
 
-say_no_way:
-  shiruFX FX_Wall
-  CallScript action_ring_explode
-  ShowText no_way_mess
+; base_explode_no_way:
+  ; shiruFX FX_Wall
+  ; CallScript action_ring_explode
+;   ShowText no_way_mess
+
 no_way_script: ; неуспех
   SetVar Vars.var_ret, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
