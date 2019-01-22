@@ -130,7 +130,7 @@ Acid_cell_name: db "Лужица кислоты", 0
 Table_cell_name: db "Стол", 0
 Keramit_cell_name: db "Керамит", 0
 ; Locker_cell_name: db "Шкафчик", 0
-; Safe_cell_name: db "Сейф", 0
+Safe_cell_name: db "Сейф", 0
 
 PDA_cell_name: db "Электронный планшет", 0
 Book_cell_name: db "Книга", 0
