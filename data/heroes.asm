@@ -22,10 +22,32 @@ ITEM_ARRAY:
   Item Chair.item, 8,13, Floor.spr, #ff, 00
   Item Chair.item, 8,16, Floor.spr, #ff, 00
 
+  Item Chair.item, 5,21, Floor.spr, #ff, 00
+  Item Chair.item, 5,22, Floor.spr, #ff, 00
+  Item Chair.item, 5,23, Floor.spr, #ff, 00
+  Item Chair.item, 3,22, Floor.spr, #ff, 00
+
+  Item Chair.item, 21,30, Floor.spr, #ff, 00
+
+; склад
   Item CanisterEmpty.item, 10,16, Floor.spr, #ff, 00
   Item CanisterEmpty.item, 10,17, Floor.spr, #ff, 00
   Item CanisterEmpty.item, 11,16, Floor.spr, #ff, 00
 
+; лаборатория
+  Item CanisterEmpty.item, 25,6, FloorWhite.spr, #ff, 00
+  Item CanisterEmpty.item, 28,6, FloorWhite.spr, #ff, 00
+
+; генераторная
+  Item CanisterEmpty.item, 25,19, FloorRed.spr, #ff, 00
+  Item CanisterEmpty.item, 25,17, FloorRed.spr, #ff, 00
+  Item CanisterEmpty.item, 26,17, FloorRed.spr, #ff, 00
+  Item CanisterEmpty.item, 27,17, FloorRed.spr, #ff, 00
+
+; заросли
+  Item CanisterEmpty.item, 18,9, FloorRed.spr, #ff, 00
+
+; канистра в скафандерной
   Item Canister.item, 9,20, FloorCyan.spr, #ff, 00
 
   Item Wrench.item, 11,17, FloorCyan.spr, #ff, 00
