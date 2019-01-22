@@ -13,13 +13,12 @@ Mentoscanner.spr: equ 59
   MODULE Mentoscanner
     SETUP_CELL_TYPE_N Mentoscanner_cell_name, no_way_script
 
-Mentoscanner_break_script
-  shiruFX FX_Boom
-  CallScript action_ring_explode
-  ShowText Mentoscanner_kick_mess
-  SetMapCell ElectonicDestroy.spr
-  goto no_way_script
-
+; Mentoscanner_break_script
+  ; shiruFX FX_Boom
+  ; CallScript action_ring_explode
+  ; ShowText Mentoscanner_kick_mess
+  ; SetMapCell ElectonicDestroy.spr
+  ; goto no_way_script
 ; Mentoscanner_kick_mess
   ENDMODULE
 

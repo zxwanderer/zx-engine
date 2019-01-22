@@ -2,6 +2,7 @@
     include "scaf_place.asm"
     include "nipple.asm"
     include "acid.asm"
+    include "airland.asm"
     
     include "items/0_shard.asm"
     include "items/1_chair.asm"

@@ -7,16 +7,18 @@ Door_half_open equ #12
     SETUP_CELL_TYPE_N Door_cell_name, door_script
   
 door_script:
-  IfVar Vars.var_act, do_stand, get_
-  IfVar Vars.var_act, do_get, get_
+  IfVar Vars.var_act, do_stand, not_open_
+  IfVar Vars.var_act, do_get, not_open_
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
 
 drop_:
-  IfVar Vars.var_item_id, Chair.spr, base_kick_fault
-  IfVar Vars.var_item_id, Nippers.spr, base_kick_fault
   IfVar Vars.var_item_id, Shard.spr, base_kick_shard_fault
-get_:
+  ; IfVar Vars.var_item_id, Chair.spr, base_kick_fault
+  ; IfVar Vars.var_item_id, Nippers.spr, base_kick_fault
+  goto base_kick_fault
+
+not_open_:
   ShowText Door_not_open_mess
   shiruFX FX_Nope
   goto no_way_script
@@ -52,16 +54,26 @@ DoorGreen.spr: equ #6b
     SETUP_CELL_TYPE_N Door_cell_name, script
 
 script:
-  IfVar Vars.var_act, do_stand, open_
-  IfVar Vars.var_act, do_get, open_
-  IfVar Vars.var_act, do_drop, Door.drop_
+  IfVar Vars.var_act, do_stand, not_open_
+  IfVar Vars.var_act, do_get, not_open_
+  IfVar Vars.var_act, do_drop, drop_
   goto no_way_script
 
-open_:
+not_open_:
+  ; shiruFX 43
+  ; SetMapCell DoorGreenOpen.spr
+  ShowText Door_not_open_mess
+  shiruFX FX_Nope
+  goto no_way_script
+
+drop_:
+  IfVar Vars.var_item_id, Wrench.spr, force_open_
+  goto Door.drop_ ; наследование!!! лол ^)
+
+force_open_:
   shiruFX 43
   SetMapCell DoorGreenOpen.spr
   goto no_way_script
-
   ENDMODULE
 
 DoorGreenOpen.spr: equ #6c
@@ -113,8 +125,7 @@ drop_:
   goto no_way_script
 
 force_open_:
-  shiruFX FX_Boom
-  CallScript action_ring_explode
+  shiruFX 43
   SetMapCell DoorRedHardOpen.spr
   goto no_way_script
   ENDMODULE
@@ -132,8 +143,8 @@ drop_:
   goto no_way_script
 
 force_close_:
-  shiruFX FX_Boom
-  CallScript action_ring_explode
+  shiruFX 43
   SetMapCell DoorRedHard.spr
   goto no_way_script
+
   ENDMODULE  
