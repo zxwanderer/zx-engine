@@ -123,6 +123,8 @@ Sand_cell_name: db "Песок", 0
 CraterSmall_cell_name: db "Вмятина на земле", 0
 AirLand_cell_name: db "Посадочная площадка", 0
 NavLight_cell_name: db "Навигационные огни", 0
+Acid_cell_name: db "Лужица кислоты", 0
+
 ; Toilet_cell_name: db "Туалет",0
 ; Sink_cell_name: db "Раковина",0
 Table_cell_name: db "Стол", 0
