@@ -101,6 +101,7 @@ Empty_cell_name: db " ",0
 Floor_cell_name: db "Плитка",0
 Computer_cell_name: db "Терминал",0
 Door_cell_name: db "Дверь",0
+DoorHard_cell_name: db "Шлюзовая дверь",0
 Wall_cell_name: db "Тяжелая бронеплита",0
 Ballon_cell_name: db "Баллон",0
 Bed_cell_name: db "Кровать",0
@@ -120,8 +121,8 @@ PlantPot_cell_name: db "Растение в горшке", 0
 Gravel_cell_name: db "Гравий", 0
 Sand_cell_name: db "Песок", 0
 CraterSmall_cell_name: db "Вмятина на земле", 0
-Toilet_cell_name: db "Туалет",0
-Sink_cell_name: db "Раковина",0
+; Toilet_cell_name: db "Туалет",0
+; Sink_cell_name: db "Раковина",0
 Table_cell_name: db "Стол", 0
 Keramit_cell_name: db "Керамит", 0
 Locker_cell_name: db "Шкафчик", 0
@@ -132,7 +133,7 @@ Book_cell_name: db "Книга", 0
 
 Canister_cell_name: db "Биоконтейнер", 0
 CanisterEmpty_cell_name: db "Биоконтейнер (пустой)", 0
-Generator_cell_name: db "Биотопливный генератор", 0
+; Generator_cell_name: db "Биотопливный генератор", 0
 
 WallHole_name: db "Большая дыра в стене",0
 WallGrid_name: db "Металлическая решетка", 0
@@ -144,7 +145,7 @@ Anabiose_cell_name: db "Анабиозная камера", 0
 Analyzer_cell_name: db "Анализатор", 0
 Mentoscanner_cell_name: db "Ментосканнер", 0
 Medicbox_cell_name: db "Контейнер с мед. инструментами", 0
-FoodDispenser_cell_name: db "Пищевой раздатчик", 0
+; FoodDispenser_cell_name: db "Пищевой раздатчик", 0
 ElectonicDestroy_cell_name: db "Обломки оборудования..", 0
 
 Nippers_item_name: db "Гидравлические ножницы", 0
@@ -158,9 +159,6 @@ Mentoscanner_kick_mess:
 
 tHeroName1 defb "Робот",0
 tHeroName2 defb "HOMO",0
-
-; Electronic_break_mess:
-  ; db "И так уже все сломано дальше некуда...",0
 
 WallGrid_false_mess:
   db "Толстые прутья решетки не поддавались...",0
