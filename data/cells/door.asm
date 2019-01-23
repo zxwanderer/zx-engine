@@ -125,12 +125,16 @@ drop_:
   goto no_way_script
 
 force_open_:
+  shiruFX 43
+  SetMapCell DoorRedHardOpen.spr
+  IfVarN Vars.var_pos_y, 21, no_way_script
+  IfVarN Vars.var_pos_x, 22, no_way_script
+
   ; SetVar Vars.game_over, 3
   SetVar Vars.game_over, 4
   goto no_way_script
-  shiruFX 43
-  SetMapCell DoorRedHardOpen.spr
-  goto no_way_script
+
+
   ENDMODULE
 
 DoorRedHardOpen.spr: equ #63
