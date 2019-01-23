@@ -7,13 +7,14 @@ Scaf.spr: equ 25
     SETUP_ITEM_TYPE_N
     
 script:
-  IfVar Vars.var_act, do_get, get_
-  IfVar Vars.var_act, do_drop, no_way_script
   IfVar Vars.var_act, do_stand, no_way_script
+  IfVar Vars.var_act, do_get, take_
+  IfVar Vars.var_act, do_drop, drop_
   defb _endByte
-
-get_ 
-  goto no_way_script  
+take_:
+  goto no_script
+drop_:
+  goto no_way_script
 
   ENDMODULE
 
