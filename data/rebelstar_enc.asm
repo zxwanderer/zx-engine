@@ -56,7 +56,8 @@ ITEM_TYPES:
    EDUP
 
 ;  общие бинарные процедуры 
-binary_set_active_cell_left:
+
+binary_set_active_cell_left: ; устанавливаем позицию влево на 1 ячейку
   LD A, ( Vars.MapCell_xy+Point.x )
   DEC A
   LD ( Vars.MapCell_xy+Point.x ), A

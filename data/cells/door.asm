@@ -125,16 +125,36 @@ drop_:
   goto no_way_script
 
 force_open_:
+  ;к сожалению шлюз здесь только один, поэтому координаты дверей захардкожены
+  SetVar Vars.var_ret, 0
+  CallCode binary_check_doors_is_closed ; проверяем открыты ли обе двери
+  IfVar Vars.var_ret, 1, force_open_norm
+
+  SetVar Vars.game_over, 4
+  goto force_open_norm
+
+force_open_norm:
   shiruFX 43
   SetMapCell DoorRedHardOpen.spr
-  IfVarN Vars.var_pos_y, 21, no_way_script
-  IfVarN Vars.var_pos_x, 22, no_way_script
-
-  ; SetVar Vars.game_over, 3
-  SetVar Vars.game_over, 4
   goto no_way_script
 
-
+; две двери шлюза захардкожены (!)
+binary_check_doors_is_closed:
+  LD D, 20
+  LD E, 18
+  CALL map.calc_pos
+  LD A, (HL); получили спрайт
+  CP DoorRedHard.spr
+  RET NZ
+  LD D, 22
+  LD E, 21
+  CALL map.calc_pos
+  LD A, (HL); получили спрайт
+  CP DoorRedHard.spr
+  RET NZ
+  LD A, 1
+  setVar Vars.var_ret
+  RET
   ENDMODULE
 
 DoorRedHardOpen.spr: equ #63
