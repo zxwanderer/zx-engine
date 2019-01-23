@@ -55,6 +55,8 @@ END_SCRIPT:
 game_over:
   CallCode binary_clear_screen
   IfVar Vars.game_over, 2, game_over_2
+  IfVar Vars.game_over, 3, game_over_3
+  IfVar Vars.game_over, 4, game_over_4
 
 game_over_1:
   setScreen PAPER_BLACK or PEN_RED
@@ -66,6 +68,18 @@ game_over_2
   setScreen PAPER_BLACK or PEN_YELLOW
   printAt 0,0,GAMEOVER_2
   CallCode play_happy
+  goto RESTART
+
+game_over_3
+  setScreen PAPER_BLACK or PEN_RED
+  printAt 0,0,GAMEOVER_3
+  CallCode play_gameover
+  goto RESTART
+
+game_over_4
+  setScreen PAPER_BLACK or PEN_RED
+  printAt 0,0,GAMEOVER_4
+  CallCode play_gameover
   goto RESTART
 
 binary_clear_screen:
