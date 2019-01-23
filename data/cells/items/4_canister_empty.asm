@@ -7,12 +7,17 @@ CanisterEmpty.spr: equ 29
     SETUP_ITEM_TYPE_N
     
 script:
-  IfVar Vars.var_act, do_get, no_script
-  IfVar Vars.var_act, do_drop, drop
+  IfVar Vars.var_act, do_stand, no_way_script
+  IfVar Vars.var_act, do_get, take_
+  IfVar Vars.var_act, do_drop, drop_
+  defb _endByte
+take_:
+  goto no_script
+drop_:
   goto no_way_script
 
-drop:
-
+; drop:
+;   goto no_script
 
   ENDMODULE
 

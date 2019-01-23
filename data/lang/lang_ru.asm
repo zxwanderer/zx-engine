@@ -109,7 +109,7 @@ Trash_cell_name: db "ћелкие обломки и мусор",0
 
 Soft_wall_name: db "ћ€гка€ декоративна€ стена",0
 
-Shard_item_name: db "ќсколок",0
+Shard_item_name: db "ќстрый пластиковый обломок",0
 Chair_item_name: db "—тул",0
 
 Electronic_cell_name: db "Ёлектронный блок управлени€",0
@@ -238,7 +238,7 @@ Table_mess:
   ; db "сверкающий колпак статис-пол€...",0
 
 Take_shard_mess
-  db "я подобрал острый осколок пластика..",0
+  db "я подобрал острый обломок пластика..",0
 
 Shard_to_soft_wall_mess
   db "я прорезал дырку в м€гкой декоративной    "

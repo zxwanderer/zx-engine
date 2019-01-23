@@ -9,10 +9,13 @@ Chair.spr: equ #33
 script:
   IfVar Vars.var_act, do_stand, no_script
   IfVar Vars.var_act, do_get, take_
+  IfVar Vars.var_act, do_drop, drop_
   goto no_way_script
 take_:
   ; ShowText Take_chair_mess
   defb _endByte
+drop_:
+  goto no_way_script
   ENDMODULE
 
 ChairWhite.spr: equ 83
