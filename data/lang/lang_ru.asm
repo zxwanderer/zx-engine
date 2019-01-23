@@ -163,6 +163,7 @@ Book_cell_name: db "Книга", 0
 
 Canister_cell_name: db "Биоконтейнер", 0
 CanisterEmpty_cell_name: db "Биоконтейнер (пустой)", 0
+CanisterPowered_cell_name: db "Биоконтейнер (работает)", 0
 Generator_cell_name: db "Биотопливный генератор", 0
 
 WallHole_name: db "Большая дыра в стене",0

@@ -61,12 +61,17 @@ MODULE zxengine
 	  defw code_ptr
 	ENDM
 
-  MACRO IfVarN var_num, value_, code_ptr; переход 
+  MACRO IfVarN var_num, value_, code_ptr; переход
 	  defw zxengine.if_var_not_me
 	  defb var_num
 	  defb value_
 	  defw code_ptr
 	ENDM
+
+  MACRO IncVar var_num
+	  defw zxengine.inc_var_me
+    defb var_num
+  ENDM
 
 ; для использования внутри ассемблера
 
@@ -304,6 +309,15 @@ set_var_me:
 	LD A,(HL)
 	INC HL
 	LD (DE),A
+	JP process
+
+inc_var_me:
+	mLDA
+	CALL getVar
+	INC HL
+	LD A, (DE)
+  INC A
+  LD (DE),A
 	JP process
 
 ; --- получить значение переменной

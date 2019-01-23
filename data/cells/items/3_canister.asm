@@ -17,3 +17,8 @@ drop_:
   goto no_way_script
   
   ENDMODULE
+
+CanisterPowered.spr: equ 114
+  MODULE CanisterPowered
+    SETUP_CELL_TYPE_N CanisterPowered_cell_name, no_way_script
+  ENDMODULE
