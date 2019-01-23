@@ -87,7 +87,7 @@ push_item_from_map_no_heroes:
     POP AF; сняли со стека номер спрайта
     LD (HL), A
     RET
-    
+
 push_item_from_map_no_items: ; на карте нет предметов
 ; в IY у нас указатель на активный предмет
     LD A, (IY+Item.ground)
@@ -228,7 +228,7 @@ del_item_from_hand:
   LD (IX+Hero.hand_right_p_1),0
   PUSH DE
   POP IY
-  LD (IY+Item.itemID), #ff 
+  LD (IY+Item.itemID), #ff
   RET
 
 ; del_all_items_from_cell:
@@ -259,5 +259,19 @@ add_item_to_hand_2:
 ; add_item_to_hand_error:
     ; POP AF
     ; RET
+
+; уничтожаем предмет в активной ячейке
+self_destroy_item:
+    LD DE, (Vars.MapCell_xy);
+; TODO в силу (временных?) ограничений движка предмет на предмет класть не можем,
+; поэтому удаляем первый найденный предмет с карты 
+; в DE позиция на карте
+; на выходе если есть на этой позиции хотя бы один предмет, возвращаем true
+; TODO "ЗЕМЛЮ" на карте не восстанавливаем (!!!!)
+del_item_from_map:
+  CALL find_item_on_map
+  RET NC ; предмета и так нет
+  LD (IX+Item.itemID), #ff
+  ret_true
 
 ENDMODULE

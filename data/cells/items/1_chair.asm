@@ -15,6 +15,14 @@ take_:
   ; ShowText Take_chair_mess
   defb _endByte
 drop_:
+  IfVar Vars.var_item_id, Nippers.spr, destroy_
+  goto no_way_script
+
+destroy_:
+  CallCode items.self_destroy_item
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  SetMapCell Trash.spr
   goto no_way_script
   ENDMODULE
 

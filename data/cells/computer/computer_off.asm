@@ -3,17 +3,17 @@ ComputerOff.spr equ #14
 
   MODULE ComputerOff
 
-    SETUP_CELL_TYPE_N Computer_cell_name, computer_off_script
+    SETUP_CELL_TYPE_N Computer_cell_name, script
 
-computer_off_script:
-  IfVar Vars.var_act, do_drop, drop_script
-  IfVar Vars.var_act, do_get, take_script
+script:
+  IfVar Vars.var_act, do_drop, drop_
+  IfVar Vars.var_act, do_get, get_
   goto no_way_script
 
-drop_script:
+drop_:
   IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
   IfVar Vars.var_item_id, Shard.spr, computer_screen_destroy
-take_script:
+get_:
   shiruFX FX_Poweroff
   ShowText Computer_off_hit_mess
   goto no_way_script
