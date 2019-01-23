@@ -68,7 +68,7 @@ not_open_:
 
 drop_:
   IfVar Vars.var_item_id, Wrench.spr, force_open_
-  goto Door.drop_ ; наследование!!! лол ^)
+  ; goto Door.drop_ ; наследование!!! лол ^)
 
 force_open_:
   shiruFX 43

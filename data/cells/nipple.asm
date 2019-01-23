@@ -18,7 +18,7 @@ power_:
   CallCode items.del_item_from_hand
   SetMapCell CanisterPowered.spr
   IncVar Vars.power_on
-  IfVar Vars.power_on, 1, power_start_
+  IfVar Vars.power_on, 6, power_start_
   goto no_script
 
 power_start_:
