@@ -314,7 +314,6 @@ set_var_me:
 inc_var_me:
 	mLDA
 	CALL getVar
-	INC HL
 	LD A, (DE)
   INC A
   LD (DE),A
