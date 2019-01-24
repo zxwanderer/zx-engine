@@ -1,4 +1,4 @@
-Wrench.item: equ 6
+Wrench.item: equ 7
 Wrench.spr: equ 61
 
   MODULE Wrench

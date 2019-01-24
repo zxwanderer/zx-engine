@@ -17,4 +17,3 @@ drop_:
   goto no_way_script
 
   ENDMODULE
-

@@ -23,3 +23,8 @@ LockerSafe.spr: equ 85
 ;   ShowText Safe_mess
 ;   goto no_way_script
   ENDMODULE
+
+LockerSafeEmpty.spr: equ 101
+  MODULE LockerSafeEmpty
+    SETUP_CELL_TYPE_N Safe_cell_name, no_way_script
+  ENDMODULE  

@@ -164,7 +164,7 @@ Book_cell_name: db "Книга", 0
 Canister_cell_name: db "Биоконтейнер", 0
 CanisterEmpty_cell_name: db "Биоконтейнер (пустой)", 0
 CanisterPowered_cell_name: db "Биоконтейнер (работает)", 0
-Generator_cell_name: db "Биотопливный генератор", 0
+Generator_cell_name: db "Биотопливный реактор", 0
 
 WallHole_name: db "Большая дыра в стене",0
 WallGrid_name: db "Металлическая решетка", 0
@@ -184,8 +184,11 @@ Wrench_cell_name: db "Гаечный ключ-лом", 0
 
 ScafPlace_cell_name: db "Место для скафандра", 0
 Scaf_cell_name: db "Легкий скафандр", 0
+HardScaf_cell_name: db "Тяжелый боевой скафандр", 0
 
 Nipple_cell_name: db "Патрубок для биоконтейнера", 0
+
+Pistol_cell_name: db "Сломаный энергетический пистолет",0
 
 Mentoscanner_kick_mess:
   db "От сильного удара хрупкий прибор сломался...",0
