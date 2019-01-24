@@ -114,7 +114,7 @@ draw_loop1:
     POP HL
     INC HL
     POP BC
-    DJNZ draw_loop1        
+    DJNZ draw_loop1   
 
     POP DE
     Tiles16.NEXT_TITLE_POS_DOWN
