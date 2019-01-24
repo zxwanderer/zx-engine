@@ -22,14 +22,20 @@ power_:
   goto no_script
 
 power_start_:
-  CallCode power_monitor_on
+  CallCode power_base_on
   goto no_script
 
-power_monitor_on:
-  LD D, 20
-  LD E, 24
-  CALL map.calc_pos
-  LD A, Computer.spr
-  LD (HL), A
+power_base_on:
+  
+  ; LD D, 20
+  ; LD E, 24
+  ; CALL map.calc_pos
+  ; LD A, Computer.spr
+  ; LD (HL), A
   RET
+
+power_monitor_on:
+  LD A, Computer.spr
+  RET
+
   ENDMODULE
