@@ -2,9 +2,9 @@ PersonagesNum equ 1
 
 CHARS_SET: ; описываем героев:
 ; Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
-; Hero2: Hero 3,10, 0, 160, 160, 0, 0, tHeroName2, 00
+Hero2: Hero 3,10, 0, 160, 160, 0, 0, tHeroName2, 00
 
-Hero2: Hero 23,28, 0, 160, 160, 0, 0, tHeroName2, 00
+; Hero2: Hero 23,28, 0, 160, 160, 0, 0, tHeroName2, 00
 
 
 ITEM_ARRAY:

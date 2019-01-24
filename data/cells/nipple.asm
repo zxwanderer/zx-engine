@@ -18,7 +18,7 @@ power_:
   CallCode items.del_item_from_hand
   SetMapCell CanisterPowered.spr
   IncVar Vars.power_on
-  IfVar Vars.power_on, 6, power_start_
+  IfVar Vars.power_on, 1, power_start_
   goto no_script
 
 power_start_:
@@ -26,16 +26,29 @@ power_start_:
   goto no_script
 
 power_base_on:
+  LD HL, MAP_SET
+  LD C, 31
+power_base_on_l1:
+  LD B, 31
+power_base_on_l2:  
+  INC HL
   
-  ; LD D, 20
-  ; LD E, 24
-  ; CALL map.calc_pos
-  ; LD A, Computer.spr
-  ; LD (HL), A
+  LD A, (HL)
+  CP ComputerOff.spr
+  JP Z,power_monitor_on
+
+  ; CP ComputerOff.spr
+  ; JP NZ power_monitor_on
+
+power_base_on_l2_end:
+  DJNZ power_base_on_l2  
+  DEC C
+  JP NZ,power_base_on_l1
   RET
 
 power_monitor_on:
   LD A, Computer.spr
-  RET
+  LD (HL), A
+  JP power_base_on_l2_end
 
   ENDMODULE
