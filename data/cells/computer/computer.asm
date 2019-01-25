@@ -16,9 +16,9 @@ use_get:
   ScanPosTable computer_scan_table
   IfVar Vars.var_ret, 1, no_way_script
 
-  shiruFX 55
+  ; shiruFX 55
   SetMapCell ComputerOff.spr
-  ShowText Computer_off_mess
+  ; ShowText Computer_off_mess
   goto no_way_script
 
 use_drop:
@@ -29,7 +29,7 @@ computer_glass_destroy_kill:
   shiruFX 19
   CallScript action_ring_explode
   SetMapCell ComputerBreak.spr
-  SetVar Vars.game_over, 1
+  SetVar Vars.game_over, 5
   goto no_way_script
 
 computer_scan_table:
@@ -37,12 +37,24 @@ computer_scan_table:
   defw flip_flop_tambur
   defb 23,22
   defw flip_flop_tambur
+  defb 23,3
+  defw check_alert_code_found
   defb _endByte
   ; defb 5,9
   ; defw soft_wall_break_electronic_script
   ; defb 11,9
   ; defw soft_wall_break_electronic_script
 
+check_alert_code_found:
+  IfVar Vars.alert_code_found, 0, show_CALL_HELP_NO_CODE
+  SetVar Vars.game_over, 5
+  goto no_way_script
+
+show_CALL_HELP_NO_CODE:
+  shiruFX 55
+  ShowText CALL_HELP_NO_CODE
+  SetVar Vars.var_ret, 1
+  defb _endByte
 
 flip_flop_tambur:
   shiruFX 55

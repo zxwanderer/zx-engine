@@ -15,4 +15,5 @@ Cursor_pos_y equ zxengine.varsTab+cursor_pos_y; позиция курсора н
 Cursor_pos_x equ zxengine.varsTab+cursor_pos_x; позиция курсора на экране
 var_mode equ 8; текущий режим игры: 0 - игрок двигается, 1 - курсор двигается
 power_on equ 9; сколько контейнеров подключено в энергостанции
+alert_code_found: equ 10; найдены коды активации протокола
 ENDMODULE
