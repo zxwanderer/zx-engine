@@ -4,6 +4,7 @@
     include "acid.asm"
     include "airland.asm"
     include "pistol.asm"
+    include "safe.asm"
     
     include "items/0_shard.asm"
     include "items/1_chair.asm"
