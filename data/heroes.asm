@@ -2,9 +2,9 @@ PersonagesNum equ 1
 
 CHARS_SET: ; описываем героев:
 ; Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
-Hero2: Hero 3,10, 0, 160, 160, 0, 0, tHeroName2, 00
+; Hero2: Hero 3,10, 0, 160, 160, 0, 0, tHeroName2, 00
 
-; Hero2: Hero 23,28, 0, 160, 160, 0, 0, tHeroName2, 00
+Hero2: Hero 27,4, 0, 160, 160, 0, 0, tHeroName2, 00
 
 
 ITEM_ARRAY:
@@ -50,13 +50,12 @@ ITEM_ARRAY:
 ; заросли
   Item CanisterEmpty.item, 18,9, Grass.spr, #ff, 00
 
-; канистра в скафандерной
-; Item Canister.item, 9,20, FloorCyan.spr, #ff, 00
-
   Item Wrench.item, 11,17, FloorRed.spr, #ff, 00
 
   Item Nippers.item, 11,11, Floor.spr, #ff, 00
   Item Nippers.item, 17,10, Grass.spr, #ff, 00
+
+  Item RedCard.item, 27,3, FloorWhite.spr, #ff, 00
 
   DUP Item*50
     defb #ff; item.itemID = #ff - признак того что предмета нет 
