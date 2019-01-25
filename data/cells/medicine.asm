@@ -27,16 +27,6 @@ MentoscannerOn.spr: equ 56
     SETUP_CELL_TYPE_N Mentoscanner_cell_name, no_way_script
   ENDMODULE
 
-Analyzer.spr: equ 57
-  MODULE Analyzer
-    SETUP_CELL_TYPE_N Analyzer_cell_name, no_way_script
-  ENDMODULE
-
-AnalyzerOn.spr: equ 55
-  MODULE AnalyzerOn
-    SETUP_CELL_TYPE_N Analyzer_cell_name, no_way_script
-  ENDMODULE
-
 Medicbox.spr: equ 53
   MODULE Medicbox
     SETUP_CELL_TYPE_N Medicbox_cell_name, no_way_script

@@ -3,9 +3,9 @@ Computer.spr equ #04
 
   MODULE Computer
 
-    SETUP_CELL_TYPE_N Computer_cell_name, computer_script
+    SETUP_CELL_TYPE_N Computer_cell_name, script
 
-computer_script:
+script:
   IfVar Vars.var_act, do_get, use_get
   IfVar Vars.var_act, do_drop, use_drop
   goto no_way_script
