@@ -161,6 +161,8 @@ Safe_cell_name: db "Сейф", 0
 PDA_cell_name: db "Электронный планшет", 0
 Book_cell_name: db "Книга", 0
 
+RedCard_cell_name: db "Ключ-карта от сейфа начальника", 0
+
 Canister_cell_name: db "Биоконтейнер", 0
 CanisterEmpty_cell_name: db "Биоконтейнер (пустой)", 0
 CanisterPowered_cell_name: db "Биоконтейнер (работает)", 0

@@ -13,3 +13,4 @@
     include "items/5_scaf.asm"
     include "items/6_hardscaf.asm"
     include "items/7_wrench.asm"
+    include "items/8_redcard.asm"
