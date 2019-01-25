@@ -34,11 +34,15 @@ power_base_on_l2:
   INC HL
   
   LD A, (HL)
+
   CP ComputerOff.spr
   JP Z,power_monitor_on
 
-  ; CP ComputerOff.spr
-  ; JP NZ power_monitor_on
+  CP Analyzer.spr
+  JP Z,power_analyzer_on
+
+  CP Mentoscanner.spr
+  JP Z,power_mentoscanner_on
 
 power_base_on_l2_end:
   DJNZ power_base_on_l2  
@@ -48,6 +52,16 @@ power_base_on_l2_end:
 
 power_monitor_on:
   LD A, Computer.spr
+  LD (HL), A
+  JP power_base_on_l2_end
+
+power_analyzer_on:
+  LD A, AnalyzerOn.spr
+  LD (HL), A
+  JP power_base_on_l2_end
+
+power_mentoscanner_on:
+  LD A, MentoscannerOn.spr
   LD (HL), A
   JP power_base_on_l2_end
 

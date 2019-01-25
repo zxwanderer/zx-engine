@@ -22,8 +22,18 @@ Mentoscanner.spr: equ 59
 ; Mentoscanner_kick_mess
   ENDMODULE
 
+MentoscannerOn.spr: equ 56
+  MODULE MentoscannerOn
+    SETUP_CELL_TYPE_N Mentoscanner_cell_name, no_way_script
+  ENDMODULE
+
 Analyzer.spr: equ 57
   MODULE Analyzer
+    SETUP_CELL_TYPE_N Analyzer_cell_name, no_way_script
+  ENDMODULE
+
+AnalyzerOn.spr: equ 55
+  MODULE AnalyzerOn
     SETUP_CELL_TYPE_N Analyzer_cell_name, no_way_script
   ENDMODULE
 
