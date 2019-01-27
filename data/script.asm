@@ -63,7 +63,7 @@ game_over:
 game_over_1:
 
   setScreen PAPER_BLACK or PEN_RED
-  printAt 0,0,BIOTESLA_HELP
+  printAt 0,0,GAMEOVER_6_1
   CallCode play_gameover
   goto RESTART
   
