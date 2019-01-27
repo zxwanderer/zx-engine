@@ -29,7 +29,7 @@ computer_glass_destroy_kill:
   shiruFX 19
   CallScript action_ring_explode
   SetMapCell ComputerBreak.spr
-  SetVar Vars.game_over, 5
+  SetVar Vars.game_over, 1
   goto no_way_script
 
 computer_scan_table:
