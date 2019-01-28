@@ -16,7 +16,7 @@ use_get:
   ScanPosTable computer_scan_table
   IfVar Vars.var_ret, 1, no_way_script
 
-  ; shiruFX 55
+  shiruFX 55
   SetMapCell ComputerOff.spr
   ; ShowText Computer_off_mess
   goto no_way_script
