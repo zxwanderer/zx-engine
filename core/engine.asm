@@ -361,4 +361,4 @@ stop_measure:
 
 ENDMODULE
 
-display "zxengine.scan_table_xy", zxengine.scan_table_xy
+; display "zxengine.scan_table_xy", zxengine.scan_table_xy

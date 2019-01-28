@@ -47,7 +47,7 @@ computer_scan_table:
 
 check_alert_code_found:
   IfVar Vars.alert_code_found, 0, show_CALL_HELP_NO_CODE
-  SetVar Vars.game_over, 5
+  SetVar Vars.game_over, 3
   goto no_way_script
 
 show_CALL_HELP_NO_CODE:

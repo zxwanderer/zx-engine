@@ -7,4 +7,4 @@ include "main.asm"
 
   SAVEBIN "static.bin", code, dynamic-code
   SAVEBIN "dynamic.bin", dynamic, _all_end-dynamic
-  SAVEBIN "fullgame.bin", code, _all_end-code
+  ; SAVEBIN "fullgame.bin", code, _all_end-code

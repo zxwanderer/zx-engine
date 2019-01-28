@@ -130,7 +130,7 @@ force_open_:
   CallCode binary_check_doors_is_closed ; проверяем открыты ли обе двери
   IfVar Vars.var_ret, 1, force_open_norm
 
-  SetVar Vars.game_over, 4
+  SetVar Vars.game_over, 2
   goto force_open_norm
 
 force_open_norm:
