@@ -83,16 +83,22 @@ MODULE zxengine
     LD A, ( zxengine.varsTab + var )
   ENDM
 
-; наш внутренний стек 
-my_stack:
-  DEFS 100, 00
-my_stack_end:
+cur_addr equ $
+
+; org #f000
 
 ; различные переменные для скриптов
 varsTab:
   DUP 256
     defb 00
   EDUP
+
+; наш внутренний стек 
+my_stack:
+  DEFS 100, 00
+my_stack_end:
+
+; org cur_addr
 
 init:
   DI

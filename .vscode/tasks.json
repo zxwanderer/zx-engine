@@ -52,7 +52,7 @@
         {
             "type": "shell",
             "label": "zx7",
-            "command": "rm -f *.zx7; ./bin/zx7 static.bin; ./bin/zx7 dynamic.bin;",
+            "command": "rm -f *.zx7; ./bin/zx7 static.bin; ./bin/zx7 dynamic.bin; ./bin/zx7 fullgame.bin",
             "dependsOn": [
                 "sjasmplus_parts"
             ],
