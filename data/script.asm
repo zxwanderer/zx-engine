@@ -4,7 +4,7 @@ BEGIN_SCRIPT:
   CallCode binary_clear_screen
   printAt 0,0,HELLO_TXT
   CallCode binary_play_intro
-  ; ScanKeyTable key_table_intro
+  ScanKeyTable key_table_intro
   CallCode input.noKey
 
   CallCode binary_clear_screen
@@ -17,24 +17,24 @@ LOOP_SCRIPT:
   goto LOOP_SCRIPT
   defb _endByte
 
-; ABOUT_INTRO:
-;   CallCode binary_clear_screen
-;   setScreen PAPER_BLACK or PEN_GREEN
-;   printAt 0,0,ABOUT_TXT
-;   CallCode input.waitKey
-;   goto BEGIN_SCRIPT
-;   defb _endByte
+ABOUT_INTRO:
+  CallCode binary_clear_screen
+  setScreen PAPER_BLACK or PEN_GREEN
+  printAt 0,0,ABOUT_TXT
+  CallCode input.waitKey
+  goto BEGIN_SCRIPT
+  defb _endByte
 
-; HELP_SCRIPT_INTRO:
-;   CallCode binary_clear_screen
-;   setScreen PAPER_BLACK or PEN_GREEN
-;   printAt 0,0,HELP
-;   ; shiruFX 46
-;   CallCode input.waitKey
-;   goto BEGIN_SCRIPT
-;   ; CallCode input.noKey
-;   ; CallCode binary_show_screen
-;   defb _endByte
+HELP_SCRIPT_INTRO:
+  CallCode binary_clear_screen
+  setScreen PAPER_BLACK or PEN_GREEN
+  printAt 0,0,HELP
+  ; shiruFX 46
+  CallCode input.waitKey
+  goto BEGIN_SCRIPT
+  ; CallCode input.noKey
+  ; CallCode binary_show_screen
+  defb _endByte
 
 ; HELP_SCRIPT:
 ;   CallCode binary_clear_screen
@@ -58,7 +58,7 @@ game_over:
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
-  IfVar Vars.game_over, 5, game_over_5
+  ; IfVar Vars.game_over, 5, game_over_5
 
 game_over_1:
 
@@ -85,11 +85,11 @@ game_over_4
   CallCode play_gameover
   goto RESTART
 
-game_over_5
-  setScreen PAPER_BLACK or PEN_YELLOW
-  printAt 0,0,GAMEOVER_5
-  CallCode play_gameover
-  goto RESTART
+; game_over_5
+;   setScreen PAPER_BLACK or PEN_YELLOW
+;   printAt 0,0,GAMEOVER_5
+;   CallCode play_gameover
+;   goto RESTART
 
 binary_clear_screen:
   LD D, 0
@@ -143,10 +143,10 @@ show_hand_item:
 binary_show_gui_ret:
   RET
 
-; key_table_intro:
-;   ; KEY_H, HELP_SCRIPT_INTRO
-;   KEY_I, ABOUT_INTRO
-;   defb _endByte
+key_table_intro:
+  KEY_H, HELP_SCRIPT_INTRO
+  KEY_I, ABOUT_INTRO
+  defb _endByte
 
 key_table_hero:
   KEY_CAPS_SHIFT, scan_cursor_keys
