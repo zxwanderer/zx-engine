@@ -1,6 +1,10 @@
 include "defines.asm"
 ORG PROG_ADDR
 
+или все же для trd грузить надо файлы без сжатия прямо в память
+и не забыть про сжатые dynamic чтобы при переапуске игры они вновь 
+распаковывались бы
+
 static:
     incbin "static.bin"
 static_end:
