@@ -4,7 +4,7 @@ BEGIN_SCRIPT:
   CallCode binary_clear_screen
   printAt 0,0,HELLO_TXT
   CallCode binary_play_intro
-  ScanKeyTable key_table_intro
+  ; ScanKeyTable key_table_intro
   CallCode input.noKey
 
   CallCode binary_clear_screen
@@ -17,34 +17,34 @@ LOOP_SCRIPT:
   goto LOOP_SCRIPT
   defb _endByte
 
-ABOUT_INTRO:
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_GREEN
-  printAt 0,0,ABOUT_TXT
-  CallCode input.waitKey
-  goto BEGIN_SCRIPT
-  defb _endByte
+; ABOUT_INTRO:
+;   CallCode binary_clear_screen
+;   setScreen PAPER_BLACK or PEN_GREEN
+;   printAt 0,0,ABOUT_TXT
+;   CallCode input.waitKey
+;   goto BEGIN_SCRIPT
+;   defb _endByte
 
-HELP_SCRIPT_INTRO:
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_GREEN
-  printAt 0,0,HELP
-  ; shiruFX 46
-  CallCode input.waitKey
-  goto BEGIN_SCRIPT
-  ; CallCode input.noKey
-  ; CallCode binary_show_screen
-  defb _endByte
+; HELP_SCRIPT_INTRO:
+;   CallCode binary_clear_screen
+;   setScreen PAPER_BLACK or PEN_GREEN
+;   printAt 0,0,HELP
+;   ; shiruFX 46
+;   CallCode input.waitKey
+;   goto BEGIN_SCRIPT
+;   ; CallCode input.noKey
+;   ; CallCode binary_show_screen
+;   defb _endByte
 
-HELP_SCRIPT:
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_CYAN
-  printAt 0,0,HELP
-  shiruFX 46
-  CallCode input.waitKey
-  CallCode input.noKey
-  CallCode binary_show_screen
-  defb _endByte
+; HELP_SCRIPT:
+;   CallCode binary_clear_screen
+;   setScreen PAPER_BLACK or PEN_CYAN
+;   printAt 0,0,HELP
+;   shiruFX 46
+;   CallCode input.waitKey
+;   CallCode input.noKey
+;   CallCode binary_show_screen
+;   defb _endByte
 
 END_SCRIPT:
   shiruFX 46
@@ -63,7 +63,7 @@ game_over:
 game_over_1:
 
   setScreen PAPER_BLACK or PEN_RED
-  printAt 0,0,GAMEOVER_6_1
+  printAt 0,0,GAMEOVER_1
   CallCode play_gameover
   goto RESTART
   
@@ -143,10 +143,10 @@ show_hand_item:
 binary_show_gui_ret:
   RET
 
-key_table_intro:
-  KEY_H, HELP_SCRIPT_INTRO
-  KEY_I, ABOUT_INTRO
-  defb _endByte
+; key_table_intro:
+;   ; KEY_H, HELP_SCRIPT_INTRO
+;   KEY_I, ABOUT_INTRO
+;   defb _endByte
 
 key_table_hero:
   KEY_CAPS_SHIFT, scan_cursor_keys
@@ -160,7 +160,7 @@ key_table_hero:
 
   ; KEY_I, set_cursor_look
 
-  KEY_H, HELP_SCRIPT
+  ; KEY_H, HELP_SCRIPT
 
   KEY_G, RESTART
 

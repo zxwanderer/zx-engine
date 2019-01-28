@@ -30,7 +30,6 @@ TILE_SET_END
 
 LANG_SET:
   INCLUDE LANG_FILE
-  ; include "data/lang/lang_en.asm"
 LANG_SET_END
 
 ORG (high $+1)*256
