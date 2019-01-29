@@ -59,7 +59,7 @@ ENCOUNTER_SET:
   include "data/cells/memo.asm"
   include "data/cells/medicine.asm"
   include "data/cells/book.asm"
-  include "data/cells/ballon.asm"
+  ; include "data/cells/generator.asm"
   include "data/cells/computer/computer_break.asm"
   include "data/cells/computer/computer_off.asm"
   include "data/cells/computer/computer.asm"
