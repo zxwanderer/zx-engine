@@ -10,6 +10,7 @@ script_:
   IfVar Vars.var_act, do_get, take_
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
+
 take_:
   SetVar Vars.var_ret, 0
   CallCode binary_check_scaf
