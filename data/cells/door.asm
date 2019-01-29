@@ -60,6 +60,7 @@ script:
   goto no_way_script
 
 not_open_:
+  IfVar Vars.power_on,Vars.MAX_BIOCONTAINERS_FOR_POWER_ON, force_open_
   ; shiruFX 43
   ; SetMapCell DoorGreenOpen.spr
   ShowText Door_not_open_mess

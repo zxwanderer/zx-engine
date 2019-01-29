@@ -2,9 +2,9 @@ PersonagesNum equ 1
 
 CHARS_SET: ; описываем героев:
 ; Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
-Hero2: Hero 3,10, 0, 144, 144, 0, 0, tHeroName2, 00
+; Hero2: Hero 3,10, 0, 160, 160, 0, 0, tHeroName2, 00
 
-; Hero2: Hero 5, 27, 0, 160, 160, 0, 0, tHeroName2, 00
+Hero2: Hero 9, 21, 0, 160, 160, 0, 0, tHeroName2, 00
 
   
 ITEM_ARRAY:
@@ -15,15 +15,15 @@ ITEM_ARRAY:
   Item Chair.item, 11,6, Floor.spr, #ff, 00
   Item Chair.item, 11,12, Floor.spr, #ff, 00
   
-  Item Chair.item, 6,6, Floor.spr, #ff, 00
+  Item Chair.item, 6,7, Floor.spr, #ff, 00
   Item Chair.item, 6,9, Floor.spr, #ff, 00
   Item Chair.item, 6,13, Floor.spr, #ff, 00
-  Item Chair.item, 6,16, Floor.spr, #ff, 00
+  Item Chair.item, 6,15, Floor.spr, #ff, 00
 
-  Item Chair.item, 8,6, Floor.spr, #ff, 00
+  Item Chair.item, 8,7, Floor.spr, #ff, 00
   Item Chair.item, 8,9, Floor.spr, #ff, 00
   Item Chair.item, 8,13, Floor.spr, #ff, 00
-  Item Chair.item, 8,16, Floor.spr, #ff, 00
+  Item Chair.item, 8,15, Floor.spr, #ff, 00
 
   Item Chair.item, 5,21, Floor.spr, #ff, 00
   Item Chair.item, 5,22, Floor.spr, #ff, 00

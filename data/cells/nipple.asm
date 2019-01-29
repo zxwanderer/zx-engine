@@ -18,10 +18,11 @@ power_:
   CallCode items.del_item_from_hand
   SetMapCell CanisterPowered.spr
   IncVar Vars.power_on
-  IfVar Vars.power_on, 1, power_start_
+  IfVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON, power_start_
   goto no_script
 
 power_start_:
+  SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
   CallCode power_base_on
   goto no_script
 
