@@ -9,7 +9,7 @@ BEGIN_SCRIPT:
 
   CallCode binary_clear_screen
   CallCode binary_init
-  CallCode Nipple.power_base_on
+  CallScript Nipple.power_start_
 
 LOOP_SCRIPT:
   CallScript GAME_LOOP

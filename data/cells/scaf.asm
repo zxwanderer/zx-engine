@@ -1,0 +1,46 @@
+
+Scaf.spr: equ 128
+
+  MODULE Scaf
+
+    SETUP_CELL_TYPE_N Scaf_cell_name, script_
+    
+script_:
+  IfVar Vars.var_act, do_stand, no_way_script
+  IfVar Vars.var_act, do_get, take_
+  IfVar Vars.var_act, do_drop, drop_
+  defb _endByte
+take_:
+  SetMapCell ScafPlace.spr
+  CallCode binary_wear_scaf
+  SetMapCell Scaf.spr
+  goto no_script
+drop_:
+  goto no_way_script
+
+binary_wear_scaf:
+  LD IX, (Entities.activePersonage_ptr)
+  LD A, Scaf.spr
+  LD ( IX + Hero.sprite ), A
+  LD ( IX + Hero.base_spr), A
+  CALL Entities.lookChar
+  RET
+  ENDMODULE
+
+HardScaf.spr: equ 144
+
+  MODULE HardScaf
+
+    SETUP_CELL_TYPE_N HardScaf_cell_name, Scaf.script_
+    ; SETUP_ITEM_TYPE_N
+
+; script:
+;   IfVar Vars.var_act, do_get, get_ ; get у нас особый 
+;   goto Scaf.script
+; ;   defb _endByte
+; get_:
+;   goto no_script
+; drop_:
+;   goto no_way_script
+
+  ENDMODULE

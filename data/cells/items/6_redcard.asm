@@ -1,4 +1,4 @@
-RedCard.item: equ 8
+RedCard.item: equ 6
 RedCard.spr: equ 105
 
   MODULE RedCard
