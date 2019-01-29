@@ -6,6 +6,7 @@
     include "pistol.asm"
     include "safe.asm"
     include "analyzer.asm"
+    include "generator.asm"
     
     include "items/0_shard.asm"
     include "items/1_chair.asm"
