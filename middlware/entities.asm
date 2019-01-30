@@ -5,6 +5,16 @@ MODULE Entities
     defb value_p
   ENDM
 
+; одеваем ячейку карты на героя - item_id то что становится на герое,
+; cell_id - что становится на земле вместо надетой вещи
+; пока будет так потом надо где-то хранить "исходный" спрайт игрока чтобы
+; автоматом его возвращать, но потом 
+  MACRO WearItem item_, cell_
+    defw Entities.wear_item_me
+    defb cell_
+    defb item_
+  ENDM
+
 ; для корректного вызова скрипта обработки предмета 
 ; нужно знать откуда брать его id - 
 ;       предмет может быть в руках персонажа
@@ -86,6 +96,32 @@ char_do_dir_me:
 ;   CALL char_do
 ;   POP HL
 ;   JP zxengine.process
+
+wear_item_me:
+  mLBC
+  PUSH HL
+  CALL wear_item
+  ; CALL Entities.lookChar
+  POP HL
+  JP zxengine.process
+
+; на входе в B - что одеваем
+; , C - что остается на земле
+wear_item
+  PUSH BC
+  PUSH BC
+  LD A, C
+  CALL set_map_cell
+  POP BC
+  LD IX, (Entities.activePersonage_ptr)
+  LD A, B
+  LD ( IX + Hero.sprite ), A
+  LD ( IX + Hero.base_spr), A
+  CALL Entities.lookChar
+  POP BC
+  LD A, B
+  CALL set_map_cell
+  RET
 
 set_map_cell_me:
   mLDA

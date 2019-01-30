@@ -7,23 +7,28 @@ Scaf.spr: equ 128
     
 script_:
   IfVar Vars.var_act, do_stand, no_way_script
-  IfVar Vars.var_act, do_get, take_
+  IfVar Vars.var_act, do_get, get_
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
 
-take_:
+get_:
   SetVar Vars.var_ret, 0
   CallCode binary_check_scaf
   IfVar Vars.var_ret, 0, no_way_script
 
 wear_scaf:
-  SetMapCell ScafPlace.spr
-  CallCode binary_wear_scaf
-  SetMapCell Scaf.spr
-  goto no_script
+  WearItem Scaf.spr, ScafPlace.spr
+  goto no_way_script
+  defb _endByte
 
 drop_:
   goto no_way_script
+
+unwear_scaf:
+  WearItem Hero09.spr, Scaf.spr
+  goto no_way_script
+  defb _endByte
+
 
 binary_check_scaf: ; Vars.var_ret = 1 - скафандра нет
   LD IX, (Entities.activePersonage_ptr)
@@ -37,13 +42,22 @@ binary_check_scaf: ; Vars.var_ret = 1 - скафандра нет
   setVar Vars.var_ret
   RET
 
-binary_wear_scaf:
-  LD IX, (Entities.activePersonage_ptr)
-  LD A, Scaf.spr
-  LD ( IX + Hero.sprite ), A
-  LD ( IX + Hero.base_spr), A
-  CALL Entities.lookChar
-  RET
+; binary_wear_scaf:
+;   LD IX, (Entities.activePersonage_ptr)
+;   LD A, Scaf.spr
+;   LD ( IX + Hero.sprite ), A
+;   LD ( IX + Hero.base_spr), A
+;   CALL Entities.lookChar
+;   RET
+
+; binary_drop_scaf:
+;   LD IX, (Entities.activePersonage_ptr)
+;   LD A, Hero09.spr
+;   LD ( IX + Hero.sprite ), A
+;   LD ( IX + Hero.base_spr), A
+;   CALL Entities.lookChar
+;   RET
+
   ENDMODULE
 
 HardScaf.spr: equ 144
