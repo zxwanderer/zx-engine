@@ -62,8 +62,8 @@ HardScaf.spr: equ 144
 
   ENDMODULE
 
-  DISPLAY "binary_wear_scaf ", Scaf.binary_wear_scaf
-  DISPLAY "MAP_SET", MAP_SET
-  DISPLAY "MapCell_xy", Vars.MapCell_xy
-  DISPLAY "zxengine.varsTab", zxengine.varsTab
-  DISPLAY "zxengine.varsTab+Vars.var_item_id", zxengine.varsTab+Vars.var_item_id
+  ; DISPLAY "binary_wear_scaf ", Scaf.binary_wear_scaf
+  ; DISPLAY "MAP_SET", MAP_SET
+  ; DISPLAY "MapCell_xy", Vars.MapCell_xy
+  ; DISPLAY "zxengine.varsTab", zxengine.varsTab
+  ; DISPLAY "zxengine.varsTab+Vars.var_item_id", zxengine.varsTab+Vars.var_item_id
