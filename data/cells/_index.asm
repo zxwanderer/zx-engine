@@ -8,6 +8,7 @@
     include "analyzer.asm"
     include "generator.asm"
     include "scaf.asm"
+    include "crater.asm"
 
     include "items/0_shard.asm"
     include "items/1_chair.asm"
