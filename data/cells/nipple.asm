@@ -22,7 +22,7 @@ power_:
   goto no_script
 
 power_start_:
-  SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
+  ; SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
   CallCode power_base_on
   goto no_script
 

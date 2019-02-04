@@ -5,12 +5,12 @@ BEGIN_SCRIPT:
   ; goto game_over_3
   printAt 0,0,HELLO_TXT
   CallCode binary_play_intro
-  ScanKeyTable key_table_intro
+  ; ScanKeyTable key_table_intro
   CallCode input.noKey
 
   CallCode binary_clear_screen
   CallCode binary_init
-  CallScript Nipple.power_start_
+  ; CallScript Nipple.power_start_
 
 LOOP_SCRIPT:
   CallScript GAME_LOOP
@@ -18,13 +18,13 @@ LOOP_SCRIPT:
   goto LOOP_SCRIPT
   defb _endByte
 
-ABOUT_INTRO:
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_GREEN
-  printAt 0,0,ABOUT_TXT
-  CallCode input.waitKey
-  goto BEGIN_SCRIPT
-  defb _endByte
+; ABOUT_INTRO:
+;   CallCode binary_clear_screen
+;   setScreen PAPER_BLACK or PEN_GREEN
+;   printAt 0,0,ABOUT_TXT
+;   CallCode input.waitKey
+;   goto BEGIN_SCRIPT
+;   defb _endByte
 
 ; HELP_SCRIPT_INTRO:
 ;   CallCode binary_clear_screen
@@ -97,13 +97,13 @@ game_over_4
   CallCode input.noKey
   setScreen PAPER_BLACK or PEN_GREEN
   printAt 0,0,GAMEOVER_4
-  CallCode play_gameover
+  CallCode play_happy
   CallCode input.waitKey
   CallCode input.noKey
   CallCode binary_clear_screen
   setScreen PAPER_BLACK or PEN_WHITE
   printAt 0,0,GAMEOVER_4_0
-  CallCode play_gameover
+  CallCode play_happy
   CallCode input.waitKey
   CallCode input.noKey
   goto RESTART
@@ -170,10 +170,10 @@ show_hand_item:
 binary_show_gui_ret:
   RET
 
-key_table_intro:
-  ; KEY_H, HELP_SCRIPT_INTRO
-  KEY_I, ABOUT_INTRO
-  defb _endByte
+; key_table_intro:
+;   ; KEY_H, HELP_SCRIPT_INTRO
+;   KEY_I, ABOUT_INTRO
+;   defb _endByte
 
 key_table_hero:
   KEY_CAPS_SHIFT, scan_cursor_keys

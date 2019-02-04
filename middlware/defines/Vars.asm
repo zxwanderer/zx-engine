@@ -1,6 +1,6 @@
 MODULE Vars
 
-MAX_BIOCONTAINERS_FOR_POWER_ON equ 1; максимальное кол-во биоконтейнеров для запуска энергии
+MAX_BIOCONTAINERS_FOR_POWER_ON equ 6; максимальное кол-во биоконтейнеров для запуска энергии
 
 ; системные переменные в Engine для использования
 var_act equ 0; // переменная 0 - действие
