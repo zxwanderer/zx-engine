@@ -9,11 +9,17 @@ MODULE Entities
 ; cell_id - что становится на земле вместо надетой вещи
 ; пока будет так потом надо где-то хранить "исходный" спрайт игрока чтобы
 ; автоматом его возвращать, но потом 
+; "Снять" здесь нет, просто одеваем спрайт игрока без скафандра )
   MACRO WearItem item_, cell_
     defw Entities.wear_item_me
     defb cell_
     defb item_
   ENDM
+
+  ; ; в var_ret возвращаем спрайт в который одет герой
+  ; MACRO GetWearItem 
+  ;   defw Entities.get_wear_item_me
+  ; ENDM
 
 ; для корректного вызова скрипта обработки предмета 
 ; нужно знать откуда брать его id - 
@@ -122,6 +128,10 @@ wear_item
   LD A, B
   CALL set_map_cell
   RET
+
+; get_wear_item_me:
+;   INC HL
+  
 
 set_map_cell_me:
   mLDA
