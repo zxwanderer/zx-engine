@@ -29,7 +29,8 @@ ITEM_ARRAY:
   Item Chair.item, 5,23, Floor.spr, #ff, 00
   Item Chair.item, 3,22, Floor.spr, #ff, 00
 
-  Item Chair.item, 21,30, Floor.spr, #ff, 00
+; тайник
+  Item Chair.item, 21,30, FloorWhite.spr, #ff, 00
 
 ; склад
   Item Canister.item, 10,16, FloorRed.spr, #ff, 00

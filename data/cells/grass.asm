@@ -64,12 +64,6 @@ PlantPot.spr: equ 24
     SETUP_CELL_TYPE_N PlantPot_cell_name, Bush.script
   ENDMODULE
 
-; --- вмятина на земле
-CraterSmall.spr: equ 65
-  MODULE CraterSmall
-    SETUP_CELL_TYPE_N CraterSmall_cell_name, Floor.script
-  ENDMODULE
-
 ; Toilet.spr: equ 102
 ;   MODULE Toilet
 ;     SETUP_CELL_TYPE_N Toilet_cell_name, no_way_script
