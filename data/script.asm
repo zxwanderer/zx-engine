@@ -2,7 +2,7 @@ BEGIN_SCRIPT:
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_CYAN
   CallCode binary_clear_screen
-  goto game_over_5
+  ; goto game_over_3
   printAt 0,0,HELLO_TXT
   CallCode binary_play_intro
   ScanKeyTable key_table_intro
@@ -58,21 +58,28 @@ game_over:
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
+  IfVar Vars.game_over, 5, game_over_5
 
 game_over_1:
-
+  CallCode input.noKey
   setScreen PAPER_BLACK or PEN_RED
   printAt 0,0,GAMEOVER_1
   CallCode play_gameover
+  CallCode input.waitKey
+  CallCode input.noKey
   goto RESTART
   
 game_over_2
+  CallCode input.noKey
   setScreen PAPER_BLACK or PEN_RED
   printAt 0,0,GAMEOVER_2
   CallCode play_gameover
+  CallCode input.waitKey
+  CallCode input.noKey
   goto RESTART
 
 game_over_3
+  CallCode input.noKey
   setScreen PAPER_BLACK or PEN_YELLOW
   printAt 0,0,GAMEOVER_3
   CallCode play_gameover
@@ -87,6 +94,7 @@ game_over_3
   goto RESTART
 
 game_over_4
+  CallCode input.noKey
   setScreen PAPER_BLACK or PEN_GREEN
   printAt 0,0,GAMEOVER_4
   CallCode play_gameover
@@ -101,9 +109,12 @@ game_over_4
   goto RESTART
 
 game_over_5
+  CallCode input.noKey
   setScreen PAPER_BLACK or PEN_RED
   printAt 0,0,GAMEOVER_5
   CallCode play_gameover
+  CallCode input.waitKey
+  CallCode input.noKey
   goto RESTART
 
 

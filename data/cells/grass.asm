@@ -53,12 +53,6 @@ Gravel.spr: equ 42
     SETUP_CELL_TYPE_N Gravel_cell_name, Floor.script
   ENDMODULE
 
-; --- песок
-Sand.spr: equ 80
-  MODULE Sand
-    SETUP_CELL_TYPE_N Sand_cell_name, Floor.script
-  ENDMODULE
-
 PlantPot.spr: equ 24
   MODULE PlantPot
     SETUP_CELL_TYPE_N PlantPot_cell_name, Bush.script

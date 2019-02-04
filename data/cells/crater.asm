@@ -19,6 +19,6 @@ script:
 happy_end_game:
     SetVar Vars.game_over, 4
     goto no_way_script
-    goto no_script
+    ; goto no_script
 
   ENDMODULE
