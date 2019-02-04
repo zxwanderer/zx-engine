@@ -18,7 +18,7 @@ use_get:
 
   shiruFX 55
   SetMapCell ComputerOff.spr
-  ; ShowText Computer_off_mess
+  ShowText Computer_off_mess
   goto no_way_script
 
 use_drop:
