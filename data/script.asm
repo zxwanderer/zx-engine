@@ -2,7 +2,8 @@ BEGIN_SCRIPT:
   setBorder PEN_BLACK
   setScreen PAPER_BLACK or PEN_CYAN
   CallCode binary_clear_screen
-  printAt 0,0,HELLO_TXT
+  ; printAt 0,0,HELLO_TXT
+  printAt 0,0,GAMEOVER_4
   CallCode binary_play_intro
   ScanKeyTable key_table_intro
   CallCode input.noKey
