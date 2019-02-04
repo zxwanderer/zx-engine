@@ -4,7 +4,7 @@ Scaf.spr: equ 128
   MODULE Scaf
 
     SETUP_CELL_TYPE_N Scaf_cell_name, script_
-    
+
 script_:
   IfVar Vars.var_act, do_stand, no_way_script
   IfVar Vars.var_act, do_get, get_
