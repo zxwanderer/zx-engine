@@ -17,9 +17,9 @@ MODULE Entities
   ENDM
 
   ; ; в var_ret возвращаем спрайт в который одет герой
-  ; MACRO GetWearItem 
-  ;   defw Entities.get_wear_item_me
-  ; ENDM
+  MACRO GetWearItem
+    defw Entities.get_wear_item_me
+  ENDM
 
 ; для корректного вызова скрипта обработки предмета 
 ; нужно знать откуда брать его id - 
@@ -129,9 +129,14 @@ wear_item
   CALL set_map_cell
   RET
 
-; get_wear_item_me:
-;   INC HL
-  
+get_wear_item_me:
+  ; INC HL
+  PUSH HL
+  LD IX, (Entities.activePersonage_ptr)
+  LD A, ( IX+Hero.base_spr ) ; запомнили одежду
+  setVar Vars.var_ret
+  POP HL
+  JP zxengine.process
 
 set_map_cell_me:
   mLDA
