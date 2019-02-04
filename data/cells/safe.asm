@@ -2,14 +2,14 @@ Safe.spr: equ 85
   MODULE Safe
     SETUP_CELL_TYPE_N Safe_cell_name, script
 script:
-  IfVar Vars.var_act, do_stand, no_script
+  IfVar Vars.var_act, do_stand, no_way_script
   IfVar Vars.var_act, do_get, no_way_script
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
 
 drop_:
   IfVar Vars.var_item_id, RedCard.spr, add_alert_code
-  goto no_way_script
+  goto base_kick_fault
 
 add_alert_code:
   CallCode items.del_item_from_hand ; удаляем ключ-карту
