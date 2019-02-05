@@ -3,14 +3,19 @@ Bed.spr equ 19
 
   MODULE Bed
 
-  SETUP_CELL_TYPE_N Bed_cell_name,  script
+  SETUP_CELL_TYPE_N Bed_cell_name, script
 
-bed_script:
-  IfVar Vars.var_act, do_get, take_
+script:
+  IfVar Vars.var_act, do_get, get_
+  IfVar Vars.var_act, do_drop, drop_
   ; FxActionCell Ring_expl_1
   defb _endByte
 
-take_
+drop_:
+  IfVar Vars.var_item_id, Nippers.spr, Table.break_table
+  defb _endByte
+
+get_:
   ShowText Take_bed_mess
   defb _endByte
 

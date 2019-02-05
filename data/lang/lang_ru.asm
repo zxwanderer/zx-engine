@@ -356,8 +356,8 @@ Mentoscanner_cell_name: db "Ментосканнер", 0
 ; FoodDispenser_cell_name: db "Пищевой раздатчик", 0
 ElectonicDestroy_cell_name: db "Обломки оборудования..", 0
 
-Nippers_item_name: db "Кислотоупорные гидравлические ножницы", 0
-Wrench_cell_name: db "Гаечный ключ-лом", 0
+Nippers_item_name: db "Кислотостойкий гидравлический резак", 0
+Wrench_cell_name: db "Гаечный ключ-ломик", 0
 
 ScafPlace_cell_name: db "Стойка для скафандра", 0
 Scaf_cell_name: db "Легкий скафандр", 0
