@@ -67,6 +67,11 @@ binary_set_active_cell_left: ; устанавливаем позицию вле�
 
 ; общие скрипты:
 
+; не получилось
+nope_script:
+  shiruFX FX_Nope
+  goto no_way_script
+
 base_kick_fault: ; неуспех удара предметом
   shiruFX FX_Wall
   CallScript action_ring_explode
