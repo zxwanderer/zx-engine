@@ -40,10 +40,16 @@ computer_scan_table:
   defb 23,3
   defw check_alert_code_found
   defb _endByte
-  ; defb 5,9
-  ; defw soft_wall_break_electronic_script
+  defb 20,24
+  defw show_Energy_monitor_show
   ; defb 11,9
   ; defw soft_wall_break_electronic_script
+
+show_Energy_monitor_show
+  shiruFX 55
+  ShowText Energy_monitor_show
+  SetVar Vars.var_ret, 1
+  defb _endByte
 
 check_alert_code_found:
   IfVar Vars.alert_code_found, 0, show_CALL_HELP_NO_CODE
@@ -77,6 +83,8 @@ binary_open_tambur:
   LD HL, MAP_SET+21*mapSize+22 ; x=22, y=21
   LD A, DoorRedHardOpen.spr
   LD (HL),A
+  LD HL, Tambur_open
+  CALL screenfx.show_info_message
   RET
 
 binary_close_tambur:
@@ -87,6 +95,9 @@ binary_close_tambur:
   LD HL, MAP_SET+21*mapSize+22 ; x=22, y=21
   LD A, DoorRedHard.spr
   LD (HL),A
+  LD HL, Tambur_close
+  CALL screenfx.show_info_message
+
   RET
 
   ENDMODULE

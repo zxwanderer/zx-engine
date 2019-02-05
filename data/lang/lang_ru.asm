@@ -251,6 +251,15 @@ GAMEOVER_4_0:
   
   db _endByte
 
+Energy_monitor_show:
+  db "Ёнергообеспеченность базы: 100%",0
+
+Tambur_open:
+  db "Ўлюз открыт",0
+
+Tambur_close:
+  db "Ўлюз закрыт",0
+
 CALL_HELP_NO_CODE:
   db "Ёто был аварийный терминал, но € не знал  "
   db "коды запуска протокола эвакуации.."
