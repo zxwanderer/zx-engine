@@ -12,7 +12,7 @@ script:
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
 take_:
-  ShowText Take_shard_mess
+  ; ShowText Take_shard_mess
   defb _endByte
 drop_: ; дропаем что-то из рук на эту ячейку =)
   goto no_way_script
