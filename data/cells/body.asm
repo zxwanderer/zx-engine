@@ -1,6 +1,6 @@
 BodyYellow.spr: equ 10
   MODULE BodyYellow
-    SETUP_CELL_TYPE_N Body_cell_name, script
+    SETUP_CELL_TYPE_N BodyInScaf_cell_name, script
 
 script:
   IfVarN Vars.var_act, do_get, no_script
@@ -15,6 +15,5 @@ BodyWhite.spr: equ 27
 
 BodyBlue.spr: equ 28
   MODULE BodyBlue
-    ; SETUP_CELL_TYPE_N BodyTech_cell_name, BodyYellow.script
-    SETUP_CELL_TYPE_N BodyInScaf_cell_name, BodyYellow.script
+    SETUP_CELL_TYPE_N BodyTech_cell_name, BodyYellow.script
   ENDMODULE

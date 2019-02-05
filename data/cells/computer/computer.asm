@@ -23,7 +23,7 @@ use_get:
 
 use_drop:
   IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy_kill
-  goto no_way_script
+  ; goto no_way_script
   
 computer_glass_destroy_kill:
   shiruFX 19
