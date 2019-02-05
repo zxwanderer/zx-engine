@@ -23,8 +23,8 @@ use_get:
 
 use_drop:
   IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy_kill
-  ; goto no_way_script
-  
+  IfVar Vars.var_item_id, RedCard.spr, no_way_script
+
 computer_glass_destroy_kill:
   shiruFX 19
   CallScript action_ring_explode
