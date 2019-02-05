@@ -3,7 +3,7 @@ ComputerBreak.spr equ #24
 
   MODULE ComputerBreak
 
-    SETUP_CELL_TYPE_N Computer_cell_name, computer_break_script
+    SETUP_CELL_TYPE_N Computer_break_cell_name, computer_break_script
   
 computer_break_script:
   IfVar Vars.var_act, do_get, use_script

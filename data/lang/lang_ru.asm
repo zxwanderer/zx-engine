@@ -273,6 +273,8 @@ CELL_TYPE_NAMES:
 Empty_cell_name: db " ",0
 Floor_cell_name: db "Плитка",0
 Computer_cell_name: db "Терминал",0
+Computer_break_cell_name: db "Разбитый терминал",0
+
 Door_cell_name: db "Дверь",0
 DoorHard_cell_name: db "Шлюзовая дверь",0
 Wall_cell_name: db "Тяжелая бронеплита",0

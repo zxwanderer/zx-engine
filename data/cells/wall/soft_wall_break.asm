@@ -46,13 +46,15 @@ soft_wall_panel_table:
   defw soft_wall_break_electronic_script
   defb 11,5
   defw soft_wall_break_electronic_script
+  defb 17,5
+  defw soft_wall_break_electronic_script
   defb 5,9
   defw soft_wall_break_electronic_script
   defb 11,9
   defw soft_wall_break_electronic_script
 
-  defb 16,5
-  defw soft_wall_make_grid_script
+  ; defb 16,5
+  ; defw soft_wall_make_grid_script
   defb 16,9
   defw soft_wall_make_grid_script
   defb 3,6
@@ -64,8 +66,8 @@ soft_wall_panel_table:
   defw soft_wall_make_cavity_script
   defb 17,9
   defw soft_wall_make_cavity_script
-  defb 19,3
-  defw soft_wall_make_cavity_script
+  ; defb 19,3
+  ; defw soft_wall_make_cavity_script
 
   defb _endByte
 
