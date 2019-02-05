@@ -53,11 +53,6 @@ Gravel.spr: equ 42
     SETUP_CELL_TYPE_N Gravel_cell_name, Floor.script
   ENDMODULE
 
-Blood.spr: equ 97
-  MODULE Blood
-    SETUP_CELL_TYPE_N Blood_cell_name, Floor.script
-  ENDMODULE
-
 PlantPot.spr: equ 24
   MODULE PlantPot
     SETUP_CELL_TYPE_N PlantPot_cell_name, Bush.script

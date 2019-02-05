@@ -10,6 +10,7 @@
     include "scaf.asm"
     include "crater.asm"
     include "sand.asm"
+    include "blood.asm" 
 
     include "items/0_shard.asm"
     include "items/1_chair.asm"

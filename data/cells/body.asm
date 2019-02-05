@@ -3,10 +3,18 @@ BodyYellow.spr: equ 10
     SETUP_CELL_TYPE_N BodyInScaf_cell_name, script
 
 script:
-  IfVarN Vars.var_act, do_get, no_script
+  IfVar Vars.var_act, do_get, get_
+  IfVar Vars.var_act, do_drop, drop_
+  defb _endByte
+
+get_:
   ShowText Body_no_get
   goto nope_script
   ENDMODULE
+
+drop_:
+  SetMapCell Blood.spr
+  goto no_way_script
 
 BodyWhite.spr: equ 27
   MODULE BodyWhite
