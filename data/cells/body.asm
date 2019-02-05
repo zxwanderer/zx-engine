@@ -13,6 +13,7 @@ get_:
   ENDMODULE
 
 drop_:
+  shiruFX FX_Cutt1
   SetMapCell Blood.spr
   goto no_way_script
 
