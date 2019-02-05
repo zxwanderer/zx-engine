@@ -12,19 +12,22 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, Canister.spr, power_
-  goto no_script
+  ; goto no_script
+  defb _endByte
 
 power_:
   CallCode items.del_item_from_hand
   SetMapCell CanisterPowered.spr
   IncVar Vars.power_on
   IfVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON, power_start_
-  goto no_script
+  ; goto no_script
+  defb _endByte
 
 power_start_:
   ; SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
   CallCode power_base_on
-  goto no_script
+  ; goto no_script
+  defb _endByte
 
 power_base_on:
   LD HL, MAP_SET

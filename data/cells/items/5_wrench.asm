@@ -12,7 +12,8 @@ script:
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
 take_:
-  goto no_script
+  ; goto no_script
+  defb _endByte
 drop_:
   goto no_way_script
 
