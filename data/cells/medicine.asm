@@ -1,12 +1,23 @@
 
 Anabiose.spr: equ 98
   MODULE Anabiose
-    SETUP_CELL_TYPE_N Anabiose_cell_name, no_way_script
+    SETUP_CELL_TYPE_N Anabiose_cell_name, script
+
+script:
+  IfVarN Vars.var_act, do_get, no_way_script
+  ; goto no_way_script    
+open:
+  SetMapCell AnabioseOff.spr
+  shiruFX FX_DoorOpen
+  ShowText Anaboise_do_open
+  SetMapCellOnHero Blood.spr
+  ; CallCode Entities.lookChar
+  goto no_way_script
   ENDMODULE
 
 AnabioseOff.spr: equ 82
   MODULE AnabioseOff
-    SETUP_CELL_TYPE_N Anabiose_cell_name, no_way_script
+    SETUP_CELL_TYPE_N AnabioseOpen_cell_name, no_way_script
   ENDMODULE
 
 Mentoscanner.spr: equ 59

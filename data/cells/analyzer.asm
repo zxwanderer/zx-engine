@@ -60,7 +60,6 @@ show_name5:
   SetVar Vars.var_ret, 1
   defb _endByte
 
-
   ENDMODULE
 
 ; Евтимов Димчо
