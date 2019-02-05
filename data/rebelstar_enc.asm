@@ -43,6 +43,7 @@ FX_Boom equ 21
 FX_Wall equ 51
 FX_Cutt equ 7
 FX_Cutt1 equ 8
+FX_GridCut equ 39
 
 CELL_TYPES:
   DUP CellType*256

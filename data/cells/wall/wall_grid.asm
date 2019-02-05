@@ -19,8 +19,8 @@ get_script:
   goto no_way_script
 
 break_grid:
-  shiruFX FX_Wall
-  CallScript action_ring_explode
+  shiruFX FX_GridCut
+  ; CallScript action_ring_explode
   ShowText WallHole_name
   SetMapCell WallHole.spr
   goto no_way_script
