@@ -71,9 +71,11 @@ PlantPot.spr: equ 24
 
 Keramit.spr: equ 175
   MODULE Keramit
-    SETUP_CELL_TYPE_N Keramit_cell_name, no_way_script
-; keramit_script:
+    SETUP_CELL_TYPE_N Keramit_cell_name, script
+
+script:
+  IfVarN Vars.var_act, do_drop, no_way_script
   ; shiruFX FX_Wall
-  ; ShowText Keramit_mess
-  ; goto no_way_script    
+  ShowText Keramit_nohit_mess
+  goto no_way_script
   ENDMODULE
