@@ -12,11 +12,11 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
-  IfVar Vars.var_item_id, CanisterEmpty.spr, computer_glass_destroy
-
-  IfVar Vars.var_item_id, Nippers.spr, computer_screen_destroy
-  IfVar Vars.var_item_id, Canister.spr, computer_screen_destroy
-  IfVar Vars.var_item_id, Wrench.spr, computer_screen_destroy
+  goto computer_screen_destroy
+  ; IfVar Vars.var_item_id, CanisterEmpty.spr, computer_glass_destroy
+  ; IfVar Vars.var_item_id, Nippers.spr, computer_screen_destroy
+  ; IfVar Vars.var_item_id, Canister.spr, computer_screen_destroy
+  ; IfVar Vars.var_item_id, Wrench.spr, computer_screen_destroy
 get_:
   shiruFX FX_Poweroff
   ShowText Computer_off_hit_mess
