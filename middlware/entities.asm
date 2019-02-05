@@ -5,6 +5,11 @@ MODULE Entities
     defb value_p
   ENDM
 
+  MACRO SetMapCellOnHero value_p
+    defw Entities.set_map_cell_on_hero_me
+    defb value_p
+  ENDM
+
 ; одеваем ячейку карты на героя - item_id то что становится на герое,
 ; cell_id - что становится на земле вместо надетой вещи
 ; пока будет так потом надо где-то хранить "исходный" спрайт игрока чтобы
@@ -144,6 +149,25 @@ set_map_cell_me:
   CALL set_map_cell
   POP HL
   JP zxengine.process 
+
+set_map_cell_on_hero_me
+  mLDA
+  PUSH HL
+  CALL set_map_cell_on_hero
+  POP HL
+  JP zxengine.process 
+
+; устанавливаем землю под ноги героя
+; в A - индекс типа ячейки
+set_map_cell_on_hero:
+  ; PUSH AF
+  LD IX, (Entities.activePersonage_ptr)
+  LD (IX+Hero.ground), A
+  RET
+  ; LD D, (IX+Hero.pos.x)
+  ; LD E, (IX+Hero.pos.y)
+  ; POP AF
+  ; JP set_map_cell_DE
 
 ; на входе в A - индекс типа ячейки
 ; на выходе - в HL указатель на массив с ячейкой

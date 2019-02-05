@@ -39,6 +39,7 @@ FX_Computer equ 55
 FX_Yeah equ 56
 FX_No equ 10
 
+FX_DoorOpen equ 43
 FX_Boom equ 21
 FX_Wall equ 51
 FX_Cutt equ 7

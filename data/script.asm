@@ -4,7 +4,7 @@ BEGIN_SCRIPT:
   printScreen PAPER_BLACK or PEN_GREEN, HELLO_TXT
   CallCode binary_play_intro
   CallCode binary_init
-  ; CallScript Nipple.power_start_
+  CallScript Nipple.power_start_
 
 LOOP_SCRIPT:
   CallScript GAME_LOOP
