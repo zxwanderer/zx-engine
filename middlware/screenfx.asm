@@ -176,7 +176,6 @@ show_frames:
 
     RET
 
-
 show_info_message_me:
     mLDE
     PUSH HL
@@ -197,6 +196,9 @@ show_info_message:
     LD D, 22
     LD E, 2
     CALL screenfx.clear_window
+
+    ; CALL input.noKey
+    ; CALL input.waitKey
 
     LD DE, #0016
     CALL text.print_at
