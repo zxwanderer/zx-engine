@@ -39,11 +39,9 @@ computer_scan_table:
   defw flip_flop_tambur
   defb 23,3
   defw check_alert_code_found
-  defb _endByte
   defb 20,24
   defw show_Energy_monitor_show
-  ; defb 11,9
-  ; defw soft_wall_break_electronic_script
+  defb _endByte
 
 show_Energy_monitor_show
   shiruFX 55
