@@ -9,7 +9,10 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, RedCard.spr, add_alert_code
-  goto base_kick_fault
+  shiruFX FX_Wall
+  CallScript action_ring_explode
+  ShowText Safe_try_hit_mess
+  goto no_way_script
 
 add_alert_code:
   CallCode items.del_item_from_hand ; удаляем ключ-карту
