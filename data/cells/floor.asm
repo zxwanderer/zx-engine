@@ -9,7 +9,7 @@ script:
   ; IfVar Vars.var_act, do_stand, stand_script
   defb _endByte
 get:
-  ShowText Take_floor_mess
+  ; ShowText Take_floor_mess
   CallCode Entities.action_fault
   SetVar Vars.var_ret, 0
   defb _endByte
