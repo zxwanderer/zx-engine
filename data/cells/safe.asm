@@ -19,6 +19,8 @@ add_alert_code:
   SetMapCell SafeEmpty.spr
   SetVar Vars.alert_code_found, 1
   ShowText FOUND_ALERT_CODE
+  CallCode Entities.lookChar
+  CallCode binary_play_intro
   goto no_way_script
 
   ENDMODULE
