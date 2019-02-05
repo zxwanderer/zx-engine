@@ -24,12 +24,14 @@ power_:
   defb _endByte
 
 power_start_:
-  SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
+  ; SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
   CallCode power_base_on
+  printScreen PAPER_BLACK or PEN_YELLOW, Base_energy_on
   ; goto no_script
   defb _endByte
 
 power_base_on:
+
   LD HL, MAP_SET
   LD C, 31
 power_base_on_l1:
