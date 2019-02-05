@@ -7,10 +7,9 @@ Scaf.spr: equ 128
 
 script_:
 
-
   IfVar Vars.var_act, do_get, get_
   IfVar Vars.var_act, do_drop, no_way_script
-  defb _endByte
+  goto no_way_script
 
 get_:
   SetVar Vars.var_ret, 0
