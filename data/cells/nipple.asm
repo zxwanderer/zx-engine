@@ -26,9 +26,10 @@ power_:
 power_start_:
   ; SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
   CallCode power_base_on
-  printScreen PAPER_BLACK or PEN_YELLOW, Base_energy_on
-  ; goto no_script
-  defb _endByte
+  ShowText Base_energy_on
+  CallCode Entities.lookChar
+  CallCode binary_play_intro
+  goto no_way_script
 
 power_base_on:
 
