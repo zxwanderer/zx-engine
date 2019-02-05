@@ -6,7 +6,33 @@ MODULE text
     defw ptext
   ENDM
 
+; печать текста сверху экрана
+  MACRO printScreen color, text
+      dw text.print_screen_me
+      db color
+      dw text
+  ENDM
+
 include "../core/routines/text68.asm"
+
+print_screen_me:
+    PUSH HL
+    CALL input.noKey
+    LD D, 0
+    LD E, 24
+    CALL screenfx.clear_window; очищаем экран
+    POP HL
+    mLDA; загрузили цвет
+    PUSH HL
+    CALL screen.set_colors
+    POP HL
+    mLDE
+    PUSH HL
+    LD HL, SCREEN_ADDR
+    EX HL, DE
+    CALL Text68.print_68at
+    POP HL
+    JP zxengine.process
 
 print_at_me:
   mLDE

@@ -21,43 +21,26 @@ scan_table:
   defb _endByte
 
 show_alarm:
-  CallCode input.noKey
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_CYAN
-  printAt 0,0,ALARM_HELP
+  printScreen PAPER_BLACK or PEN_CYAN, ALARM_HELP
   CallCode binary_play_intro
-  CallCode input.noKey
   defb _endByte
 
 show_private_help:
-  CallCode input.noKey
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_CYAN
-  printAt 0,0,PRIVATE_HELP
+  printScreen PAPER_BLACK or PEN_CYAN, PRIVATE_HELP
   CallCode binary_play_intro
-  CallCode input.noKey
   defb _endByte
 
 show_genetic:
-  CallCode input.noKey
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_CYAN
-  printAt 0,0,GENETIC_HELP
+  printScreen PAPER_BLACK or PEN_CYAN, GENETIC_HELP
   CallCode binary_play_intro
-  CallCode input.noKey
   defb _endByte
 
 show_tesla:
-  CallCode input.noKey
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_CYAN
-  printAt 0,0,BIOTESLA_HELP
+  printScreen PAPER_BLACK or PEN_CYAN, BIOTESLA_HELP
   CallCode binary_play_intro
-  ; CallCode input.waitKey
-  CallCode input.noKey
   defb _endByte
 
-PdaBlue.spr: equ 106
-  MODULE PdaBlue
-    SETUP_CELL_TYPE_N PDA_cell_name, Floor.script
-  ENDMODULE
+; PdaBlue.spr: equ 106
+;   MODULE PdaBlue
+;     SETUP_CELL_TYPE_N PDA_cell_name, Floor.script
+;   ENDMODULE

@@ -1,7 +1,7 @@
 MODULE screen
 
   MACRO setScreen inc_
-    defw screen.set_colors
+    defw screen.set_colors_me
     defb inc_
   ENDM
 /*
@@ -9,15 +9,20 @@ MODULE screen
     defw screen.statica
   ENDM
 */
-set_colors:
+set_colors_me:
   mLDA
   PUSH HL
+  CALL set_colors
+  POP HL
+  JP zxengine.process
 
+set_colors:
   LD HL,ATTR_ADDR
   LD (HL),A
   LD DE,ATTR_ADDR+1
   LD BC,768
   LDIR
+  RET
   /* LD (set_colors_loop+1),A
   LD HL,ATTR_ADDR
 set_colors_loop:
@@ -27,8 +32,6 @@ set_colors_loop:
   CP #5B
   JR NZ,set_colors_loop */
 
-  POP HL
-  JP zxengine.process
 
 /*
 statica:

@@ -1,14 +1,8 @@
 BEGIN_SCRIPT:
   setBorder PEN_BLACK
-  setScreen PAPER_BLACK or PEN_CYAN
-  CallCode binary_clear_screen
   ; goto game_over_3
-  printAt 0,0,HELLO_TXT
+  printScreen PAPER_BLACK or PEN_GREEN, HELLO_TXT
   CallCode binary_play_intro
-  ; ScanKeyTable key_table_intro
-  CallCode input.noKey
-
-  CallCode binary_clear_screen
   CallCode binary_init
   ; CallScript Nipple.power_start_
 
@@ -54,75 +48,47 @@ END_SCRIPT:
   goto RESTART
 
 game_over:
-  CallCode binary_clear_screen
+  ; CallCode binary_clear_screen
+  ; goto game_over_3
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
   IfVar Vars.game_over, 5, game_over_5
 
 game_over_1:
-  CallCode input.noKey
-  setScreen PAPER_BLACK or PEN_RED
-  printAt 0,0,GAMEOVER_1
+  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_1
   CallCode play_gameover
-  CallCode input.waitKey
-  CallCode input.noKey
   goto RESTART
   
 game_over_2
-  CallCode input.noKey
-  setScreen PAPER_BLACK or PEN_RED
-  printAt 0,0,GAMEOVER_2
+  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_2
   CallCode play_gameover
-  CallCode input.waitKey
-  CallCode input.noKey
   goto RESTART
 
 game_over_3
-  CallCode input.noKey
-  setScreen PAPER_BLACK or PEN_YELLOW
-  printAt 0,0,GAMEOVER_3
+  printScreen PAPER_BLACK or PEN_YELLOW, GAMEOVER_3
   CallCode play_gameover
-  CallCode input.waitKey
-  CallCode input.noKey
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_WHITE
-  printAt 0,0,GAMEOVER_3_1
+  printScreen PAPER_BLACK or PEN_WHITE, GAMEOVER_3_1
   CallCode play_gameover
-  CallCode input.waitKey
-  CallCode input.noKey
   goto RESTART
 
 game_over_4
-  CallCode input.noKey
-  setScreen PAPER_BLACK or PEN_GREEN
-  printAt 0,0,GAMEOVER_4
+  printScreen PAPER_BLACK or PEN_GREEN, GAMEOVER_4
   CallCode play_happy
-  CallCode input.waitKey
-  CallCode input.noKey
-  CallCode binary_clear_screen
-  setScreen PAPER_BLACK or PEN_WHITE
-  printAt 0,0,GAMEOVER_4_0
+  printScreen PAPER_BLACK or PEN_GREEN, GAMEOVER_4_0
   CallCode play_happy
-  CallCode input.waitKey
-  CallCode input.noKey
   goto RESTART
 
 game_over_5
-  CallCode input.noKey
-  setScreen PAPER_BLACK or PEN_RED
-  printAt 0,0,GAMEOVER_5
+  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_5
   CallCode play_gameover
-  CallCode input.waitKey
-  CallCode input.noKey
   goto RESTART
 
-
-binary_clear_screen:
-  LD D, 0
-  LD E, 24
-  CALL screenfx.clear_window
-  RET
+; binary_clear_screen:
+;   LD D, 0
+;   LD E, 24
+;   CALL screenfx.clear_window
+;   RET
 
 binary_init:
   ; LD DE, #1008
@@ -147,14 +113,19 @@ binary_play_intro:
   JR Z, play_happy
 play_gameover:
   LD HL, gameover.MUSICDATA
-  JP TRI_PLAY
+  JP just_play
 play_normal:
   LD HL,MUSICDATA
-  JP TRI_PLAY
+  JP just_play
 play_happy:
   LD HL, gameend.MUSICDATA
-  JP TRI_PLAY
+  JP just_play
 
+just_play:
+  CALL TRI_PLAY
+  CALL input.noKey
+  RET
+  
 binary_show_screen:
   CALL Entities.lookChar
   
