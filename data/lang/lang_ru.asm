@@ -315,6 +315,8 @@ Acid_cell_name: db "Лужица кислотного сока", 0
 ; Sink_cell_name: db "Раковина",0
 Table_cell_name: db "Стол", 0
 Keramit_cell_name: db "Керамит", 0
+
+
 ; Locker_cell_name: db "Шкафчик", 0
 Safe_cell_name: db "Сейф", 0
 Safe_try_hit_mess:
@@ -440,8 +442,8 @@ Take_trash_mess:
 ; Safe_mess:
 ;   db "Сейф отозвался на удар глухим звуком..", 0
 
-; Keramit_mess:
-  ; db "Стучать по керамиту было бессмысленно..", 0
+Keramit_nohit_mess:
+  db "Стучать по керамиту было бессмысленно..", 0
 
 ; Statis_on_mess
   ; db "Я нажал на кнопки и над кроватью загудел   "
