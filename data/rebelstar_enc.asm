@@ -93,14 +93,13 @@ base_kick_shard_fault: ; неуспех резания острым
 no_way_script: ; неуспех
   SetVar Vars.var_ret, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
+  ; CallCode Entities.lookCharSeeCellInfo
   defb _endByte
 
 ; stand_script:
 ;   CallCode Entities.char_do_stand
 ;   defb _endByte
 
-; сигнал о получении приходит только после 
-; НАЗАД и открыть аккаунт по-новой
 action_ring_explode:
   FxActionCell Ring_expl_1
   wait_halt 3
