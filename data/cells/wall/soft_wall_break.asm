@@ -19,7 +19,7 @@ soft_wall_break:
   
 soft_wall_break_on:
   SetMapCell Wall.spr
-  ; ShowText Soft_wall_clean
+  ShowText Soft_wall_clean
   goto no_way_script; на выходе должно быть 0 тогда дальше обрабатываться не будет
 
 soft_wall_break_electronic_script:

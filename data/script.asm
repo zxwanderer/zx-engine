@@ -216,28 +216,28 @@ look_char:
 char_up:
   ; CharDo do_stand, dir_up
   CharRotMove dir_up
-  CallCode Entities.lookCharSeeCellInfo
+  ; CallCode Entities.lookCharSeeCellInfo
   ; CharDoForward do_stand
   goto look_char
 
 char_down:
   ; CharDo do_stand, dir_down
   CharRotMove dir_down
-  CallCode Entities.lookCharSeeCellInfo
+  ; CallCode Entities.lookCharSeeCellInfo
   goto look_char
 
 char_left:
   ; CharRotLeft
   ; CharDo do_stand, dir_left
   CharRotMove dir_left
-  CallCode Entities.lookCharSeeCellInfo
+  ; CallCode Entities.lookCharSeeCellInfo
   goto look_char
 
 char_right:
   ; CharDo do_stand, dir_right
   ; CharRotRight
   CharRotMove dir_right
-  CallCode Entities.lookCharSeeCellInfo
+  ; CallCode Entities.lookCharSeeCellInfo
   goto look_char
 
 ; char_up_left:

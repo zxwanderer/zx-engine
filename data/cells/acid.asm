@@ -34,6 +34,7 @@ binary_fill:
   CALL items.del_item_from_hand ; убираем пустую канистру
   LD A, Canister.item
   CALL items.add_item_to_hand
-  JP Entities.action_pickup
+  RET
+  ; JP Entities.action_pickup
 
   ENDMODULE

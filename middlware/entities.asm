@@ -332,9 +332,8 @@ char_rot_move:
 char_not_move:
   LD A, B
   LD (IX+Hero.dir), B
+  CALL Entities.lookCharSeeCellInfo
   JP char_update_sprite
-
-  ; RET
 
 ; в B - action
 char_do_dir:
@@ -482,6 +481,7 @@ char_do_stand:
 
   LD A, (IX+Hero.sprite)
   LD (HL),A                     ; ставим спрайт персонажа на карту
+  CALL Entities.lookCharSeeCellInfo
   RET
 
 ; ; ------------------------------------------------------------------------------------

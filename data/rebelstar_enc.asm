@@ -90,10 +90,11 @@ base_kick_shard_fault: ; неуспех резания острым
   ; CallScript action_ring_explode
 ;   ShowText no_way_mess
 
+already_pickup: ; предмет появился в руках героя, обрабатывать не надо
+  shiruFX FX_Pickup
 no_way_script: ; неуспех
   SetVar Vars.var_ret, 0
 no_script:  ;  никак не нужно обрабатывать коллизию с сущностью
-  ; CallCode Entities.lookCharSeeCellInfo
   defb _endByte
 
 ; stand_script:
