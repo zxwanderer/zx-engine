@@ -22,7 +22,7 @@ break_table:
   shiruFX FX_Wall
   CallScript action_ring_explode
   SetMapCell Trash.spr
-  goto no_way_script
+  goto need_look_no_way
 
   ENDMODULE
 

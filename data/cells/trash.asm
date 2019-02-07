@@ -16,7 +16,6 @@ take_trash_script
 binary_get_shard:
   LD A, Shard.item
   CALL items.add_item_to_hand
-  ; JP Entities.action_pickup
   LD A, FX_Pickup
   CALL FX_SET
   RET

@@ -8,7 +8,7 @@ Scaf.spr: equ 128
 script_:
 
   IfVar Vars.var_act, do_get, get_
-  IfVar Vars.var_act, do_drop, no_way_script
+  ; IfVar Vars.var_act, do_drop, no_way_script
   goto no_way_script
 
 get_:

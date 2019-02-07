@@ -26,7 +26,7 @@ not_open_:
 open_:
   shiruFX 43
   SetMapCell DoorOpen.spr
-  goto no_way_script
+  goto need_look_no_way
 
 ; door_kick_chair:
 ;   shiruFX FX_Wall
@@ -74,41 +74,11 @@ drop_:
 force_open_:
   shiruFX 43
   SetMapCell DoorGreenOpen.spr
-  goto no_way_script
+  goto need_look_no_way
   ENDMODULE
 
 DoorGreenOpen.spr: equ #6c
   MODULE DoorGreenOpen
-    SETUP_CELL_TYPE_N Door_cell_name, DoorOpen.DoorOpen_script
-  ENDMODULE
-
-DoorWhite.spr: equ #7b
-  MODULE DoorWhite
-    SETUP_CELL_TYPE_N Door_cell_name, Door.door_script
-
-; door_script:
-;   shiruFX 43
-;   SetMapCell DoorWhiteOpen.spr
-;   goto no_way_script
-
-  ENDMODULE
-
-DoorWhiteOpen.spr: equ #7c
-  MODULE DoorWhiteOpen
-    SETUP_CELL_TYPE_N Door_cell_name, DoorOpen.DoorOpen_script
-  ENDMODULE
-
-DoorBlue.spr: equ #8b
-  MODULE DoorBlue
-    SETUP_CELL_TYPE_N Door_cell_name, Door.door_script
-; door_script:
-;   shiruFX 43
-;   SetMapCell DoorBlueOpen.spr
-;   goto no_way_script
-  ENDMODULE
-
-DoorBlueOpen.spr: equ #8c
-  MODULE DoorBlueOpen
     SETUP_CELL_TYPE_N Door_cell_name, DoorOpen.DoorOpen_script
   ENDMODULE
 
@@ -137,7 +107,7 @@ force_open_:
 force_open_norm:
   shiruFX 43
   SetMapCell DoorRedHardOpen.spr
-  goto no_way_script
+  goto need_look_no_way
 
 ; две двери шлюза захардкожены (!)
 binary_check_doors_is_closed:
@@ -173,6 +143,6 @@ drop_:
 force_close_:
   shiruFX 43
   SetMapCell DoorRedHard.spr
-  goto no_way_script
+  goto need_look_no_way
 
   ENDMODULE  

@@ -23,6 +23,6 @@ break_grid:
   ; CallScript action_ring_explode
   ShowText WallHole_name
   SetMapCell WallHole.spr
-  goto no_way_script
+  goto need_look_no_way
   
   ENDMODULE
