@@ -17,6 +17,7 @@ drop_:
 
 get_:
   ShowText Take_bed_mess
-  defb _endByte
+  shiruFX 10
+  goto no_way_script
 
   ENDMODULE

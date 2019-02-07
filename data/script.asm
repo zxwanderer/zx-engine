@@ -256,4 +256,5 @@ char_right:
 char_loot:
   ; CharDo do_get_drop, dir_center
   CharDoDir do_get_drop
+  CallCode input.noKey
   goto look_char
