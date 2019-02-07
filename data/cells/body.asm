@@ -15,7 +15,7 @@ get_:
 drop_:
   shiruFX FX_Cutt1
   SetMapCell Blood.spr
-  goto no_way_script
+  goto need_look_no_way
 
 BodyWhite.spr: equ 27
   MODULE BodyWhite

@@ -2,12 +2,12 @@
 WallCavity.spr: equ 43
 
   MODULE WallCavity
-    SETUP_CELL_TYPE_N WallCavity_name,     cavity_script
+    SETUP_CELL_TYPE_N WallCavity_name, no_way_script
 
-cavity_script:
+; cavity_script:
 ;   IfVar Vars.var_act, do_get, get_script
 ;   IfVar Vars.var_act, do_drop, drop_script
-  goto no_way_script
+  ; goto no_way_script
 
 ; drop_script:
 ;   IfVar Vars.var_item_id, Shard.spr, break_shard

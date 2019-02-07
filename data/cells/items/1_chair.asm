@@ -16,14 +16,14 @@ take_:
   defb _endByte
 drop_:
   IfVar Vars.var_item_id, Nippers.spr, destroy_
-  goto no_way_script
+  goto need_look_no_way
 
 destroy_:
   CallCode items.self_destroy_item
   shiruFX FX_Wall
   CallScript action_ring_explode
   SetMapCell Trash.spr
-  goto no_way_script
+  goto need_look_no_way
   ENDMODULE
 
 ChairWhite.spr: equ 83

@@ -18,12 +18,12 @@ get_:
 
 drop_:
   IfVar Vars.var_item_id, CanisterEmpty.spr, fill_
-  goto no_way_script
+  goto need_look_no_way
 
 fill_:
   CallCode binary_fill
   SetMapCell CraterSmall.spr ; на земле ставим маленький кратер
-  goto no_way_script
+  goto need_look_no_way
 
   ; ShowText Take_floor_mess
   ; CallCode Entities.action_fault

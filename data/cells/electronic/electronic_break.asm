@@ -13,8 +13,8 @@ drop_script:
   shiruFX FX_Wall
   CallScript action_ring_explode
   ; ShowText Electronic_break_mess
-  ShowText WallCavity_name
+  ; ShowText WallCavity_name
   SetMapCell WallCavity.spr
-  goto no_way_script
+  goto need_look_no_way
 
   ENDMODULE

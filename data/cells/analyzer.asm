@@ -17,7 +17,7 @@ get_:
 
   SetVar Vars.var_ret, 0
   ScanPosTable scan_table
-  IfVar Vars.var_ret, 1, no_way_script
+  ; IfVar Vars.var_ret, 1, no_way_script
   goto no_way_script
 
 scan_table:
