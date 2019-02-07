@@ -573,17 +573,20 @@ get_from_item:
 
 action_drop:
   LD A, FX_Drop
-  CALL FX_SET; обиженно пиликаем
+  CALL FX_SET
+  CALL Entities.lookCharSeeCellInfo
   RET
 
 action_pickup:
   LD A, FX_Pickup
-  CALL FX_SET; обиженно пиликаем
+  CALL FX_SET
+  CALL Entities.lookCharSeeCellInfo
   RET
 
 action_fault:
   LD A, 10
   CALL FX_SET; обиженно пиликаем
+  CALL Entities.lookCharSeeCellInfo
   RET
 
 

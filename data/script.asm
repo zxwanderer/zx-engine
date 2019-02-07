@@ -75,7 +75,7 @@ game_over_3
 game_over_4
   printScreen PAPER_BLACK or PEN_GREEN, GAMEOVER_4
   CallCode play_happy
-  printScreen PAPER_BLACK or PEN_GREEN, GAMEOVER_4_0
+  printScreen PAPER_BLACK or PEN_WHITE, GAMEOVER_4_0
   CallCode play_happy
   goto RESTART
 
