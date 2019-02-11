@@ -1,27 +1,30 @@
   MODULE Text68
 
-  /* MACRO Text68.print68at posx,posy,text
-    LD HL,text
-    LD DE,posx*256+posy
-    CALL Text68.print_68at
-  ENDM */
+; переводим при печати на одну строчку вниз
+; внутренняя служебная процедура
+make_down_
+  LD A, E
+  AND 11100000b
+  LD E, A
+  call math.down_pos
+  LD C,7
+  INC HL
+  JP LOOP
 
 ; НЕ УЧИТЫВАЕТ DOWN_HL !!!!!!
 ; ВСЕ В ПРЕДЕЛАХ ОДНОЙ ТРЕТИ ЭКРАНА!!!! :E
 ; DE - screen pointer
 ; HL - text pointer
 print_68at:
-  ;CALL math.pos_scr
-  ;PUSH DE
-  ;LD A,1
-  ;CALL ScreenBuf.clean_rows
-  ;POP DE
   LD C, 7
 LOOP:
 ;-----
   LD A,(HL)
   OR A
-  JR Z, EXIT
+  JP Z, EXIT
+  CP 13
+  JP Z, make_down_
+
   PUSH HL
   CALL PRINT_68
 
@@ -34,18 +37,17 @@ LOOP:
 calc_ce_end: 
   LD C,A
 
-
   LD A, E
   AND 31
   CP 31
   JR NZ, no_next_pos
+
   LD A, E
   AND 11100000b
   LD E, A
   call math.down_pos
   LD C,7
 no_next_pos:
-
 
 ;------
   POP HL
