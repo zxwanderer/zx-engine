@@ -12,9 +12,8 @@ electronic_break_script
 drop_script:  
   shiruFX FX_Wall
   CallScript action_ring_explode
-  ; ShowText Electronic_break_mess
-  ; ShowText WallCavity_name
+  ShowText Electronic_kick_mess
   SetMapCell WallCavity.spr
-  goto need_look_no_way
+  goto no_way_script
 
   ENDMODULE
