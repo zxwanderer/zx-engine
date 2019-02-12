@@ -13,6 +13,7 @@ get_:
   ENDMODULE
 
 drop_:
+  IfVar Vars.var_item_id, RedCard.spr, no_way_script
   shiruFX FX_Cutt1
   SetMapCell Blood.spr
   goto need_look_no_way
