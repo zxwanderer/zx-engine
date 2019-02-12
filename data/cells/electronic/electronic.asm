@@ -5,7 +5,7 @@ Electronic.spr: equ #27
     SETUP_CELL_TYPE_N Electronic_cell_name, electronic_script
   
 electronic_script
-  IfVar Vars.var_act, do_get, electronic_script_get
+  IfVar Vars.var_act, do_get, no_way_script
   IfVar Vars.var_act, do_drop, electronic_script_break
   goto no_way_script
 
@@ -15,12 +15,12 @@ electronic_script_break
   shiruFX FX_Wall
   ShowText Electronic_kick_mess
   CallScript action_ring_explode
-  SetMapCell ElectronicBreak.spr
+  SetMapCell WallCavity.spr
   goto no_way_script
 
-electronic_script_get
-  shiruFX 3
-  goto no_way_script
+; electronic_script_get
+;   shiruFX 3
+;   goto no_way_script
 
 electronic_script_off:
   shiruFX 3
