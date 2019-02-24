@@ -12,7 +12,7 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, Canister.spr, power_
-  ; goto no_script
+  IfVar Vars.var_item_id, CanisterRed.spr, power_
   defb _endByte
 
 power_:
