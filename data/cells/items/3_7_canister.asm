@@ -23,3 +23,13 @@ CanisterPowered.spr: equ 114
   MODULE CanisterPowered
     SETUP_CELL_TYPE_N CanisterPowered_cell_name, no_way_script
   ENDMODULE
+
+CanisterRed.item: equ 7
+CanisterRed.spr: equ 113
+
+  MODULE CanisterRed
+
+    SETUP_CELL_TYPE_N Canister_cell_name, Canister.script
+    SETUP_ITEM_TYPE_N
+
+  ENDMODULE
