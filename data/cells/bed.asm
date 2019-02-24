@@ -13,6 +13,7 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, Nippers.spr, Table.break_table
+  IfVar Vars.var_item_id, Wrench.spr, Table.break_table
   defb _endByte
 
 get_:

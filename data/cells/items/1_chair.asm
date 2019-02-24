@@ -16,6 +16,7 @@ take_:
   defb _endByte
 drop_:
   IfVar Vars.var_item_id, Nippers.spr, destroy_
+  IfVar Vars.var_item_id, Wrench.spr, destroy_
   goto need_look_no_way
 
 destroy_:
