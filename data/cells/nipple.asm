@@ -24,7 +24,7 @@ power_:
   defb _endByte
 
 power_start_:
-  ; SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
+  SetVar Vars.power_on, Vars.MAX_BIOCONTAINERS_FOR_POWER_ON
   CallCode power_base_on
   ShowText Base_energy_on
   CallCode Entities.lookChar
