@@ -79,7 +79,26 @@ force_open_:
 
 DoorGreenOpen.spr: equ #6c
   MODULE DoorGreenOpen
-    SETUP_CELL_TYPE_N Door_cell_name, DoorOpen.DoorOpen_script
+    SETUP_CELL_TYPE_N Door_cell_name, script
+
+script:
+  IfVar Vars.var_act, do_get, try_close_
+  IfVar Vars.var_act, do_drop, try_drop_
+  defb _endByte
+
+try_drop_:
+  IfVar Vars.var_item_id, Wrench.spr, force_close_
+  defb _endByte
+
+try_close_:
+  IfVar Vars.power_on,Vars.MAX_BIOCONTAINERS_FOR_POWER_ON, force_close_
+  shiruFX FX_Nope
+  goto no_way_script
+
+force_close_:
+  shiruFX 43
+  SetMapCell DoorGreen.spr
+  goto need_look_no_way
   ENDMODULE
 
 DoorRedHard.spr: equ #64
