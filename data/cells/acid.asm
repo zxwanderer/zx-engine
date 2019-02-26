@@ -22,12 +22,10 @@ drop_:
 
 fill_:
   CallCode binary_fill
+  shiruFX FX_Pickup
+  ShowText Canister_fill
   SetMapCell CraterSmall.spr ; на земле ставим маленький кратер
-  goto need_look_no_way
-
-  ; ShowText Take_floor_mess
-  ; CallCode Entities.action_fault
-  ; SetVar Vars.var_ret, 0
+  goto no_way_script
   defb _endByte
 
 binary_fill:

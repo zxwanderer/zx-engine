@@ -28,7 +28,13 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, Nippers.spr, cut_
+  IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
   goto base_kick_fault
+
+try_container_get_:
+  ShowText Not_get_plant
+  shiruFX FX_Nope
+  goto no_way_script
 
 cut_:
   shiruFX FX_Wall

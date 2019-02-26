@@ -316,6 +316,18 @@ player_name5: db "Клон \"Панчев Златко\"", 0
 Electronic_cell_name: db "Электронный блок управления",0
 Electronic_break_name: db "Сломанная электроника", 0
 
+Not_get_plant:
+  db "Растение не пролезало в вакуум-сборник",13
+  db "биоконтейнера", 0
+
+Not_get_body:
+  db "Тело не пролезало в вакуум-сборник",13
+  db "биоконтейнера", 0
+
+Canister_fill:
+  db "Вакуум-сборник засосал биомассу и ",13
+  db "контейнер наполнился",0
+
 Grass_cell_name: db "Трава", 0
 Bush_cell_name: db "Кустарник", 0
 PlantPot_cell_name: db "Растение в горшке", 0
@@ -366,7 +378,7 @@ Generator_cell_name: db "Биотопливный реактор", 0
 
 WallHole_name: db "Большая дыра в стене",0
 WallGrid_name: db "Металлическая решетка", 0
-WallCavity_name: db "Короб под электронику", 0
+WallCavity_name: db "Пустой короб для электроники", 0
 
 Body_no_get: 
   db "Мне не хочется таскать мертвое тело..", 0
