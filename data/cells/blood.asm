@@ -12,8 +12,10 @@ drop_:
 
 fill_:
   CallCode binary_fill
+  shiruFX FX_Pickup
   SetMapCell CraterSmall.spr ; на земле ставим маленький кратер
-  goto need_look_no_way
+  ShowText Canister_fill
+  goto no_way_script
 
 binary_fill:
   CALL items.del_item_from_hand ; убираем пустую канистру

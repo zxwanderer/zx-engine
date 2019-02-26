@@ -14,9 +14,15 @@ get_:
 
 drop_:
   IfVar Vars.var_item_id, RedCard.spr, no_way_script
+  IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
   shiruFX FX_Cutt1
   SetMapCell Blood.spr
   goto need_look_no_way
+
+try_container_get_:
+  ShowText Not_get_body
+  shiruFX FX_Nope
+  goto no_way_script
 
 BodyWhite.spr: equ 27
   MODULE BodyWhite
