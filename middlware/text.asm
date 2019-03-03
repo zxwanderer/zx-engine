@@ -1,10 +1,10 @@
 MODULE text
 
-  MACRO printAt posx,posy,ptext
-    defw text.print_at_me
-    defb posx, posy
-    defw ptext
-  ENDM
+  ; MACRO printAt posx,posy,ptext
+  ;   defw text.print_at_me
+  ;   defb posx, posy
+  ;   defw ptext
+  ; ENDM
 
 ; печать текста сверху экрана
   MACRO printScreen color, text
@@ -34,15 +34,15 @@ print_screen_me:
     POP HL
     JP zxengine.process
 
-print_at_me:
-  mLDE
-  mLBC
-  PUSH HL ; запомнили указатель скрипта
-  PUSH BC
-  POP HL
-  CALL print_at
-  POP HL
-  JP zxengine.process
+; print_at_me:
+;   mLDE
+;   mLBC
+;   PUSH HL ; запомнили указатель скрипта
+;   PUSH BC
+;   POP HL
+;   CALL print_at
+;   POP HL
+;   JP zxengine.process
 
   ; На входе 
   ; в DE координаты XY
