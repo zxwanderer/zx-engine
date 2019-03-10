@@ -34,7 +34,8 @@ BEGIN_SCRIPT:
 ; разбиваем биоконтейнер и вытекает
 
 LOOP_SCRIPT:
-  CallScript GAME_LOOP
+  ; CallScript GAME_LOOP
+  ScanKeyTable key_table_hero
   IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
   defb _endByte
@@ -68,11 +69,11 @@ LOOP_SCRIPT:
 ;   CallCode binary_show_screen
 ;   defb _endByte
 
-END_SCRIPT:
-  shiruFX 46
-  CallCode input.waitKey
-  CallCode input.noKey
-  goto RESTART
+; END_SCRIPT:
+;   shiruFX 46
+;   CallCode input.waitKey
+;   CallCode input.noKey
+;   goto RESTART
 
 game_over:
   ; CallCode binary_clear_screen
@@ -124,13 +125,13 @@ binary_init:
   CALL Entities.lookChar
   RET
 
-GAME_LOOP:
+; GAME_LOOP:
   ; IfVar Vars.var_mode, 1, cursor_look
-  ScanKeyTable key_table_hero
-  wait_halt 1
+  ; ScanKeyTable key_table_hero
+  ; wait_halt 1
   ; CallCode screenfx.show_frames
   ; CallScript look_char
-  defb _endByte
+  ; defb _endByte
 
 binary_play_intro:
   LD A, (IS_GAME_OVER)
@@ -150,7 +151,7 @@ play_happy:
 
 just_play:
   CALL TRI_PLAY
-  CALL input.noKey
+  ; CALL input.noKey
   RET
   
 binary_show_screen:
