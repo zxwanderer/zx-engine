@@ -8,6 +8,15 @@ waitKey:
 	jr z,waitKey
 	ret
 
+; waitGKey:
+; 	HALT
+; 	XOR A
+; 	LD A,#FD
+; 	IN A,(#FE)
+; 	BIT 4,A
+; 	RET Z
+; 	JR waitGKey
+
 noKey:
 	xor a
 	in a,(0xfe)
