@@ -2,7 +2,7 @@
 
 HELLO_TXT:
 ; db "012345678901234567890123456789012345678901"
-  db " CELL 3326       v1.1-alpha    05.02.2019 "
+  db " CELL 3326       v1.2-alpha    11.03.2019 "
   db "------------------------------------------"
   db "Привет мир! Я хочу поиграть с тобой в одну"
   db "игру. Сюжет банален - герой, потерявший", 13
@@ -20,6 +20,10 @@ HELLO_TXT:
   db "------------------------------------------"
   db "Код Wanderer,музыка AER,графика взята из", 13
   db "игр LaserSquad,Stalker,Monstrland", 13
+  db "------------------------------------------"
+  db "Thank's to Shiru for fix beep sound and",13
+  db "Modern ZX-Retro Gaming Youtube Channel for"
+  db "walkthrough video..",13
   db "------------------------------------------"
   db "Сайт: zxwanderer.github.io/cell3326", 13
   db "------------------------------------------"

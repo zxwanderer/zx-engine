@@ -123,6 +123,7 @@ binary_init:
   ; LD ( Vars.Cursor_pos ), DE
   CALL Entities.initHeroes
   CALL Entities.lookChar
+  CALL Entities.lookCharSeeCellInfo
   RET
 
 ; GAME_LOOP:
