@@ -1,23 +1,3 @@
-FX_SET:
-  include "data/demoFX.asm"
-FX_SET_END
-
-TRITONE:
-
-  include "core/routines/music_tritone.asm"
-
-  include "data/music/AER/foryou.asm"
-
-  MODULE gameover
-  include "data/music/AER/gameover.asm"
-  ENDMODULE
-
-  MODULE gameend
-  include "data/music/AER/gameend.asm"
-  ENDMODULE
-
-TRITONE_END
-
 ; 0 - игра не окончена никак
 ; 1 - хеппи-енд
 ; 2 - геймовер
@@ -76,3 +56,31 @@ ENCOUNTER_SET:
   include "data/cells/wall/wall.asm"
   include "data/cells/_index.asm"
 ENCOUNTER_SET_END
+
+; (!) код плеера должен быть в быстрой памяти как Shiru сказал (!!!)
+; На 48K это просто любая память выше 32768, на оригинальных 128K 
+; есть сложности: на 128K и +2 медленные страницы 1,3,5,7; 
+; на +2A и +3 медленные страницы 4,5,6,7. Т.е. для корректной работы 
+; на всех оригинальных моделях плеер надо обязательно поместить в страницу 0 или 2.
+; На данный момент подключается аккурат во 2ю страницу ( FX_SET: 0xBC46)
+FX_SET:
+  include "data/demoFX.asm"
+FX_SET_END
+
+TRITONE:
+
+  include "core/routines/music_tritone.asm"
+
+  include "data/music/AER/foryou.asm"
+
+  MODULE gameover
+  include "data/music/AER/gameover.asm"
+  ENDMODULE
+
+  MODULE gameend
+  include "data/music/AER/gameend.asm"
+  ENDMODULE
+
+TRITONE_END
+
+DISPLAY "FX_SET ", FX_SET

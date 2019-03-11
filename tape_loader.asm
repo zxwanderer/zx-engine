@@ -1,4 +1,4 @@
-    DEVICE ZXSPECTRUM128
+    device zxspectrum128
 	
 tStart	db 0,10
 	dw t1len
