@@ -153,7 +153,7 @@ goto_me:
 halt_me:
   mLDB
 wait_halt_loop:
-  ; HALT
+  HALT
   DJNZ wait_halt_loop
   JP process
 
