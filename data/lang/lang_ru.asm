@@ -8,7 +8,7 @@ HELLO_TXT:
   db "игру. Сюжет банален - герой, потерявший", 13
   db "память, просыпается на кровати в комнате.", 13
   ; db "------------------------------------------"
-  db 13
+  ; db 13
   db "-----------[Управление в игре]------------"
   ; db "Управление в игре:                        "
   db "Кнопки курсора,QAOP-передвижение", 13
@@ -16,14 +16,15 @@ HELLO_TXT:
   db "прямо перед персонажем тем предметом,кото-"
   db "рый находится в руках.", 13
   db "G-выход в меню и рестарт игры", 13
-  db 13
   db "------------------------------------------"
   db "Код Wanderer,музыка AER,графика взята из", 13
   db "игр LaserSquad,Stalker,Monstrland", 13
   db "------------------------------------------"
-  db "Thank's to Shiru for fix beep sound and",13
-  db "Modern ZX-Retro Gaming Youtube Channel for"
-  db "walkthrough video..",13
+  db "Thank's to Videogames Sematary for 2-hours"
+  db "game stream video, Shiru for operative and"
+  db "detailed information about the beeproblem "
+  db "sound and Modern ZX-Retro Gaming Channel  "
+  db "for walkthrough video..",13
   db "------------------------------------------"
   db "Сайт: zxwanderer.github.io/cell3326", 13
   db "------------------------------------------"
