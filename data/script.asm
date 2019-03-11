@@ -152,7 +152,7 @@ play_happy:
 
 just_play:
   CALL TRI_PLAY
-  ; CALL input.noKey
+  CALL input.noKey
   RET
   
 binary_show_screen:
