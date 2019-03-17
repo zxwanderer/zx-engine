@@ -8,7 +8,7 @@ dynamic:
 dynamic_pack:
     incbin "dynamic.bin.zx7"
 ; static_pack:
-;     incbin "static.bin.zx7"
+    ; incbin "static.bin.zx7"
 ; unpacker:
 ;     LD HL,static_pack
 ;     LD DE, static

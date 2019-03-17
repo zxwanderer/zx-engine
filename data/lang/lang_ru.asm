@@ -20,12 +20,12 @@ HELLO_TXT:
   db "Код Wanderer,музыка AER,графика взята из", 13
   db "игр LaserSquad,Stalker,Monstrland", 13
   db "------------------------------------------"
-  ; db "Thank's to Videogames Sematary for 2-hours"
-  ; db "game stream video, Shiru for operative and"
-  ; db "detailed information about the beeproblem "
-  ; db "sound and Modern ZX-Retro Gaming Channel  "
-  ; db "for walkthrough video..",13
-  ; db "------------------------------------------"
+  db "Thank's to Videogames Sematary for 2-hours"
+  db "game stream video, Shiru for operative and"
+  db "detailed information about the beeproblem "
+  db "sound and Modern ZX-Retro Gaming Channel  "
+  db "for walkthrough video..",13
+  db "------------------------------------------"
   db "Сайт: zxwanderer.github.io/cell3326", 13
   db "------------------------------------------"
   db _endByte

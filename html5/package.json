@@ -1,0 +1,32 @@
+{
+  "name": "TestRPG",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "alex-worker <43813540+alex-worker@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.4",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "clean-webpack-plugin": "^2.0.1",
+    "copy-webpack-plugin": "^5.0.1",
+    "eslint": "^5.15.2",
+    "eslint-loader": "^2.1.2",
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^1.0.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  },
+  "dependencies": {
+    "phaser": "^3.16.2"
+  }
+}
