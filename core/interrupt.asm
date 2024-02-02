@@ -1,3 +1,6 @@
+
+  include "h_push_pop.asm"
+
   MODULE interrupt
 
 init: ;инициализация прерываний, из Survivesection
@@ -26,31 +29,24 @@ init_loop:
 
 interrupt_routine:
   DI
-  push af             ; preserve registers.
-  push bc
-  push de
-  push hl
-  push ix
-  push iy
+  DO_PUSH_ALL_REGISTRY
   
-  ; LD A,R
+  ; LD A,1
   ; OUT(#FE),A
 
   LD HL, (frame_counter)
   INC HL
   LD (frame_counter), HL
 
+  ; LD A,0
+  ; OUT(#FE),A
+
   ; CALL cursor.show_cursor
   ; show_cursor
 
   ; CALL screenfx.show_frames
 return_routine:
-  pop iy
-  pop ix             ; restore registers.
-  pop hl
-  pop de
-  pop bc
-  pop af
+  DO_POP_ALL_REGISTRY
   EI
   ret
 

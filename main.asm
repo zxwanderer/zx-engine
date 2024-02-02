@@ -17,7 +17,7 @@ display "engine size: ", /D, static-code, ", code end: ", static
 display "static data size: ", /D, dynamic-static, ", static end: ", dynamic
 display "font addr: ", p68_font, ", pre-font unused size: ", /D, p68_font - LANG_SET_END
 display "dynamic data size: ", /D, _all_end-dynamic, ", dynamic end: ", _all_end
-display "interrupt:  ", INT_VECTOR, " ", INT_VECTOR+256
+display "interrupt table:  ", INT_VECTOR, " ", INT_VECTOR+256
 display "----- all end: ", _all_end
 
 ; display binary_calc_hero_cursor_pos

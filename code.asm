@@ -6,7 +6,8 @@
   include "middlware/defines/ItemType.asm"
   include "middlware/defines/Item.asm"
   include "middlware/defines/Hero.asm"
-
+  include "middlware/defines/Vars.asm"
+  
   include "core/scankeys.asm"
   include "core/engine.asm"
   ; include "core/cursor.asm"
@@ -20,7 +21,6 @@
   include "middlware/text.asm"
   include "middlware/screen.asm"
   include "middlware/map.asm"
-  include "middlware/defines/Vars.asm" ; если разместить в начале, то тупой компилятор ругается на forvard reference из-за ссылки на zxengine.varsTab несмотря на два прохода
   include "middlware/entities.asm"
   include "middlware/items.asm"
   include "core/interrupt.asm"
