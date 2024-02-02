@@ -15,6 +15,7 @@ LANG_SET_END
 START_SCRIPT:
   include "data/script.asm"
   ; include "data/cursor_look.asm"
+START_SCRIPT_END
 
 ENCOUNTER_SET:
 	include "data/rebelstar_enc.asm"

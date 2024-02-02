@@ -22,8 +22,12 @@ display 'PROGRAM_ORG: ', code
 display '-----------------------------------------'
 display 'Code:      ', code, '-', code_end, ', size: ', /D, code_end - code
 display 'Static:    ', static, '-', static_end,', size: ', /D, static_end - static
-display 'FX_SET:    ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX_SET
-display 'TRITONE:   ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
+display '*TILE_SET: ', TILE_SET, '-', TILE_SET_END-1,', size: ', /D, TILE_SET_END-TILE_SET
+display '*LANG_SET: ', LANG_SET, '-', LANG_SET_END-1,', size: ', /D, LANG_SET_END-LANG_SET
+display '*SCRIPT:   ', START_SCRIPT, '-', START_SCRIPT_END-1,', size: ', /D, START_SCRIPT_END-START_SCRIPT
+display '*ENCOUNTER:', ENCOUNTER_SET, '-', ENCOUNTER_SET_END-1,', size: ', /D, ENCOUNTER_SET_END-ENCOUNTER_SET
+display '*FX_SET:   ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX_SET
+display '*TRITONE:  ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
 display '[Free]     ', TRITONE_END, '-', p68_font, ', size: ', /D, p68_font - TRITONE_END
 display 'Font:      ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end - p68_font
 display 'Dynamic:   ', dynamic, '-', dynamic_end, ', size: ', /D, dynamic_end - dynamic
