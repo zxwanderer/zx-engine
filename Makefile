@@ -7,7 +7,7 @@ zx7: sjasmplus_parts
 sjasmplus_one: zx7
 	./bin/sjasmplus --dos866 --nofakes --dirbol one.asm
 
-make_sna:
+make_sna: zx7
 	./bin/sjasmplus --dos866 --nofakes --dirbol make_sna.asm
 
 run_sna: make_sna

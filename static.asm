@@ -12,13 +12,6 @@ LANG_SET:
   INCLUDE LANG_FILE
 LANG_SET_END
 
-ORG (high $+1)*256
-p68_font:
-  ; incbin "data/fonts/tripfont_revert.fnt"
-  incbin "data/fonts/Font57_revert.fnt"
-  ; incbin "data/fonts/casa2_revert.fnt"
-_after_font:
-
 START_SCRIPT:
   include "data/script.asm"
   ; include "data/cursor_look.asm"
@@ -68,7 +61,6 @@ FX_SET:
 FX_SET_END
 
 TRITONE:
-
   include "core/routines/music_tritone.asm"
 
   include "data/music/AER/foryou.asm"
@@ -84,3 +76,10 @@ TRITONE:
 TRITONE_END
 
 DISPLAY "FX_SET ", FX_SET
+
+ORG (high $+1)*256
+p68_font:
+  ; incbin "data/fonts/tripfont_revert.fnt"
+  incbin "data/fonts/Font57_revert.fnt"
+  ; incbin "data/fonts/casa2_revert.fnt"
+p68_font_end:

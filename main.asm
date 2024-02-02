@@ -1,24 +1,39 @@
 
 code:
   include "code.asm"
+code_end:
+
 static:
   include "static.asm"
+static_end:
+
 dynamic:
   include "dynamic.asm"
+dynamic_end:
 
 pack_dynamic:
+  ; incbin "dynamic.bin.zx7"
+; pack_dynamic_end:
 
-_all_end:
+; _all_end:
 
-display /D, _all_end-code, " size, ", /D, INT_VECTOR-_all_end, " free"
+; display /D, _all_end-code, " size, ", /D, INT_VECTOR-_all_end, " free"
 
-display "----- code start: ", code
-display "engine size: ", /D, static-code, ", code end: ", static
-display "static data size: ", /D, dynamic-static, ", static end: ", dynamic
-display "font addr: ", p68_font, ", pre-font unused size: ", /D, p68_font - LANG_SET_END
-display "dynamic data size: ", /D, _all_end-dynamic, ", dynamic end: ", _all_end
-display "interrupt table:  ", INT_VECTOR, " ", INT_VECTOR+256
-display "----- all end: ", _all_end
+display 'PROGRAM_ORG: ', code
+display '-----------------------------------------'
+display 'Code:      ', code, '-', code_end, ', size: ', /D, code_end - code
+display 'Static:    ', static, '-', static_end,', size: ', /D, static_end - static
+display 'FX_SET:    ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX_SET
+display 'TRITONE:   ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
+display '[Free]     ', TRITONE_END, '-', p68_font, ', size: ', /D, p68_font - TRITONE_END
+display 'Font:      ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end - p68_font
+display 'Dynamic:   ', dynamic, '-', dynamic_end, ', size: ', /D, dynamic_end - dynamic
+; display 'Pack:      ', pack_dynamic_end, '-', pack_dynamic, ', size: ', /D, pack_dynamic_end - pack_dynamic
+; display '[Free]     ', dynamic_end+1, '-', INT_TABLE-1, ', size: ', /D, INT_TABLE - dynamic_end
+; display '-----------------------------------------'
+; display 'INT_TABLE: ', INT_TABLE, "-", INT_TABLE+256-1
+; display 'INT_VECTOR:', INT_VECTOR, "-", INT_VECTOR
+; display '[Free]     ', _all_end, '-', #FFFF, ', size: ', /D, 0x10000 - _all_end
 
 ; display binary_calc_hero_cursor_pos
 ; display CELL_TYPES
