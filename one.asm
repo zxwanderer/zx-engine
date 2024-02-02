@@ -20,8 +20,6 @@ _end_all:
 
   display "BINARY SIZE: ", /D, _end_all-PROG_ADDR, " ", _end_all-static
   display "BINARY BEGIN: ", PROG_ADDR, " (", /D, PROG_ADDR, ")"
-;   display "BINARY START: ", PROG_ADDR, " (", /D, PROG_ADDR, ")"
   display "BINARY END: ", _end_all, " (", /D, _end_all, ")"
   SAVEBIN "cell3326.bin", PROG_ADDR, _end_all-PROG_ADDR
-;   SAVEBIN "game.bin", PROG_ADDR, $-PROG_ADDR
   
