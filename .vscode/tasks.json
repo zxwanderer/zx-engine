@@ -15,8 +15,8 @@
         {
             "type": "shell",
             "label": "run_sna",
-            "command": "open -a 'Fuse' cell3326.sna",
-            // "command": "open -a 'Unreal Speccy Portable' cell3326.sna",
+            // "command": "open -a 'Fuse' cell3326.sna",
+            "command": "open -a 'UnrealSpeccyPortable' cell3326.sna",
             "group": {
                 "kind": "build",
                 "isDefault": true

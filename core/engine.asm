@@ -4,83 +4,83 @@ MODULE zxengine
     defw zxengine.stop_me
   ENDM
 
-  MACRO goto addr
+  MACRO goto __addr
     defw zxengine.goto_me
-    defw addr
+    defw __addr
   ENDM
 
-  MACRO wait num
+  MACRO wait __num
     defw zxengine.wait_me
-    defb num
+    defb __num
   ENDM
 
-  MACRO wait_halt num
+  MACRO wait_halt __num
     defw zxengine.halt_me
-    defb num
+    defb __num
   ENDM
 
-  MACRO CallCode ptr
+  MACRO CallCode __ptr
     defw zxengine.call_code_me
-    defw ptr
+    defw __ptr
   ENDM
 
-  MACRO CallScript ptr
+  MACRO CallScript __ptr
     defw zxengine.call_script_me
-    defw ptr
+    defw __ptr
   ENDM
 
 ; сканировать таблицу в зависимости от нажатой клавиши
-  MACRO ScanKeyTable ptr
+  MACRO ScanKeyTable __ptr
     defw zxengine.scan_keys_me
-    defw ptr
+    defw __ptr
   ENDM
 
 ; сканировать таблицу в зависимости от нажатой клавиши
-  MACRO ScanPosTable ptr
+  MACRO ScanPosTable __ptr
     defw zxengine.scan_pos_table_me
-    defw ptr
+    defw __ptr
   ENDM
 
 ; сканировать таблицу в зависимости от номера переменной ( не значения!!! )
-  MACRO SkanVarTable var_num, ptr
+  MACRO SkanVarTable __var_num, __ptr
     defw zxengine.scan_var_me
-    defw ptr
-    defw var_num
+    defw __ptr
+    defw __var_num
   ENDM
 
-  MACRO SetVar var, value
+  MACRO SetVar __var, __value
     defw zxengine.set_var_me
-    defb var
-    defb value
+    defb __var
+    defb __value
   ENDM
 
-	MACRO IfVar var_num, value_, code_ptr; переход 
+	MACRO IfVar __var_num, __value, __code_ptr; переход 
 	  defw zxengine.if_var_me
-	  defb var_num
-	  defb value_
-	  defw code_ptr
+	  defb __var_num
+	  defb __value
+	  defw __code_ptr
 	ENDM
 
-  MACRO IfVarN var_num, value_, code_ptr; переход
+  MACRO IfVarN __var_num, __value, __code_ptr; переход
 	  defw zxengine.if_var_not_me
-	  defb var_num
-	  defb value_
-	  defw code_ptr
+	  defb __var_num
+	  defb __value
+	  defw __code_ptr
 	ENDM
 
-  MACRO IncVar var_num
+  MACRO IncVar __var_num
 	  defw zxengine.inc_var_me
-    defb var_num
+    defb __var_num
   ENDM
 
 ; для использования внутри ассемблера
 
-  MACRO setVar var; заносим значение из A в переменную движка
-    LD ( zxengine.varsTab + var ), A
+  MACRO setVar __var; заносим значение из A в переменную движка
+    LD ( zxengine.varsTab + __var ), A
   ENDM
 
-	MACRO getVar var; в A заносим значение переменной движка
-    LD A, ( zxengine.varsTab + var )
+	MACRO getVar __var; в A заносим значение переменной движка
+    LD A, ( zxengine.varsTab + __var )
   ENDM
 
 cur_addr equ $
