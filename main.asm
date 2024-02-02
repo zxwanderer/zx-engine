@@ -18,7 +18,6 @@ pack_dynamic:
 ; _all_end:
 
 ; display /D, _all_end-code, " size, ", /D, INT_VECTOR-_all_end, " free"
-
 display 'PROGRAM_ORG: ', code
 display '-----------------------------------------'
 display 'Code:      ', code, '-', code_end, ', size: ', /D, code_end - code
@@ -30,9 +29,6 @@ display 'Font:      ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end
 display 'Dynamic:   ', dynamic, '-', dynamic_end, ', size: ', /D, dynamic_end - dynamic
 ; display 'Pack:      ', pack_dynamic_end, '-', pack_dynamic, ', size: ', /D, pack_dynamic_end - pack_dynamic
 ; display '[Free]     ', dynamic_end+1, '-', INT_TABLE-1, ', size: ', /D, INT_TABLE - dynamic_end
-; display '-----------------------------------------'
-; display 'INT_TABLE: ', INT_TABLE, "-", INT_TABLE+256-1
-; display 'INT_VECTOR:', INT_VECTOR, "-", INT_VECTOR
 ; display '[Free]     ', _all_end, '-', #FFFF, ', size: ', /D, 0x10000 - _all_end
 
 ; display binary_calc_hero_cursor_pos

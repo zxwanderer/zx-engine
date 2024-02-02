@@ -16,17 +16,23 @@ DYNAMIC_BIN_PACK_END:
 
 SAVESNA "cell3326.sna",PROG_ADDR
 
-INT_VECTOR_high equ (high INT_VECTOR)
-INT_VECTOR_high_1 equ (high INT_VECTOR) + 1
+INT_VECTOR_h equ high INT_VECTOR
+INT_VECTOR_h_1 equ INT_VECTOR_h + 1
+INT_VECTOR_END equ INT_VECTOR + 257
+
+INT_ROUTINE equ INT_VECTOR_h_1 * 256 + INT_VECTOR_h_1
+INT_ROUTINE_END equ INT_ROUTINE + 3
 
 display '-------- Snapshot ---------------------------------'
 display 'STATIC_BIN:          ', STATIC_BIN, '-', STATIC_BIN_END-1, ', size: ', /D, STATIC_BIN_END-STATIC_BIN
 display 'DYNAMIC_BIN:         ', DYNAMIC_BIN, '-', DYNAMIC_BIN_END-1, ', size: ', /D, DYNAMIC_BIN_END-DYNAMIC_BIN
 display 'DYNAMIC_BIN_PACK:    ', DYNAMIC_BIN_PACK, '-', DYNAMIC_BIN_PACK_END-1, ', size: ', /D, DYNAMIC_BIN_PACK_END-DYNAMIC_BIN_PACK
-display '---------------------------------------------------'
-display 'INT_VECTOR:          ', INT_VECTOR, '-', INT_VECTOR+256
-display 'INT_VECTOR high:     ', INT_VECTOR_high
-display 'INT_VECTOR high + 1: ', INT_VECTOR_high_1, ' ', INT_VECTOR_high_1 + INT_VECTOR_high_1 * 256, ' ', INT_VECTOR_high_1 + INT_VECTOR_high_1 * 256 + 1
-display '---------------------------------------------------'
-display 'free:                ', /D, 0xFFFF - INT_VECTOR - 255 
+display '[Free]               ', DYNAMIC_BIN_PACK_END, '-', INT_VECTOR-1,', size: ', /D, INT_VECTOR - DYNAMIC_BIN_PACK_END
+display '---Interrupt---------------------------------------'
+display 'VECTOR:              ', /H, INT_VECTOR_h
+display 'POINTER:             ', /H, INT_VECTOR_h_1
+display 'TABLE:               ', INT_VECTOR, '-', INT_VECTOR_END-1,', size: ', /D, INT_VECTOR_END - INT_VECTOR
+display '[Free]               ', INT_VECTOR_END, '-', INT_ROUTINE-1,', size: ', /D, INT_ROUTINE - INT_VECTOR_END
+display 'ROUTINE:             ', INT_ROUTINE, '-', INT_ROUTINE_END-1, ', size: ', /D, INT_ROUTINE_END - INT_ROUTINE
+display '[Free]               ', INT_ROUTINE_END, '-', 0xFFFF,', size: ', /D, 0xFFFF - INT_ROUTINE_END
 display '---------------------------------------------------'
