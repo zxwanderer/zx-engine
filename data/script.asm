@@ -228,8 +228,6 @@ next_char:
 look_char:
     CallCode Entities.lookChar
     CallCode binary_show_gui
-    ; CallCode input.noKey ; ждем пока отпустит клавишу
-    ; wait_halt 5
     defb _endByte
 
 char_up:
@@ -273,7 +271,7 @@ char_right:
 ;   goto look_char
 
 char_loot:
-  ; CharDo do_get_drop, dir_center
   CharDoDir do_get_drop
+  CallScript look_char
   CallCode input.noKey
-  goto look_char
+  defb _endByte
