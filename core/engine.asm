@@ -99,7 +99,9 @@ my_stack_end:
 init:
   DI
 
+  ifdef _ShowStartupScreen_
   CALL input.waitKey
+  endif
 
   LD HL, pack_dynamic
   LD DE, dynamic

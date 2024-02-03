@@ -1,8 +1,12 @@
 BEGIN_SCRIPT:
   setBorder PEN_BLACK
   ; goto game_over_3
+
+  ifdef _ShowStartupText_  
   printScreen PAPER_BLACK or PEN_GREEN, HELLO_TXT
   CallCode binary_play_intro
+  endif
+
   CallCode binary_init
   ; CallScript Nipple.power_start_
 

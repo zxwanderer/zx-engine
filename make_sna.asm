@@ -1,8 +1,11 @@
 include "defines.asm"
 include "core/defines.asm"
+
+  ifdef _ShowStartupScreen_
 ORG #4000
   incbin "./tiles.scr"
-  
+  endif
+
 ORG PROG_ADDR
 
 STATIC_BIN:
