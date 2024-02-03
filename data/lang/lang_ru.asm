@@ -348,7 +348,6 @@ Acid_cell_name: db "Лужица кислотного сока", 0
 Table_cell_name: db "Стол", 0
 Keramit_cell_name: db "Керамит", 0
 
-
 ; Locker_cell_name: db "Шкафчик", 0
 Safe_cell_name: db "Сейф", 0
 Safe_try_hit_mess:

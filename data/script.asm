@@ -8,6 +8,7 @@ BEGIN_SCRIPT:
 
 ; TODO
 ; ломаем биоконтейнер
+; взять растение в горшке
 ; убрать на складе мягкую обшивку слева вверху дабы не смущать
 ; при финале press g to restart надо а то иногда схлопывается
 ; внятное сообщение при ударе ломиком о растение
@@ -77,7 +78,7 @@ game_over_1:
   printScreen PAPER_BLACK or PEN_RED, GAMEOVER_1
   CallCode play_gameover
   goto RESTART
-  
+
 game_over_2
   printScreen PAPER_BLACK or PEN_RED, GAMEOVER_2
   CallCode play_gameover
@@ -142,6 +143,7 @@ play_happy:
 
 just_play:
   CALL TRI_PLAY
+  CALL input.waitKey
   CALL input.noKey
   RET
   
