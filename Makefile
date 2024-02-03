@@ -1,7 +1,7 @@
 make_scr:
 	python3 ./bin/png2scr.py -i ./data/maps/tiles_many.png -o tiles.scr
 
-make_tileset: make_scr
+make_tileset: 
 	python3 ./bin/scr2spr.py --width 2 --height 2 --color True --count 191 -i ./tiles.scr -o ./tiles.bin
 
 make_map:
