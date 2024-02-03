@@ -99,7 +99,7 @@ my_stack_end:
 init:
   DI
 
-  LD HL,pack_dynamic
+  LD HL, pack_dynamic
   LD DE, dynamic
   CALL dzx7_standard
 
