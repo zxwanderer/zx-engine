@@ -29,12 +29,11 @@ display ' FX_SET:     ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX
 display ' TRITONE:    ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
 display '[Free]       ', TRITONE_END, '-', p68_font, ', size: ', /D, p68_font - TRITONE_END
 display ' Font:       ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end - p68_font
-display 'Dynamic:     ', dynamic, '-', dynamic_end, ', size: ', /D, dynamic_end - dynamic
+display 'Dynamic:     ', dynamic, '-', dynamic_end-1, ', size: ', /D, dynamic_end - dynamic
 display ' MAP_MASK:   ', MAP_MASK, '-', MAP_MASK_END-1,', size: ', /D, MAP_MASK_END-MAP_MASK
 display ' MAP_SET:    ', MAP_SET, '-', MAP_SET_END-1,', size: ', /D, MAP_SET_END-MAP_SET
 display ' CHARS_SET:  ', CHARS_SET, '-', CHARS_SET_END-1,', size: ', /D, CHARS_SET_END-CHARS_SET
 display ' ITEM_ARRAY: ', ITEM_ARRAY_END, '-', ITEM_ARRAY-1,', size: ', /D, ITEM_ARRAY_END-ITEM_ARRAY
-
 
 ; display binary_calc_hero_cursor_pos
 ; display CELL_TYPES
