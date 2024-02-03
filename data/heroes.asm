@@ -6,7 +6,17 @@ Hero2: Hero 3,10, 0, Hero09.spr, Hero09.spr, 0, 0, tHeroName2, 00
 ; Hero2: Hero 9, 27, 0, Scaf.spr, Scaf.spr, 0, 0, tHeroName2, 00
 CHARS_SET_END
 
+ItemArraySize equ 100; максимальное число предметов 
+
 ITEM_ARRAY:
+cur_addr EQU $
+  DUP Item*ItemArraySize
+    defb #ff; item.itemID = #ff - признак того что предмета нет 
+  EDUP
+ITEM_ARRAY_END:
+
+; заполняем массив
+  ORG cur_addr
   Item Chair.item, 4,6, Floor.spr, #ff, 00
   Item Chair.item, 4,12, Floor.spr, #ff, 00
   Item Chair.item, 4,18, Floor.spr, #ff, 00
@@ -57,9 +67,5 @@ ITEM_ARRAY:
 
   Item RedCard.item, 27,3, FloorWhite.spr, #ff, 00
 
-  DUP Item*50
-    defb #ff; item.itemID = #ff - признак того что предмета нет 
-   EDUP
-ITEM_ARRAY_END
-
-ItemArraySize equ 50; максимальное число предметов 
+; проверяем что не вышли за границу таблицы предметов
+  ASSERT ITEM_ARRAY_END >= $
