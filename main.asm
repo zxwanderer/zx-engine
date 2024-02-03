@@ -17,7 +17,6 @@ pack_dynamic:
 
 ; _all_end:
 
-; display /D, _all_end-code, " size, ", /D, INT_VECTOR-_all_end, " free"
 display 'PROGRAM_ORG: ', code
 display '-----------------------------------------'
 display 'Code:        ', code, '-', code_end, ', size: ', /D, code_end - code
@@ -36,10 +35,6 @@ display ' MAP_SET:    ', MAP_SET, '-', MAP_SET_END-1,', size: ', /D, MAP_SET_END
 display ' CHARS_SET:  ', CHARS_SET, '-', CHARS_SET_END-1,', size: ', /D, CHARS_SET_END-CHARS_SET
 display ' ITEM_ARRAY: ', ITEM_ARRAY_END, '-', ITEM_ARRAY-1,', size: ', /D, ITEM_ARRAY_END-ITEM_ARRAY
 
-
-; display 'Pack:      ', pack_dynamic_end, '-', pack_dynamic, ', size: ', /D, pack_dynamic_end - pack_dynamic
-; display '[Free]     ', dynamic_end+1, '-', INT_TABLE-1, ', size: ', /D, INT_TABLE - dynamic_end
-; display '[Free]     ', _all_end, '-', #FFFF, ', size: ', /D, 0x10000 - _all_end
 
 ; display binary_calc_hero_cursor_pos
 ; display CELL_TYPES
