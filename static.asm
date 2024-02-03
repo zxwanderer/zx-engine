@@ -4,11 +4,6 @@
 IS_GAME_OVER
   defb 00
 
-TILE_SET:
-  incbin "tiles.bin"
-  ; include "data/graph/tiles_many.asm"
-TILE_SET_END
-
 LANG_SET:
   INCLUDE LANG_FILE
 LANG_SET_END
@@ -51,6 +46,11 @@ ENCOUNTER_SET:
   include "data/cells/wall/wall.asm"
   include "data/cells/_index.asm"
 ENCOUNTER_SET_END
+
+TILE_SET:
+  incbin "tiles.bin"
+  ; include "data/graph/tiles_many.asm"
+TILE_SET_END
 
 ; (!) код плеера должен быть в быстрой памяти как Shiru сказал (!!!)
 ; На 48K это просто любая память выше 32768, на оригинальных 128K 

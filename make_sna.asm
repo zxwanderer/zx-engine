@@ -1,5 +1,8 @@
 include "defines.asm"
 include "core/defines.asm"
+ORG #4000
+  incbin "./tiles.scr"
+  
 ORG PROG_ADDR
 
 STATIC_BIN:

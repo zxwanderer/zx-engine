@@ -99,6 +99,8 @@ my_stack_end:
 init:
   DI
 
+  CALL input.waitKey
+
   LD HL, pack_dynamic
   LD DE, dynamic
   CALL dzx7_standard
