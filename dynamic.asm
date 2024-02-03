@@ -5,7 +5,8 @@ MAP_MASK:
 MAP_MASK_END
 
 MAP_SET:
-  include "data/maps/laboratory3.asm"
+  incbin "map.bin"
+  ; include "data/maps/laboratory3.asm"
 MAP_SET_END
 
   include "data/heroes.asm"

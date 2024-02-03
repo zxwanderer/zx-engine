@@ -1,10 +1,13 @@
 make_scr:
 	python3 ./bin/png2scr.py -i ./data/maps/tiles_many.png -o tiles.scr
 
+make_tileset: make_scr
+	python3 ./bin/scr2spr.py --width 2 --height 2 --color True --count 191 -i ./tiles.scr -o ./tiles.bin
+
 make_map:
 	python3 ./bin/tiled2bin.py -i ./data/maps/laboratory3.tmx -o map.bin
 
-sjasmplus_parts:
+sjasmplus_parts: make_tileset make_map
 	./bin/sjasmplus --dos866 --nofakes --dirbol parts.asm
 
 zx7: sjasmplus_parts
