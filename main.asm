@@ -28,7 +28,7 @@ display ' ENCOUNTER:  ', ENCOUNTER_SET, '-', ENCOUNTER_SET_END-1,', size: ', /D,
 display ' FX_SET:     ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX_SET
 display ' TRITONE:    ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
 display '[Free]       ', TRITONE_END, '-', p68_font, ', size: ', /D, p68_font - TRITONE_END
-display 'Font:        ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end - p68_font
+display ' Font:       ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end - p68_font
 display 'Dynamic:     ', dynamic, '-', dynamic_end, ', size: ', /D, dynamic_end - dynamic
 display ' MAP_MASK:   ', MAP_MASK, '-', MAP_MASK_END-1,', size: ', /D, MAP_MASK_END-MAP_MASK
 display ' MAP_SET:    ', MAP_SET, '-', MAP_SET_END-1,', size: ', /D, MAP_SET_END-MAP_SET
