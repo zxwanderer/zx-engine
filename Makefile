@@ -1,3 +1,9 @@
+make_scr:
+	python3 ./bin/png2scr.py -i ./data/maps/tiles_many.png -o tiles.scr
+
+make_map:
+	python3 ./bin/tiled2bin.py -i ./data/maps/laboratory3.tmx -o map.bin
+
 sjasmplus_parts:
 	./bin/sjasmplus --dos866 --nofakes --dirbol parts.asm
 
