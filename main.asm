@@ -20,17 +20,23 @@ pack_dynamic:
 ; display /D, _all_end-code, " size, ", /D, INT_VECTOR-_all_end, " free"
 display 'PROGRAM_ORG: ', code
 display '-----------------------------------------'
-display 'Code:      ', code, '-', code_end, ', size: ', /D, code_end - code
-display 'Static:    ', static, '-', static_end,', size: ', /D, static_end - static
-display '*TILE_SET: ', TILE_SET, '-', TILE_SET_END-1,', size: ', /D, TILE_SET_END-TILE_SET
-display '*LANG_SET: ', LANG_SET, '-', LANG_SET_END-1,', size: ', /D, LANG_SET_END-LANG_SET
-display '*SCRIPT:   ', START_SCRIPT, '-', START_SCRIPT_END-1,', size: ', /D, START_SCRIPT_END-START_SCRIPT
-display '*ENCOUNTER:', ENCOUNTER_SET, '-', ENCOUNTER_SET_END-1,', size: ', /D, ENCOUNTER_SET_END-ENCOUNTER_SET
-display '*FX_SET:   ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX_SET
-display '*TRITONE:  ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
-display '[Free]     ', TRITONE_END, '-', p68_font, ', size: ', /D, p68_font - TRITONE_END
-display 'Font:      ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end - p68_font
-display 'Dynamic:   ', dynamic, '-', dynamic_end, ', size: ', /D, dynamic_end - dynamic
+display 'Code:        ', code, '-', code_end, ', size: ', /D, code_end - code
+display 'Static:      ', static, '-', static_end,', size: ', /D, static_end - static
+display ' TILE_SET:   ', TILE_SET, '-', TILE_SET_END-1,', size: ', /D, TILE_SET_END-TILE_SET
+display ' LANG_SET:   ', LANG_SET, '-', LANG_SET_END-1,', size: ', /D, LANG_SET_END-LANG_SET
+display ' SCRIPT:     ', START_SCRIPT, '-', START_SCRIPT_END-1,', size: ', /D, START_SCRIPT_END-START_SCRIPT
+display ' ENCOUNTER:  ', ENCOUNTER_SET, '-', ENCOUNTER_SET_END-1,', size: ', /D, ENCOUNTER_SET_END-ENCOUNTER_SET
+display ' FX_SET:     ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX_SET
+display ' TRITONE:    ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
+display '[Free]       ', TRITONE_END, '-', p68_font, ', size: ', /D, p68_font - TRITONE_END
+display 'Font:        ', p68_font, '-', p68_font_end, ', size: ', /D, p68_font_end - p68_font
+display 'Dynamic:     ', dynamic, '-', dynamic_end, ', size: ', /D, dynamic_end - dynamic
+display ' MAP_MASK:   ', MAP_MASK, '-', MAP_MASK_END-1,', size: ', /D, MAP_MASK_END-MAP_MASK
+display ' MAP_SET:    ', MAP_SET, '-', MAP_SET_END-1,', size: ', /D, MAP_SET_END-MAP_SET
+display ' CHARS_SET:  ', CHARS_SET, '-', CHARS_SET_END-1,', size: ', /D, CHARS_SET_END-CHARS_SET
+display ' ITEM_ARRAY: ', ITEM_ARRAY_END, '-', ITEM_ARRAY-1,', size: ', /D, ITEM_ARRAY_END-ITEM_ARRAY
+
+
 ; display 'Pack:      ', pack_dynamic_end, '-', pack_dynamic, ', size: ', /D, pack_dynamic_end - pack_dynamic
 ; display '[Free]     ', dynamic_end+1, '-', INT_TABLE-1, ', size: ', /D, INT_TABLE - dynamic_end
 ; display '[Free]     ', _all_end, '-', #FFFF, ', size: ', /D, 0x10000 - _all_end

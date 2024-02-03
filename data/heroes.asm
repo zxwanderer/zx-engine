@@ -4,6 +4,7 @@ CHARS_SET: ; описываем героев:
 ; Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
 Hero2: Hero 3,10, 0, Hero09.spr, Hero09.spr, 0, 0, tHeroName2, 00
 ; Hero2: Hero 9, 27, 0, Scaf.spr, Scaf.spr, 0, 0, tHeroName2, 00
+CHARS_SET_END
 
 ITEM_ARRAY:
   Item Chair.item, 4,6, Floor.spr, #ff, 00
@@ -59,5 +60,6 @@ ITEM_ARRAY:
   DUP Item*50
     defb #ff; item.itemID = #ff - признак того что предмета нет 
    EDUP
+ITEM_ARRAY_END
 
 ItemArraySize equ 50; максимальное число предметов 
