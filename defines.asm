@@ -5,7 +5,7 @@ PROG_ADDR equ #6000 ; уся память в наших руках c собст�
   ; DEFINE _ShowStartupScreen_
 
   ; выдавать текст перед началом игры
-  ; DEFINE _ShowStartupText_
+  DEFINE _ShowStartupText_
 
   ; взаимодействовать с окружением
-  DEFINE _InteractiveOn_
+  ; DEFINE _InteractiveOn_
