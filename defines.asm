@@ -8,4 +8,4 @@ PROG_ADDR equ #6000 ; уся память в наших руках c собст�
   DEFINE _ShowStartupText_
 
   ; взаимодействовать с окружением
-  ; DEFINE _InteractiveOn_
+  DEFINE _InteractiveOn_

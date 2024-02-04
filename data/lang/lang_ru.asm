@@ -522,3 +522,6 @@ Computer_off_mess:
 
 Computer_off_hit_mess:
   db "Выключено..", 0
+
+Fuu_mainac_mess:
+  db "Фу, ну ты  и маньяк..", 0

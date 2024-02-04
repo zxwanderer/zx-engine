@@ -13,11 +13,17 @@ get_:
   ENDMODULE
 
 drop_:
-  IfVar Vars.var_item_id, RedCard.spr, no_way_script
   IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
+  IfVar Vars.var_item_id, Wrench.spr, try_cut
+  IfVar Vars.var_item_id, Shard.spr, try_cut
+  IfVar Vars.var_item_id, Nippers.spr, try_cut
+  goto no_way_script
+
+try_cut:
   shiruFX FX_Cutt1
   SetMapCell Blood.spr
-  goto need_look_no_way
+  ShowText Fuu_mainac_mess
+  goto no_way_script
 
 try_container_get_:
   ShowText Not_get_body
