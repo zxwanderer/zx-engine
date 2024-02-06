@@ -853,4 +853,36 @@ set_map:
 ; set_herow_sprite
 ;   RET 
 
+  MACRO CheckActionReaction __table
+    defw Entities.check_action_reaction_me
+    defw __table
+  ENDM
+
+  MACRO CheckItem __table
+	defw Entities.check_item_me
+    defw __table
+  ENDM
+
+check_action_reaction_me:
+    mLDE
+    PUSH HL
+    EX HL, DE; в DE указатель на таблицу
+    getVar Vars.var_act
+    CALL TABLE_SCAN_BY_INDEX_PTR
+    JR NC, .action_not_found
+    POP DE ; чтобы не портить найденное значение HL
+    ; EX HL, DE
+    JP zxengine.process
+.action_not_found
+    POP HL
+    JP zxengine.process
+
+  DISPLAY 'TABLE_SCAN_BY_INDEX_PTR:', TABLE_SCAN_BY_INDEX_PTR
+
+check_item_me:
+    PUSH HL
+    mLDE
+    POP HL
+    JP zxengine.process
+
 ENDMODULE

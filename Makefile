@@ -34,4 +34,7 @@ make_tape: sjasmplus_one
 	./bin/bin2tap -b -hp cell3326.bin -c 24575 -a 24576 -r 24576 
 
 run_tape: make_tape
-	open -a 'UnrealSpeccyPortable' cell3326.tap --args -m 0 
+	open -a 'UnrealSpeccyPortable' --args cell3326.tap --args -m 0 
+
+debug: make_sna
+	open -a 'xpeccy' cell3326.sna --args --labels ./cell3326.list

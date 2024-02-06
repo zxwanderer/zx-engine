@@ -11,6 +11,7 @@
   include "core/scankeys.asm"
   include "core/engine.asm"
   ; include "core/cursor.asm"
+  include "core/tables.asm"
   include "core/routines/math.asm"
   include "core/routines/tiles16.asm"
   include "core/routines/view.asm"

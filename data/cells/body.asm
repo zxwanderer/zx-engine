@@ -3,13 +3,24 @@ BodyYellow.spr: equ 10
     SETUP_CELL_TYPE_N BodyInScaf_cell_name, script
 
 script:
-  IfVar Vars.var_act, do_get, get_
-  IfVar Vars.var_act, do_drop, drop_
+  CheckActionReaction _body_action_table
+  ; IfVar Vars.var_act, do_get, get_
+  ; IfVar Vars.var_act, do_drop, drop_
   defb _endByte
 
-get_:
+_body_action_table:
+  db do_get
+  dw BodyYellow.body_get_
+  ; db do_drop
+  ; dw try_cut
+  defb _endByte
+
+body_get_:
   ShowText Body_no_get
   goto nope_script
+
+    DISPLAY 'body_get_:', body_get_
+
   ENDMODULE
 
 drop_:

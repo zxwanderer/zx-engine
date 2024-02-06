@@ -39,7 +39,7 @@ display ' ITEM_ARRAY: ', ITEM_ARRAY_END, '-', ITEM_ARRAY-1,', size: ', /D, ITEM_
 ; display CELL_TYPES
 ; display Computer_cell_name
 ; display ComputerBreak.computer_break_script
-; LABELSLIST "mylabels.txt"
+; LABELSLIST "cell3326.list"
 
   ; прикрепляем к engine скрипты и определения
   ; SAVEBIN "static.bin", code, dynamic-code
