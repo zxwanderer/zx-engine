@@ -6,13 +6,14 @@ script:
   CheckActionReaction _body_action_table
   ; IfVar Vars.var_act, do_get, get_
   ; IfVar Vars.var_act, do_drop, drop_
+  goto no_way_script
   defb _endByte
 
 _body_action_table:
   db do_get
   dw BodyYellow.body_get_
-  ; db do_drop
-  ; dw try_cut
+  db do_drop
+  dw try_cut
   defb _endByte
 
 body_get_:
