@@ -858,7 +858,7 @@ set_map:
     defw __table
   ENDM
 
-  MACRO CheckItem __table
+  MACRO CheckActiveItem __table
 	defw Entities.check_item_me
     defw __table
   ENDM
@@ -868,6 +868,7 @@ check_action_reaction_me:
     PUSH HL
     EX HL, DE; в DE указатель на таблицу
     getVar Vars.var_act
+do_scan_routines:    
     CALL TABLE_SCAN_BY_INDEX_PTR
     JR NC, .action_not_found
     POP DE ; чтобы не портить найденное значение HL
@@ -878,9 +879,10 @@ check_action_reaction_me:
     JP zxengine.process
 
 check_item_me:
-    PUSH HL
     mLDE
-    POP HL
-    JP zxengine.process
+    PUSH HL
+    EX HL, DE; в DE указатель на таблицу
+    getVar Vars.var_act
+    JP do_scan_routines
 
 ENDMODULE
