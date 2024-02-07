@@ -33,13 +33,13 @@ display 'Dynamic:     ', dynamic, '-', dynamic_end-1, ', size: ', /D, dynamic_en
 display ' MAP_MASK:   ', MAP_MASK, '-', MAP_MASK_END-1,', size: ', /D, MAP_MASK_END-MAP_MASK
 display ' MAP_SET:    ', MAP_SET, '-', MAP_SET_END-1,', size: ', /D, MAP_SET_END-MAP_SET
 display ' CHARS_SET:  ', CHARS_SET, '-', CHARS_SET_END-1,', size: ', /D, CHARS_SET_END-CHARS_SET
-display ' ITEM_ARRAY: ', ITEM_ARRAY_END, '-', ITEM_ARRAY-1,', size: ', /D, ITEM_ARRAY_END-ITEM_ARRAY
+display ' ITEM_ARRAY: ', ITEM_ARRAY, '-', ITEM_ARRAY_END-1,', size: ', /D, ITEM_ARRAY_END-ITEM_ARRAY
 
 ; display binary_calc_hero_cursor_pos
 ; display CELL_TYPES
 ; display Computer_cell_name
 ; display ComputerBreak.computer_break_script
-; LABELSLIST "cell3326.list"
+  LABELSLIST "cell3326.list"
 
   ; прикрепляем к engine скрипты и определения
   ; SAVEBIN "static.bin", code, dynamic-code

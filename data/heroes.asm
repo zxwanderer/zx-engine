@@ -8,20 +8,19 @@ CHARS_SET_END
 ItemArraySize equ 100; максимальное число предметов 
 
 ITEM_ARRAY:
-cur_addr EQU $
   DUP Item*ItemArraySize
     defb #ff; item.itemID = #ff - признак того что предмета нет 
   EDUP
 ITEM_ARRAY_END:
 
-; заполняем массив
-  ORG cur_addr
+  ORG ITEM_ARRAY ; начинаем с метки описания массива и заполняем массив
+
   Item Chair.item, 4,6, Floor.spr, #ff, 00
   Item Chair.item, 4,12, Floor.spr, #ff, 00
   Item Chair.item, 4,18, Floor.spr, #ff, 00
   
   Item Chair.item, 11,6, Floor.spr, #ff, 00
-  Item Chair.item, 11,12, Floor.spr, #ff, 00
+  ; Item Chair.item, 11,12, Floor.spr, #ff, 00
   
   Item Chair.item, 6,7, Floor.spr, #ff, 00
   Item Chair.item, 6,9, Floor.spr, #ff, 00
@@ -65,6 +64,8 @@ ITEM_ARRAY_END:
   Item Nippers.item, 17,10, Grass.spr, #ff, 00
 
   Item RedCard.item, 27,3, FloorWhite.spr, #ff, 00
+
+ ORG ITEM_ARRAY_END ; возвращем адрес на конец таблицы меток
 
 ; проверяем что не вышли за границу таблицы предметов
   ASSERT ITEM_ARRAY_END >= $
