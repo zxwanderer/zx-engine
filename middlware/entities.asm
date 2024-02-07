@@ -877,8 +877,6 @@ check_action_reaction_me:
     POP HL
     JP zxengine.process
 
-  DISPLAY 'TABLE_SCAN_BY_INDEX_PTR:', TABLE_SCAN_BY_INDEX_PTR
-
 check_item_me:
     PUSH HL
     mLDE
