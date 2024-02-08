@@ -859,8 +859,13 @@ set_map:
   ENDM
 
   MACRO CheckActiveItem __table
-	defw Entities.check_item_me
+	  defw Entities.check_item_me
     defw __table
+  ENDM
+
+  MACRO SetIndexPointer __index, __pointer
+  	defb __index
+    defw __pointer
   ENDM
 
 check_action_reaction_me:

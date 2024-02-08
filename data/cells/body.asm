@@ -3,55 +3,29 @@ BodyYellow.spr: equ 10
     SETUP_CELL_TYPE_N BodyInScaf_cell_name, script
 
 script:
-  ; CheckActionReaction _body_action_table
-  IfVar Vars.var_act, do_get, body_get_
-  IfVar Vars.var_act, do_drop, body_drop_
+  CheckActionReaction _body_action_table
   goto no_way_script
-  defb _endByte
 
 _body_action_table:
-  db do_get
-  dw body_get_
-  db do_drop
-  dw try_cut
+  SetIndexPointer do_get, body_get_
+  SetIndexPointer do_drop, try_cut_
   defb _endByte
 
 body_get_:
   ShowText Body_no_get
   goto nope_script
 
-_body_drop_table:
-  ; IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
-  ; IfVar Vars.var_item_id, Wrench.spr, try_cut
-  ; IfVar Vars.var_item_id, Shard.spr, try_cut
-  ; IfVar Vars.var_item_id, Nippers.spr, try_cut
-  ; goto no_way_script
-
-  db CanisterEmpty.spr
-  dw try_container_get_
-  db Wrench.spr
-  dw try_cut
-  db Shard.spr
-  dw try_cut
-  db Nippers.spr
-  dw try_cut
-  defb _endByte
-
-  ; IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
-  ; IfVar Vars.var_item_id, Wrench.spr, try_cut
-  ; IfVar Vars.var_item_id, Shard.spr, try_cut
-  ; IfVar Vars.var_item_id, Nippers.spr, try_cut
-  
-
 body_drop_:
-  ; CheckActiveItem _body_drop_table
-  IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
-  IfVar Vars.var_item_id, Wrench.spr, try_cut
-  IfVar Vars.var_item_id, Shard.spr, try_cut
-  IfVar Vars.var_item_id, Nippers.spr, try_cut
-  goto no_way_script
+  CheckActiveItem _body_action_table
+  goto nope_script
 
-try_cut:
+_body_drop_table:
+  SetIndexPointer CanisterEmpty.spr, try_container_get_
+  SetIndexPointer Wrench.spr, try_cut_
+  SetIndexPointer Shard.spr, try_cut_
+  SetIndexPointer Nippers.spr, try_cut_
+
+try_cut_:
   shiruFX FX_Cutt1
   SetMapCell Blood.spr
   ShowText Fuu_mainac_mess
