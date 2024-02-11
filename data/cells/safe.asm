@@ -2,10 +2,8 @@ Safe.spr: equ 85
   MODULE Safe
     SETUP_CELL_TYPE_N Safe_cell_name, script
 script:
-  IfVar Vars.var_act, do_stand, no_way_script
-  IfVar Vars.var_act, do_get, no_way_script
   IfVar Vars.var_act, do_drop, drop_
-  defb _endByte
+  goto no_way_script
 
 drop_:
   IfVar Vars.var_item_id, RedCard.spr, add_alert_code
@@ -28,4 +26,4 @@ add_alert_code:
 SafeEmpty.spr: equ 101
   MODULE SafeEmpty
     SETUP_CELL_TYPE_N Safe_cell_name, no_way_script
-  ENDMODULE  
+  ENDMODULE
