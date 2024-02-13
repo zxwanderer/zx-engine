@@ -20,7 +20,6 @@ PAPER_GREEN   equ %100000
 PAPER_CYAN    equ %101000
 PAPER_YELLOW  equ %110000
 PAPER_WHITE   equ %111000
-
 _endByte equ 0
 
 scrHeight equ 12-1
