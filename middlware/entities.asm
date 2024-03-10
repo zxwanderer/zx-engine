@@ -178,6 +178,15 @@ calc_cell_type:
   ADD HL, DE
   RET
 
+; на входе в A - индекс типа ячейки
+; на выходе - в HL указатель на массив с типом предмета
+calc_item_type:
+  LD DE, ItemType
+  CALL math.mul_ADE
+  LD DE, ITEM_TYPES
+  ADD HL, DE
+  RET
+
 ; по номеру ячейки вызываем скрипт обработки
 ; на входе в A - номер ячейки
 ; на выходе хм.. должен быть результат в Vars.var_ret = 1 то успешно
@@ -222,7 +231,7 @@ initItems:
   LD (IX+Item.ground),A; ячейку карты ставим на пол персонажа
   
   LD A,(IX+Item.itemID)
-  CALL calc_cell_type
+  CALL calc_item_type
   LD A, (HL) ; spr_num - нулевое смещение описания предмета
   POP HL
   LD (HL), A

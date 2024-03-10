@@ -282,3 +282,6 @@ char_loot:
   CallScript look_char
   CallCode input.noKey
   defb _endByte
+
+
+  display binary_init
