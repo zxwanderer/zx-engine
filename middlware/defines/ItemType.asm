@@ -1,4 +1,4 @@
-STRUCT ItemType
+    STRUCT ItemType
 spr_num db 00; номер спрайта предмета, должен идти первым 
 ; чтобы после вызова функции calcItemType 
 ; можно было получать номер спрайта как LD A, (HL)
@@ -9,4 +9,4 @@ round db 00; скажем, заряд
 weight db 00; скажем, вес
     db 00
 ; script_ptr dw 00; указатель на скрипт обработки действий
-ENDS
+    ENDS
