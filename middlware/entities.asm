@@ -193,6 +193,47 @@ call_cell_script:
   CALL zxengine.process
   RET
 
+; ------- инициализация на карте всех предметов из ITEM_ARRAY
+initItems:
+  LD HL, ITEM_ARRAY
+.loop:
+  PUSH HL
+
+  PUSH HL
+  POP IX
+
+  LD A, (IX + Item.itemID)
+  CP #FF
+  JR Z, .loop_exit; // если FF - переходим на конец
+
+  LD A, (IX + Item.owner)
+  CP #FF
+  JR Z, .loop_next; // если FF то значит у кого-то лежит в рюкзаке, не размещаем на карте
+
+  LD D, (IX+Item.pos.x)
+  LD E, (IX+Item.pos.y)
+  call map.calc_pos
+  
+  PUSH HL
+  LD A,(HL)
+  LD (IX+Item.ground),A; ячейку карты ставим на пол персонажа
+  
+  LD A,(IX+Item.itemID)
+  CALL calc_cell_type
+  LD A, (HL) ; spr_num - нулевое смещение описания предмета
+  POP HL
+  LD (HL), A
+
+.loop_next:
+  POP HL
+  LD DE, Item
+  ADD HL, DE
+  JP .loop
+
+.loop_exit:
+  POP HL
+  RET
+
 ; ------- инициализация на карте всех персонажей из CHAR_SET
 initHeroes:
   LD HL, CHARS_SET

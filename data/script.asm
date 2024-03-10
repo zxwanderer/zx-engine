@@ -116,6 +116,7 @@ game_over_5
 binary_init:
   ; LD DE, #1008
   ; LD ( Vars.Cursor_pos ), DE
+  CALL Entities.initItems
   CALL Entities.initHeroes
   CALL Entities.lookChar
   CALL Entities.lookCharSeeCellInfo
