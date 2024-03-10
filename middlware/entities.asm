@@ -204,11 +204,14 @@ initItems:
 
   LD A, (IX + Item.itemID)
   CP #FF
-  JR Z, .loop_exit; // если FF - переходим на конец
+  JR NZ, .loop_continue; // если не FF - идем дальше
+  POP HL
+  RET
 
+.loop_continue
   LD A, (IX + Item.owner)
   CP #FF
-  JR Z, .loop_next; // если FF то значит у кого-то лежит в рюкзаке, не размещаем на карте
+  JR NZ, .loop_next; // если не FF, значит у кого-то лежит в рюкзаке, не размещаем на карте
 
   LD D, (IX+Item.pos.x)
   LD E, (IX+Item.pos.y)
@@ -229,10 +232,6 @@ initItems:
   LD DE, Item
   ADD HL, DE
   JP .loop
-
-.loop_exit:
-  POP HL
-  RET
 
 ; ------- инициализация на карте всех персонажей из CHAR_SET
 initHeroes:

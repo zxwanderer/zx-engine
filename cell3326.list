@@ -758,8 +758,8 @@
 05:2868 Entities.init_loop
 05:2866 Entities.PersonagesNum_ptr
 05:2863 Entities.initHeroes
-05:2859 Entities.initItems.loop_next
-05:2861 Entities.initItems.loop_exit
+05:285B Entities.initItems.loop_next
+05:283D Entities.initItems.loop_continue
 05:2830 Entities.initItems.loop
 05:282D Entities.initItems
 05:2818 Entities.call_cell_script
