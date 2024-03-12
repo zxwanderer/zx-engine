@@ -21,6 +21,7 @@ _computer_drop_table:
   SetIndexPointer Canister.spr, computer_screen_destroy
   SetIndexPointer CanisterRed.spr, computer_screen_destroy
   SetIndexPointer Wrench.spr, computer_screen_destroy
+  SetIndexPointer Shard.spr, base_kick_shard_fault
   defb _endByte
 
 get_:
