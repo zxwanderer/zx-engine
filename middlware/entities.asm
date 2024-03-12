@@ -936,7 +936,7 @@ check_item_me:
     mLDE
     PUSH HL
     EX HL, DE; в DE указатель на таблицу
-    getVar Vars.var_act
+    getVar Vars.var_item_id
     JP do_scan_routines
 
 ENDMODULE

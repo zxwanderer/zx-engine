@@ -8,7 +8,7 @@ script:
 
 _body_action_table:
   SetIndexPointer do_get, body_get_
-  SetIndexPointer do_drop, try_cut_
+  SetIndexPointer do_drop, body_drop_
   defb _endByte
 
 body_get_:
@@ -16,7 +16,7 @@ body_get_:
   goto nope_script
 
 body_drop_:
-  CheckActiveItem _body_action_table
+  CheckActiveItem _body_drop_table
   goto nope_script
 
 _body_drop_table:

@@ -439,10 +439,10 @@
 02:1399 215>_temp
 :001B BodyWhite.spr
 02:195C AnalyzerOn.show_name3
+02:1380 BodyYellow.try_cut_
 02:138E BodyYellow.try_container_get_
 02:1374 BodyYellow._body_drop_table
 02:136C BodyYellow.body_drop_
-02:1380 BodyYellow.try_cut_
 02:1A54 589>_temp
 02:1364 BodyYellow.body_get_
 02:135D BodyYellow._body_action_table
