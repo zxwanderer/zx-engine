@@ -506,8 +506,8 @@ Shard_to_soft_wall_mess
 Soft_wall_clean
   db "я содрал остатки декоративной стенки.",0
 
-Computer_break_chair_mess:
-  db "—тул в руках развалилс€, но зкран треснул.",0
+; Computer_break_chair_mess:
+  ; db "—тул в руках развалилс€, но зкран треснул.",0
 
 Computer_break_mess:
   db "Ёкран компьютера треснул..",0

@@ -64,8 +64,7 @@ ITEM_ARRAY_END:
   Item Nippers.item, 17,10, Grass.spr, #ff, 00
 
   Item RedCard.item, 27,3, FloorWhite.spr, #ff, 00
-
- ORG ITEM_ARRAY_END ; возвращем адрес на конец таблицы меток
+  Item RedCard.item, 3,11, FloorWhite.spr, #ff, 00
 
 ; проверяем что не вышли за границу таблицы предметов
   ASSERT ITEM_ARRAY_END >= $

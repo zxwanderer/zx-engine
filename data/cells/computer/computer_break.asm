@@ -14,7 +14,6 @@ use_script:
   shiruFX 56
   CallScript action_ring_explode
   SetMapCell Trash.spr
-  ; CallCode binary_add_shard
   ShowText Computer_add_shard_mess
   goto no_way_script
 

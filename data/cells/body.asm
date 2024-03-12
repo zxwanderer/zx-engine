@@ -24,6 +24,7 @@ _body_drop_table:
   SetIndexPointer Wrench.spr, try_cut_
   SetIndexPointer Shard.spr, try_cut_
   SetIndexPointer Nippers.spr, try_cut_
+  defb _endByte
 
 try_cut_:
   shiruFX FX_Cutt1
