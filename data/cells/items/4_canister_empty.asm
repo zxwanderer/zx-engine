@@ -5,19 +5,18 @@ CanisterEmpty.spr: equ 29
 
     SETUP_CELL_TYPE_N CanisterEmpty_cell_name, script
     SETUP_ITEM_TYPE_N
-    
+
 script:
-  IfVar Vars.var_act, do_stand, no_way_script
-  IfVar Vars.var_act, do_get, take_
-  IfVar Vars.var_act, do_drop, drop_
-  defb _endByte
-take_:
-  ; goto no_script
-  defb _endByte
-drop_:
+  CheckActionReaction _canister_empty_action_table
   goto no_way_script
 
-; drop:
-;   goto no_script
+; SetIndexPointer do_drop, no_way_script ; нельзя поставить ничего на этот предмет
+; явно не прописываем, так как в таблице ActionReaction действия do_drop нет
+; поэтому потом по дефолту сработает следующая строчка после CheckActionReaction
+; а там написано goto no_way_script
+
+_canister_empty_action_table:
+  SetIndexPointer do_get, no_script ; можно взять
+  defb _endByte
 
   ENDMODULE
