@@ -18,10 +18,6 @@ electronic_script_break
   SetMapCell WallCavity.spr
   goto no_way_script
 
-; electronic_script_get
-;   shiruFX 3
-;   goto no_way_script
-
 electronic_script_off:
   shiruFX 3
   ShowText Electronic_kick_open_mess
@@ -35,8 +31,3 @@ electronic_script_off:
   goto no_way_script
 
   ENDMODULE
-
-; FoodDispenser.spr: equ 87
-;   MODULE FoodDispenser
-;     SETUP_CELL_TYPE_N FoodDispenser_cell_name, say_no_way
-;   ENDMODULE
