@@ -11,6 +11,7 @@ script:
   IfVar Vars.var_act, do_get, take_
   IfVar Vars.var_act, do_drop, no_way_script
   defb _endByte
+
 take_:
   ; ShowText Take_shard_mess
   defb _endByte
