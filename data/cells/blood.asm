@@ -8,7 +8,14 @@ script:
 
 drop_:
   IfVar Vars.var_item_id, CanisterEmpty.spr, fill_
+  IfVar Vars.var_item_id, Canister.spr, canister_full_
+  IfVar Vars.var_item_id, CanisterRed.spr, canister_full_
   goto need_look_no_way
+
+canister_full_:
+  ShowText Canister_full
+  shiruFX FX_Nope
+  goto no_way_script
 
 fill_:
   CallCode binary_fill
