@@ -899,6 +899,9 @@ set_map:
   LD (HL), A
   RET
 
+; set_herow_sprite
+;   RET 
+
   MACRO CheckActionReaction __table
     defw Entities.check_action_reaction_me
     defw __table

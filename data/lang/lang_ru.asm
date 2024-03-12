@@ -303,6 +303,7 @@ Wall_cell_name: db "Тяжелая бронеплита",0
 ; Ballon_cell_name: db "Баллон",0
 Bed_cell_name: db "Кровать",0
 Trash_cell_name: db "Мелкие обломки и мусор",0
+Trash_empty_cell_name: db "Мелкий мусор. Бесполезный",0
 
 Soft_wall_name: db "Мягкая декоративная стена",0
 
