@@ -12,12 +12,7 @@ script:
 
 drop_:
   CheckActiveItem _computer_drop_table
-  goto computer_screen_destroy
-  ; IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
-  ; IfVar Vars.var_item_id, CanisterEmpty.spr, computer_glass_destroy
-  ; IfVar Vars.var_item_id, Nippers.spr, computer_screen_destroy
-  ; IfVar Vars.var_item_id, Canister.spr, computer_screen_destroy
-  ; IfVar Vars.var_item_id, Wrench.spr, computer_screen_destroy
+  goto no_way_script
 
 _computer_drop_table:
   SetIndexPointer Chair.spr, computer_screen_destroy
