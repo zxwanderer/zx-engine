@@ -21,3 +21,17 @@ sprintum evolution industries
 - в движок импортирована генерация спрайтов по png-файлу из более современной версии zx-core
 - в движок импортирована генерация карты по tmx-файлу из более современной версии zx-core
 - в движок импортирована макрокоманда CheckActionReaction <action_table> из более современной версии zx-core
+
+
+
+### Благодарности ###
+
+Выражаю благодарность AER за музыку, специально написанную для intro этой игры. Получилось очень атмосферно.
+
+Thanks to xlat for tape-version attention and testing on real hardware.
+
+My respect to coders: kalantaj, Wiev, Шыншыл and big russian demoscene boss AAA,
+also special thanks to Alone Coder for some z80 ideas and IDE cable :)  
+
+Thank's to Videogames Sematary for 2-hours game stream video, Shiru for operative and detailed information about 
+the beeproblem sound and Modern ZX-Retro Gaming Channel for walkthrough video.
