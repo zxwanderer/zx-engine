@@ -1,5 +1,5 @@
 
-; TrashEmpty.spr equ #31
+TrashEmpty.spr equ #31
 Trash.spr equ #32
 
   MODULE Trash
@@ -17,14 +17,14 @@ take_trash_script
 binary_get_shard:
   LD A, Shard.item
   CALL items.add_item_to_hand
-  ; LD A, TrashEmpty.spr
-  ; CALL Entities.set_map_cell
+  LD A, TrashEmpty.spr
+  CALL Entities.set_map_cell
   LD A, FX_Pickup
   CALL FX_SET
   RET
 
   ENDMODULE
 
-  ; MODULE TrashEmpty
-  ; SETUP_CELL_TYPE_N Trash_empty_cell_name,  Floor.script
-  ; ENDMODULE
+  MODULE TrashEmpty
+  SETUP_CELL_TYPE_N Trash_empty_cell_name,  Floor.script
+  ENDMODULE
