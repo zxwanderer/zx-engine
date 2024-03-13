@@ -14,7 +14,7 @@ drop_script:
   CallScript action_ring_explode
   ShowText Electronic_kick_mess
   SetMapCell WallCavity.spr
-  ; SetMapCellOnHero TrashEmpty.spr
+  SetMapCellOnHero TrashEmpty.spr
   goto no_way_script
 
   ENDMODULE

@@ -16,6 +16,7 @@ electronic_script_break
   ShowText Electronic_kick_mess
   CallScript action_ring_explode
   SetMapCell WallCavity.spr
+  SetMapCellOnHero TrashEmpty.spr
   goto no_way_script
 
 electronic_script_off:
