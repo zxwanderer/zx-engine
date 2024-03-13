@@ -162,12 +162,12 @@ set_map_cell_on_hero_me
 set_map_cell_on_hero:
   ; PUSH AF
   LD IX, (Entities.activePersonage_ptr)
-  LD (IX+Hero.ground), A
-  RET
-  ; LD D, (IX+Hero.pos.x)
-  ; LD E, (IX+Hero.pos.y)
+  ; LD (IX+Hero.ground), A
+  ; RET
+  LD D, (IX+Hero.pos.x)
+  LD E, (IX+Hero.pos.y)
   ; POP AF
-  ; JP set_map_cell_DE
+  JP set_map_cell_DE
 
 ; на входе в A - индекс типа ячейки
 ; на выходе - в HL указатель на массив с ячейкой
@@ -869,16 +869,18 @@ set_map_cell:
   LD DE, (Vars.MapCell_xy)
 set_map_cell_DE:
   setVar Vars.var_item_id; запомнили A
+  PUSH DE
   CALL map.calc_pos
   LD (MapCell_ptr), HL
+  POP DE
   CALL items.find_item_on_map ; есть ли на карте предметы?
   JR NC, set_map_cell_no_items
 
 set_map_cell_next_item: ; есть - устанавливаем им всем новую "землю"
   getVar Vars.var_item_id
   LD (IX+Item.ground), A
-  CALL items.check_item
-  JR C, set_map_cell_next_item
+  ; CALL items.check_item
+  ; JR C, set_map_cell_next_item
 
   ; героям и просто карте менять ничего не надо
   RET
