@@ -118,6 +118,12 @@ binary_init:
   ; LD ( Vars.Cursor_pos ), DE
   CALL Entities.initItems
   CALL Entities.initHeroes
+
+  ; LD A, Scaf.spr
+  ; LD D, 10
+  ; LD E, 4
+  ; CALL Entities.set_map_cell_DE
+
   CALL Entities.lookChar
   CALL Entities.lookCharSeeCellInfo
   RET
@@ -282,6 +288,3 @@ char_loot:
   CallScript look_char
   CallCode input.noKey
   defb _endByte
-
-
-  display binary_init

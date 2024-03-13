@@ -37,7 +37,6 @@ binary_unwear_scaf:
   LD C, A
   LD B, Hero09.spr
   JP Entities.wear_item
-  ; RET
 
 binary_check_scaf: ; Vars.var_ret = 1 - скафандра нет
   LD IX, (Entities.activePersonage_ptr)

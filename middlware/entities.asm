@@ -118,8 +118,7 @@ wear_item_me:
 
 ; на входе в B - что одеваем
 ; , C - что остается на земле
-wear_item
-  PUSH BC
+wear_item:
   PUSH BC
   LD A, C
   CALL set_map_cell
@@ -128,14 +127,10 @@ wear_item
   LD A, B
   LD ( IX + Hero.sprite ), A
   LD ( IX + Hero.base_spr), A
-  CALL Entities.lookChar
-  POP BC
-  LD A, B
-  CALL set_map_cell
-  RET
+  CALL char_update_sprite
+  JP Entities.lookChar
 
 get_wear_item_me:
-  ; INC HL
   PUSH HL
   LD IX, (Entities.activePersonage_ptr)
   LD A, ( IX+Hero.base_spr ) ; запомнили одежду
@@ -884,6 +879,7 @@ set_map_cell_next_item: ; есть - устанавливаем им всем н
 
   ; героям и просто карте менять ничего не надо
   RET
+
 
 set_map_cell_no_items: ; предметов нет
 ; есть ли на карте герои?
