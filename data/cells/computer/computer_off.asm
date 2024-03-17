@@ -29,14 +29,6 @@ get_:
   shiruFX FX_Poweroff
   goto no_way_script
 
-; computer_glass_destroy:
-;   shiruFX 56
-;   CallScript action_ring_explode
-;   SetMapCell ComputerBreak.spr
-;   ShowText Computer_break_chair_mess
-;   CallCode items.del_item_from_hand
-;   goto no_way_script
-
 computer_screen_destroy:
   shiruFX 56
   CallScript action_ring_explode
