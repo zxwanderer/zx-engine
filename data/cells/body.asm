@@ -9,6 +9,7 @@ script:
 _body_action_table:
   SetIndexPointer do_get, body_get_
   SetIndexPointer do_drop, body_drop_
+  SetIndexPointer do_stand, no_script
   defb _endByte
 
 body_get_:
