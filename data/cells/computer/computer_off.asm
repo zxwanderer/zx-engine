@@ -25,8 +25,8 @@ _computer_drop_table:
   defb _endByte
 
 get_:
-  shiruFX FX_Poweroff
   ShowText Computer_off_hit_mess
+  shiruFX FX_Poweroff
   goto no_way_script
 
 ; computer_glass_destroy:
