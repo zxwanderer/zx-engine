@@ -64,7 +64,7 @@ ITEM_ARRAY_END:
   Item Nippers.item, 17,10, Grass.spr, #ff, 00
 
   Item RedCard.item, 27,3, FloorWhite.spr, #ff, 00
-  ; Item RedCard.item, 3,11, FloorWhite.spr, #ff, 00
+  Item RedCard.item, 3,11, FloorWhite.spr, #ff, 00
   ; Item RedCard.item, 4,11, FloorWhite.spr, #ff, 00
   ; Item RedCard.item, 5,11, FloorWhite.spr, #ff, 00
 
