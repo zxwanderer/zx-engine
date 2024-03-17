@@ -20,11 +20,17 @@ Grass3.spr: equ #10
 Bush.spr: equ 49
   MODULE Bush
     SETUP_CELL_TYPE_N Bush_cell_name, script
+
 script:
-  IfVar Vars.var_act, do_stand, no_way_script
+  IfVar Vars.var_act, do_stand, stand_
   IfVar Vars.var_act, do_get, base_kick_fault
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
+
+stand_:
+  GetWearItem
+  IfVar Vars.var_ret, HardScaf.spr, cut_
+  goto no_way_script
 
 drop_:
   IfVar Vars.var_item_id, Nippers.spr, cut_
