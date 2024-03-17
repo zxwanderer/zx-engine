@@ -11,6 +11,8 @@ script:
   defb _endByte
 
 stand_:
+  GetWearItem
+  IfVar Vars.var_ret, HardScaf.spr, no_script
   goto no_way_script
 
 get_:
