@@ -119,10 +119,10 @@ binary_init:
   CALL Entities.initItems
   CALL Entities.initHeroes
 
-  LD A, HardScaf.spr
-  LD D, 10
-  LD E, 4
-  CALL Entities.set_map_cell_DE
+  ; LD A, HardScaf.spr
+  ; LD D, 10
+  ; LD E, 4
+  ; CALL Entities.set_map_cell_DE
 
   CALL Entities.lookChar
   CALL Entities.lookCharSeeCellInfo
