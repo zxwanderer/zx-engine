@@ -1,5 +1,8 @@
 all:	make_tape make_trd make_sna
 
+make_qr_png:
+	./bin/zx-qr-code --url https://zxwanderer.github.io/cell3326/1.2.1-aplha -o ./qrcode.png
+
 make_scr:
 	python3 ./bin/png2scr.py -i ./data/maps/tiles_many.png -o tiles.scr
 
