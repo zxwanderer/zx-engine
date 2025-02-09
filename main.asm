@@ -24,9 +24,9 @@ display 'Static:         ', static, '-', static_end-1,', size: ', /D, static_end
 display ' LANG_SET:      ', LANG_SET, '-', LANG_SET_END-1,', size: ', /D, LANG_SET_END-LANG_SET
 display ' START_SCRIPT:  ', START_SCRIPT, '-', START_SCRIPT_END-1,', size: ', /D, START_SCRIPT_END-START_SCRIPT
 display ' ENCOUNTER_SET: ', ENCOUNTER_SET, '-', ENCOUNTER_SET_END-1,', size: ', /D, ENCOUNTER_SET_END-ENCOUNTER_SET
-display ' TILE_SET:      ', TILE_SET, '-', TILE_SET_END-1,', size: ', /D, TILE_SET_END-TILE_SET
 display ' -CELL_TYPES    ', CELL_TYPES, '-', CELL_TYPES_END-1,', size: ', /D, CELL_TYPES_END-CELL_TYPES
 display ' -ITEM_TYPES    ', ITEM_TYPES, '-', ITEM_TYPES_END-1,', size: ', /D, ITEM_TYPES_END-ITEM_TYPES
+display ' TILE_SET:      ', TILE_SET, '-', TILE_SET_END-1,', size: ', /D, TILE_SET_END-TILE_SET
 display ' FX_SET:        ', FX_SET, '-', FX_SET_END-1,', size: ', /D, FX_SET_END-FX_SET
 display ' TRITONE:       ', TRITONE, '-', TRITONE_END-1,', size: ', /D, TRITONE_END-TRITONE
 display '[Free]          ', TRITONE_END, '-', p68_font, ', size: ', /D, p68_font - TRITONE_END
