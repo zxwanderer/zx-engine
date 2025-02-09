@@ -4,6 +4,10 @@
 
 sprintum evolution industries
 
+-- errata 
+
+- сборка программы происходит в папочку output как в более современной версии zx-core
+
 -- errata v1.2.2-alpha:
 
 - из кучки мусора можно взять только один осколок
