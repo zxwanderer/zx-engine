@@ -39,3 +39,4 @@ also special thanks to Alone Coder for some z80 ideas and IDE cable :)
 
 Thank's to Videogames Sematary for 2-hours game stream video, Shiru for operative and detailed information about 
 the beeproblem sound and Modern ZX-Retro Gaming Channel for walkthrough video.
+
