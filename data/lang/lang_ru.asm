@@ -292,7 +292,7 @@ FOUND_ALERT_CODE:
   db _endByte
 
 CELL_TYPE_NAMES:
-Empty_cell_name: db " ",0
+Empty_cell_name: db "Что-то непонятное ",0
 Floor_cell_name: db "Плитка",0
 Computer_cell_name: db "Терминал",0
 Computer_break_cell_name: db "Разбитый терминал",0

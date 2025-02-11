@@ -1,3 +1,6 @@
+  ifndef __ITEM_TYPE_H_
+  define __ITEM_TYPE_H_
+
     STRUCT ItemType
 spr_num db 00; номер спрайта предмета, должен идти первым 
 ; чтобы после вызова функции calcItemType 
@@ -8,3 +11,5 @@ round db 00; скажем, заряд
 weight db 00; скажем, вес
     db 00
     ENDS
+
+  endif

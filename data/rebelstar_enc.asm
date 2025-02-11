@@ -1,9 +1,9 @@
 
   MACRO SETUP_CELL_TYPE_N _name, _script
-._temp equ $; запоминаем адрес
-    ORG CELL_TYPES+spr*CellType
-    CellType _name, _script
-    ORG ._temp
+; ._temp equ $; запоминаем адрес
+    ; ORG CELL_TYPES+spr*CellType
+    ; CellType _name, _script
+    ; ORG ._temp
   ENDM
 
   MACRO SETUP_ITEM_TYPE_N
@@ -36,18 +36,13 @@ FX_Cutt equ 7
 FX_Cutt1 equ 8
 FX_GridCut equ 39
 
-CELL_TYPES:
-  DUP CellType*256
+; CELL_TYPES:
+  ; DUP CellType*256
     ; CellType Empty_cell_name, no_way_script
-    defb 00
-  EDUP
-CELL_TYPES_END equ $
+    ; defb 00
+  ; EDUP
+; CELL_TYPES_END equ $
 
-ITEM_TYPES:
-  DUP ItemType*100
-    defb 00
-   EDUP
-ITEM_TYPES_END equ $
 
 ;  общие бинарные процедуры 
 

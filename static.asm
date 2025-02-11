@@ -14,6 +14,8 @@ START_SCRIPT:
 START_SCRIPT_END
 
 ENCOUNTER_SET:
+  include "src/cells_data.asm"
+  include "src/items_data.asm"
 	include "data/rebelstar_enc.asm"
   include "data/cells/empty.asm"
   ; include "data/cells/items/shard.asm"

@@ -1,13 +1,13 @@
   jp zxengine.init
 
+  include "src/CellType_h.asm"
+  include "src/ItemType_h.asm"
+
   include "core/defines.asm"
   include "middlware/defines.asm"
-  include "middlware/defines/CellType.asm"
-  include "middlware/defines/ItemType.asm"
   include "middlware/defines/Item.asm"
   include "middlware/defines/Hero.asm"
-  include "middlware/defines/Vars.asm"
-  
+  include "middlware/defines/Vars.asm"  
   include "core/scankeys.asm"
   include "core/engine.asm"
   ; include "core/cursor.asm"
