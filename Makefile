@@ -4,6 +4,9 @@ BUILD_FOLDER := ./output
 
 all:	make_tape make_trd make_sna
 
+source:
+	source ./venv/bin/activate
+
 clean:
 	rm -rf $(BUILD_FOLDER)
 	mkdir -p $(BUILD_FOLDER)
