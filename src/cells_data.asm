@@ -13,5 +13,3 @@ CELL_TYPES:
   EDUP
 CELL_TYPES_END equ $-1
 
-Empty_0.spr equ 0
-  DEFINE_SPR_CELL Empty_0.spr, Empty_cell

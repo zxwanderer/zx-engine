@@ -17,6 +17,8 @@ ENCOUNTER_SET:
   include "src/CellType.asm"
   include "src/cells_data.asm"
   include "src/items_data.asm"
+
+  include "data/cells/Hero09.asm"
 	; include "data/rebelstar_enc.asm"
   ; include "data/cells/empty.asm"
   ; include "data/cells/items/shard.asm"
@@ -39,7 +41,6 @@ ENCOUNTER_SET:
   ; include "data/cells/door.asm"
   ; include "data/cells/electronic/electronic.asm"
   ; include "data/cells/electronic/electronic_break.asm"
-  ; include "data/cells/heroes/Hero09.asm"
   ; include "data/cells/heroes/HeroDead.asm"
   ; include "data/cells/locker.asm"
   ; include "data/cells/cavity.asm"
