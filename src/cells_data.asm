@@ -2,7 +2,7 @@
   
 ; масив типов ячеек
 OBJECT_DATA:
-  SET_CELL_TYPE Empty_cell, Empty_cell_name, No_action_reaction
+  include "types/Empty_cell.asm"
 OBJECT_DATA_END equ $-1
 
 ; массив ячеек с номерами от 0 до 255
