@@ -2,12 +2,15 @@
 
   include "src/CellType_h.asm"
   include "src/ItemType_h.asm"
+  include "src/Item_h.asm"
 
   include "data/fx_sounds_h.asm"
 
   include "core/defines.asm"
   include "middlware/defines.asm"
-  include "middlware/defines/Item.asm"
+  
+  include "src/cells_reactions.asm"
+
   include "middlware/defines/Hero.asm"
   include "middlware/defines/Vars.asm"  
   include "core/scankeys.asm"

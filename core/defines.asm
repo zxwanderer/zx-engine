@@ -29,10 +29,11 @@ mapSize equ 32
 SCREEN_ADDR equ #4000
 ATTR_ADDR EQU SCREEN_ADDR+#1800
 
-STRUCT Point; LD DE, (Point) получаем в D - x, в E - y
-y db 0
-x db 0
-ENDS
+include "../src/Point_h.asm"
+; STRUCT Point; LD DE, (Point) получаем в D - x, в E - y
+; y db 0
+; x db 0
+; ENDS
 
 MACRO mLDA
   LD A, (HL)

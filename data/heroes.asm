@@ -5,7 +5,7 @@ CHARS_SET: ; описываем героев:
 Hero2: Hero 3,10, 0, Hero09.spr, Hero09.spr, 0, 0, tHeroName2, 00
 CHARS_SET_END
 
-ItemArraySize equ 100; максимальное число предметов 
+ItemArraySize equ 100; максимальное число предметов
 
 ITEM_ARRAY:
   DUP Item*ItemArraySize
