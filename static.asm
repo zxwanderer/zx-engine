@@ -19,6 +19,7 @@ ENCOUNTER_SET:
   include "src/items_data.asm"
 
   include "data/cells/Hero09.asm"
+  include "data/cells/items/Chair.asm"
 	; include "data/rebelstar_enc.asm"
   ; include "data/cells/empty.asm"
   ; include "data/cells/items/shard.asm"
