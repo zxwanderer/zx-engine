@@ -1,3 +1,5 @@
+  ; include "../src/CellType.asm"
+
 MODULE Entities
 
   MACRO SetMapCell value_p
@@ -166,12 +168,12 @@ set_map_cell_on_hero:
 
 ; на входе в A - индекс типа ячейки
 ; на выходе - в HL указатель на массив с ячейкой
-calc_cell_type:
-  LD DE, CellType
-  CALL math.mul_ADE
-  LD DE, CELL_TYPES
-  ADD HL, DE
-  RET
+; calc_cell_type:
+  ; LD DE, CellType
+  ; CALL math.mul_ADE
+  ; LD DE, CELL_TYPES
+  ; ADD HL, DE
+  ; RET
 
 ; на входе в A - индекс типа ячейки
 ; на выходе - в HL указатель на массив с типом предмета
@@ -187,7 +189,7 @@ calc_item_type:
 ; на выходе хм.. должен быть результат в Vars.var_ret = 1 то успешно
 ; .... гадит в HL, IY
 call_cell_script:
-  CALL calc_cell_type; получили в HL указатель на описание ячейки
+  CALL CellType.get_by_index; получили в HL указатель на описание ячейки
   PUSH HL
   POP IY
   LD A, 1
@@ -313,7 +315,7 @@ lookCharSeeCellInfo:
   RET NC
   LD HL, (MapCell_ptr)
   LD A, (HL)
-  CALL calc_cell_type
+  CALL CellType.get_by_index; получили в HL указатель на описание ячейки
   LD (lookCharSeeCellInfo_p+1), HL
 lookCharSeeCellInfo_p:
   LD HL, (#0000)

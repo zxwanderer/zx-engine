@@ -3,6 +3,8 @@
   include "src/CellType_h.asm"
   include "src/ItemType_h.asm"
 
+  include "data/fx_sounds_h.asm"
+
   include "core/defines.asm"
   include "middlware/defines.asm"
   include "middlware/defines/Item.asm"
