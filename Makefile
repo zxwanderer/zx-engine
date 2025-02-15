@@ -23,6 +23,9 @@ make_scr:
 make_tileset: make_scr
 	python3 ./bin/scr2spr.py --width 2 --height 2 --color True --count 191 -i $(BUILD_FOLDER)/tiles.scr -o $(BUILD_FOLDER)/tiles.bin
 
+make_cell_types:
+	python3 ./bin/tsx2asm.py -i ./data/maps/tiles_many.tsx -o $(BUILD_FOLDER)/spr_types.asm
+
 make_map:
 	python3 ./bin/tiled2bin.py -i ./data/maps/map.tmx -o $(BUILD_FOLDER)/map.bin
 
