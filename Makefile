@@ -18,13 +18,13 @@ make_qr:
 	./bin/zx-qr-code --url https://zxwanderer.github.io/cell3326/1.2.1-aplha -o ./qrcode.bin
 
 make_scr:
-	python3 ./bin/png2scr.py -i ./data/maps/tiles_many.png -o $(BUILD_FOLDER)/tiles.scr
+	python3 ./bin/png2scr.py -i ./data/maps/tiles.png -o $(BUILD_FOLDER)/tiles.scr
 
 make_tileset: make_scr
 	python3 ./bin/scr2spr.py --width 2 --height 2 --color True --count 191 -i $(BUILD_FOLDER)/tiles.scr -o $(BUILD_FOLDER)/tiles.bin
 
 make_map:
-	python3 ./bin/tiled2bin.py -i ./data/maps/laboratory3.tmx -o $(BUILD_FOLDER)/map.bin
+	python3 ./bin/tiled2bin.py -i ./data/maps/map.tmx -o $(BUILD_FOLDER)/map.bin
 
 parts: clean make_tileset make_map
 	./bin/sjasmplus --dos866 --nofakes \
