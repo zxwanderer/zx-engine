@@ -319,8 +319,58 @@ lookCharSeeCellInfo:
   LD (lookCharSeeCellInfo_p+1), HL
 lookCharSeeCellInfo_p:
   LD HL, (#0000)
-  CALL screenfx.show_info_message
-  RET
+
+  ; PUSH HL
+  LD DE, Empty_cell_name
+  LD A, H
+  CP D
+  JP NZ, .not_empty_cell
+  LD A, L
+  CP E
+  JP Z,   .is_empty_cell
+
+.not_empty_cell
+  JP screenfx.show_info_message
+  ; POP HL
+  ; RET
+
+.is_empty_cell
+  ; POP HL ; снимаем чтобы не болталось
+
+  ; CALL screenfx.show_info_message
+  ; RET
+
+  ; LD DE, #0016
+  ; CALL math.pos_scr
+  ; PUSH DE
+
+  ; LD B, 2
+  ; CALL SCREEN_CLEAR_ROWS
+
+  LD DE, print_number_hex
+  LD HL, (.last_cell_index)
+  CALL PHEX_W
+  
+  LD DE, print_number_dec
+  LD HL, (.last_cell_index)
+  CALL PDEC_W
+
+  ; POP DE
+
+  LD HL, print_number
+  JP screenfx.show_info_message
+  ; CALL text.print_at
+  ; RET
+
+.last_cell_index: db 0, 0
+
+print_number: 
+print_number_dec:
+    defb "00000"
+    defb "("
+print_number_hex:  
+    defb "0000"
+    defb ")", 0
 
 ; ------- показать карту с текущим персонажем на экране
 lookChar:
