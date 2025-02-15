@@ -22,6 +22,7 @@
  <tile id="24" type="AcidPlant"/>
  <tile id="32" type="Grass"/>
  <tile id="34" type="InternalDoor"/>
+ <tile id="35" type="Table"/>
  <tile id="36" type="Terminal"/>
  <tile id="39" type="LogicDevice"/>
  <tile id="40" type="LogicDeviceBroken"/>
@@ -38,8 +39,10 @@
  <tile id="54" type="Floor"/>
  <tile id="58" type="Floor"/>
  <tile id="64" type="AcidPlant"/>
+ <tile id="67" type="Chair"/>
  <tile id="74" type="Floor"/>
  <tile id="80" type="Sand"/>
+ <tile id="81" type="Table"/>
  <tile id="83" type="Chair">
   <properties>
    <property name="color" value="white"/>
