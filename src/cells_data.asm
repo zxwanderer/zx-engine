@@ -3,6 +3,7 @@
 ; масив типов ячеек
 OBJECT_DATA:
   include "types/Empty_cell.asm"
+  include "types/Floor.asm"
 OBJECT_DATA_END equ $-1
 
 ; массив ячеек с номерами от 0 до 255
@@ -13,3 +14,6 @@ CELL_TYPES:
   EDUP
 CELL_TYPES_END equ $-1
 
+Floor_03.spr: equ #03
+
+  DEFINE_SPR_CELL Floor_03.spr, Floor_cell

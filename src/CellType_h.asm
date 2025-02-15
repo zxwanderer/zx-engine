@@ -18,7 +18,7 @@ script_ptr dw 0000; указатель на таблицу action-reaction
 ; reaction-on-item table:
 ; item_in_hand: dw #0000    - 0000 - это значит для всех предметов в руке
 ; reaction_script: dw #0000
-  MACRO DEFINE_SPR_CELL spr_num?, cell_type_ptr?
+MACRO DEFINE_SPR_CELL spr_num?, cell_type_ptr?
 .temp equ $; запоминаем адрес
     ORG CELL_TYPES + spr_num?*2
     display 'DEFINE_SPR_CELL ', spr_num? , ' -> ', $ , '(', CELL_TYPES, ')'
