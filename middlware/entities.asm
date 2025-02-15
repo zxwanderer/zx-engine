@@ -371,7 +371,7 @@ print_number_dec:
     defb "("
 print_number_hex:  
     defb "0000"
-    defb ")", 0
+    defb "#)", 0
 
 ; ------- показать карту с текущим персонажем на экране
 lookChar:
