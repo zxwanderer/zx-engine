@@ -11,7 +11,6 @@
  <tile id="5" type="Floor"/>
  <tile id="8" type="Floor"/>
  <tile id="17" type="Grass"/>
- <tile id="18" type="InternalDoor"/>
  <tile id="20" type="Terminal">
   <properties>
    <property name="online" type="bool" value="false"/>
