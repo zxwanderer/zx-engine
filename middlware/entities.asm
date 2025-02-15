@@ -315,6 +315,7 @@ lookCharSeeCellInfo:
   RET NC
   LD HL, (MapCell_ptr)
   LD A, (HL)
+  LD (last_cell_index), A
   CALL CellType.get_by_index; получили в HL указатель на описание ячейки
   LD (lookCharSeeCellInfo_p+1), HL
 lookCharSeeCellInfo_p:
@@ -348,11 +349,11 @@ lookCharSeeCellInfo_p:
   ; CALL SCREEN_CLEAR_ROWS
 
   LD DE, print_number_hex
-  LD HL, (.last_cell_index)
+  LD HL, (last_cell_index)
   CALL PHEX_W
   
   LD DE, print_number_dec
-  LD HL, (.last_cell_index)
+  LD HL, (last_cell_index)
   CALL PDEC_W
 
   ; POP DE
@@ -362,7 +363,7 @@ lookCharSeeCellInfo_p:
   ; CALL text.print_at
   ; RET
 
-.last_cell_index: db 0, 0
+last_cell_index: db 0, 0
 
 print_number: 
 print_number_dec:
