@@ -29,7 +29,7 @@ make_cell_types:
 make_map:
 	python3 ./bin/tiled2bin.py -i ./data/maps/map.tmx -o $(BUILD_FOLDER)/map.bin
 
-parts: clean make_tileset make_map
+parts: clean make_tileset make_map make_cell_types
 	./bin/sjasmplus --dos866 --nofakes \
 		-i$(BUILD_FOLDER) \
 		--outprefix=$(BUILD_FOLDER)/ \

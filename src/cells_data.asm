@@ -14,13 +14,15 @@ CELL_TYPES:
   EDUP
 CELL_TYPES_END equ $-1
 
-  DEFINE_SPR_CELL #03, Floor_cell
-  DEFINE_SPR_CELL #05, Floor_cell
-  DEFINE_SPR_CELL #08, Floor_cell
-  DEFINE_SPR_CELL #16, Floor_cell
-  DEFINE_SPR_CELL #17, Floor_cell
-  DEFINE_SPR_CELL #29, Floor_cell
-  DEFINE_SPR_CELL #35, Floor_cell
-  DEFINE_SPR_CELL #36, Floor_cell
-  DEFINE_SPR_CELL #37, Floor_cell
-  DEFINE_SPR_CELL #4A, Floor_cell
+  include "spr_types.asm"
+
+  ; DEFINE_SPR_CELL #03, Floor_cell
+  ; DEFINE_SPR_CELL #05, Floor_cell
+  ; DEFINE_SPR_CELL #08, Floor_cell
+  ; DEFINE_SPR_CELL #16, Floor_cell
+  ; DEFINE_SPR_CELL #17, Floor_cell
+  ; DEFINE_SPR_CELL #29, Floor_cell
+  ; DEFINE_SPR_CELL #35, Floor_cell
+  ; DEFINE_SPR_CELL #36, Floor_cell
+  ; DEFINE_SPR_CELL #37, Floor_cell
+  ; DEFINE_SPR_CELL #4A, Floor_cell
