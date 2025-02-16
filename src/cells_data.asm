@@ -4,6 +4,18 @@
 OBJECT_DATA:
   include "types/Empty_cell.asm"
   include "types/Floor.asm"
+  include "types/InternalDoor.asm"
+  include "types/Terminal.asm"
+  include "types/Grass.asm"
+  include "types/Table.asm"
+  include "types/AcidPlant.asm"
+  include "types/Chair.asm"
+  include "types/ElectronicBox.asm"
+  include "types/Keramit.asm"
+  include "types/ExternalDoor.asm"
+  include "types/MetallicGrid.asm"
+  include "types/Sand.asm"
+  include "types/LogicDevice.asm"
 OBJECT_DATA_END equ $-1
 
 ; массив ячеек с номерами от 0 до 255

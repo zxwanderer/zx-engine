@@ -24,7 +24,7 @@
  <tile id="35" type="Table"/>
  <tile id="36" type="Terminal"/>
  <tile id="39" type="LogicDevice"/>
- <tile id="40" type="LogicDeviceBroken"/>
+ <tile id="40" type="LogicDevice"/>
  <tile id="41" type="Floor"/>
  <tile id="43" type="ElectonicBox"/>
  <tile id="44" type="MetallicGrid"/>
