@@ -125,15 +125,26 @@ binary_init:
   CALL Entities.lookCharSeeCellInfo
   RET
 
+play_gameover_table:
+  KEY_G, play_gameover_loop_exit
+  defb _endByte
+
+play_gameover:
+  LD HL, gameover.MUSICDATA
+  CALL TRI_PLAY
+play_gameover_loop:
+  CALL zxengine.scanKeys
+  JP NZ, play_gameover_loop_exit; если флаг не 0 то клавиша есть
+  JR play_gameover_loop
+play_gameover_loop_exit:
+  RET
+
 binary_play_intro:
   LD A, (IS_GAME_OVER)
   AND A
   JR Z, play_normal
   DEC A
   JR Z, play_happy
-play_gameover:
-  LD HL, gameover.MUSICDATA
-  JP just_play
 play_normal:
   LD HL,MUSICDATA
   JP just_play
