@@ -29,7 +29,6 @@ BEGIN_SCRIPT:
 ; разбиваем биоконтейнер и вытекает
 
 LOOP_SCRIPT:
-  ; CallScript GAME_LOOP
   ScanKeyTable key_table_hero
   IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
@@ -71,8 +70,6 @@ LOOP_SCRIPT:
 ;   goto RESTART
 
 game_over:
-  ; CallCode binary_clear_screen
-  ; goto game_over_3
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
@@ -127,14 +124,6 @@ binary_init:
   CALL Entities.lookChar
   CALL Entities.lookCharSeeCellInfo
   RET
-
-; GAME_LOOP:
-  ; IfVar Vars.var_mode, 1, cursor_look
-  ; ScanKeyTable key_table_hero
-  ; wait_halt 1
-  ; CallCode screenfx.show_frames
-  ; CallScript look_char
-  ; defb _endByte
 
 binary_play_intro:
   LD A, (IS_GAME_OVER)
