@@ -234,6 +234,7 @@ cursor_table_hero:
 
 
 RESTART
+  goto game_over_2
     ; CallCode zxengine.clear_data
     CallCode zxengine.init; переходим на инициализацию
 
