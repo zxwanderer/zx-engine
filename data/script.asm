@@ -133,6 +133,7 @@ play_gameover:
   LD HL, gameover.MUSICDATA
   CALL TRI_PLAY
 play_gameover_loop:
+  LD HL, play_gameover_table
   CALL zxengine.scanKeys
   JP NZ, play_gameover_loop_exit; если флаг не 0 то клавиша есть
   JR play_gameover_loop
