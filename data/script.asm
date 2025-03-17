@@ -76,31 +76,31 @@ game_over:
   IfVar Vars.game_over, 5, game_over_5
 
 game_over_1:
-  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_1
+  printScreen PAPER_BLACK or PEN_RED or PAPER_BRIGHT, GAMEOVER_1
   CallCode play_gameover
   goto RESTART
 
 game_over_2
-  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_2
+  printScreen PAPER_BLACK or PEN_RED or PAPER_BRIGHT, GAMEOVER_2
   CallCode play_gameover
   goto RESTART
 
 game_over_3
-  printScreen PAPER_BLACK or PEN_YELLOW, GAMEOVER_3
+  printScreen PAPER_BLACK or PEN_YELLOW or PAPER_BRIGHT, GAMEOVER_3
   CallCode play_gameover
-  printScreen PAPER_BLACK or PEN_WHITE, GAMEOVER_3_1
+  printScreen PAPER_BLACK or PEN_WHITE or PAPER_BRIGHT, GAMEOVER_3_1
   CallCode play_gameover
   goto RESTART
 
 game_over_4
-  printScreen PAPER_BLACK or PEN_GREEN, GAMEOVER_4
+  printScreen PAPER_BLACK or PEN_GREEN or PAPER_BRIGHT, GAMEOVER_4
   CallCode play_happy
-  printScreen PAPER_BLACK or PEN_WHITE, GAMEOVER_4_0
+  printScreen PAPER_BLACK or PEN_WHITE or PAPER_BRIGHT, GAMEOVER_4_0
   CallCode play_happy
   goto RESTART
 
 game_over_5
-  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_5
+  printScreen PAPER_BLACK or PEN_RED or PAPER_BRIGHT, GAMEOVER_5
   CallCode play_gameover
   goto RESTART
 
@@ -131,11 +131,14 @@ play_gameover_table:
 
 play_gameover:
   LD HL, gameover.MUSICDATA
+play_gameover_call:
   CALL TRI_PLAY
 play_gameover_loop:
   LD HL, play_gameover_table
   CALL zxengine.scanKeys
   JP NZ, play_gameover_loop_exit; если флаг не 0 то клавиша есть
+  LD A, FX_Computer
+  CALL FX_SET
   JR play_gameover
 play_gameover_loop_exit:
   RET
@@ -234,7 +237,7 @@ cursor_table_hero:
 
 
 RESTART
-  goto game_over_2
+  goto game_over_4
     ; CallCode zxengine.clear_data
     CallCode zxengine.init; переходим на инициализацию
 
