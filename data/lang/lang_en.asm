@@ -334,6 +334,8 @@ HardScaf_cell_name: db "Heavy combat spacesuit", 0
 
 Nipple_cell_name: db "Biocontainer nozzle", 0
 
+tHeroName2 defb " ",0
+
 WallGrid_false_mess:
   db "The thick grate bars wouldn't budge..",0
 
