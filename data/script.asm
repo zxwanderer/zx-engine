@@ -2,13 +2,13 @@ BEGIN_SCRIPT:
   setBorder PEN_BLACK
   ; goto game_over_3
 
-  ifdef _ShowStartupText_  
+  ifdef _ShowStartupText_
   printScreen PAPER_BLACK or PEN_GREEN, HELLO_TXT
   CallCode binary_play_intro
   endif
 
   CallCode binary_init
-  ; CallScript Nipple.power_start_
+  CallScript Nipple.power_start_
 
 ; TODO
 ; ломаем биоконтейнер
@@ -70,6 +70,7 @@ LOOP_SCRIPT:
 ;   goto RESTART
 
 game_over:
+  goto game_over_3
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
@@ -131,15 +132,18 @@ play_gameover_table:
 
 play_gameover:
   LD HL, gameover.MUSICDATA
+play_gameover_set_loop_music:
+  LD (play_gameover_call+1), HL
 play_gameover_call:
+  LD HL, #0000
   CALL TRI_PLAY
 play_gameover_loop:
   LD HL, play_gameover_table
   CALL zxengine.scanKeys
   JP NZ, play_gameover_loop_exit; если флаг не 0 то клавиша есть
-  LD A, FX_Computer
+  LD A, FX_Nope
   CALL FX_SET
-  JR play_gameover
+  JR play_gameover_call
 play_gameover_loop_exit:
   RET
 
@@ -150,11 +154,11 @@ binary_play_intro:
   DEC A
   JR Z, play_happy
 play_normal:
-  LD HL,MUSICDATA
+  LD HL, MUSICDATA
   JP just_play
 play_happy:
   LD HL, gameend.MUSICDATA
-  JP just_play
+  JP play_gameover_set_loop_music
 
 just_play:
   CALL TRI_PLAY
@@ -237,8 +241,8 @@ cursor_table_hero:
 
 
 RESTART
-  goto game_over_4
-    ; CallCode zxengine.clear_data
+  ; goto game_over_4
+    CallCode zxengine.clear_data
     CallCode zxengine.init; переходим на инициализацию
 
 next_char:
