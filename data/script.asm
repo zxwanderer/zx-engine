@@ -70,7 +70,7 @@ LOOP_SCRIPT:
 ;   goto RESTART
 
 game_over:
-  goto game_over_3
+  goto game_over_4
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
