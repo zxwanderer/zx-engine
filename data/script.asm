@@ -8,8 +8,9 @@ BEGIN_SCRIPT:
   endif
 
   CallCode binary_init
-  CallScript Nipple.power_start_
-
+  ; CallScript Nipple.power_start_
+  CallScript show_private_help
+  
 ; TODO
 ; ломаем биоконтейнер
 ; взять растение в горшке
@@ -165,7 +166,7 @@ just_play:
   CALL input.waitKey
   CALL input.noKey
   RET
-  
+
 binary_show_screen:
   CALL Entities.lookChar
   
