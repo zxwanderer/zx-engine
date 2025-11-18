@@ -13,9 +13,9 @@ HELLO_TXT:
   db "Действие -  Enter/Space/M",13
   db "Выход в меню - G", 13, 13
   db "------------------------------------------", 13
-  db "Код Wanderer,музыка AER,звуки BeepFX,", 13
-  db "графика взята из игр LaserSquad, Stalker", 13
-  db "Monstrland", 13, 13
+  db "Код Wanderer, музыка AER, звуки BeepFX", 13
+  db "от Shiru. Графика взята из игр LaserSquad,"
+  db "Stalker, Monstrland", 13, 13
   db "------------------------------------------", 13
   db "  https://zxwanderer.github.io/cell3326", 13, 13
   db "------------------------------------------"
