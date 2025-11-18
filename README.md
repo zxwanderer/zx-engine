@@ -8,8 +8,8 @@ sprintum evolution industries
 
 - сборка программы происходит в папочку output как в более современной версии zx-core
 - в сообщениях об окончании игры включен атрибут BRIGHT
-- после вывода сообщения об окончании игры для возврата в меню нужно специально нажать клавишу G, иногда игроки
-случайно нажимали клавишу не успев прочитать сообщение об окончании игры
+- после получения концовки игры для возврата в меню нужно специально нажать клавишу G, иногда игроки
+случайно нажимали клавишу не успев прочитать финальное сообщение
 - для симметричности расположения проемов базы в комнату начальника добавлена замаскированая решетка, внезапно оказалось что это дает еще один шанс попасть в нее, если электроника у двери комнаты случайно поломалась от удара чем-то тяжелым
 - боевой скафандр перекрашен в зеленый цвет :)
 
@@ -52,5 +52,4 @@ My respect to coders: kalantaj, Wiev, Шыншыл and big russian demoscene bos
 also special thanks to Alone Coder for some z80 ideas and IDE cable :)  
 
 Thank's to Videogames Sematary for 2-hours game stream video, Shiru for operative and detailed information about 
-the beeproblem sound and Modern ZX-Retro Gaming Channel for walkthrough video.
-
+the "beeproblem" sound and "Modern ZX-Retro Gaming Channel" for walkthrough video.
