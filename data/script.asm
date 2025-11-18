@@ -9,7 +9,7 @@ BEGIN_SCRIPT:
 
   CallCode binary_init
   ; CallScript Nipple.power_start_
-  CallScript show_private_help
+  ; CallScript show_private_help
   
 ; TODO
 ; ломаем биоконтейнер
@@ -71,7 +71,7 @@ LOOP_SCRIPT:
 ;   goto RESTART
 
 game_over:
-  goto game_over_4
+  goto game_over_5
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
