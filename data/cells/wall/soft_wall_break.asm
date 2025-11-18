@@ -22,7 +22,7 @@ soft_wall_break_on:
   ; ShowText Soft_wall_clean
   goto need_look_no_way; на выходе должно быть 0 тогда дальше обрабатываться не будет
 
-soft_wall_break_electronic_script:
+soft_wall_set_electronic_script:
   SetMapCell Electronic.spr
   ShowText Soft_wall_show_electronic
   SetVar Vars.var_ret, 1
@@ -43,18 +43,18 @@ soft_wall_make_cavity_script:
 soft_wall_panel_table:
 
   defb 5,5
-  defw soft_wall_break_electronic_script
+  defw soft_wall_set_electronic_script
   defb 11,5
-  defw soft_wall_break_electronic_script
+  defw soft_wall_set_electronic_script
   defb 17,5
-  defw soft_wall_break_electronic_script
+  defw soft_wall_set_electronic_script
   defb 5,9
-  defw soft_wall_break_electronic_script
+  defw soft_wall_set_electronic_script
   defb 11,9
-  defw soft_wall_break_electronic_script
+  defw soft_wall_set_electronic_script
 
-  ; defb 16,5
-  ; defw soft_wall_make_grid_script
+  defb 19,4
+  defw soft_wall_make_grid_script
   defb 16,9
   defw soft_wall_make_grid_script
   defb 3,6
@@ -62,8 +62,8 @@ soft_wall_panel_table:
   defb 3,8
   defw soft_wall_make_grid_script
 
-  defb 17,5
-  defw soft_wall_make_cavity_script
+  ; defb 17,5
+  ; defw soft_wall_make_cavity_script
   defb 17,9
   defw soft_wall_make_cavity_script
   ; defb 19,3
