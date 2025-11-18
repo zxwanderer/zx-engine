@@ -22,22 +22,22 @@ scan_table:
 
 show_alarm:
   printScreen PAPER_BLACK or PEN_CYAN, ALARM_HELP
-  CallCode binary_play_intro
+  CallCode play_normal
   defb _endByte
 
 show_private_help:
   printScreen PAPER_BLACK or PEN_CYAN, PRIVATE_HELP
-  CallCode binary_play_intro
+  CallCode play_normal
   defb _endByte
 
 show_genetic:
   printScreen PAPER_BLACK or PEN_CYAN, GENETIC_HELP
-  CallCode binary_play_intro
+  CallCode play_normal
   defb _endByte
 
 show_tesla:
   printScreen PAPER_BLACK or PEN_CYAN, BIOTESLA_HELP
-  CallCode binary_play_intro
+  CallCode play_normal
   defb _endByte
 
 ; PdaBlue.spr: equ 106
