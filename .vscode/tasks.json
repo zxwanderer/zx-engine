@@ -5,6 +5,12 @@
     "tasks": [
         {
             "type": "shell",
+            "label": "make_qr_png",
+            "command": "./bin/zx-qr-code --url https://zxwanderer.github.io/cell3326/1.2.1-aplha -o ./qrcode.png",
+            "problemMatcher": "$errmatcher-sjasmplus",
+        },
+        {
+            "type": "shell",
             "label": "make_sna",
             "command": "./bin/sjasmplus --dos866 --nofakes --dirbol make_sna.asm",
             "problemMatcher": "$errmatcher-sjasmplus",

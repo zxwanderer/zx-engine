@@ -22,7 +22,6 @@ use_get:
   goto no_way_script
 
 use_drop:
-  IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy_kill
   IfVar Vars.var_item_id, RedCard.spr, no_way_script
 
 computer_glass_destroy_kill:

@@ -1,20 +1,10 @@
 
-  ; MACRO SETUP_CELL_TYPE _name, _script
-  ;   ORG CELL_TYPES+spr*CellType
-  ;   CellType _name, _script
-  ; ENDM
-
   MACRO SETUP_CELL_TYPE_N _name, _script
 ._temp equ $; запоминаем адрес
     ORG CELL_TYPES+spr*CellType
     CellType _name, _script
     ORG ._temp
   ENDM
-
-  ; MACRO SETUP_ITEM_TYPE
-  ;   ORG ITEM_TYPES+item*ItemType
-  ;   ItemType spr, 0, 10
-  ; ENDM
 
   MACRO SETUP_ITEM_TYPE_N
 ._temp equ $; запоминаем адрес  
@@ -51,11 +41,13 @@ CELL_TYPES:
     ; CellType Empty_cell_name, no_way_script
     defb 00
   EDUP
+CELL_TYPES_END equ $
 
 ITEM_TYPES:
   DUP ItemType*100
     defb 00
    EDUP
+ITEM_TYPES_END equ $
 
 ;  общие бинарные процедуры 
 
@@ -89,7 +81,6 @@ base_kick_shard_fault: ; неуспех резания острым
   ; shiruFX FX_Wall
   ; CallScript action_ring_explode
 ;   ShowText no_way_mess
-
 
 ; already_pickup: ; предмет появился в руках героя, обрабатывать не надо
   ; shiruFX FX_Pickup

@@ -1,11 +1,20 @@
 PersonagesNum equ 1
 
 CHARS_SET: ; описываем героев:
-; Hero1: Entities.Hero 31,31, 9, 0, 0, tHeroName1, 00
+; Hero2: Hero 4, 17, 0, Hero09.spr, Hero09.spr, 0, 0, tHeroName2, 00
 Hero2: Hero 3,10, 0, Hero09.spr, Hero09.spr, 0, 0, tHeroName2, 00
-; Hero2: Hero 9, 27, 0, Scaf.spr, Scaf.spr, 0, 0, tHeroName2, 00
+CHARS_SET_END
+
+ItemArraySize equ 100; максимальное число предметов 
 
 ITEM_ARRAY:
+  DUP Item*ItemArraySize
+    defb #ff; item.itemID = #ff - признак того что предмета нет 
+  EDUP
+ITEM_ARRAY_END:
+
+  ORG ITEM_ARRAY ; начинаем с метки описания массива и заполняем массив
+
   Item Chair.item, 4,6, Floor.spr, #ff, 00
   Item Chair.item, 4,12, Floor.spr, #ff, 00
   Item Chair.item, 4,18, Floor.spr, #ff, 00
@@ -55,9 +64,11 @@ ITEM_ARRAY:
   Item Nippers.item, 17,10, Grass.spr, #ff, 00
 
   Item RedCard.item, 27,3, FloorWhite.spr, #ff, 00
+  ; Item RedCard.item, 3,11, FloorWhite.spr, #ff, 00
+  ; Item RedCard.item, 4,11, FloorWhite.spr, #ff, 00
+  ; Item RedCard.item, 5,11, FloorWhite.spr, #ff, 00
 
-  DUP Item*50
-    defb #ff; item.itemID = #ff - признак того что предмета нет 
-   EDUP
+; проверяем что не вышли за границу таблицы предметов
+  ASSERT ITEM_ARRAY_END >= $
 
-ItemArraySize equ 50; максимальное число предметов 
+  ORG ITEM_ARRAY_END ; блок должен занимать положенное кол-во байт, даже если предметов меньше

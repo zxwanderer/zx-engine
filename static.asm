@@ -4,24 +4,14 @@
 IS_GAME_OVER
   defb 00
 
-TILE_SET:
-  include "data/graph/tiles_many.asm"
-TILE_SET_END
-
 LANG_SET:
   INCLUDE LANG_FILE
 LANG_SET_END
 
-ORG (high $+1)*256
-p68_font:
-  ; incbin "data/fonts/tripfont_revert.fnt"
-  incbin "data/fonts/Font57_revert.fnt"
-  ; incbin "data/fonts/casa2_revert.fnt"
-_after_font:
-
 START_SCRIPT:
   include "data/script.asm"
   ; include "data/cursor_look.asm"
+START_SCRIPT_END
 
 ENCOUNTER_SET:
 	include "data/rebelstar_enc.asm"
@@ -57,6 +47,11 @@ ENCOUNTER_SET:
   include "data/cells/_index.asm"
 ENCOUNTER_SET_END
 
+TILE_SET:
+  incbin "tiles.bin"
+  ; include "data/graph/tiles_many.asm"
+TILE_SET_END
+
 ; (!) код плеера должен быть в быстрой памяти как Shiru сказал (!!!)
 ; На 48K это просто любая память выше 32768, на оригинальных 128K 
 ; есть сложности: на 128K и +2 медленные страницы 1,3,5,7; 
@@ -68,7 +63,6 @@ FX_SET:
 FX_SET_END
 
 TRITONE:
-
   include "core/routines/music_tritone.asm"
 
   include "data/music/AER/foryou.asm"
@@ -84,3 +78,10 @@ TRITONE:
 TRITONE_END
 
 DISPLAY "FX_SET ", FX_SET
+
+ORG (high $+1)*256
+p68_font:
+  ; incbin "data/fonts/tripfont_revert.fnt"
+  incbin "data/fonts/Font57_revert.fnt"
+  ; incbin "data/fonts/casa2_revert.fnt"
+p68_font_end:

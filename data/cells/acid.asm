@@ -11,6 +11,8 @@ script:
   defb _endByte
 
 stand_:
+  GetWearItem
+  IfVar Vars.var_ret, HardScaf.spr, no_script
   goto no_way_script
 
 get_:
@@ -18,6 +20,8 @@ get_:
 
 drop_:
   IfVar Vars.var_item_id, CanisterEmpty.spr, fill_
+  IfVar Vars.var_item_id, Canister.spr, Blood.canister_full_
+  IfVar Vars.var_item_id, CanisterRed.spr, Blood.canister_full_
   goto need_look_no_way
 
 fill_:

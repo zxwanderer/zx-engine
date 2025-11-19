@@ -3,26 +3,42 @@ BodyYellow.spr: equ 10
     SETUP_CELL_TYPE_N BodyInScaf_cell_name, script
 
 script:
-  IfVar Vars.var_act, do_get, get_
-  IfVar Vars.var_act, do_drop, drop_
+  CheckActionReaction _body_action_table
+  goto no_way_script
+
+_body_action_table:
+  SetIndexPointer do_get, body_get_
+  SetIndexPointer do_drop, body_drop_
+  SetIndexPointer do_stand, no_script
   defb _endByte
 
-get_:
+body_get_:
   ShowText Body_no_get
   goto nope_script
-  ENDMODULE
 
-drop_:
-  IfVar Vars.var_item_id, RedCard.spr, no_way_script
-  IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
+body_drop_:
+  CheckActiveItem _body_drop_table
+  goto nope_script
+
+_body_drop_table:
+  SetIndexPointer CanisterEmpty.spr, try_container_get_
+  SetIndexPointer Wrench.spr, try_cut_
+  SetIndexPointer Shard.spr, try_cut_
+  SetIndexPointer Nippers.spr, try_cut_
+  defb _endByte
+
+try_cut_:
   shiruFX FX_Cutt1
   SetMapCell Blood.spr
-  goto need_look_no_way
+  ShowText Fuu_mainac_mess
+  goto no_way_script
 
 try_container_get_:
   ShowText Not_get_body
   shiruFX FX_Nope
   goto no_way_script
+
+  ENDMODULE
 
 BodyWhite.spr: equ 27
   MODULE BodyWhite

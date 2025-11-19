@@ -118,8 +118,7 @@ wear_item_me:
 
 ; на входе в B - что одеваем
 ; , C - что остается на земле
-wear_item
-  PUSH BC
+wear_item:
   PUSH BC
   LD A, C
   CALL set_map_cell
@@ -128,14 +127,10 @@ wear_item
   LD A, B
   LD ( IX + Hero.sprite ), A
   LD ( IX + Hero.base_spr), A
-  CALL Entities.lookChar
-  POP BC
-  LD A, B
-  CALL set_map_cell
-  RET
+  CALL char_update_sprite
+  JP Entities.lookChar
 
 get_wear_item_me:
-  ; INC HL
   PUSH HL
   LD IX, (Entities.activePersonage_ptr)
   LD A, ( IX+Hero.base_spr ) ; запомнили одежду
@@ -162,12 +157,12 @@ set_map_cell_on_hero_me
 set_map_cell_on_hero:
   ; PUSH AF
   LD IX, (Entities.activePersonage_ptr)
-  LD (IX+Hero.ground), A
-  RET
-  ; LD D, (IX+Hero.pos.x)
-  ; LD E, (IX+Hero.pos.y)
+  ; LD (IX+Hero.ground), A
+  ; RET
+  LD D, (IX+Hero.pos.x)
+  LD E, (IX+Hero.pos.y)
   ; POP AF
-  ; JP set_map_cell_DE
+  JP set_map_cell_DE
 
 ; на входе в A - индекс типа ячейки
 ; на выходе - в HL указатель на массив с ячейкой
@@ -175,6 +170,15 @@ calc_cell_type:
   LD DE, CellType
   CALL math.mul_ADE
   LD DE, CELL_TYPES
+  ADD HL, DE
+  RET
+
+; на входе в A - индекс типа ячейки
+; на выходе - в HL указатель на массив с типом предмета
+calc_item_type:
+  LD DE, ItemType
+  CALL math.mul_ADE
+  LD DE, ITEM_TYPES
   ADD HL, DE
   RET
 
@@ -192,6 +196,46 @@ call_cell_script:
   LD H, (IY+CellType.script_ptr+1)
   CALL zxengine.process
   RET
+
+; ------- инициализация на карте всех предметов из ITEM_ARRAY
+initItems:
+  LD HL, ITEM_ARRAY
+.loop:
+  PUSH HL
+
+  PUSH HL
+  POP IX
+
+  LD A, (IX + Item.itemID)
+  CP #FF
+  JR NZ, .loop_continue; // если не FF - идем дальше
+  POP HL
+  RET
+
+.loop_continue
+  LD A, (IX + Item.owner)
+  CP #FF
+  JR NZ, .loop_next; // если не FF, значит у кого-то лежит в рюкзаке, не размещаем на карте
+
+  LD D, (IX+Item.pos.x)
+  LD E, (IX+Item.pos.y)
+  call map.calc_pos
+  
+  PUSH HL
+  LD A,(HL)
+  LD (IX+Item.ground),A; ячейку карты ставим на пол персонажа
+  
+  LD A,(IX+Item.itemID)
+  CALL calc_item_type
+  LD A, (HL) ; spr_num - нулевое смещение описания предмета
+  POP HL
+  LD (HL), A
+
+.loop_next:
+  POP HL
+  LD DE, Item
+  ADD HL, DE
+  JP .loop
 
 ; ------- инициализация на карте всех персонажей из CHAR_SET
 initHeroes:
@@ -378,12 +422,14 @@ no_item_in_hand: ; предмета в руках нет - значить под
   setVar Vars.var_act
 
 char_do_2:
+  ifdef _InteractiveOn_
   LD HL, (MapCell_ptr)
   LD A, (HL)
   CALL call_cell_script
   getVar Vars.var_ret
   OR A
   RET Z; после скрипта переменная установлена в 0 - значит все обработано, по дефолту обрабатывать не нужно
+  endif
 
 ; -- дефолтная обработка - если хотим встать - становимся,
 ; -- если хотим бросить - бросаем, если хотим поднять - поднимаем!
@@ -818,19 +864,22 @@ set_map_cell:
   LD DE, (Vars.MapCell_xy)
 set_map_cell_DE:
   setVar Vars.var_item_id; запомнили A
+  PUSH DE
   CALL map.calc_pos
   LD (MapCell_ptr), HL
+  POP DE
   CALL items.find_item_on_map ; есть ли на карте предметы?
   JR NC, set_map_cell_no_items
 
 set_map_cell_next_item: ; есть - устанавливаем им всем новую "землю"
   getVar Vars.var_item_id
   LD (IX+Item.ground), A
-  CALL items.check_item
-  JR C, set_map_cell_next_item
+  ; CALL items.check_item
+  ; JR C, set_map_cell_next_item
 
   ; героям и просто карте менять ничего не надо
   RET
+
 
 set_map_cell_no_items: ; предметов нет
 ; есть ли на карте герои?
@@ -850,5 +899,42 @@ set_map:
 
 ; set_herow_sprite
 ;   RET 
+
+  MACRO CheckActionReaction __table
+    defw Entities.check_action_reaction_me
+    defw __table
+  ENDM
+
+  MACRO CheckActiveItem __table
+	  defw Entities.check_item_me
+    defw __table
+  ENDM
+
+  MACRO SetIndexPointer __index, __pointer
+  	defb __index
+    defw __pointer
+  ENDM
+
+check_action_reaction_me:
+    mLDE
+    PUSH HL
+    EX HL, DE; в DE указатель на таблицу
+    getVar Vars.var_act
+do_scan_routines:    
+    CALL TABLE_SCAN_BY_INDEX_PTR
+    JR NC, .action_not_found
+    POP DE ; чтобы не портить найденное значение HL
+    ; EX HL, DE
+    JP zxengine.process
+.action_not_found
+    POP HL
+    JP zxengine.process
+
+check_item_me:
+    mLDE
+    PUSH HL
+    EX HL, DE; в DE указатель на таблицу
+    getVar Vars.var_item_id
+    JP do_scan_routines
 
 ENDMODULE

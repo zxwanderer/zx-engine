@@ -14,7 +14,9 @@ script_:
 get_:
   SetVar Vars.var_ret, 0
   CallCode binary_check_scaf
-  IfVar Vars.var_ret, 0, no_way_script
+  IfVarN Vars.var_ret, 0, wear_scaf ; можем одеть скафандр, на нас ничего нет
+  ShowText SCAF_ALREADY_WEAR
+  goto no_way_script
 
 wear_scaf:
   CallCode binary_wear_scaf
@@ -37,7 +39,6 @@ binary_unwear_scaf:
   LD C, A
   LD B, Hero09.spr
   JP Entities.wear_item
-  ; RET
 
 binary_check_scaf: ; Vars.var_ret = 1 - скафандра нет
   LD IX, (Entities.activePersonage_ptr)

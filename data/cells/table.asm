@@ -13,10 +13,6 @@ drop_table_script:
   IfVar Vars.var_item_id, Shard.spr, base_kick_shard_fault
   IfVar Vars.var_item_id, Nippers.spr, break_table
   IfVar Vars.var_item_id, Wrench.spr, break_table
-;   shiruFX FX_Boom
-;   CallScript action_ring_explode
-;   ShowText Mentoscanner_kick_mess
-;   SetMapCell Trash.spr
   goto no_way_script
 
 break_table:

@@ -11,23 +11,22 @@ script:
   goto no_way_script
 
 drop_:
-  IfVar Vars.var_item_id, Chair.spr, computer_glass_destroy
-  goto computer_screen_destroy
-  ; IfVar Vars.var_item_id, CanisterEmpty.spr, computer_glass_destroy
-  ; IfVar Vars.var_item_id, Nippers.spr, computer_screen_destroy
-  ; IfVar Vars.var_item_id, Canister.spr, computer_screen_destroy
-  ; IfVar Vars.var_item_id, Wrench.spr, computer_screen_destroy
-get_:
-  shiruFX FX_Poweroff
-  ShowText Computer_off_hit_mess
+  CheckActiveItem _computer_drop_table
   goto no_way_script
 
-computer_glass_destroy:
-  shiruFX 56
-  CallScript action_ring_explode
-  SetMapCell ComputerBreak.spr
-  ShowText Computer_break_chair_mess
-  CallCode items.del_item_from_hand
+_computer_drop_table:
+  SetIndexPointer Chair.spr, computer_screen_destroy
+  SetIndexPointer CanisterEmpty.spr, computer_screen_destroy
+  SetIndexPointer Nippers.spr, computer_screen_destroy
+  SetIndexPointer Canister.spr, computer_screen_destroy
+  SetIndexPointer CanisterRed.spr, computer_screen_destroy
+  SetIndexPointer Wrench.spr, computer_screen_destroy
+  SetIndexPointer Shard.spr, base_kick_shard_fault
+  defb _endByte
+
+get_:
+  ShowText Computer_off_hit_mess
+  shiruFX FX_Poweroff
   goto no_way_script
 
 computer_screen_destroy:
@@ -35,7 +34,6 @@ computer_screen_destroy:
   CallScript action_ring_explode
   SetMapCell ComputerBreak.spr
   ShowText Computer_break_mess
-  ; CallCode items.del_item_from_hand
   goto no_way_script
 
   ENDMODULE

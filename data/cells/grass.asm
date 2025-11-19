@@ -20,16 +20,28 @@ Grass3.spr: equ #10
 Bush.spr: equ 49
   MODULE Bush
     SETUP_CELL_TYPE_N Bush_cell_name, script
+
 script:
-  IfVar Vars.var_act, do_stand, no_way_script
+  IfVar Vars.var_act, do_stand, stand_
   IfVar Vars.var_act, do_get, base_kick_fault
   IfVar Vars.var_act, do_drop, drop_
   defb _endByte
+
+stand_:
+  GetWearItem
+  IfVar Vars.var_ret, HardScaf.spr, cut_
+  goto no_way_script
 
 drop_:
   IfVar Vars.var_item_id, Nippers.spr, cut_
   IfVar Vars.var_item_id, CanisterEmpty.spr, try_container_get_
   goto base_kick_fault
+
+try_container_get_full:
+  ShowText Not_get_plant
+  shiruFX FX_Nope
+  goto no_way_script
+
 
 try_container_get_:
   ShowText Not_get_plant

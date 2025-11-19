@@ -141,7 +141,7 @@ down_pos:
 	LD A,D 
 	ADD A,8 
 	LD D,A 
-	RET 
+	RET
 
 /* ;взято из процедуры Wanderers
 ; in: A = bit num

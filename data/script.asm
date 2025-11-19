@@ -1,13 +1,19 @@
 BEGIN_SCRIPT:
   setBorder PEN_BLACK
   ; goto game_over_3
+
+  ifdef _ShowStartupText_
   printScreen PAPER_BLACK or PEN_GREEN, HELLO_TXT
   CallCode binary_play_intro
+  endif
+
   CallCode binary_init
   ; CallScript Nipple.power_start_
-
+  ; CallScript show_private_help
+  
 ; TODO
 ; ломаем биоконтейнер
+; взять растение в горшке
 ; убрать на складе мягкую обшивку слева вверху дабы не смущать
 ; при финале press g to restart надо а то иногда схлопывается
 ; внятное сообщение при ударе ломиком о растение
@@ -24,7 +30,6 @@ BEGIN_SCRIPT:
 ; разбиваем биоконтейнер и вытекает
 
 LOOP_SCRIPT:
-  ; CallScript GAME_LOOP
   ScanKeyTable key_table_hero
   IfVarN Vars.game_over, 0, game_over
   goto LOOP_SCRIPT
@@ -66,39 +71,38 @@ LOOP_SCRIPT:
 ;   goto RESTART
 
 game_over:
-  ; CallCode binary_clear_screen
-  ; goto game_over_3
+  ; goto game_over_4
   IfVar Vars.game_over, 2, game_over_2
   IfVar Vars.game_over, 3, game_over_3
   IfVar Vars.game_over, 4, game_over_4
   IfVar Vars.game_over, 5, game_over_5
 
 game_over_1:
-  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_1
+  printScreen PAPER_BLACK or PEN_RED or PAPER_BRIGHT, GAMEOVER_1
   CallCode play_gameover
   goto RESTART
-  
+
 game_over_2
-  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_2
+  printScreen PAPER_BLACK or PEN_RED or PAPER_BRIGHT, GAMEOVER_2
   CallCode play_gameover
   goto RESTART
 
 game_over_3
-  printScreen PAPER_BLACK or PEN_YELLOW, GAMEOVER_3
+  printScreen PAPER_BLACK or PEN_YELLOW or PAPER_BRIGHT, GAMEOVER_3
   CallCode play_gameover
-  printScreen PAPER_BLACK or PEN_WHITE, GAMEOVER_3_1
+  printScreen PAPER_BLACK or PEN_WHITE or PAPER_BRIGHT, GAMEOVER_3_1
   CallCode play_gameover
   goto RESTART
 
 game_over_4
-  printScreen PAPER_BLACK or PEN_GREEN, GAMEOVER_4
+  printScreen PAPER_BLACK or PEN_GREEN or PAPER_BRIGHT, GAMEOVER_4
   CallCode play_happy
-  printScreen PAPER_BLACK or PEN_WHITE, GAMEOVER_4_0
+  printScreen PAPER_BLACK or PEN_WHITE or PAPER_BRIGHT, GAMEOVER_4_0
   CallCode play_happy
   goto RESTART
 
 game_over_5
-  printScreen PAPER_BLACK or PEN_RED, GAMEOVER_5
+  printScreen PAPER_BLACK or PEN_RED or PAPER_BRIGHT, GAMEOVER_5
   CallCode play_gameover
   goto RESTART
 
@@ -111,18 +115,38 @@ game_over_5
 binary_init:
   ; LD DE, #1008
   ; LD ( Vars.Cursor_pos ), DE
+  CALL Entities.initItems
   CALL Entities.initHeroes
+
+  ; LD A, HardScaf.spr
+  ; LD D, 10
+  ; LD E, 4
+  ; CALL Entities.set_map_cell_DE
+
   CALL Entities.lookChar
   CALL Entities.lookCharSeeCellInfo
   RET
 
-; GAME_LOOP:
-  ; IfVar Vars.var_mode, 1, cursor_look
-  ; ScanKeyTable key_table_hero
-  ; wait_halt 1
-  ; CallCode screenfx.show_frames
-  ; CallScript look_char
-  ; defb _endByte
+play_gameover_table:
+  KEY_G, play_gameover_loop_exit
+  defb _endByte
+
+play_gameover:
+  LD HL, gameover.MUSICDATA
+play_gameover_set_loop_music:
+  LD (play_gameover_call+1), HL
+play_gameover_call:
+  LD HL, #0000
+  CALL TRI_PLAY
+play_gameover_loop:
+  LD HL, play_gameover_table
+  CALL zxengine.scanKeys
+  JP NZ, play_gameover_loop_exit; если флаг не 0 то клавиша есть
+  LD A, FX_Nope
+  CALL FX_SET
+  JR play_gameover_call
+play_gameover_loop_exit:
+  RET
 
 binary_play_intro:
   LD A, (IS_GAME_OVER)
@@ -130,21 +154,19 @@ binary_play_intro:
   JR Z, play_normal
   DEC A
   JR Z, play_happy
-play_gameover:
-  LD HL, gameover.MUSICDATA
-  JP just_play
 play_normal:
-  LD HL,MUSICDATA
+  LD HL, MUSICDATA
   JP just_play
 play_happy:
   LD HL, gameend.MUSICDATA
-  JP just_play
+  JP play_gameover_set_loop_music
 
 just_play:
   CALL TRI_PLAY
+  CALL input.waitKey
   CALL input.noKey
   RET
-  
+
 binary_show_screen:
   CALL Entities.lookChar
   
@@ -220,7 +242,8 @@ cursor_table_hero:
 
 
 RESTART
-    ; CallCode zxengine.clear_data
+  ; goto game_over_4
+    CallCode zxengine.clear_data
     CallCode zxengine.init; переходим на инициализацию
 
 next_char:
@@ -228,8 +251,6 @@ next_char:
 look_char:
     CallCode Entities.lookChar
     CallCode binary_show_gui
-    ; CallCode input.noKey ; ждем пока отпустит клавишу
-    ; wait_halt 5
     defb _endByte
 
 char_up:
@@ -273,7 +294,7 @@ char_right:
 ;   goto look_char
 
 char_loot:
-  ; CharDo do_get_drop, dir_center
   CharDoDir do_get_drop
+  CallScript look_char
   CallCode input.noKey
-  goto look_char
+  defb _endByte
